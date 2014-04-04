@@ -1,0 +1,63 @@
+/* Setup */
+
+/* General */
+#overview {
+	header {
+		width: 900px;
+		.title {
+			max-width: none;
+			.tower {
+				position: relative;				
+					width: 175px;
+					left: 450px;
+					top: -26px;
+				img {
+					width: 175px;
+				}
+			}			
+		}
+	}
+	div.title {
+		width: 900px;
+		margin: 300px auto 0;
+		text-align: right;
+		position: relative;		
+	}
+}
+
+/* Animation */
+
+	.fadeInOut {
+	    -webkit-animation-name: fader;
+	    -webkit-animation-duration: 10s;
+	    -webkit-animation-timing-function: linear;
+	    -webkit-animation-iteration-count: infinite;
+
+	    -moz-animation-name: fader;
+	    -moz-animation-duration: 10s;
+	    -moz-animation-timing-function: linear;
+	    -moz-animation-iteration-count: infinite;
+
+	    animation-name: fader;
+	    animation-duration: 10s;
+	    animation-timing-function: linear;
+	    animation-iteration-count: infinite;
+	}
+
+	@-moz-keyframes fader {  
+	    0% { opacity: 1.0; }
+	    50% { opacity: 0.0; }
+	    100% { opacity: 1.0; }
+	}
+
+	@-webkit-keyframes fader {  
+	    0% { opacity: 1.0; }
+	    50% { opacity: 0.0; }
+	    100% { opacity: 1.0; }
+	}
+
+	@keyframes fader {  
+	    0% { opacity: 1.0; }
+	    50% { opacity: 0.0; }
+	    100% { opacity: 1.0; }
+	}

@@ -1,3 +1,7 @@
+/******************************************************************
+Site Name: Crisis Coverage - A CS171 Final Project
+Creators: Dhairya Dalal, Luke Hatfield, Michael Johns
+******************************************************************/
 /*! normalize.css v3.0.0 | MIT License | git.io/normalize */
 html {
   font-family: sans-serif;
@@ -145,16 +149,38 @@ td, th {
 
 /* Setup */
 /* General */
+/* Header */
 header {
   width: 900px;
-  margin: 340px auto 0;
-  text-align: right;
-  position: relative; }
+  margin: 1.5em auto 0; }
+  header .title {
+    max-width: 600px; }
+    header .title .tower {
+      position: relative;
+      top: 0; }
+      header .title .tower img {
+        width: 100px;
+        position: absolute;
+        left: 270px;
+        top: -28px; }
+    header .title .sitename {
+      float: left;
+      text-align: right;
+      font-size: 1.5em; }
+      header .title .sitename span {
+        display: block;
+        font-size: 0.7em; }
 
-img#radio {
-  position: absolute;
-  right: 0;
-  top: -63px; }
+/* Nav */
+nav {
+  position: relative;
+  top: 1em; }
+  nav ul {
+    text-decoration: none;
+    float: right; }
+    nav ul li {
+      display: inline;
+      padding: 1em; }
 
 /* Text */
 h1 {
@@ -171,8 +197,83 @@ h2, h3 {
 
 h2 {
   font-weight: 700;
-  margin-bottom: 0; }
+  margin-bottom: 0;
+  font-size: 52px; }
 
 h3 {
   font-weight: 400;
-  margin-top: 5px; }
+  margin-top: -5px; }
+
+/* Content */
+.content {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2em 0;
+  clear: both; }
+
+/* Footer */
+footer {
+  width: 900px;
+  margin: 100px auto 0; }
+
+/* Setup */
+/* General */
+#overview header {
+  width: 900px; }
+  #overview header .title {
+    max-width: none; }
+    #overview header .title .tower {
+      position: relative;
+      width: 175px;
+      left: 450px;
+      top: -26px; }
+      #overview header .title .tower img {
+        width: 175px; }
+#overview div.title {
+  width: 900px;
+  margin: 300px auto 0;
+  text-align: right;
+  position: relative; }
+
+/* Animation */
+.fadeInOut {
+  -webkit-animation-name: fader;
+  -webkit-animation-duration: 10s;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+  -moz-animation-name: fader;
+  -moz-animation-duration: 10s;
+  -moz-animation-timing-function: linear;
+  -moz-animation-iteration-count: infinite;
+  animation-name: fader;
+  animation-duration: 10s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite; }
+
+@-moz-keyframes fader {
+  0% {
+    opacity: 1.0; }
+
+  50% {
+    opacity: 0.0; }
+
+  100% {
+    opacity: 1.0; } }
+@-webkit-keyframes fader {
+  0% {
+    opacity: 1.0; }
+
+  50% {
+    opacity: 0.0; }
+
+  100% {
+    opacity: 1.0; } }
+@keyframes fader {
+  0% {
+    opacity: 1.0; }
+
+  50% {
+    opacity: 0.0; }
+
+  100% {
+    opacity: 1.0; } }
