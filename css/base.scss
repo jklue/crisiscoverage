@@ -2,13 +2,28 @@
 
 /* Setup */
 
+	// colors
+	$red: #CC1452;
+	$orange: #FF4940;
+	$green: #00FFA8;
+	$darkBlue: #3D8699;
+	$lightBlue: #14A6CC;
+	$gray:#CCC;
+
+	$link: $lightBlue;
+	$active: $red;
+
 /* General */
+
+	a {text-decoration: none;color:$gray;}
+	a:hover {color:$red;}
 
 /* Header */
 	header {
 		width: 900px;
 		margin: 1.5em auto 0;
 		.title {
+			color: $darkBlue;
 			max-width: 600px;
 			.tower {
 				position: relative;
@@ -28,6 +43,9 @@
 					display:block;
 					font-size: 0.7em;
 				}
+				a{
+					color: $darkBlue;
+				}
 			}
 		}
 	}
@@ -35,7 +53,7 @@
 /* Nav */
 	nav {
 		position: relative;
-		top: 1em;
+		top: 2em;
 		ul {		
 			text-decoration: none;
 			float: right;
@@ -45,6 +63,8 @@
 			}
 		}
 	}
+	// current page highlights
+	#overview .overviewLink, #timeline .timelineLink, #data .dataLink {color: $active}
 
 /* Text */
 
@@ -84,6 +104,8 @@
 
 /* Footer */
 footer {
+	text-align: center;
+	color: $gray;
 	width: 900px;
 	margin: 100px auto 0;
 }

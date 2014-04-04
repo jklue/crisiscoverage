@@ -149,11 +149,19 @@ td, th {
 
 /* Setup */
 /* General */
+a {
+  text-decoration: none;
+  color: #cccccc; }
+
+a:hover {
+  color: #cc1452; }
+
 /* Header */
 header {
   width: 900px;
   margin: 1.5em auto 0; }
   header .title {
+    color: #3d8699;
     max-width: 600px; }
     header .title .tower {
       position: relative;
@@ -170,17 +178,22 @@ header {
       header .title .sitename span {
         display: block;
         font-size: 0.7em; }
+      header .title .sitename a {
+        color: #3d8699; }
 
 /* Nav */
 nav {
   position: relative;
-  top: 1em; }
+  top: 2em; }
   nav ul {
     text-decoration: none;
     float: right; }
     nav ul li {
       display: inline;
       padding: 1em; }
+
+#overview .overviewLink, #timeline .timelineLink, #data .dataLink {
+  color: #cc1452; }
 
 /* Text */
 h1 {
@@ -213,23 +226,25 @@ h3 {
 
 /* Footer */
 footer {
+  text-align: center;
+  color: #cccccc;
   width: 900px;
   margin: 100px auto 0; }
 
 /* Setup */
 /* General */
-#overview header {
+#welcome header {
   width: 900px; }
-  #overview header .title {
+  #welcome header .title {
     max-width: none; }
-    #overview header .title .tower {
+    #welcome header .title .tower {
       position: relative;
       width: 175px;
       left: 450px;
       top: -26px; }
-      #overview header .title .tower img {
+      #welcome header .title .tower img {
         width: 175px; }
-#overview div.title {
+#welcome div.title {
   width: 900px;
   margin: 300px auto 0;
   text-align: right;

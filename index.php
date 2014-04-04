@@ -11,14 +11,14 @@
 	<script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
 
 </head>
-<body id="overview">
+<body id="welcome">
 	<header>		
 		<div class="title">
 			<div class="tower">
 				<img id="radio-tower" src="images/radio2.3-simple.png" alt="Radio Icon">
 				<img id="radio-dot" class="fadeInOut" src="images/radio2.3-dot.png" alt="Radio Dot">
 			</div>
-			<h1>Coming soon...</h1>
+			<h1>Coming May 2014...</h1>
 			<h2>From Turmoil to Resolution</h2>
 			<h3>Media Coverage Over the Life of a Crisis</h3>
 		</div>
@@ -29,9 +29,9 @@
 	<footer>
 		<nav>
 			<ul>
-				<li>Overview</li>
-				<li><a href="/timeline.html">Timeline</a></li>
-				<li>Data</li>
+				<li><a href="/overview.php">Overview</a></li>
+				<li><a href="/timeline.php">Timeline</a></li>
+				<li><a href="/data.php">Data</a></li>
 			</ul>
 		</nav>
 	</footer>
