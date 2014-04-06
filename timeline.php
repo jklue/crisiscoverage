@@ -4,7 +4,6 @@
 	<?php include 'includes/header.html'; ?>
 
 	<div class="content">
-		Graph goes here.
 
 		<div id="timelineVis"></div>
 

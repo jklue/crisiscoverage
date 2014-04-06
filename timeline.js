@@ -1,5 +1,5 @@
 /* Setup */
-	var bbDetail, bbOverview, dates, padding, parseYear, svg, xDetailScale, xOverviewScale ;
+	var bbDetail, bbOverview, dates, duplicateDates, padding, parseYear, svg, xDetailScale, xOverviewScale ;
 
 	var margin = {
 	    top: 50,
@@ -21,7 +21,7 @@
 
 	bbDetail = {
 	    x: 0,
-	    y: 150,
+	    y: 25,
 	    w: width,
 	    h: 300
 	};
@@ -37,7 +37,8 @@
 	dates = [];
 
   // build svg and bounding box
-	svg = d3.select("#visUN").append("svg").attr({
+	svg = d3.select("#timelineVis").append("svg").attr({
+      class: 'timeline',
 	    width: width + margin.left + margin.right,
 	    height: height + margin.top + margin.bottom
 	}).append("g").attr({
@@ -78,34 +79,20 @@
     var previousDate;
     // go through dates and add to previous is date is same
     duplicateDates.forEach(function(d,i) {
-      // current date without time
+      // current date without time so can compare by day instead of hour
       var currentDate = parseDateSimple(d);
       // if current date not last date in array (and not first element), set date and count
-// console.log('current: ',currentDate);
-// console.log('previous: ',previousDate);
       if(currentDate != previousDate) {
         dates.push(
-          { date: currentDate, total: 1 }
+          { date: d, total: 1 }
         );
         // set last date
-        previousDate = parseDateSimple(d);
+        previousDate = currentDate;
       } else {
         // add one to previous date
-// console.log(dates.length);
         dates[dates.length-1].total++;
-// console.log('passed');
       }
-// console.log(dates);
-      // if current date not last date in array (and not first element), set date and count
-      // if(i!= 0 && d != dates[i-1]) {
-      //   // set date
-      //   dates[d] = total++;
-      // // else increase total of previous date
-      // } else {
-
-      // }
     });
-console.log(dates);
 
     // move to next step on ajax completion
     return detailVis();
@@ -127,8 +114,8 @@ console.log(dates);
 
   // use that minimum and maximum possible y values for domain in log scale
   yScale = d3.scale.linear().domain([
-                            d3.min(originalData, function(d) { return d.tweets; }),
-                            d3.max(originalData, function(d) { return d.tweets; })
+                            d3.min(originalData, function(d) { return d.total; }),
+                            d3.max(originalData, function(d) { return d.total; })
                           ]).range([bbOverview.h, 0]);
 
   // x axis
@@ -145,7 +132,7 @@ console.log(dates);
 
     var line = d3.svg.line()
                      .x(function(d) { return xOverviewScale(d.date) })
-                     .y(function(d) { return yScale(d.tweets )})
+                     .y(function(d) { return yScale(d.total )})
                      .interpolate('linear');
 
   // add x axis to svg
@@ -167,7 +154,7 @@ console.log(dates);
             .attr("y", -bbOverview.h + 5)
             .attr("dy", "30px")
             .style("text-anchor", "end")
-            .text("# Tweets")
+            .text("Coverage")
             .style('fill','#09C6FF');
 
   // add line
@@ -188,7 +175,7 @@ console.log(dates);
       .attr({
         class: 'dot',
         cx: function(d) { return xOverviewScale(d.date); },
-        cy: function(d) { return yScale(d.tweets); },
+        cy: function(d) { return yScale(d.total); },
         fill: '#55D8FF',
         r: 2,
       })
@@ -204,23 +191,25 @@ console.log(dates);
 		var xDetailAxis, yDetailAxis, yDetailScale;
 
 	// normal scale
-	  xDetailScale = d3.time.scale().domain(d3.extent(originalData, function(d) { return d.date_published; })).range([0, bbDetail.w]);  // define the right domain
-// console.log(xDetailScale(parseDateBack.parse('Jan 12 2014')));
+	  xDetailScale = d3.time.scale().domain(d3.extent(dates, function(d) { return d.date; })).range([0, bbDetail.w]);  // define the right domain
 	// example that translates to the bottom left of our vis space:
 	  var detailFrame = svg.append("g").attr({
-	      transform: "translate(" + bbDetail.x + "," + bbDetail.y +")",
+	      class: 'detailFrame',
+        transform: "translate(" + bbDetail.x + "," + bbDetail.y +")",
 	  });
 
 	// use that minimum and maximum possible y values for domain in log scale
 	  yDetailScale = d3.scale.linear().domain([
-	                            d3.min(originalData, function(d) { return d.tweets; }),
-	                            d3.max(originalData, function(d) { return d.tweets; })
+	                            d3.min(dates, function(d) { return d.total; }),
+	                            d3.max(dates, function(d) { return d.total; })
 	                          ]).range([bbDetail.h, 0]);
-
+// console.log(yDetailScale(2));
   // x axis
     xDetailAxis = d3.svg.axis()
                   .scale(xDetailScale)
-                  .orient('bottom');
+                  .orient('bottom')
+                  .ticks(7)
+                  .tickFormat(d3.time.format('%b'));
 
   // y axis for consolidated population line
     yDetailAxis = d3.svg.axis()
@@ -231,11 +220,11 @@ console.log(dates);
     var area = d3.svg.area()
 								     .x(function(d) { return xDetailScale(d.date); })
 								     .y0(bbDetail.h)
-								     .y1(function(d) { return yDetailScale(d.tweets); });
+								     .y1(function(d) { return yDetailScale(d.total); });
 
     var line = d3.svg.line()
                      .x(function(d) { return xDetailScale(d.date) })
-                     .y(function(d) { return yDetailScale(d.tweets )})
+                     .y(function(d) { return yDetailScale(d.total)})
                      .interpolate('linear');
 
   // add x axis to svg
@@ -257,43 +246,93 @@ console.log(dates);
             .attr("y", -45)
             .attr("dy", "30px")
             .style("text-anchor", "end")
-            .text("# Tweets")
-            .style('fill','#09C6FF');
+            .text("Coverage")
 
   // add fill
   detailFrame.append("path")
-		         .datum(originalData)
+		         .datum(dates)
 		         .attr("class", "detailArea")
 		         .attr("d", area);
 
   // add line
     detailFrame.append('path')
-               .datum(originalData)
+               .datum(dates)
                .attr({
                   class: 'detailPath',
                   d: line,
                })
                .style({
-                'stroke': '#09C6FF', 
                 'fill': 'none',
                });
 
-  // add dots for each line
+  /* Tool tips */
+    // Initialize tooltip
+    tip = d3.tip()
+            .html(function(d) { return 'total: ' + d.total; })
+            .direction('e')
+            .attr('class','d3-tip e');
+
+    // Invoke the tip in the context of your visualization
+    detailFrame.call(tip)
+
+  /* add dots for each line */
   	detailFrame.selectAll('.dot')
-       .data(originalData)
+       .data(dates)
     .enter().append('circle')
       .attr({
         class: 'dot',
         cx: function(d) { return xDetailScale(d.date); },
-        cy: function(d) { return yDetailScale(d.tweets); },
-        fill: '#55D8FF',
-        r: 2,
+        cy: function(d) { return yDetailScale(d.total); },
+        r: 3,
       })
+      /* Show and hide tip on mouse events */
+      .on('mouseover', tip.show)
+      .on('mouseout', tip.hide);
 
-		// setup actions to take on brush event, scale is same as overview scale, but overview scale not in scope here
+  /* add vertical line mouseover - initial code with help from Richard @ http://stackoverflow.com/questions/18882642/d3-js-drawing-a-line-on-linegraph-on-mouseover */
+
+    // define vertical line group to hold line and tooltip
+    var hoverLineGroup = svg.append('g')
+                         .attr('class','hover-line');                         
+    // define vertical line
+    var hoverLine = hoverLineGroup
+        .append('line')
+          .attr('x1',10).attr('x2',10)
+          // set y to height of detail area, adjusting for margin on top
+          .attr('y1',0 + bbDetail.y).attr('y2',bbDetail.h + bbDetail.y)
+          .attr('stroke-width',2)
+          .style('stroke','#CCC');
+
+    // control mousemove event
+    d3.select('.timeline').on('mouseover',function(){
+      // console.log('mouseover');
+    }).on('mousemove',function(){
+      // console.log('moved', d3.mouse(this));
+      // get x coordinate of mouse and adjust for left margin
+      var mouseX = d3.mouse(this)[0] - margin.left;
+      // if not outside graph bounds
+      if(mouseX > 0 && mouseX < width) {
+        // set x coordinate of line
+        hoverLine.attr('x1',mouseX)
+                 .attr('x2',mouseX);
+
+        // console.log('mouseX',mouseX);
+        // show line
+        hoverLine.style('opacity',1);
+      } else {
+        // disappear line        
+        hoverLine.style('opacity',0);
+      }
+
+    });
+
+      // set hoverline to invisible on page load
+      hoverLine.style('opacity',0);
+
+	// setup actions to take on brush event, scale is same as overview scale, but overview scale not in scope here
 		brush = d3.svg.brush().x(xOverviewScale).on("brush", brushed);
 
-		// add brush to viz
+	// add brush to viz
 		svg.append("g")
 			 .attr("class", "brush")
 			 .call(brush)

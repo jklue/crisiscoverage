@@ -292,3 +292,60 @@ footer {
 
   100% {
     opacity: 1.0; } }
+#timeline {
+  /* Tooltips */
+  /* Creates a small triangle extender for the tooltip */
+  /* Northward tooltips */
+  /* Eastward tooltips */
+  /* Southward tooltips */
+  /* Westward tooltips */ }
+  #timeline .detailPath {
+    stroke: #cc1452; }
+  #timeline .dot {
+    fill: #940f3c; }
+  #timeline .detailArea {
+    fill: #cc1452; }
+  #timeline .x.axis, #timeline .y.axis {
+    fill: #cccccc; }
+  #timeline .hover-line {
+    pointer-events: none; }
+  #timeline .d3-tip {
+    margin-left: 7px;
+    line-height: 1;
+    font-weight: bold;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    border-radius: 2px;
+    pointer-events: none; }
+  #timeline .d3-tip:after {
+    box-sizing: border-box;
+    display: inline;
+    font-size: 10px;
+    width: 100%;
+    line-height: 1;
+    color: rgba(0, 0, 0, 0.8);
+    position: absolute;
+    pointer-events: none; }
+  #timeline .d3-tip.n:after {
+    content: "\25BC";
+    margin: -1px 0 0 0;
+    top: 100%;
+    left: 0;
+    text-align: center; }
+  #timeline .d3-tip.e:after {
+    content: "\25C0";
+    margin: -4px 0 0 0;
+    top: 50%;
+    left: -8px; }
+  #timeline .d3-tip.s:after {
+    content: "\25B2";
+    margin: 0 0 1px 0;
+    top: -8px;
+    left: 0;
+    text-align: center; }
+  #timeline .d3-tip.w:after {
+    content: "\25B6";
+    margin: -4px 0 0 -1px;
+    top: 50%;
+    left: 100%; }
