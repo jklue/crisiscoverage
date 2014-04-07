@@ -268,7 +268,14 @@
   /* Tool tips */
     // Initialize tooltip
     tip = d3.tip()
-            .html(function(d) { return 'total: ' + d.total; })
+            .html(function(d) { 
+              // if 1 article, use singular 'article'
+              if(d.total == 1)
+                return d.total + ' article on ' + parseDateSimple(d.date); 
+              // else use 'articles'
+              else
+                return d.total + ' articles on ' + parseDateSimple(d.date); 
+            })
             .direction('e')
             .attr('class','d3-tip e');
 
@@ -283,51 +290,64 @@
         class: 'dot',
         cx: function(d) { return xDetailScale(d.date); },
         cy: function(d) { return yDetailScale(d.total); },
-        r: 3,
+        r: 4,
       })
       /* Show and hide tip on mouse events */
       .on('mouseover', tip.show)
-      .on('mouseout', tip.hide);
+      .on('mouseout', tip.hide)
+      // make dot bigger
+      .on('mouseover', function(d){
+        d3.select(this)
+          .transition()
+          .duration(25)
+          .attr('r',10);
+        tip.show(d);
+      })
+      // make dot smaller
+      .on('mouseout', function(){
+        d3.select(this)
+          .transition()
+          .duration(25)
+          .attr('r',4)
+      });
 
   /* add vertical line mouseover - initial code with help from Richard @ http://stackoverflow.com/questions/18882642/d3-js-drawing-a-line-on-linegraph-on-mouseover */
 
-    // define vertical line group to hold line and tooltip
-    var hoverLineGroup = svg.append('g')
-                         .attr('class','hover-line');                         
-    // define vertical line
-    var hoverLine = hoverLineGroup
-        .append('line')
-          .attr('x1',10).attr('x2',10)
-          // set y to height of detail area, adjusting for margin on top
-          .attr('y1',0 + bbDetail.y).attr('y2',bbDetail.h + bbDetail.y)
-          .attr('stroke-width',2)
-          .style('stroke','#CCC');
+    // // define vertical line group to hold line and tooltip
+    // var hoverLineGroup = svg.append('g')
+    //                      .attr('class','hover-line');                         
+    // // define vertical line
+    // var hoverLine = hoverLineGroup
+    //     .append('line')
+    //       .attr('x1',10).attr('x2',10)
+    //       // set y to height of detail area, adjusting for margin on top
+    //       .attr('y1',0 + bbDetail.y).attr('y2',bbDetail.h + bbDetail.y)
+    //       .attr('stroke-width',2)
+    //       .style('stroke','#CCC');
 
-    // control mousemove event
-    d3.select('.timeline').on('mouseover',function(){
-      // console.log('mouseover');
-    }).on('mousemove',function(){
-      // console.log('moved', d3.mouse(this));
-      // get x coordinate of mouse and adjust for left margin
-      var mouseX = d3.mouse(this)[0] - margin.left;
-      // if not outside graph bounds
-      if(mouseX > 0 && mouseX < width) {
-        // set x coordinate of line
-        hoverLine.attr('x1',mouseX)
-                 .attr('x2',mouseX);
+    // // control mousemove event
+    // d3.select('.timeline').on('mouseover',function(){
+    //   // console.log('mouseover');
+    // }).on('mousemove',function(){
+    //   // console.log('moved', d3.mouse(this));
+    //   // get x coordinate of mouse and adjust for left margin
+    //   var mouseX = d3.mouse(this)[0] - margin.left;
+    //   // if not outside graph bounds
+    //   if(mouseX > 0 && mouseX < width) {
+    //     // set x coordinate of line
+    //     hoverLine.attr('x1',mouseX)
+    //              .attr('x2',mouseX);
+    //     // show line
+    //     hoverLine.style('opacity',1);
+    //   } else {
+    //     // disappear line        
+    //     hoverLine.style('opacity',0);
+    //   }
 
-        // console.log('mouseX',mouseX);
-        // show line
-        hoverLine.style('opacity',1);
-      } else {
-        // disappear line        
-        hoverLine.style('opacity',0);
-      }
+    // });
 
-    });
-
-      // set hoverline to invisible on page load
-      hoverLine.style('opacity',0);
+    // // set hoverline to invisible on page load
+    // hoverLine.style('opacity',0);
 
 	// setup actions to take on brush event, scale is same as overview scale, but overview scale not in scope here
 		brush = d3.svg.brush().x(xOverviewScale).on("brush", brushed);
