@@ -24,14 +24,13 @@
 		</div>
 	</header>
 	
-
 <!-- footer -->
 	<footer>
 		<nav>
 			<ul>
-				<li><a href="/overview.php">Overview</a></li>
-				<li><a href="/timeline.php">Timeline</a></li>
-				<li><a href="/data.php">Data</a></li>
+				<li><a href="/overview">Overview</a></li>
+				<li><a href="/timeline">Timeline</a></li>
+				<li><a href="/project-data">Data</a></li>
 			</ul>
 		</nav>
 	</footer>

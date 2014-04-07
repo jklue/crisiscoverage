@@ -4,13 +4,13 @@
 	var margin = {
 	    top: 50,
 	    right: 50,
-	    bottom: 50,
+	    bottom: 0,
 	    left: 100
 	};
 
 	var width = 960 - margin.left - margin.right;
 
-	var height = 550 - margin.bottom - margin.top;
+	var height = 400 - margin.bottom - margin.top;
 
 	bbOverview = {
 	    x: 0,
@@ -31,6 +31,7 @@
 	// read in date format from csv, convert to js object to be read by d3
   parseDate = d3.time.format("%Y-%m-%dT%H:%M:%S+00:00").parse;
   parseDateSimple = d3.time.format("%b %d %Y");
+  parseDateTips = d3.time.format("%b %d, %Y");
 
   // array for all dates
   duplicateDates = [];
@@ -61,7 +62,6 @@
 
 	  // define colors
 	    var keys = d3.keys(data[0]).filter(function(key) { return key !== "AnalysisDate"; });
-
       // convert dates to js object and get list of all dates with duplicates
 	    originalData.forEach(function(d,i) {
         // convert each date to js date
@@ -95,94 +95,28 @@
     });
 
     // move to next step on ajax completion
-    return detailVis();
-	  // return overviewVis();
+    return storypoints();
   });
 
-/* Make overview */
-	function overviewVis() {
+/* Get storypoints */
+  function storypoints() {
 
-		var xAxis, yAxis, yScale;
 
-  // normal scale
-  xOverviewScale = d3.time.scale().domain(d3.extent(originalData, function(d) { return d.date; })).range([0, bbOverview.w]);  // define the right domain
 
-  // example that translates to the bottom left of our vis space:
-  var overviewFrame = svg.append("g").attr({
-      transform: "translate(" + bbOverview.x + ",0)",
-  });
+    /* Add storypoints */
+    d3.csv("data/haiyan/storypoints.csv", function(data) {
+console.log(data);
 
-  // use that minimum and maximum possible y values for domain in log scale
-  yScale = d3.scale.linear().domain([
-                            d3.min(originalData, function(d) { return d.total; }),
-                            d3.max(originalData, function(d) { return d.total; })
-                          ]).range([bbOverview.h, 0]);
+      // draw storypoint lines at appropriate dates
 
-  // x axis
-    xAxis = d3.svg.axis()
-                  .scale(xOverviewScale)
-                  .orient('bottom')
-                  .ticks(20);
 
-  // y axis for consolidated population line
-    yAxis = d3.svg.axis()
-                  .scale(yScale)
-                  .orient('left')
-                  .ticks(3, ",");
+      // add hidden html content to be shown on click
 
-    var line = d3.svg.line()
-                     .x(function(d) { return xOverviewScale(d.date) })
-                     .y(function(d) { return yScale(d.total )})
-                     .interpolate('linear');
+    // create vis
+      return detailVis();
+    });
 
-  // add x axis to svg
-    overviewFrame.append('g')
-            .attr({
-              class: 'x axis',
-              transform: 'translate(0,' + bbOverview.h + ')'
-            })
-            .call(xAxis)
-
-  // add y axis to svg
-    overviewFrame.append('g')
-            .attr({
-              class: 'y axis',
-            })
-            .call(yAxis)
-          .append("text")
-            .attr('x', -5)
-            .attr("y", -bbOverview.h + 5)
-            .attr("dy", "30px")
-            .style("text-anchor", "end")
-            .text("Coverage")
-            .style('fill','#09C6FF');
-
-  // add line
-    overviewFrame.append('path')
-               .datum(originalData)
-               .attr({
-                  class: 'line',
-                  d: line,
-               })
-               .style({
-                'stroke': '#09C6FF', 
-                'fill': 'none',
-               });
-  // add dots for each line
-  	overviewFrame.selectAll('.dot')
-       .data(originalData)
-    .enter().append('circle')
-      .attr({
-        class: 'dot',
-        cx: function(d) { return xOverviewScale(d.date); },
-        cy: function(d) { return yScale(d.total); },
-        fill: '#55D8FF',
-        r: 2,
-      })
-
-    // continue to lower vis
-    detailVis();
-	}
+  };
 
 /* Make detail */
 	function detailVis() {
@@ -222,10 +156,14 @@
 								     .y0(bbDetail.h)
 								     .y1(function(d) { return yDetailScale(d.total); });
 
-    var line = d3.svg.line()
+    var areaLine = d3.svg.line()
                      .x(function(d) { return xDetailScale(d.date) })
                      .y(function(d) { return yDetailScale(d.total)})
                      .interpolate('linear');
+
+    var storypointLine = d3.svg.line()
+                           .x(function(d) { return xDetailScale(d.date); })
+                           .y(bbDetail.h);
 
   // add x axis to svg
     detailFrame.append('g')
@@ -259,7 +197,7 @@
                .datum(dates)
                .attr({
                   class: 'detailPath',
-                  d: line,
+                  d: areaLine,
                })
                .style({
                 'fill': 'none',
@@ -271,10 +209,10 @@
             .html(function(d) { 
               // if 1 article, use singular 'article'
               if(d.total == 1)
-                return d.total + ' article on ' + parseDateSimple(d.date); 
+                return d.total + ' article on ' + parseDateTips(d.date); 
               // else use 'articles'
               else
-                return d.total + ' articles on ' + parseDateSimple(d.date); 
+                return d.total + ' articles on ' + parseDateTips(d.date); 
             })
             .direction('e')
             .attr('class','d3-tip e');
@@ -292,10 +230,7 @@
         cy: function(d) { return yDetailScale(d.total); },
         r: 4,
       })
-      /* Show and hide tip on mouse events */
-      .on('mouseover', tip.show)
-      .on('mouseout', tip.hide)
-      // make dot bigger
+      // make dot bigger and show tip
       .on('mouseover', function(d){
         d3.select(this)
           .transition()
@@ -303,12 +238,13 @@
           .attr('r',10);
         tip.show(d);
       })
-      // make dot smaller
-      .on('mouseout', function(){
+      // make dot smaller and hide tip
+      .on('mouseleave', function(d){
         d3.select(this)
           .transition()
           .duration(25)
           .attr('r',4)
+        tip.hide(d);
       });
 
   /* add vertical line mouseover - initial code with help from Richard @ http://stackoverflow.com/questions/18882642/d3-js-drawing-a-line-on-linegraph-on-mouseover */
@@ -367,7 +303,7 @@
       xDetailScale.domain(brush.empty() ? xOverviewScale.domain() : brush.extent());
       // redraw detail lines and dots
       detailFrame.select('.detailArea').attr('d', area);
-      detailFrame.select('.detailPath').attr('d', line);
+      detailFrame.select('.detailPath').attr('d', areaLine);
       detailFrame.selectAll('.dot').attr('cx', function(d) { return xDetailScale(d.date); });
       // redraw axis
       detailFrame.select('.x.axis').call(xDetailAxis);
@@ -389,7 +325,7 @@
           xDetailScale.domain(xOverviewScale.domain());
           // redraw detail lines and dots
           detailFrame.select('.detailArea').transition().attr('d', area);
-          detailFrame.select('.detailPath').transition().attr('d', line);
+          detailFrame.select('.detailPath').transition().attr('d', areaLine);
           detailFrame.selectAll('.dot').transition().attr('cx', function(d) { return xDetailScale(d.date); });
           // redraw axis
           detailFrame.select('.x.axis').transition().call(xDetailAxis);
@@ -413,7 +349,7 @@
         xDetailScale.domain(brush.extent());
         // redraw detail lines and dots
         detailFrame.select('.detailArea').transition().attr('d', area);
-        detailFrame.select('.detailPath').transition().attr('d', line);
+        detailFrame.select('.detailPath').transition().attr('d', areaLine);
         detailFrame.selectAll('.dot').transition().attr('cx', function(d) { return xDetailScale(d.date); });
         // redraw axis
         detailFrame.select('.x.axis').transition().call(xDetailAxis);
@@ -440,7 +376,7 @@
         xDetailScale.domain(brush.extent());
         // redraw detail lines and dots
         detailFrame.select('.detailArea').transition().attr('d', area);
-        detailFrame.select('.detailPath').transition().attr('d', line);
+        detailFrame.select('.detailPath').transition().attr('d', areaLine);
         detailFrame.selectAll('.dot').transition().attr('cx', function(d) { return xDetailScale(d.date); });
         // redraw axis
         detailFrame.select('.x.axis').transition().call(xDetailAxis);
