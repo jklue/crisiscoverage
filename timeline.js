@@ -62,7 +62,6 @@
  	
  	// make globally available
     originalData = data;
-// console.log(originalData);
 
 	  // define colors
 	    var keys = d3.keys(data[0]).filter(function(key) { return key !== "AnalysisDate"; });
@@ -78,7 +77,6 @@
       duplicateDates.sort(function(a, b) {
         return d3.ascending(a, b);
       });
-// console.log(duplicateDates);
     // define previous date
     var previousDate;
     // go through dates and add to previous is date is same
@@ -105,8 +103,6 @@
 /* Get storypoints */
   function storypoints() {
 
-
-
     /* Add storypoints */
     d3.csv("data/haiyan/storypoints.csv", function(data) {
       // make data accessible by d3 later on
@@ -117,11 +113,6 @@
         // change date out with object
         d.date = parseStorypoint(d.date);
       });
-
-      // draw storypoint lines at appropriate dates
-
-
-      // add hidden html content to be shown on click
 
     // create vis
       return detailVis();
@@ -172,9 +163,8 @@
                      .y(function(d) { return yDetailScale(d.total); })
                      .interpolate('linear');
 
-    var storypointLine = {
-                         'x1': (function(d) { console.log(d);return xDetailScale(d.date); })
-    }
+    // could not figure out how to set static y0 and y1 values using d3 line generator
+    // var storypointLine = d3.svg.line();
 
   // add x axis to svg
     detailFrame.append('g')
@@ -214,21 +204,50 @@
                 'fill': 'none',
                });
 
-  // add storypoints
+  /* Storypoints */
+    // add intro title and summary
+    d3.select("#crisisTitle").html('<h3>Typhoon Haiyan</h3>');
+    d3.select('#crisisStory').html('Typhoon Haiyan, known as Typhoon Yolanda in the Philippines, was a powerful tropical cyclone that devastated portions of Southeast Asia, particularly the Philippines, on November 8, 2013. <a href="http://en.wikipedia.org/wiki/Typhoon_Haiyan" class="storySource">&mdash; Wikipedia</a>');
+
+    // add dotted lines
     detailFrame.selectAll('.line')
                .data(storyPoints)
             .enter().append('line')
                .attr({
                   class: 'storyline',
-                  x1: function(d) { 
-                        return xDetailScale(d.date);
-                      },
-                  x2: function(d) { 
-                        return xDetailScale(d.date);
-                      },
+                  x1: function(d) { return xDetailScale(d.date); },
+                  x2: function(d) { return xDetailScale(d.date); },
                   y1: -bbDetail.y, // make taller than chart
                   y2: bbDetail.h
                 });
+
+    // add triangles
+    detailFrame.selectAll('.storyTriangle')
+           .data(storyPoints)
+        .enter().append('path')
+           .attr({
+              class: 'storyTriangle',
+              transform: function(d){ return 'translate(' + xDetailScale(d.date) + ',' + -bbDetail.y + ')'; },
+              d: d3.svg.symbol().type('triangle-down').size(256)
+            })
+           // add mouseover story details
+           .on('mouseover',function(d){
+              console.log(d);
+              // add new content to div
+              d3.select('#crisisStory')
+                .html(d.title);
+              /* color and size handling */
+                // revert to original color on other triangles and shrink
+                d3.selectAll('.storyTriangle')
+                  .transition()
+                  .style('fill','#919191')
+                  .attr('d',d3.svg.symbol().type('triangle-down').size(256));
+                // change color of current triangle and enlarge
+                d3.select(this)
+                  .transition()
+                  .style('fill','#3D8699')
+                  .attr('d',d3.svg.symbol().type('triangle-down').size(512));
+           });
 
   /* Tool tips */
     // Initialize tooltip

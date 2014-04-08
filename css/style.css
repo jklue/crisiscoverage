@@ -299,6 +299,27 @@ footer {
   /* Eastward tooltips */
   /* Southward tooltips */
   /* Westward tooltips */ }
+  #timeline #crisisTitle {
+    margin: 1em 0 0 6em;
+    width: 40%;
+    color: #919191;
+    padding: 0; }
+  #timeline #crisisStory {
+    margin: 1em 0 0em 6em;
+    width: 40%;
+    color: #919191;
+    height: 6em;
+    padding: 0; }
+  #timeline h3 {
+    font-size: 1.5em;
+    color: #cc1452;
+    margin-bottom: 0.3em; }
+  #timeline .storySource {
+    display: block;
+    text-align: right;
+    margin-top: 0.3em; }
+  #timeline .storyTriangle {
+    fill: #919191; }
   #timeline .detailPath {
     stroke: #cc1452; }
   #timeline .dot {

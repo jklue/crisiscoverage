@@ -5,14 +5,16 @@
 
 	<div class="content">
 
-		<div id="timelineVis"></div>
+		<div id="crisisTitle"></div>
+		<div id="crisisStory"></div>
 
-		<script src="timeline.js"></script>
+		<div id="timelineVis"></div>
 
 	</div>
 
 <!-- footer -->
 	<?php include 'includes/footer.html'; ?>
+	<script src="timeline.js"></script>
 
 </body>
 </html>

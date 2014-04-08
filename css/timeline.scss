@@ -1,4 +1,32 @@
 #timeline {
+// general
+	#crisisTitle{
+		margin: 1em 0 0 6em;
+		width: 40%;
+		color: $darkGray;
+		padding: 0;
+	}
+	#crisisStory{
+		margin: 1em 0 0em 6em;
+		width: 40%;
+		color: $darkGray;
+		height: 6em;
+		padding: 0;
+	}
+// headings
+	h3 {
+		font-size: 1.5em;
+		color: $red;
+		margin-bottom: 0.3em;
+	}
+	.storySource{
+		display: block;
+		text-align:right;
+		margin-top:0.3em;
+	}
+	.storyTriangle{
+		fill: $darkGray;
+	}
 // detail path
 	.detailPath {
 		stroke: $red;
@@ -20,12 +48,13 @@
 	.hover-line {
 		pointer-events: none;
 	}
-// storyline
+// Story Points
 	.storyline{
 		stroke: $gray;
 		stroke-dasharray: 15 25;
 		// stroke-dashoffset: 35;
 	}
+
 
 /* Tooltips */
 	.d3-tip {
