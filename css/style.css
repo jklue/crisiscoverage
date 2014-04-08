@@ -331,11 +331,11 @@ footer {
     margin-top: 0.3em; }
   #timeline .storyTriangle {
     fill: #919191; }
-  #timeline .detailPath {
+  #timeline .traditionalMediaPath {
     stroke: #cc1452; }
-  #timeline .dot {
+  #timeline .traditionalMediaDot {
     fill: #940f3c; }
-  #timeline .detailArea {
+  #timeline .traditionalMediaArea {
     fill: #cc1452; }
   #timeline .x.axis, #timeline .y.axis {
     fill: #cccccc; }

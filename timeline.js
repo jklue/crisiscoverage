@@ -1,5 +1,5 @@
 /* Setup */
-	var bbDetail, bbOverview, dates, storyPoints, duplicateDates, padding, parseYear, svg, xDetailScale, xOverviewScale ;
+	var allDates, bbDetail, bbOverview, traditionalDates, blogDates, storyPoints, duplicateDates, duplicateBlogDates, padding, parseYear, svg, xDetailScale, xOverviewScale ;
 
 	var margin = {
 	    top: 50,
@@ -38,8 +38,11 @@
   parseStorypoint = d3.time.format("%Y-%m-%d").parse;
 
   // array for all dates
+  allDates = []; // master list for date, traditional media count, and blog media count
   duplicateDates = [];
-	dates = [];
+  duplicateBlogDates = [];
+	traditionalDates = [];
+  blogDates = []; // temporarily hold blog data before add to 'dates' var
 
   // build svg and bounding box
 	svg = d3.select("#timelineVis").append("svg").attr({
@@ -57,14 +60,14 @@
     .attr("width", width)
     .attr("height", height);
 
-/* Get data */
+/* Get traditional media data */
 	d3.csv("data/2014-04-03-12.09.57_all_no_text-no2011.csv", function(data) {
  	
  	// make globally available
     originalData = data;
 
 	  // define colors
-	    var keys = d3.keys(data[0]).filter(function(key) { return key !== "AnalysisDate"; });
+	    // var keys = d3.keys(data[0]).filter(function(key) { return key !== "AnalysisDate"; });
       // convert dates to js object and get list of all dates with duplicates
 	    originalData.forEach(function(d,i) {
         // convert each date to js date
@@ -85,20 +88,76 @@
       var currentDate = parseDateSimple(d);
       // if current date not last date in array (and not first element), set date and count
       if(currentDate != previousDate) {
-        dates.push(
-          { date: d, total: 1 }
+        traditionalDates.push(
+          { date: d, traditional: 1 }
         );
         // set last date
         previousDate = currentDate;
       } else {
         // add one to previous date
-        dates[dates.length-1].total++;
+        traditionalDates[traditionalDates.length-1].traditional++;
       }
     });
 
-    // move to next step on ajax completion
-    return storypoints();
+    // go get data from blog search
+    return blogData();
   });
+
+/* Get blog media data */
+
+  function blogData() {
+
+    d3.csv("data/2014-04-03-12.09.57_all_no_text-no2011-blog.csv", function(data) {
+  // console.log(data);
+      // convert dates to js object and get list of all dates with duplicates
+      data.forEach(function(d,i) {
+        // convert each date to js date
+        d.date_published = parseDate(d.date_published);
+        // get all dates if not null
+        if(d.date_published != null)
+          duplicateBlogDates.push(d.date_published);
+      });
+      // sort dates
+      duplicateBlogDates.sort(function(a, b) {
+        return d3.ascending(a, b);
+      });
+  // console.log(duplicateBlogDates);
+      // define previous date
+      var previousDate;
+      // go through dates and add to previous if date is same
+      duplicateBlogDates.forEach(function(d,i) {
+  // console.log(blogDates);
+        // current date without time so can compare by day instead of hour
+        var currentDate = parseDateSimple(d);
+        // if current date not last date in array (and not first element), set date and count
+        if(currentDate != previousDate) {
+          blogDates.push(
+            { date: d, blog: 1 }
+          );
+          // set last date
+          previousDate = currentDate;
+        } else {
+          // add one to previous date
+          blogDates[blogDates.length-1].blog++;
+  // console.log('duplicate date');
+        }
+      });
+  console.log(blogDates);
+      
+      // go get data from story point document
+      return mergeData();
+    });
+  }
+/* Merge traditional and blog data */
+  function mergeData() {
+
+    // make new array with date, traditional media count, and blog media count
+    allDates = traditionalDates;
+
+
+    // go get data from story point document
+    return storypoints();
+  }
 
 /* Get storypoints */
   function storypoints() {
@@ -118,7 +177,7 @@
       return detailVis();
     });
 
-  };
+  }
 
 /* Make detail */
 	function detailVis() {
@@ -127,7 +186,7 @@
 		var xDetailAxis, yDetailAxis, yDetailScale;
 
 	// normal scale
-	  xDetailScale = d3.time.scale().domain(d3.extent(dates, function(d) { return d.date; })).range([0, bbDetail.w]);  // define the right domain
+	  xDetailScale = d3.time.scale().domain(d3.extent(allDates, function(d) { return d.date; })).range([0, bbDetail.w]);  // define the right domain
 	// example that translates to the bottom left of our vis space:
 	  var detailFrame = svg.append("g").attr({
 	      class: 'detailFrame',
@@ -136,8 +195,8 @@
 
 	// use that minimum and maximum possible y values for domain in log scale
 	  yDetailScale = d3.scale.linear().domain([
-	                            d3.min(dates, function(d) { return d.total; }),
-	                            d3.max(dates, function(d) { return d.total; })
+	                            d3.min(allDates, function(d) { return d.traditional; }),
+	                            d3.max(allDates, function(d) { return d.traditional; })
 	                          ]).range([bbDetail.h, 0]);
 // console.log(yDetailScale(2));
   // x axis
@@ -156,11 +215,11 @@
     var area = d3.svg.area()
 								     .x(function(d) { return xDetailScale(d.date); })
 								     .y0(bbDetail.h)
-								     .y1(function(d) { return yDetailScale(d.total); });
+								     .y1(function(d) { return yDetailScale(d.traditional); });
 
     var areaLine = d3.svg.line()
                      .x(function(d) { return xDetailScale(d.date); })
-                     .y(function(d) { return yDetailScale(d.total); })
+                     .y(function(d) { return yDetailScale(d.traditional); })
                      .interpolate('linear');
 
     // could not figure out how to set static y0 and y1 values using d3 line generator
@@ -189,20 +248,47 @@
 
   // add fill
   detailFrame.append("path")
-		         .datum(dates)
-		         .attr("class", "detailArea")
+		         .datum(allDates)
+		         .attr("class", "traditionalMediaArea")
 		         .attr("d", area);
 
   // add line
     detailFrame.append('path')
-               .datum(dates)
+               .datum(allDates)
                .attr({
-                  class: 'detailPath',
+                  class: 'traditionalMediaPath',
                   d: areaLine,
                })
                .style({
                 'fill': 'none',
                });
+
+  /* add dots for each line */
+    detailFrame.selectAll('.traditionalMediaDot')
+       .data(allDates)
+    .enter().append('circle')
+      .attr({
+        class: 'traditionalMediaDot',
+        cx: function(d) { return xDetailScale(d.date); },
+        cy: function(d) { return yDetailScale(d.traditional); },
+        r: 4,
+      })
+      // make dot bigger and show tip
+      .on('mouseover', function(d){
+        d3.select(this)
+          .transition()
+          .duration(25)
+          .attr('r',10);
+        tip.show(d);
+      })
+      // make dot smaller and hide tip
+      .on('mouseleave', function(d){
+        d3.select(this)
+          .transition()
+          .duration(25)
+          .attr('r',4)
+        tip.hide(d);
+      });
 
   /* Storypoints */
     // add intro title and summary
@@ -270,11 +356,11 @@
     tip = d3.tip()
             .html(function(d) { 
               // if 1 article, use singular 'article'
-              if(d.total == 1)
-                return d.total + ' article on ' + parseDateTips(d.date); 
+              if(d.traditional == 1)
+                return d.traditional + ' article on ' + parseDateTips(d.date); 
               // else use 'articles'
               else
-                return d.total + ' articles on ' + parseDateTips(d.date); 
+                return d.traditional + ' articles on ' + parseDateTips(d.date); 
             })
             .direction('e')
             .attr('class','d3-tip e');
@@ -282,32 +368,7 @@
     // Invoke the tip in the context of your visualization
     detailFrame.call(tip)
 
-  /* add dots for each line */
-  	detailFrame.selectAll('.dot')
-       .data(dates)
-    .enter().append('circle')
-      .attr({
-        class: 'dot',
-        cx: function(d) { return xDetailScale(d.date); },
-        cy: function(d) { return yDetailScale(d.total); },
-        r: 4,
-      })
-      // make dot bigger and show tip
-      .on('mouseover', function(d){
-        d3.select(this)
-          .transition()
-          .duration(25)
-          .attr('r',10);
-        tip.show(d);
-      })
-      // make dot smaller and hide tip
-      .on('mouseleave', function(d){
-        d3.select(this)
-          .transition()
-          .duration(25)
-          .attr('r',4)
-        tip.hide(d);
-      });
+  
 
   /* add vertical line mouseover - initial code with help from Richard @ http://stackoverflow.com/questions/18882642/d3-js-drawing-a-line-on-linegraph-on-mouseover */
 

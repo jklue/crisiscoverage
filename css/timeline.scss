@@ -42,17 +42,16 @@
 		fill: $darkGray;
 	}
 // detail path
-	.detailPath {
+	.traditionalMediaPath {
 		stroke: $red;
 	}
 // dot
-	.dot {
+	.traditionalMediaDot {
 		fill: darken($red, 12%);
 	}
 // detail area
-	.detailArea {
+	.traditionalMediaArea {
 		fill: $red;
-		// cursor: pointer;
 	}
 // y axis
 	.x.axis, .y.axis {
