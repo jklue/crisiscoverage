@@ -5,9 +5,13 @@
 
 	<div class="content">
 
-		<div id="crisisTitle"></div>
-		<div id="crisisStory"></div>
+		<!-- Crisis Info -->
+		<div id="crisisInfo">
+			<div id="crisisTitle"></div>	
+			<div id="crisisStory"></div>
+		</div>
 
+		<!-- Timeline -->
 		<div id="timelineVis"></div>
 
 	</div>

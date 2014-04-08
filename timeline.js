@@ -232,11 +232,26 @@
             })
            // add mouseover story details
            .on('mouseover',function(d){
-              console.log(d);
+              // convert story date to readable
+              var storyDate = parseDateTips(d.date);
+              /* Dates */
+                // remove any previously shown dates
+                d3.select('.crisisDate')
+                  .remove();
+                // show new date
+                d3.select('#crisisTitle')
+                  .append('span')
+                  .html(storyDate)
+                  .attr('class','crisisDate');    
+
               // add new content to div
-              d3.select('#crisisStory')
-                .html(d.title);
+              d3.select('#crisisStory').html(d.title);
               /* color and size handling */
+
+                /* Lines */
+
+
+                /* Triangles */
                 // revert to original color on other triangles and shrink
                 d3.selectAll('.storyTriangle')
                   .transition()
@@ -247,6 +262,7 @@
                   .transition()
                   .style('fill','#3D8699')
                   .attr('d',d3.svg.symbol().type('triangle-down').size(512));
+
            });
 
   /* Tool tips */
