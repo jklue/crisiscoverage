@@ -309,6 +309,9 @@ footer {
     fill: #cccccc; }
   #timeline .hover-line {
     pointer-events: none; }
+  #timeline .storyline {
+    stroke: #cccccc;
+    stroke-dasharray: 15 25; }
   #timeline .d3-tip {
     margin-left: 12px;
     line-height: 1;

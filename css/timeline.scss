@@ -20,6 +20,12 @@
 	.hover-line {
 		pointer-events: none;
 	}
+// storyline
+	.storyline{
+		stroke: $gray;
+		stroke-dasharray: 15 25;
+		// stroke-dashoffset: 35;
+	}
 
 /* Tooltips */
 	.d3-tip {

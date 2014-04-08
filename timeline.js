@@ -1,5 +1,5 @@
 /* Setup */
-	var bbDetail, bbOverview, dates, duplicateDates, padding, parseYear, svg, xDetailScale, xOverviewScale ;
+	var bbDetail, bbOverview, dates, storyPoints, duplicateDates, padding, parseYear, svg, xDetailScale, xOverviewScale ;
 
 	var margin = {
 	    top: 50,
@@ -30,8 +30,12 @@
 
 	// read in date format from csv, convert to js object to be read by d3
   parseDate = d3.time.format("%Y-%m-%dT%H:%M:%S+00:00").parse;
+  // remove hour from date so can aggregate articles by date w/out regard to hour
   parseDateSimple = d3.time.format("%b %d %Y");
+  // format date for tooltip
   parseDateTips = d3.time.format("%b %d, %Y");
+  // convert storypoints date to js object for graphing on x axis
+  parseStorypoint = d3.time.format("%Y-%m-%d").parse;
 
   // array for all dates
   duplicateDates = [];
@@ -105,7 +109,14 @@
 
     /* Add storypoints */
     d3.csv("data/haiyan/storypoints.csv", function(data) {
-console.log(data);
+      // make data accessible by d3 later on
+      storyPoints = data;
+
+      // convert storypoint dates to js objects
+      storyPoints.forEach(function(d){
+        // change date out with object
+        d.date = parseStorypoint(d.date);
+      });
 
       // draw storypoint lines at appropriate dates
 
@@ -157,13 +168,13 @@ console.log(data);
 								     .y1(function(d) { return yDetailScale(d.total); });
 
     var areaLine = d3.svg.line()
-                     .x(function(d) { return xDetailScale(d.date) })
-                     .y(function(d) { return yDetailScale(d.total)})
+                     .x(function(d) { return xDetailScale(d.date); })
+                     .y(function(d) { return yDetailScale(d.total); })
                      .interpolate('linear');
 
-    var storypointLine = d3.svg.line()
-                           .x(function(d) { return xDetailScale(d.date); })
-                           .y(bbDetail.h);
+    var storypointLine = {
+                         'x1': (function(d) { console.log(d);return xDetailScale(d.date); })
+    }
 
   // add x axis to svg
     detailFrame.append('g')
@@ -202,6 +213,22 @@ console.log(data);
                .style({
                 'fill': 'none',
                });
+
+  // add storypoints
+    detailFrame.selectAll('.line')
+               .data(storyPoints)
+            .enter().append('line')
+               .attr({
+                  class: 'storyline',
+                  x1: function(d) { 
+                        return xDetailScale(d.date);
+                      },
+                  x2: function(d) { 
+                        return xDetailScale(d.date);
+                      },
+                  y1: -bbDetail.y, // make taller than chart
+                  y2: bbDetail.h
+                });
 
   /* Tool tips */
     // Initialize tooltip
