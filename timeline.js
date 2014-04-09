@@ -239,15 +239,6 @@
                      .y(function(d) { return yDetailScale(d.count); })
                      .interpolate('linear');
 
-    function circleMakerX(values) {
-      console.log(values);
-      return xDetailScale(values.date); 
-    }
-
-    function circleMakerY(values) {
-      return yDetailScale(values.count); 
-    }
-
     // could not figure out how to set static y0 and y1 values using d3 line generator
     // var storypointLine = d3.svg.line();
   // add x axis to svg
@@ -301,9 +292,6 @@
                });
 
   /* add dots for each line */
-  // define color var for use inside next operation
-    var mediaType = [];
-
     dataTypes.selectAll('circle').data(function(d) { return d.values;})
       .enter().append('circle')
       .attr({
@@ -314,20 +302,16 @@
         transform: 'translate(0,' + bbDetail.y + ')'
       })
       .style({
-        'fill': function(d) { return color(d.type); }
+        fill: function(d) { 
+          // get color of type (traditional or blog color)
+          var typeColor = color(d.type);
+          // darken color
+          var d3color = d3.rgb(typeColor).darker();
+          // return color
+          return d3color; 
+        }
       })
-    // dataTypes.append('circle')
-    //   .attr({
-    //     class: 'dot',
-    //     cx: function(d,i) { return circleMakerX(d.values[i]); },
-    //     cy: function(d,i) { return circleMakerY(d.values[i]); },
-    //     // cy: function(d) { return yDetailScale(e.count); },
-    //     r: 4,
-    //     transform: 'translate(0,' + bbDetail.y + ')'
-    //   })
-    //   .style({
-    //     'fill': function(d) { return color(d.type); }
-    //   })
+
       // make dot bigger and show tip
       .on('mouseover', function(d){
         d3.select(this)
@@ -346,82 +330,82 @@
       });
 
   // /* Storypoints */
-  //   // add intro title and summary
-  //   d3.select("#crisisTitle").html('<h3>Typhoon Haiyan</h3>');
-  //   d3.select('#crisisStory').html('Typhoon Haiyan, known as Typhoon Yolanda in the Philippines, was a powerful tropical cyclone that devastated portions of Southeast Asia, particularly the Philippines, on November 8, 2013. <a href="http://en.wikipedia.org/wiki/Typhoon_Haiyan" class="storySource">&mdash; Wikipedia</a>');
+    // add intro title and summary
+    d3.select("#crisisTitle").html('<h3>Typhoon Haiyan</h3>');
+    d3.select('#crisisStory').html('Typhoon Haiyan, known as Typhoon Yolanda in the Philippines, was a powerful tropical cyclone that devastated portions of Southeast Asia, particularly the Philippines, on November 8, 2013. <a href="http://en.wikipedia.org/wiki/Typhoon_Haiyan" class="storySource">&mdash; Wikipedia</a>');
 
-  //   // add dotted lines
-  //   detailFrame.selectAll('.line')
-  //              .data(storyPoints)
-  //           .enter().append('line')
-  //              .attr({
-  //                 class: 'storyline',
-  //                 x1: function(d) { return xDetailScale(d.date); },
-  //                 x2: function(d) { return xDetailScale(d.date); },
-  //                 y1: -bbDetail.y, // make taller than chart
-  //                 y2: bbDetail.h
-  //               });
+    // add dotted lines
+    detailFrame.selectAll('.line')
+               .data(storyPoints)
+            .enter().append('line')
+               .attr({
+                  class: 'storyline',
+                  x1: function(d) { return xDetailScale(d.date); },
+                  x2: function(d) { return xDetailScale(d.date); },
+                  y1: -bbDetail.y, // make taller than chart
+                  y2: bbDetail.h
+                });
 
-  //   // add triangles
-  //   detailFrame.selectAll('.storyTriangle')
-  //          .data(storyPoints)
-  //       .enter().append('path')
-  //          .attr({
-  //             class: 'storyTriangle',
-  //             transform: function(d){ return 'translate(' + xDetailScale(d.date) + ',' + -bbDetail.y + ')'; },
-  //             d: d3.svg.symbol().type('triangle-down').size(256)
-  //           })
-  //          // add mouseover story details
-  //          .on('mouseover',function(d){
-  //             // convert story date to readable
-  //             var storyDate = parseDateTips(d.date);
-  //             /* Dates */
-  //               // remove any previously shown dates
-  //               d3.select('.crisisDate')
-  //                 .remove();
-  //               // show new date
-  //               d3.select('#crisisTitle')
-  //                 .append('span')
-  //                 .html(storyDate)
-  //                 .attr('class','crisisDate');    
+    // add triangles
+    detailFrame.selectAll('.storyTriangle')
+           .data(storyPoints)
+        .enter().append('path')
+           .attr({
+              class: 'storyTriangle',
+              transform: function(d){ return 'translate(' + xDetailScale(d.date) + ',' + -bbDetail.y + ')'; },
+              d: d3.svg.symbol().type('triangle-down').size(256)
+            })
+           // add mouseover story details
+           .on('mouseover',function(d){
+              // convert story date to readable
+              var storyDate = parseDateTips(d.date);
+              /* Dates */
+                // remove any previously shown dates
+                d3.select('.crisisDate')
+                  .remove();
+                // show new date
+                d3.select('#crisisTitle')
+                  .append('span')
+                  .html(storyDate)
+                  .attr('class','crisisDate');    
 
-  //             // add new content to div
-  //             d3.select('#crisisStory').html(d.title);
-  //             /* color and size handling */
+              // add new content to div
+              d3.select('#crisisStory').html(d.title);
+              /* color and size handling */
 
-  //               /* Lines */
+                /* Lines */
 
 
-  //               /* Triangles */
-  //               // revert to original color on other triangles and shrink
-  //               d3.selectAll('.storyTriangle')
-  //                 .transition()
-  //                 .style('fill','#919191')
-  //                 .attr('d',d3.svg.symbol().type('triangle-down').size(256));
-  //               // change color of current triangle and enlarge
-  //               d3.select(this)
-  //                 .transition()
-  //                 .style('fill','#3D8699')
-  //                 .attr('d',d3.svg.symbol().type('triangle-down').size(512));
+                /* Triangles */
+                // revert to original color on other triangles and shrink
+                d3.selectAll('.storyTriangle')
+                  .transition()
+                  .style('fill','#919191')
+                  .attr('d',d3.svg.symbol().type('triangle-down').size(256));
+                // change color of current triangle and enlarge
+                d3.select(this)
+                  .transition()
+                  .style('fill','#3D8699')
+                  .attr('d',d3.svg.symbol().type('triangle-down').size(512));
 
-  //          });
+           });
 
  //  /* Tool tips */
- //    // Initialize tooltip
- //    tip = d3.tip()
- //            .html(function(d) { 
- //              // if 1 article, use singular 'article'
- //              if(d.traditional == 1)
- //                return d.traditional + ' article on ' + parseDateTips(d.date); 
- //              // else use 'articles'
- //              else
- //                return d.traditional + ' articles on ' + parseDateTips(d.date); 
- //            })
- //            .direction('e')
- //            .attr('class','d3-tip e');
+    // Initialize tooltip
+    tip = d3.tip()
+            .html(function(d) { 
+              // if 1 article, use singular 'article'
+              if(d.count == 1)
+                return d.count + " '" + d.type + "' article on " + parseDateTips(d.date); 
+              // else use 'articles'
+              else
+                return d.count + " '" + d.type + "' articles on " + parseDateTips(d.date); 
+            })
+            .direction('e')
+            .attr('class','d3-tip e');
 
- //    // Invoke the tip in the context of your visualization
- //    detailFrame.call(tip)
+    // Invoke the tip in the context of your visualization
+    detailFrame.call(tip)
 
  //  /* add vertical line mouseover - initial code with help from Richard @ http://stackoverflow.com/questions/18882642/d3-js-drawing-a-line-on-linegraph-on-mouseover */
 
