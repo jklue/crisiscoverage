@@ -40,7 +40,9 @@ public class HaiyanBbcConfig extends AbstractBbcConfig {
 //        IOUtils.maxFileLength(config.getCleanFolder(), false);//17,390
 //        IOUtils.fileLength(Paths.get(config.getCleanFolder(),"143"+cleanFolderExt));
 //
-        config.metaToTable(false, true, defaultValLimit, "all_no_text");
+//        NOTICE: USE THIS ONE!
+//        config.metaToTable(false, true, defaultValLimit, "all_no_text");
+        
 //        config.metaToTable(true, true, defaultValLimit, "all_with_text");
 //        config.metaToTable(true, true, 500, "all_500_chars_text");
 //        config.metaToTable(true, true, 8000, "all_8000_chars_text");

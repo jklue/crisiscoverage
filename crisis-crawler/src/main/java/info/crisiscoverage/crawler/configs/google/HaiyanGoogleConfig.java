@@ -1,8 +1,12 @@
 package info.crisiscoverage.crawler.configs.google;
 
+import info.crisiscoverage.crawler.IOUtils;
+
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -10,12 +14,17 @@ import java.util.Properties;
 import java.util.Set;
 
 public class HaiyanGoogleConfig extends AbstractGoogleConfig{
-
-public final static String queryVal = "key=&cx=&q=Typhoon+Haiyan&siteSearch=cnn.com&alt=atom";
 	
 // THIS IS THE ONE WORKING for CNN
 //https://www.googleapis.com/customsearch/v1?key=AIzaSyAmUPgD01HIXrwtDP5Xf0vMWmUpDglFXyQ&cx=007061251080714295857%3Anhvoqbzpcim&q=Typhoon+Haiyan&siteSearch=cnn.com&alt=atom&start=	
 	
+/* THIS IS FOR NEWS */
+public static final String newsQueryVal = "typhoon haiyan news OR article OR coverage --blog --weather.com --wikipedia.org"; 
+
+/* THIS IS FOR BLOGS */
+//public static final String blogQueryVal =  "typhoon haiyan blog --weather.com --wikipedia.org"; 
+
+
 	public HaiyanGoogleConfig()
 			throws IOException {
 		super("haiyan", "google");
@@ -37,7 +46,7 @@ public final static String queryVal = "key=&cx=&q=Typhoon+Haiyan&siteSearch=cnn.
      * @throws Exception
      */
 	public static void main(String[] args) throws Exception {
-		Properties extractProperties = new Properties();
+//		Properties extractProperties = new Properties();
         HaiyanGoogleConfig config = new HaiyanGoogleConfig();
 
         Map<Param,String> paramMap = new HashMap<>();
@@ -45,15 +54,22 @@ public final static String queryVal = "key=&cx=&q=Typhoon+Haiyan&siteSearch=cnn.
         paramMap.put(Param.cx, defaultCx);
         paramMap.put(Param.alt, defaultAlt);
 //        paramMap.put(Param.num, defaultNum);
-        paramMap.put(Param.site, "cnn.com");
-        paramMap.put(Param.dateRestrict, DateRestrict.years.valFor("1"));
-        paramMap.put(Param.q, "Typhoon Haiyan");
+//        paramMap.put(Param.site, "cnn.com");
+//        paramMap.put(Param.dateRestrict, DateRestrict.years.valFor("1"));
+        paramMap.put(Param.q, newsQueryVal);
         
         boolean archive = true;
-        boolean crawl = false;
-        config.runLiveSearch(paramMap, 102, 202, archive);
+        boolean crawl = true;
+        Calendar crisisCal = Calendar.getInstance();
+        crisisCal.clear();
+        crisisCal.set(2013, 10, 07);
+        Date crisisDate = crisisCal.getTime();
         
-         config.extractFromApiDir(archive, crawl);
+//        config.runLiveSearch(paramMap, 1, 101, archive, DateRestrict.weeks, crisisDate,8);//8 for 
+        
+//        config.runLiveSearch(paramMap, 102, 202, archive);
+        
+//         config.extractFromApiDir(archive, crawl);
 
 //        Path apiFile = Paths.get(apiLiveFolderName, "haiyan-cnn-10.xml"); 
 //        config.extractFromApiFile(apiFile, false, false, extractProperties, 0, -1);

@@ -109,7 +109,7 @@ public interface CrawlerConstants {
 	 * @author mjohns
 	 */
 	public static enum Column{
-		doc_id,domain,title,date_published,collection,tags,url,summary,clean_text;
+		doc_id,domain,title,date_published,date_query,collection,tags,url,summary,clean_text;
 	}
 	
 	/**

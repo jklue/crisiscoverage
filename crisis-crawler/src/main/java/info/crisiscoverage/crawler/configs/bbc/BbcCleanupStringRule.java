@@ -1,59 +1,30 @@
 package info.crisiscoverage.crawler.configs.bbc;
 
-import java.util.HashMap;
+import info.crisiscoverage.crawler.configs.BaseCleanupStringRule;
+import info.crisiscoverage.crawler.rule.string.FindReplaceStringRule;
+
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
-
-import info.crisiscoverage.crawler.rule.string.AbstractStringRule;
-import info.crisiscoverage.crawler.rule.string.FindReplaceStringRule;
-import info.crisiscoverage.crawler.rule.string.RegexReplaceStringRule;
 
 /**
  * Some consolidated cleanup on strings for BBC Configs.
  * @author mjohns
  *
  */
-public class BbcCleanupStringRule extends AbstractStringRule{
+public class BbcCleanupStringRule extends BaseCleanupStringRule{
 
 	public BbcCleanupStringRule() {
-		super(null, false);
+		super();
 	}
 
 	@Override
-	protected String runRuleExtender(Iterator<String> inputs,
-			Set<String> resultsHere, Map<String, Object> ioMap) {
-		
-		Set<String> results = new HashSet<String>();
-		Map<String,Object> io = new HashMap<>();
-		
-		//Run findReplace (<br>)
-		FindReplaceStringRule.run(inputs,results,io, "<br>"," ",false);
-		
-		//Run findReplace (")
-		Iterator it = results.iterator();
-		results = new HashSet<>();
-		FindReplaceStringRule.run(it,results,io, "\"","&quot;",false);
-		
-		//Run regex for multiple spaces
-		it = results.iterator();
-		results = new HashSet<>();
-		RegexReplaceStringRule.run(it,results,io, defaultAnyWhitespaceRegex," ",false);
-		
-		//Run regex for multiple spaces
-		it = results.iterator();
-		results = new HashSet<>();
-		RegexReplaceStringRule.run(it,results,io, defaultSpaceNormalizerRegex," ",false);
+	protected void runRulesInternal() {
 		
 		//Run string cleanup
-		it = results.iterator();
-		results = new HashSet<>();
-		FindReplaceStringRule.run(it,results,io,
+		Iterator<String> it = internalResults.iterator();
+		internalResults = new HashSet<>();
+		FindReplaceStringRule.run(it,internalResults,io,
 				" Share this page Delicious Digg Facebook reddit StumbleUpon Twitter Email Print","",false);
-		
-		resultsHere.addAll(results);
-		return null;
 	}
 
 }

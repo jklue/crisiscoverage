@@ -4,6 +4,7 @@ import info.crisiscoverage.crawler.IOUtils;
 import info.crisiscoverage.crawler.JsoupUtils;
 import info.crisiscoverage.crawler.LinkUtils;
 import info.crisiscoverage.crawler.configs.AbstractApiXmlDomCrawlerConfig;
+import info.crisiscoverage.crawler.configs.BaseCleanupStringRule;
 import info.crisiscoverage.crawler.rule.html.AbstractHtmlDomRule;
 import info.crisiscoverage.crawler.rule.html.DefaultHtmlRuleController;
 
@@ -11,34 +12,31 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Properties;
 import java.util.Set;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.jsoup.examples.HtmlToPlainText;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import org.jsoup.nodes.Entities.EscapeMode;
-import org.jsoup.safety.Cleaner;
 import org.jsoup.select.Elements;
 
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
-import com.google.common.escape.Escaper;
-import com.google.common.escape.Escapers;
-import com.google.common.html.HtmlEscapers;
 import com.google.common.net.UrlEscapers;
 
 public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfig{
 	
+	private int tmpCount = 0;
+	
 	public static enum Param{
-		q,key,cx,alt,site,num,start,dateRestrict;
+		hl,safe,q,key,cx,alt,site,num,start,dateRestrict;//lr is problemmatic
 		
 		public String appendToEscaped(String q, String paramVal){
 			String r = q == null? "" : q;
@@ -46,6 +44,12 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 			String v = paramVal == null? "" : UrlEscapers.urlFragmentEscaper().escape(paramVal);
 			
 			switch(this){
+			case hl: r += hlParam + v;
+			break;
+//			case lr: r += lrParam + v;
+//			break;
+			case safe: r += safeParam + v;
+			break;
 			case q: r += qParam + v;
 			break;
 			case key: r += keyParam + v;
@@ -81,6 +85,57 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 				return "y"+number;
 			}
 		}
+		
+		public int numberBack(Date now, Date then, boolean roundDown){
+			
+			int daysBack = daysBetween(then,now);
+			System.out.println("numberBack() result --> [days= "+daysBack+
+					"], would be date: "+sanityCheckDateFromDaysBack(now, daysBack).toString());
+			
+			switch(this){
+			case days: return daysBack;
+			case weeks: return daysToWeeks(daysBack, roundDown);
+			case months: return daysToMonths(daysBack, roundDown);
+			case years: return daysToYears(daysBack, roundDown);
+			}
+			
+			return -1;
+		}
+		
+		private Date sanityCheckDateFromDaysBack(Date to, int daysBack){
+			return new Date( to.getTime() - (daysBack * 1000 * 60 * 60 * 24)); 	
+		}
+		
+		private int daysBetween(Date from, Date to){
+	        return (int)( (to.getTime() - from.getTime()) / (1000 * 60 * 60 * 24));// millis * s * h * d; 
+	     }
+		
+		private int daysToWeeks(int days, boolean roundDown){
+			if (days < 1) return -1;
+			else if (days > 7){
+				if (roundDown) return ((Double)Math.floor(days/7)).intValue();
+				else return ((Double)Math.ceil(days/7)).intValue();
+			}
+			else return 1;
+		}
+		
+		private int daysToMonths(int days, boolean roundDown){
+			if (days < 1) return -1;
+			else if (days > 31){
+				if (roundDown) return ((Double)Math.floor(days/31)).intValue();
+				else return ((Double)Math.ceil(days/31)).intValue();
+			}
+			else return 1;
+		}
+		
+		private int daysToYears(int days, boolean roundDown){
+			if (days < 1) return -1;
+			else if (days > 365){
+				if (roundDown) return ((Double)Math.floor(days/365)).intValue();
+				else return ((Double)Math.ceil(days/365)).intValue();
+			}
+			else return 1;
+		}
 	}
 	
 	public static final String template = "https://www.googleapis.com/customsearch/v1?"+queryToken+offsetToken;
@@ -89,14 +144,26 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 //	final static protected String template = "https://news.google.com/?q="+queryToken+"&page="+pageToken+"&num=100&output=atom";//rss
 //	public static final String queryValue = "%22Typhoon%20Haiyan%22&as_drrb=q&as_qdr=y&num=100&output=atom";
 	
-	// THIS IS THE ONE WORKING for CNN
-	//https://www.googleapis.com/customsearch/v1?key=AIzaSyAmUPgD01HIXrwtDP5Xf0vMWmUpDglFXyQ&cx=007061251080714295857%3Anhvoqbzpcim&q=Typhoon+Haiyan&alt=atom&num=&siteSearch=cnn.com&start=&dateRestrict=
+//	 THIS IS THE ONE WORKING for CNN
+//	https://www.googleapis.com/customsearch/v1?key=AIzaSyAmUPgD01HIXrwtDP5Xf0vMWmUpDglFXyQ&cx=007061251080714295857%3Anhvoqbzpcim&q=Typhoon+Haiyan&alt=atom&num=&siteSearch=cnn.com&start=&dateRestrict=
 	
+//	SAMPLE QUERY FOR 14 weeks back (early DEC as of APR 09)
+/*
+ * 	GOOD --> https://www.googleapis.com/customsearch/v1?safe=high&alt=atom&cx=007061251080714295857:nhvoqbzpcim&hl=en&key=AIzaSyAmUPgD01HIXrwtDP5Xf0vMWmUpDglFXyQ&q=Typhoon%20Haiyan&num=10&start=1&dateRestrict=w14
+ *  Remove lr!
+ */
+	
+	public static final String defaultHl = "en";//Interface lang
+//	public static final String defaultLr = "en";//Restrict to lang //NOTE: PROBLEMMATIC
+	public static final String defaultSafe = "high";
 	public static final String defaultAlt = "atom";
 	public static final int defaultNum = 10;
 	public static final String defaultKey = "AIzaSyAmUPgD01HIXrwtDP5Xf0vMWmUpDglFXyQ";
 	public static final String defaultCx = "007061251080714295857:nhvoqbzpcim";
 	
+	public static final String hlParam = "hl=";
+	public static final String lrParam = "lr=";
+	public static final String safeParam = "safe=";
 	public static final String qParam = "q=";
 	public static final String keyParam = "key=";
 	public static final String cxParam = "cx=";
@@ -121,6 +188,9 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 	public AbstractGoogleConfig(String collectionName, String tags) throws IOException {
 		super(collectionName, tags, new DefaultHtmlRuleController(), new GoogleApiMetaMapper(), defaultHtmlExt, defaultXmlExt);
 		
+//		clean_string
+    	ruleController.addRuleTo(
+    			RuleType.parser, ParseStage.clean_string, new BaseCleanupStringRule());
     }
 	
 	@Override
@@ -140,10 +210,13 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 		while (p < maxPageOrOffset){	
 			String url = urlFromTemplate(template, Param.num.appendToEscaped(queryValue,Integer.toString(sv)), offsetVal(p));
 			System.out.println("... building url for live run search --> "+url);
+		
+			String dateName = dateNameFromUrl(url);
+			String filename = collectionName+"-"+tags+"_"+p+"-"+(p+sv)+"_"+dateName+apiFolderExt;
+			System.out.println("... now writing filename ["+filename+"]");
 			
 			Document doc = LinkUtils.readUrlPolitely(url,true);
-			IOUtils.write(Paths.get(apiLiveFolder,
-					collectionName+"-"+tags+"_"+p+"-"+(p+sv)+apiFolderExt), doc.outerHtml());
+			IOUtils.write(Paths.get(apiLiveFolder, filename), doc.outerHtml());
 			
 			p += sv;
 			
@@ -176,8 +249,48 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 		return "&"+startParam+offset;
 	}
 	
+	
 	/**
-	 * Build Query and run live search.
+	 * Build Query and run live search, accounting for changing date ranges.
+	 * @param params
+	 * @param minPageOrOffset
+	 * @param maxPageOrOffset
+	 * @param archive
+	 * @param dateRestrict DateRestrict
+	 * @param dateStart Date
+	 * @param numberOfDateIncrements int
+	 * @throws Exception
+	 */
+	protected void runLiveSearch(
+			final Map<Param,String> params, int minPageOrOffset, int maxPageOrOffset, boolean archive,
+			DateRestrict dateRestrict, Date dateStart, int numberOfDateIncrements) throws Exception{
+		
+		//handle archive
+		if (archive) archiveCalled();
+		
+		//Main work here is to figure out how many increments is the start, stored as 'd'.
+		
+		boolean roundDown = dateRestrict.equals(DateRestrict.years) || dateRestrict.equals(DateRestrict.months) ? true : false;
+		
+		int d = dateRestrict.numberBack(Calendar.getInstance().getTime(), dateStart, roundDown);
+		if (d > 0){
+			//decrement d down to 1 over loop.
+			for (int i=1; i<= numberOfDateIncrements; i++){
+				if (d > 0){
+					params.put(Param.dateRestrict, dateRestrict.valFor(Integer.toString(d)));
+					System.out.println("... runLiveSearch() for next dateRestrict: "+params.get(Param.dateRestrict));
+					runLiveSearch(params, minPageOrOffset, maxPageOrOffset, false);
+					d--;//Next run will be closer to NOW!
+				} else {
+					System.err.println("... calculated number for dateRestrict invalid, skipping.");
+					break;
+				}
+			}
+		} else System.err.println("... calculated number for dateRestrict invalid, skipping.");
+	}
+	
+	/**
+	 * Build Query and run live search. This doesn't account for changing date ranges.
 	 * @param params
 	 * @param minPageOrOffset
 	 * @param maxPageOrOffset
@@ -193,6 +306,10 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 		params.remove(Param.num);//this is handled inline.
 		params.remove(Param.start);//this is handled inline.
 		
+		if (!params.containsKey(Param.hl)) params.put(Param.hl, defaultHl);
+//		if (!params.containsKey(Param.lr)) params.put(Param.lr, defaultLr);
+		if (!params.containsKey(Param.safe)) params.put(Param.safe, defaultSafe);
+		
 		for (Entry<Param,String> entry : params.entrySet()){
 			Param k = entry.getKey();
 			String v = entry.getValue();
@@ -204,6 +321,18 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 	}
 	
 	/**
+	 * Archive
+	 * @throws IOException
+	 */
+	protected void archiveCalled() throws IOException{
+		archiveFolder(errorFolder);
+		archiveFolder(docIdFolder);
+		archiveFolder(textFolder);
+		archiveFolder(apiEntryFolder);
+		archiveFolder(abstractFolder);
+	}
+	
+	/**
 	 * Extract From Api dir, this will archive everything as ids will be disrupted.
 	 * @param archive
 	 * @param crawlUrls
@@ -211,14 +340,8 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 	 */
 	public void extractFromApiDir(boolean archive, boolean crawlUrls) throws Exception{
 		
-		//handle text archive
-		if (archive){
-			archiveFolder(errorFolder);
-			archiveFolder(docIdFolder);
-			archiveFolder(textFolder);
-			archiveFolder(apiEntryFolder);
-			archiveFolder(abstractFolder);
-		}
+		//handle archive
+		if (archive) archiveCalled();
 		extractFromApiEntries(IOUtils.entriesWithinDir(apiLiveFolder,false), false, crawlUrls);
 	}
 	
@@ -232,34 +355,21 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 	public void extractFromApiEntries(List<Path> entries, boolean archive, boolean crawlUrls)
 			throws Exception {
 		
-		//handle text archive
-		if (archive){
-			archiveFolder(errorFolder);
-			archiveFolder(docIdFolder);
-			archiveFolder(textFolder);
-			archiveFolder(apiEntryFolder);
-			archiveFolder(abstractFolder);
-		}
+		tmpCount = 0;
 		
-		Properties props = new Properties();
+		//handle archive
+		if (archive) archiveCalled();
 		for (Path entry : entries){
-			extractFromApiFile(entry, false, crawlUrls, props);
+			extractFromApiFile(entry, false, crawlUrls);
 		}
 	}
 
 	@Override
-	public void extractFromApiFile(Path apiFile, boolean archive, boolean crawlUrls, Properties props) throws Exception {
+	public void extractFromApiFile(Path apiFile, boolean archive, boolean crawlUrls) throws Exception {
 		
-		//handle text archive
-		if (archive){
-			archiveFolder(errorFolder);
-			archiveFolder(docIdFolder);
-			archiveFolder(textFolder);
-			archiveFolder(apiEntryFolder);
-			archiveFolder(abstractFolder);
-		}
-		
-		extractFromApiFile(apiFile, false, crawlUrls, props,0,-1);
+		//handle archive
+		if (archive) archiveCalled();
+		extractFromApiFile(apiFile, false, crawlUrls,0,-1);
 	}
 	
 	/**
@@ -267,105 +377,110 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 	 * @param apiFile
 	 * @param archive
 	 * @param crawlUrls
-	 * @param props
 	 * @param startFromIdx
 	 * @param endAtIdx
 	 * @throws Exception
 	 */
 	public void extractFromApiFile(
-			Path apiFile, boolean archive, boolean crawlUrls, Properties props, int startFromIdx, int endAtIdx) throws Exception {
-		
-		//handle text archive
-		if (archive){
-			archiveFolder(errorFolder);
-			archiveFolder(docIdFolder);
-			archiveFolder(textFolder);
-			archiveFolder(apiEntryFolder);
-			archiveFolder(abstractFolder);
-		}
-		
-		List<Path> entries = IOUtils.entriesWithinDir(apiLiveFolder, false);
-		
+			Path apiFile, boolean archive, boolean crawlUrls, int startFromIdx, int endAtIdx) throws Exception {
+
+		//handle archive
+		if (archive) archiveCalled();
 		int idx = 0;
-		for (Path entry : entries){
-			String content = IOUtils.read(entry);
-			
-			Document doc = JsoupUtils.parseXmlDoc(content);
-			Elements tags = doc.getElementsByTag("entry");
-			
-			int dId = 0;
-			for (Element tag : tags){
-				idx++;
-				dId++;
-				
-				String docId = IOUtils.filenameWithoutExt(entry.getFileName().toString())+"("+dId+")";
-				
-				if (idx < startFromIdx){
-					System.out.println("... skipping docId: '"+docId+"' at idx: '"+idx+"' which is less than startFromIdx: '"+startFromIdx+"' as directed.");
-					continue;//poor-man's skip function.
+
+		String content = IOUtils.read(apiFile);
+
+		Document doc = JsoupUtils.parseXmlDoc(content);
+		Elements tags = doc.getElementsByTag("entry");
+
+		int dId = 0;
+		for (Element tag : tags){
+			tmpCount++;
+			idx++;
+			dId++;
+
+			String docId = IOUtils.filenameWithoutExt(apiFile.getFileName().toString())+"("+StringUtils.leftPad(""+dId,2,"0")+")";
+
+			if (idx < startFromIdx){
+				System.out.println("... skipping docId: '"+docId+"' at idx: '"+idx+"' which is less than startFromIdx: '"+startFromIdx+"' as directed.");
+				continue;//poor-man's skip function.
+			}
+			else if (endAtIdx >0 && idx > endAtIdx){
+				System.out.println("... stopping at endAtIdx: '"+endAtIdx+"' as directed.");
+				break;
+			}
+
+			String title = titleFromEntry(tag,docId);
+
+			String url = tag.getElementsByTag("id").first().text();
+			url = ("http"+StringUtils.substringAfter(url,"http")).trim();
+
+			String date = dateFromEntry(tag,docId);
+
+			String abstractText = summaryFromEntry(tag,docId);
+
+			System.out.println("#"+tmpCount+" ... extracting docId: "+docId+", title: "+title+", date: "+date+", url: "+url);
+
+			//write entry
+			Path entryPath = Paths.get(apiEntryFolder, docId+apiFolderExt);
+			IOUtils.write(entryPath, wrapEntryInFeedXml(tag));
+
+			//write urls as docId
+			Path urlPath = Paths.get(docIdFolder, docId+urlFolderExt);
+			IOUtils.write(urlPath, url);
+
+			//write abstract
+			Path abstractPath = Paths.get(abstractFolder, docId+textFolderExt);
+			abstractText = JsoupUtils.cleanDocBodyToStringForce(abstractText, defaultCleaner, defaultEscapeMode);
+			IOUtils.write(abstractPath, abstractText);
+
+			//write text
+			if (crawlUrls){
+
+				Document textDoc = null;
+				Exception _e = null;
+				try{
+					textDoc = LinkUtils.readUrlPolitely(url,false);
+				} catch (Exception e){
+					_e = e;
 				}
-				else if (endAtIdx >0 && idx > endAtIdx){
-					System.out.println("... stopping at endAtIdx: '"+endAtIdx+"' as directed.");
-					break;
-				}
-				
-				String title = titleFromEntry(tag,docId);
-				
-				String url = tag.getElementsByTag("id").first().text();
-				url = ("http"+StringUtils.substringAfter(url,"http")).trim();
-				
-				String date = dateFromEntry(tag,docId);
-				
-				String abstractText = summaryFromEntry(tag,docId);
-				
-				System.out.println("... extracting docId: "+docId+", title: "+title+", date: "+date+", url: "+url);
-				
-				//write entry
-				Path entryPath = Paths.get(apiEntryFolder, docId+apiFolderExt);
-				IOUtils.write(entryPath, wrapEntryInFeedXml(tag));
-				
-				//write urls as docId
-				Path urlPath = Paths.get(docIdFolder, docId+urlFolderExt);
-				IOUtils.write(urlPath, url);
-				
-				//write abstract
-				Path abstractPath = Paths.get(abstractFolder, docId+textFolderExt);
-				abstractText = JsoupUtils.cleanDocBodyToStringForce(abstractText, defaultCleaner, defaultEscapeMode);
-				IOUtils.write(abstractPath, abstractText);
-				
-				//write text
-				if (crawlUrls){
-					
-					Document textDoc = null;
-					Exception _e = null;
+
+				if (textDoc == null){
 					try{
-						textDoc = LinkUtils.readUrlPolitely(url,false);
-					} catch (Exception e){
-						_e = e;
-					}
-					
-					if (textDoc == null){
-						try{
-							String altUrl = tag.getElementsByTag("link").first().attr("href");
-							System.err.println("after normal crawl fail, attempting with alt url: "+altUrl);
-							textDoc = LinkUtils.readUrlPolitely(altUrl,false);
-						} catch (Exception e){}
-					}
-					
-					if (textDoc != null){
-						String text = textDoc.outerHtml();
-						Path textPath = Paths.get(textFolder, docId+textFolderExt);
-						IOUtils.write(textPath, text);
-					} else {
-						Path errorPath = Paths.get(errorFolder, docId+textFolderExt);
-						IOUtils.write(errorPath,  
-								("exception crawling: "+url+" -->\n" + _e == null? "(no stack)" : _e.toString()));
-						System.err.println("ERROR CRAWLING ID: "+docId+" -->");
-						_e.printStackTrace();
-					}
+						String altUrl = tag.getElementsByTag("link").first().attr("href");
+						System.err.println("after normal crawl fail, attempting with alt url: "+altUrl);
+						textDoc = LinkUtils.readUrlPolitely(altUrl,false);
+					} catch (Exception e){}
+				}
+
+				if (textDoc != null){
+					String text = textDoc.outerHtml();
+					Path textPath = Paths.get(textFolder, docId+textFolderExt);
+					IOUtils.write(textPath, text);
+				} else {
+					Path errorPath = Paths.get(errorFolder, docId+textFolderExt);
+					IOUtils.write(errorPath,  
+							("exception crawling: "+url+" -->\n" + _e == null? "(no stack)" : _e.toString()));
+					System.err.println("ERROR CRAWLING ID: "+docId+" -->");
+					_e.printStackTrace();
 				}
 			}
 		}
+	}
+	
+	/**
+	 * Official way to get dateName from url.
+	 * @param url
+	 */
+	public static String dateNameFromUrl(String url){
+		String dateName = "no_date";
+		if (url.contains(Param.dateRestrict.name()+"=")){
+			String tmp = StringUtils.substringAfter(url,Param.dateRestrict.name()+"=");
+			if (tmp.contains("&"))
+				dateName = StringUtils.substringBefore(tmp,"&");
+			else if (!tmp.isEmpty()) dateName = tmp;
+		}
+		return dateName;
 	}
 	
 	/**
@@ -392,13 +507,14 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 		String date = "";
 		if (entry == null) return date;
 		Element pagemap = entry.getElementsByTag("cse:pagemap").first();
-		Elements dates = pagemap.getElementsByAttributeValue("name", "pubdate");
-		if (dates.isEmpty()) {
-			dates = pagemap.getElementsByAttributeValue("name", "datepublished");
-		}
-		if (!dates.isEmpty()) date = dates.first().attr("value");
-		else System.err.println("... date not findable by either 'pubdate' or 'datepublished' ");
-		
+		if (pagemap != null){
+			Elements dates = pagemap.getElementsByAttributeValue("name", "pubdate");
+			if (dates == null || dates.isEmpty()) {
+				dates = pagemap.getElementsByAttributeValue("name", "datepublished");
+			}
+			if (dates != null && !dates.isEmpty()) date = dates.first().attr("value");
+			else System.err.println("... date not findable by either 'pubdate' or 'datepublished' ");
+		} else System.err.println("... pagemap not findable, much less 'pubdate' or 'datepublished' ");
 		return date;
 	}
 	

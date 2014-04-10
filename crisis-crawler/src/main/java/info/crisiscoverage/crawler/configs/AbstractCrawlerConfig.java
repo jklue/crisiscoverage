@@ -18,6 +18,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.lang3.StringUtils;
+
 /**
  * All Configs for crawling should extend this class for best practices.
  * @author mjohns
@@ -242,7 +244,7 @@ public abstract class AbstractCrawlerConfig<O> implements CrawlerConstants{
 	public void metaToTable(Path csvFile, CsvOptions csvOptions, Path entry, boolean includeCleanText, boolean includeHeaders, int cellSizeLimit, String filenameAppend) throws Exception{
 		
 			String url = IOUtils.read(entry);
-			String docId = IOUtils.filenameWithoutExt(entry.getFileName().toString());
+			String docId = getDocIdFromEntry(entry);
 			String text = "";
 			try{
 				text = IOUtils.read(Paths.get(textFolder, docId + textFolderExt));
@@ -265,6 +267,15 @@ public abstract class AbstractCrawlerConfig<O> implements CrawlerConstants{
 			if (!includeCleanText) row.remove(Column.clean_text);
 			
 			IOUtils.writeCsv(csvFile, row, csvOptions, cellSizeLimit);
+	}
+	
+	/**
+	 * Special considerations for prepends.
+	 * @param entry
+	 * @return
+	 */
+	public String getDocIdFromEntry(Path entry){
+		return IOUtils.filenameWithoutExt(entry.getFileName().toString());
 	}
 	
 	/**

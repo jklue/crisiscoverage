@@ -264,7 +264,9 @@ public class IOUtils implements CrawlerConstants{
 	 */
 	public static String escapeCsvDisrupters(String value){
 		String v = StringUtils.replace(value, "\"", "&quot;");
-		v = StringUtils.replace(value, "\n", "<br>");
+		v = StringUtils.normalizeSpace(v);
+//		v = StringUtils.replace(value, "\n", "<br>");
+		
 		return v;
 	}
 	

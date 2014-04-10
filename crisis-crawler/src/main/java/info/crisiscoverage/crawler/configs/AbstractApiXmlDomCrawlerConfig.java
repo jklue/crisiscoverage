@@ -37,9 +37,8 @@ public abstract class AbstractApiXmlDomCrawlerConfig extends AbstractHtmlCrawler
 	 * @param apiFile
 	 * @param archive
 	 * @param crawlUrls
-	 * @param props
 	 */
-	public abstract void extractFromApiFile(Path apiFile, boolean archive, boolean crawlUrls, Properties props) throws Exception;
+	public abstract void extractFromApiFile(Path apiFile, boolean archive, boolean crawlUrls) throws Exception;
 
 	public String getApiLiveFolder() {
 		return apiLiveFolder;
