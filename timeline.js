@@ -69,10 +69,10 @@
 
 /* Set initial data sources */
   // Traditional source
-    var traditionalSource = 'data/haiyan/haiyan-9-week-sample/google-news/meta/2014-04-10 12.52.22_haiyan-google-news_query_stats.csv';
+    var traditionalSource = 'data/haiyan/2014-04-10 12.52.22_haiyan-google-news_query_stats.csv';
 
   // Blog source
-    var blogSource = 'data/haiyan/haiyan-9-week-sample/google-blog/meta/2014-04-10 12.53.14_haiyan-google-blog_query_stats.csv';
+    var blogSource = 'data/haiyan/2014-04-10 12.53.14_haiyan-google-blog_query_stats.csv';
 
   // start it off!
   traditionalData();
@@ -262,7 +262,6 @@
       .style({
         fill: function(d) { 
           // get color of type (traditional or blog color)
-          console.log(d.type);
           var typeColor = color(d.type);
           // darken color
           var d3color = d3.rgb(typeColor).darker();
@@ -351,14 +350,14 @@
 
  //  /* Tool tips */
     // Initialize tooltip
-    tip = d3.tip()
+    var tip = d3.tip()
             .html(function(d) { 
               // if 1 article, use singular 'article'
               if(d.count == 1)
-                return d.count + " '" + d.type + "' article on " + parseDateTips(d.date); 
+                return d.count + " '" + d.type + "' article during the week of " + parseDateTips(d.date); 
               // else use 'articles'
               else
-                return d.count + " '" + d.type + "' articles on " + parseDateTips(d.date); 
+                return d.count + " '" + d.type + "' articles during the week of " + parseDateTips(d.date); 
             })
             .direction('e')
             .attr('class','d3-tip e');
@@ -436,14 +435,6 @@
     .enter().append("g")
       .attr("class", "legend")
       .attr("transform", function(d, i) { return "translate(0," + i * 28 + ")"; })
-      .on('mouseover',function(d){
-        // decrease opacity of other rectangles
-        d3.selectAll('rect')
-          .attr('opacity',function(e){
-            if(e.name != d && e != d)
-              return 0.2;
-          });
-      })
       .on('mouseout', function (d) {
         // Restore opacity to all rectangles on mouseout
         d3.selectAll('rect')
@@ -538,7 +529,6 @@
   function blogData() {
 
     d3.csv("data/2014-04-03-12.09.57_all_no_text-no2011-blog.csv", function(data) {
-  // console.log(data);
       // convert dates to js object and get list of all dates with duplicates
       data.forEach(function(d,i) {
         // convert each date to js date
@@ -672,7 +662,7 @@
       dataTypes.append('path')
                  .attr({
                     class: 'traditionalMediaPath',
-                    d: function(e){ console.log(e);return areaLine(e.values); },
+                    d: function(e){ return areaLine(e.values); },
                     transform: 'translate(0,' + bbDetail.y + ')'                  
                  })
                  .style({
@@ -718,7 +708,7 @@
             .transition()
             .duration(25)
             .attr('r',10);
-          tip.show(d);
+          // BBCtip.show(d);
         })
         // make dot smaller and hide tip
         .on('mouseleave', function(d){
@@ -726,7 +716,7 @@
             .transition()
             .duration(25)
             .attr('r',4)
-          tip.hide(d);
+          // BBCtip.hide(d);
         });
 
     // /* Storypoints */
@@ -790,22 +780,22 @@
 
              });
 
-   //  /* Tool tips */
-      // Initialize tooltip
-      tip = d3.tip()
-              .html(function(d) { 
-                // if 1 article, use singular 'article'
-                if(d.count == 1)
-                  return d.count + " '" + d.type + "' article on " + parseDateTips(d.date); 
-                // else use 'articles'
-                else
-                  return d.count + " '" + d.type + "' articles on " + parseDateTips(d.date); 
-              })
-              .direction('e')
-              .attr('class','d3-tip e');
+   // //  /* Tool tips */
+   //    // Initialize tooltip
+   //    var BBCtip = d3.tip()
+   //            .html(function(d) { 
+   //              // if 1 article, use singular 'article'
+   //              if(d.count == 1)
+   //                return 1 + " '" + d.type + "' article on " + parseDateTips(d.date); 
+   //              // else use 'articles'
+   //              else
+   //                return 1 + " '" + d.type + "' articles on " + parseDateTips(d.date); 
+   //            })
+   //            .direction('e')
+   //            .attr('class','d3-tip e');
 
-      // Invoke the tip in the context of your visualization
-      detailFrame.call(tip)
+   //    // Invoke the tip in the context of your visualization
+   //    detailFrame.call(BBCtip);
 
     }
   }

@@ -5,7 +5,7 @@
 
 
 	<div class="content">
-		Data goes here.
+		Data goes here. Please see <a href="timeline">Timeline</a>.
 	</div>
 
 <!-- footer -->

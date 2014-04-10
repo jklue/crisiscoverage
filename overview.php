@@ -5,7 +5,7 @@
 
 
 	<div class="content">
-		Timeline goes here.
+		Overview goes here. Please see <a href="timeline">Timeline</a>.
 	</div>
 
 <!-- footer -->

@@ -24,16 +24,15 @@
 		</div>
 	</header>
 	
-<!-- footer -->
-	<footer>
-		<nav>
-			<ul>
-				<li><a href="/overview">Overview</a></li>
-				<li><a href="/timeline">Timeline</a></li>
-				<li><a href="/project-data">Data</a></li>
-			</ul>
-		</nav>
-	</footer>
-	
+	<nav>
+		<ul>
+			<li><a href="/overview">Overview</a></li>
+			<li><a href="/timeline">Timeline</a></li>
+			<li><a href="/project-data">Data</a></li>
+		</ul>
+	</nav>
+
+	<?php include 'includes/footer.html'; ?>
+
 </body>
 </html>

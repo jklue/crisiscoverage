@@ -225,11 +225,30 @@ h3 {
   clear: both; }
 
 /* Footer */
+#welcome nav {
+  text-align: center;
+  color: #cccccc;
+  width: 900px;
+  margin: 1.5em auto 3em;
+  padding-bottom: 4em; }
+
 footer {
   text-align: center;
   color: #cccccc;
   width: 900px;
-  margin: 1.5em auto 0; }
+  margin: 1.5em auto 0;
+  clear: both; }
+  footer .links {
+    float: left;
+    margin-left: 7em; }
+    footer .links img {
+      opacity: 0.5;
+      transition: opacity 0.5s ease; }
+    footer .links img:hover {
+      opacity: 1; }
+  footer .credit {
+    padding-top: 1em;
+    clear: both; }
 
 /* Setup */
 /* General */
