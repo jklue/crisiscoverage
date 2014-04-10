@@ -4,6 +4,7 @@ import info.crisiscoverage.crawler.rule.ParseObj;
 import info.crisiscoverage.crawler.rule.html.AttributeSelectRule;
 
 import java.text.SimpleDateFormat;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 import org.jsoup.nodes.Entities.EscapeMode;
@@ -104,12 +105,66 @@ public interface CrawlerConstants {
 	}
 	
 	/**
+	 * What mode is meta in for output.
+	 * @author mjohns
+	 */
+	public static enum MetaMode{
+		query_stats_only, entries_no_text, entries_with_text;
+		
+		public boolean isCleanTextMode(){
+			switch(this){
+			case entries_with_text: return true;
+			default: 
+				return false;
+			}
+		}
+		
+		public boolean isQueryStatsMode(){
+			switch(this){
+			case query_stats_only: return true;
+			default: 
+				return false;
+			}
+		}
+	}
+	
+	/**
 	 * Columns used in csv generation of available data /  metadata.
 	 * Most useful for {@link MetaMapper}
 	 * @author mjohns
 	 */
 	public static enum Column{
-		doc_id,domain,title,date_published,date_query,collection,tags,url,summary,clean_text;
+		query_run_date,query_period,periods_back,days_back,result_count,date_query_start,date_query_end,
+		doc_id,domain,title,date_published,collection,tags,url,summary,clean_text;
+		
+		public boolean isQueryAndResultColumn(){
+			switch(this){
+			case query_run_date:
+			case query_period:
+			case periods_back:
+			case days_back:
+			case result_count:
+			case date_query_start:
+			case date_query_end:
+				return true;
+			default:
+				return false;
+			}
+		}
+		
+		public static void removeQueryAndResultColumns(Map<Column,String> map){
+			if (map == null) return;
+			for (Column c : Column.values()){
+				if (c.isQueryAndResultColumn()) map.remove(c);
+			}
+		}
+		
+		public static void removeEntryLevelColumns(Map<Column,String> map){
+			if (map == null) return;
+			for (Column c : Column.values()){
+				if (!c.isQueryAndResultColumn()) map.remove(c);
+			}
+		}
 	}
 	
 	/**
@@ -180,10 +235,12 @@ public interface CrawlerConstants {
 	public static final String defaultUserAgent = "Mozilla/17.0";
 	
 	public static final SimpleDateFormat dateFilenameFormat = new SimpleDateFormat("yyyy-MM-dd hh.mm.ss");
+	public static final SimpleDateFormat dateQueryFormat = new SimpleDateFormat("yyyy-MM-dd");
 	public static final Whitelist defaultWhitelist = Whitelist.none();//Whitelist.simpleText();
 	public static final Cleaner defaultCleaner = new Cleaner(defaultWhitelist);
 	public static final EscapeMode defaultEscapeMode = EscapeMode.xhtml;
 	
 	public static final String defaultSpaceNormalizerRegex = " {2,}";//
 	public static final String defaultAnyWhitespaceRegex = "[\\s]+";
+	public static final long millisInDays = 1000 * 60 * 60 * 24;
 }

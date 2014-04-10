@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -199,17 +200,18 @@ public abstract class AbstractCrawlerConfig<O> implements CrawlerConstants{
 	
 	/**
 	 * Build meta information about the collection by dumping all meta information into an aggregated table.
-	 * @param includeCleanText boolean
+	 * @param metaMode MetaMode
 	 * @param includeHeaders boolean
 	 * @param cellSizeLimit int if < 1, no limit.
 	 * @param filenameAppend optional String to append to filename
 	 * @return Path
 	 * @throws Exception 
 	 */
-	public Path metaToTable(boolean includeCleanText, boolean includeHeaders, int cellSizeLimit, String filenameAppend) throws Exception{
+	public Path metaToTable(MetaMode metaMode, boolean includeHeaders, int cellSizeLimit, String filenameAppend) throws Exception{
 		resetForRun();
 		
-		Path csvFile = Paths.get(metaFolder,IOUtils.filenameFromDate(filenameAppend, metaFolderExt));
+		List<Map<Column,String>> dedupList = new ArrayList<>();
+		Path csvFile = Paths.get(metaFolder,IOUtils.filenameFromDate(collectionName+"-"+tags+"_"+filenameAppend, metaFolderExt));
 		
 		List<Path> entries = IOUtils.entriesWithinDir(docIdFolder,false);
 		boolean firstRun = true;
@@ -223,7 +225,7 @@ public abstract class AbstractCrawlerConfig<O> implements CrawlerConstants{
 				else csvOptions = CsvOptions.create_no_headers_data;
 			}
 			
-			metaToTable(csvFile, csvOptions, entry, includeCleanText, includeHeaders, cellSizeLimit, filenameAppend);
+			metaToTable(metaMode, csvFile, csvOptions, entry, includeHeaders, cellSizeLimit, filenameAppend,dedupList);
 		}
 		
 		return csvFile;
@@ -231,42 +233,74 @@ public abstract class AbstractCrawlerConfig<O> implements CrawlerConstants{
 	
 	/**
 	 * Build meta information about the collection by dumping all meta information into an aggregated table.
+	 * @param metaMode
 	 * @param csvFile Path to write to
 	 * @param csvOptions CsvOptions to apply
 	 * @param entry Path 
-	 * @param includeCleanText boolean
 	 * @param includeHeaders boolean
 	 * @param cellSizeLimit int if < 1, no limit.
 	 * @param filenameAppend optional String to append to filename
+	 * @param dedupList List of previous rows for dedup.
 	 * @return Path
 	 * @throws Exception 
 	 */
-	public void metaToTable(Path csvFile, CsvOptions csvOptions, Path entry, boolean includeCleanText, boolean includeHeaders, int cellSizeLimit, String filenameAppend) throws Exception{
-		
-			String url = IOUtils.read(entry);
-			String docId = getDocIdFromEntry(entry);
-			String text = "";
+	public void metaToTable(MetaMode metaMode, Path csvFile, CsvOptions csvOptions, Path entry, boolean includeHeaders, int cellSizeLimit, String filenameAppend, List<Map<Column,String>> dedupList) throws Exception{
+
+		String url = IOUtils.read(entry);
+		String docId = getDocIdFromEntry(entry);
+		String text = "";
+		try{
+			text = IOUtils.read(Paths.get(textFolder, docId + textFolderExt));
+		} catch(Exception e){
+			System.err.println("... text file not found for docId: '"+docId+"', text will be empty.");
+		}
+
+		String cleanText = "";
+		if (metaMode.isCleanTextMode()){
 			try{
-				text = IOUtils.read(Paths.get(textFolder, docId + textFolderExt));
+				cleanText = IOUtils.read(Paths.get(cleanFolder, docId + cleanFolderExt));
 			} catch(Exception e){
-				System.err.println("... text file not found for docId: '"+docId+"', text will be empty.");
+				System.err.println("... clean file not found for docId: '"+docId+"', clean text will be empty.");
 			}
-			
-			String cleanText = "";
-			if (includeCleanText){
-				try{
-					cleanText = IOUtils.read(Paths.get(cleanFolder, docId + cleanFolderExt));
-				} catch(Exception e){
-					System.err.println("... clean file not found for docId: '"+docId+"', clean text will be empty.");
-				}
-			}
-			
-//			metaMapper.dumpMeta(doc);
-			
-			Map<Column,String> row = metaMapper.populateColumnMap(collectionName, tags, docId, text, generateMetaToTableObjectFromText(docId, text), url, cleanText, ruleController);
-			if (!includeCleanText) row.remove(Column.clean_text);
-			
+		}
+
+		Map<Column,String> row = metaMapper.populateColumnMap(collectionName, tags, docId, text, generateMetaToTableObjectFromText(docId, text), url, cleanText, ruleController);
+		if (!metaMode.isCleanTextMode()) 
+		
+		if (metaMode.isQueryStatsMode()){
+			Column.removeEntryLevelColumns(row);
+		}
+		
+		if (!metaMode.isCleanTextMode()) {
+			row.remove(Column.clean_text);
+		}
+
+		if (!isDuplicate(metaMode,row,dedupList)){
+			dedupList.add(row);
 			IOUtils.writeCsv(csvFile, row, csvOptions, cellSizeLimit);
+		}
+	}
+	
+	protected boolean isDuplicate(MetaMode metaMode, Map<Column,String> row, List<Map<Column,String>> dedupList){
+		
+		if (row == null || dedupList == null) return false;
+		
+		//Summary columns to test -- all must be equal.
+		Column dateQ = Column.date_query_start;
+		Column qPeriod = Column.query_period;
+		Column pBack = Column.periods_back;
+		
+		//Full columns to test
+		Column u = Column.url;
+		
+		for (Map<Column,String> d : dedupList){
+			if (metaMode.isQueryStatsMode()){
+				if (row.get(dateQ).equals(d.get(dateQ)) && row.get(qPeriod).equals(d.get(qPeriod)) && row.get(pBack).equals(d.get(pBack)))
+					return true;
+			} else if (row.get(u).equals(d.get(u))) return true; 
+		}
+		
+		return false;
 	}
 	
 	/**

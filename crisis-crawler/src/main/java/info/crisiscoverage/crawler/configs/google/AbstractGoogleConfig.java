@@ -75,66 +75,144 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 	public static enum DateRestrict{
 		days,weeks,months,years;
 		
-		public String valFor(String number){
-			switch(this){
-			case days: return "d"+number;
-			case weeks: return "w"+number;
-			case months: return "m"+number;
-			case years:
-				default:
-				return "y"+number;
+		/**
+		 * Get DateRestrict portion, e.g. 'w' from 'w1'
+		 * @param dqStr
+		 * @return
+		 */
+		public static DateRestrict dateRestrictOf(String dqStr){
+			if (Strings.isNullOrEmpty(dqStr) || dqStr.length() < 1) return null;
+			
+			for (DateRestrict d : DateRestrict.values()){
+				if (dqStr.toLowerCase().startsWith(d.periodStr())) return d;
 			}
+			return null;
 		}
 		
-		public int numberBack(Date now, Date then, boolean roundDown){
+		/**
+		 * Get Number portion, e.g. '1' from 'w1'
+		 * @param dqStr
+		 * @return
+		 */
+		public static int periodsBackOf(String dqStr){
+			if (Strings.isNullOrEmpty(dqStr) || dqStr.length() < 2) return -1;
 			
-			int daysBack = daysBetween(then,now);
-			System.out.println("numberBack() result --> [days= "+daysBack+
-					"], would be date: "+sanityCheckDateFromDaysBack(now, daysBack).toString());
-			
-			switch(this){
-			case days: return daysBack;
-			case weeks: return daysToWeeks(daysBack, roundDown);
-			case months: return daysToMonths(daysBack, roundDown);
-			case years: return daysToYears(daysBack, roundDown);
+			try{
+			return Integer.parseInt(StringUtils.substringAfter(dqStr,dateRestrictOf(dqStr).periodStr()));
+			} catch(Exception e){
+				System.err.println("... unable to parse DateRestrict numberBackOf() for '"+dqStr+"'");
 			}
 			
 			return -1;
 		}
 		
-		private Date sanityCheckDateFromDaysBack(Date to, int daysBack){
-			return new Date( to.getTime() - (daysBack * 1000 * 60 * 60 * 24)); 	
+		/**
+		 * Construct a query value for a number, e.g. '1' becomes 'w1'
+		 * @param period
+		 * @return
+		 */
+		public String valFor(String period){
+			return periodStr()+period;
 		}
 		
-		private int daysBetween(Date from, Date to){
-	        return (int)( (to.getTime() - from.getTime()) / (1000 * 60 * 60 * 24));// millis * s * h * d; 
+		public String periodStr(){
+			switch(this){
+			case days: return "d";
+			case weeks: return "w";
+			case months: return "m";
+			case years:
+				default:
+				return "y";
+			}
+		}
+		
+		/**
+		 * From now to then, get a number back.
+		 * @param now
+		 * @param then
+		 * @param roundDown
+		 * @return
+		 */
+		public int periodsBack(Date now, Date then, boolean roundDown){
+			
+			int daysBack = daysBetween(then,now);
+			System.out.println("numberBack() result --> [days= "+daysBack+
+					"], would be start date: "+dateFromDaysBack(now, daysBack,true).toString());
+			
+			switch(this){
+			case days: return daysBack;
+			default:
+				return daysAsPeriods(daysBack, roundDown);
+			}
+		}
+		
+		/**
+		 * This is a blunt instrument.
+		 * @return
+		 */
+		public int period(){
+			switch(this){
+			case days: return 1;
+			case weeks: return 7;
+			case months: return 31;
+			case years: return 365;
+			}
+			
+			return -1;
+		}
+		
+		/**
+		 * Using a provided date, go back n days. 
+		 * Either provided the start of the period or the end of the period.
+		 * @param date Date
+		 * @param daysBack int
+		 * @param periodStart boolean
+		 * @return Date
+		 */
+		public Date dateFromDaysBack(Date date, int daysBack, boolean periodStart){
+			
+			if (date == null || daysBack < 0) return null;
+			if (daysBack == 0) return date;
+			
+			Date startDate = new Date( date.getTime() - (daysBack * millisInDays));
+			if (periodStart) return startDate;
+			
+			return new Date(startDate.getTime() + period()*millisInDays);
+		}
+		
+		/**
+		 * Days between dates.
+		 * @param from Date
+		 * @param to Date
+		 * @return int
+		 */
+		public int daysBetween(Date from, Date to){
+	        return (int)( (to.getTime() - from.getTime()) / (millisInDays)); 
 	     }
 		
-		private int daysToWeeks(int days, boolean roundDown){
+		/**
+		 * Days as periods.
+		 * @param days int
+		 * @param roundDown boolean
+		 * @return int periods
+		 */
+		public int daysAsPeriods(int days, boolean roundDown){
+			int period = period();
 			if (days < 1) return -1;
-			else if (days > 7){
-				if (roundDown) return ((Double)Math.floor(days/7)).intValue();
-				else return ((Double)Math.ceil(days/7)).intValue();
+			else if (days > period){
+				if (roundDown) return ((Double)Math.floor(days/period)).intValue();
+				else return ((Double)Math.ceil(days/period)).intValue();
 			}
 			else return 1;
 		}
 		
-		private int daysToMonths(int days, boolean roundDown){
-			if (days < 1) return -1;
-			else if (days > 31){
-				if (roundDown) return ((Double)Math.floor(days/31)).intValue();
-				else return ((Double)Math.ceil(days/31)).intValue();
-			}
-			else return 1;
-		}
-		
-		private int daysToYears(int days, boolean roundDown){
-			if (days < 1) return -1;
-			else if (days > 365){
-				if (roundDown) return ((Double)Math.floor(days/365)).intValue();
-				else return ((Double)Math.ceil(days/365)).intValue();
-			}
-			else return 1;
+		/**
+		 * Convert from periodsBack to days back.
+		 * @param periodsBack int
+		 * @return int days.
+		 */
+		public int periodsAsDaysBack(int periodsBack){
+			return period() * periodsBack;	
 		}
 	}
 	
@@ -199,30 +277,35 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 			boolean archive, boolean applyHttpPatternMatcher) throws Exception{
 		resetForRun();
 		
-		int sv = offsetStepVal > 0? offsetStepVal : 0;
+		int sv = offsetStepVal > 0? offsetStepVal : 1;
 		int p = minPageOrOffset;
 		
-		if (p+sv > maxPageOrOffset){
+		int aStep = p+sv-1;
+		if (aStep > (maxPageOrOffset)){
 			sv = maxPageOrOffset-p;
 			System.err.println("\n[adjusted offset step value for last query to '"+sv+"']");
+			aStep = p+sv-1;
 		}
 		
-		while (p < maxPageOrOffset){	
+		while (p < (maxPageOrOffset)){	
 			String url = urlFromTemplate(template, Param.num.appendToEscaped(queryValue,Integer.toString(sv)), offsetVal(p));
 			System.out.println("... building url for live run search --> "+url);
 		
 			String dateName = dateNameFromUrl(url);
-			String filename = collectionName+"-"+tags+"_"+p+"-"+(p+sv)+"_"+dateName+apiFolderExt;
+			
+			String filename = collectionName+"-"+tags+"_"+p+(aStep > 0 ? "-"+aStep : "")+"_"+dateName+apiFolderExt;
 			System.out.println("... now writing filename ["+filename+"]");
 			
 			Document doc = LinkUtils.readUrlPolitely(url,true);
 			IOUtils.write(Paths.get(apiLiveFolder, filename), doc.outerHtml());
 			
 			p += sv;
+			aStep = p+sv-1;
 			
-			if (p < maxPageOrOffset && p+sv > maxPageOrOffset){
+			if (p < maxPageOrOffset && aStep > maxPageOrOffset){
 				sv = maxPageOrOffset-p;
 				System.err.println("\n[adjusted offset step value for last query to '"+sv+"']");
+				aStep = p+sv-1;
 			}
 		}
 	}
@@ -249,7 +332,6 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 		return "&"+startParam+offset;
 	}
 	
-	
 	/**
 	 * Build Query and run live search, accounting for changing date ranges.
 	 * @param params
@@ -264,6 +346,24 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 	protected void runLiveSearch(
 			final Map<Param,String> params, int minPageOrOffset, int maxPageOrOffset, boolean archive,
 			DateRestrict dateRestrict, Date dateStart, int numberOfDateIncrements) throws Exception{
+		runLiveSearch(params, minPageOrOffset, maxPageOrOffset, archive, dateRestrict, dateStart, numberOfDateIncrements, 0);
+	}
+	
+	/**
+	 * Build Query and run live search, accounting for changing date ranges.
+	 * @param params
+	 * @param minPageOrOffset
+	 * @param maxPageOrOffset
+	 * @param archive
+	 * @param dateRestrict DateRestrict
+	 * @param dateStart Date
+	 * @param numberOfDateIncrements int
+	 * @param jumpForwardNPeriods
+	 * @throws Exception
+	 */
+	protected void runLiveSearch(
+			final Map<Param,String> params, int minPageOrOffset, int maxPageOrOffset, boolean archive,
+			DateRestrict dateRestrict, Date dateStart, int numberOfDateIncrements, int jumpForwardNPeriods) throws Exception{
 		
 		//handle archive
 		if (archive) archiveCalled();
@@ -272,13 +372,18 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 		
 		boolean roundDown = dateRestrict.equals(DateRestrict.years) || dateRestrict.equals(DateRestrict.months) ? true : false;
 		
-		int d = dateRestrict.numberBack(Calendar.getInstance().getTime(), dateStart, roundDown);
+		int d = dateRestrict.periodsBack(Calendar.getInstance().getTime(), dateStart, roundDown);
+		
+		//number of increments is 8 ... i, result calculated from 21 ... 14.  If jumpForward, then 15 ... 14. 
+		System.out.println("... original d: "+d+", new d: "+(d-jumpForwardNPeriods));
+		if (jumpForwardNPeriods > 0) d -= jumpForwardNPeriods;
+		
 		if (d > 0){
 			//decrement d down to 1 over loop.
-			for (int i=1; i<= numberOfDateIncrements; i++){
+			for (int i= jumpForwardNPeriods > 0? jumpForwardNPeriods : 1; i<= numberOfDateIncrements; i++){
 				if (d > 0){
 					params.put(Param.dateRestrict, dateRestrict.valFor(Integer.toString(d)));
-					System.out.println("... runLiveSearch() for next dateRestrict: "+params.get(Param.dateRestrict));
+					System.out.println("#"+d+"... runLiveSearch() for next dateRestrict: "+params.get(Param.dateRestrict));
 					runLiveSearch(params, minPageOrOffset, maxPageOrOffset, false);
 					d--;//Next run will be closer to NOW!
 				} else {
@@ -423,7 +528,7 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 
 			//write entry
 			Path entryPath = Paths.get(apiEntryFolder, docId+apiFolderExt);
-			IOUtils.write(entryPath, wrapEntryInFeedXml(tag));
+			IOUtils.write(entryPath, wrapEntryInFeedXml(doc,tag));
 
 			//write urls as docId
 			Path urlPath = Paths.get(docIdFolder, docId+urlFolderExt);
@@ -484,7 +589,34 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 	}
 	
 	/**
-	 * Get title from entry.
+	 * Result Count element from entry (or feed).
+	 * @param entry
+	 * @return Element
+	 */
+	public static Element resultCountElementFrom(Element entry){
+		if (entry == null) return null;
+		Elements elements = entry.getElementsByTag("opensearch:totalresults");
+		if (elements != null && !elements.isEmpty()){
+			return elements.first();
+		}
+		return null;
+	}
+	
+	/**
+	 * Get the result Count from entry (or feed).
+	 * @param entry
+	 * @param docId
+	 * @return
+	 */
+	public static String resultCountFromEntry(Element entry, String docId){
+		if (entry == null) return "";
+		Element rc = resultCountElementFrom(entry);
+		if (rc != null) return rc.text() == null? "" : rc.text();
+		return "";
+	}
+	
+	/**
+	 * Get title from entry (or feed).
 	 * @param entry
 	 * @parm docId
 	 * @return
@@ -533,11 +665,17 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 	}
 	
 	/**
+	 * This will also grab particular elements from the doc and add them to the entry.
 	 * wrap entry in feed.
+	 * @param doc
 	 * @param entry Element
 	 * @return String
 	 */
-	protected String wrapEntryInFeedXml(Element entry){
+	protected String wrapEntryInFeedXml(Document doc, Element entry){
+		
+		Element rc = resultCountElementFrom(doc);
+		if (rc != null) entry.appendChild(rc);
+		
 		return wrapEntryInFeedXml(entry.outerHtml());
 	}
 	

@@ -33,6 +33,8 @@ public class DefaultHtmlMetaMapper implements MetaMapper<Element>, CrawlerConsta
 		} else if (LinkUtils.isIgnoreUrl(url, ruleController.getIgnoreUrlsStartingWith(), ruleController.getIgnoreUrlsExact())){
 			return map;
 		}
+
+		addQueryAndResultInfo(map,element,docId);
 		
 		map.put(Column.doc_id, Strings.isNullOrEmpty(docId)? "" : docId);
 		
@@ -45,9 +47,6 @@ public class DefaultHtmlMetaMapper implements MetaMapper<Element>, CrawlerConsta
 		String p = getDatePublished(element, text, ruleController,docId);
 		map.put(Column.date_published, Strings.isNullOrEmpty(p)? "" : p);
 		
-		String dateQuery = getDateQueryName(element, docId);
-		map.put(Column.date_query, Strings.isNullOrEmpty(dateQuery)? "" : dateQuery);
-		
 		map.put(Column.collection, Strings.isNullOrEmpty(collectionName)? "" : collectionName);
 		map.put(Column.tags, Strings.isNullOrEmpty(tags)? "" : tags);
 		map.put(Column.url, Strings.isNullOrEmpty(url)? "" : url);
@@ -57,6 +56,16 @@ public class DefaultHtmlMetaMapper implements MetaMapper<Element>, CrawlerConsta
 		map.put(Column.clean_text, cleanText == null? "" : cleanText);
 		
 		return map;
+	}
+	
+	/**
+	 * Sub-classes can populate additional columns for query information.
+	 * @param map
+	 * @param element
+	 * @param docId
+	 */
+	public void addQueryAndResultInfo(Map<Column,String> map,Element element,String docId){
+		Column.removeQueryAndResultColumns(map);
 	}
 	
 	/**
@@ -83,16 +92,6 @@ public class DefaultHtmlMetaMapper implements MetaMapper<Element>, CrawlerConsta
 		if (d.contains("www."))
 			d = StringUtils.substringAfter(d, "www.");
 		return d;
-	}
-	
-	/**
-	 * Get date query name.
-	 * @param element
-	 * @param docId
-	 * @return
-	 */
-	public String getDateQueryName(Element element, String docId){
-		return "";
 	}
 	
 	/**
