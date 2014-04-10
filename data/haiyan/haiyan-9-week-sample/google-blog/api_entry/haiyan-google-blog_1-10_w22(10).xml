@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed gd:kind="customsearch#search" xmlns="http://www.w3.org/2005/Atom" xmlns:cse="http://schemas.google.com/cseapi/2010" xmlns:gd="http://schemas.google.com/g/2005" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">
+<entry gd:kind="customsearch#result"> 
+ <id>
+   https://cimss.ssec.wisc.edu/goes/blog/archives/14311 
+ </id> 
+ <updated>
+   1970-01-17T00:23:02.400Z 
+ </updated> 
+ <title type="html">Super &lt;b&gt;Typhoon Haiyan&lt;/b&gt; &laquo; CIMSS Satellite &lt;b&gt;Blog&lt;/b&gt;</title> 
+ <link href="https://cimss.ssec.wisc.edu/goes/blog/archives/14311" title="cimss.ssec.wisc.edu" /> 
+ <summary type="html">Super &lt;b&gt;Typhoon Haiyan&lt;/b&gt; (31W) formed as a tropical depression at low latitudes in &lt;br&gt; the West Pacific Ocean on 03 November 2013 — and by 18 UTC on 07&amp;nbsp;...</summary> 
+ <cse:cacheid>
+   3ffVDbb80G0J 
+ </cse:cacheid> 
+ <cse:formattedurl type="html">
+   https://cimss.ssec.wisc.edu/goes/&lt;b&gt;blog&lt;/b&gt;/archives/14311 
+ </cse:formattedurl> 
+ <cse:pagemap> 
+  <cse:dataobject type="hcard"> 
+   <cse:attribute name="fn" value="David Padua" /> 
+   <cse:attribute name="url" value="http://www.weather.com.ph/" /> 
+   <cse:attribute name="url_text" value="David Padua" /> 
+   <cse:attribute name="photo" value="https://secure.gravatar.com/avatar/4d1cea66cb261f9e5833c2a91a610ee0?s=32&amp;d=https%3A%2F%2Fsecure.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D32&amp;r=G" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="hcard"> 
+   <cse:attribute name="fn" value="Alison Campbell" /> 
+   <cse:attribute name="photo" value="https://secure.gravatar.com/avatar/544e4b95067417f7bd7f4aec3ff80a4f?s=32&amp;d=https%3A%2F%2Fsecure.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D32&amp;r=G" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="hcard"> 
+   <cse:attribute name="fn" value="BONY S.P." /> 
+   <cse:attribute name="photo" value="https://secure.gravatar.com/avatar/8e83ea3c51f989e6c973b17facfe86e7?s=32&amp;d=https%3A%2F%2Fsecure.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D32&amp;r=G" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="hcard"> 
+   <cse:attribute name="fn" value="Robert McClure" /> 
+   <cse:attribute name="photo" value="https://secure.gravatar.com/avatar/3a02ba293aabff791030af6da9f13874?s=32&amp;d=https%3A%2F%2Fsecure.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D32&amp;r=G" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="hcard"> 
+   <cse:attribute name="fn" value="musallem" /> 
+   <cse:attribute name="nickname" value="musallem" /> 
+   <cse:attribute name="photo" value="https://secure.gravatar.com/avatar/bfb901e1822b5a653eabde27c6fcf770?s=32&amp;d=https%3A%2F%2Fsecure.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D32&amp;r=G" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="hcard"> 
+   <cse:attribute name="fn" value="Jezreel Importante" /> 
+   <cse:attribute name="photo" value="https://secure.gravatar.com/avatar/15c9ee9bb367427dc60364ca4dae25a3?s=32&amp;d=https%3A%2F%2Fsecure.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D32&amp;r=G" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="cse_image"> 
+   <cse:attribute name="src" value="http://cimss.ssec.wisc.edu/goes/blog/wp-content/uploads/2013/11/131107_COMS1_IR_STY_HAIYAN_073.GIF" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="cse_thumbnail"> 
+   <cse:attribute name="width" value="259" /> 
+   <cse:attribute name="height" value="194" /> 
+   <cse:attribute name="src" value="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTweUTR_B5kCrsftfkVptZ_GJLwnffWQZ-5cgMsqLGCXCnMiQLj7ps669I" /> 
+  </cse:dataobject> 
+ </cse:pagemap> 
+ <opensearch:totalresults>
+   885000 
+ </opensearch:totalresults>
+</entry>
+</feed>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed gd:kind="customsearch#search" xmlns="http://www.w3.org/2005/Atom" xmlns:cse="http://schemas.google.com/cseapi/2010" xmlns:gd="http://schemas.google.com/g/2005" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">
+<entry gd:kind="customsearch#result"> 
+ <id>
+   http://www.youtube.com/watch?v=7yECGSh97gs 
+ </id> 
+ <updated>
+   1970-01-17T00:24:28.800Z 
+ </updated> 
+ <title type="html">&lt;b&gt;TYPHOON HAIYAN&lt;/b&gt; BATTERS THE PHILIPPINES - BBC &lt;b&gt;NEWS&lt;/b&gt; &lt;b&gt;...&lt;/b&gt;</title> 
+ <link href="http://www.youtube.com/watch?v=7yECGSh97gs" title="www.youtube.com" /> 
+ <summary type="html">Mai Zamora from the charity World Vision describes the scene in the Philippines, &lt;br&gt; as the super &lt;b&gt;Typhoon Haiyan&lt;/b&gt;, one of the strongest storms on record makes lan.</summary> 
+ <cse:cacheid>
+   dQTj1MvyFkQJ 
+ </cse:cacheid> 
+ <cse:formattedurl type="html">
+   www.youtube.com/watch?v=7yECGSh97gs 
+ </cse:formattedurl> 
+ <cse:pagemap> 
+  <cse:dataobject type="metatags"> 
+   <cse:attribute name="title" value="TYPHOON HAIYAN BATTERS THE PHILIPPINES - BBC NEWS" /> 
+   <cse:attribute name="og:site_name" value="YouTube" /> 
+   <cse:attribute name="og:url" value="http://www.youtube.com/watch?v=7yECGSh97gs" /> 
+   <cse:attribute name="og:title" value="TYPHOON HAIYAN BATTERS THE PHILIPPINES - BBC NEWS" /> 
+   <cse:attribute name="og:type" value="video" /> 
+   <cse:attribute name="og:image" value="http://i1.ytimg.com/vi/7yECGSh97gs/hqdefault.jpg" /> 
+   <cse:attribute name="og:description" value="Mai Zamora from the charity World Vision describes the scene in the Philippines, as the super Typhoon Haiyan, one of the strongest storms on record makes lan..." /> 
+   <cse:attribute name="og:video" value="http://www.youtube.com/v/7yECGSh97gs?autohide=1&amp;version=3" /> 
+   <cse:attribute name="og:video:type" value="application/x-shockwave-flash" /> 
+   <cse:attribute name="og:video:width" value="1280" /> 
+   <cse:attribute name="og:video:height" value="720" /> 
+   <cse:attribute name="fb:app_id" value="87741124305" /> 
+   <cse:attribute name="og:restrictions:age" value="18+" /> 
+   <cse:attribute name="twitter:card" value="player" /> 
+   <cse:attribute name="twitter:site" value="@youtube" /> 
+   <cse:attribute name="twitter:url" value="http://www.youtube.com/watch?v=7yECGSh97gs" /> 
+   <cse:attribute name="twitter:title" value="TYPHOON HAIYAN BATTERS THE PHILIPPINES - BBC NEWS" /> 
+   <cse:attribute name="twitter:description" value="Mai Zamora from the charity World Vision describes the scene in the Philippines, as the super Typhoon Haiyan, one of the strongest storms on record makes lan..." /> 
+   <cse:attribute name="twitter:image" value="http://i1.ytimg.com/vi/7yECGSh97gs/hqdefault.jpg" /> 
+   <cse:attribute name="twitter:app:name:iphone" value="YouTube" /> 
+   <cse:attribute name="twitter:app:id:iphone" value="544007664" /> 
+   <cse:attribute name="twitter:app:name:ipad" value="YouTube" /> 
+   <cse:attribute name="twitter:app:id:ipad" value="544007664" /> 
+   <cse:attribute name="twitter:app:url:iphone" value="vnd.youtube://watch/7yECGSh97gs" /> 
+   <cse:attribute name="twitter:app:url:ipad" value="vnd.youtube://watch/7yECGSh97gs" /> 
+   <cse:attribute name="twitter:app:name:googleplay" value="YouTube" /> 
+   <cse:attribute name="twitter:app:id:googleplay" value="com.google.android.youtube" /> 
+   <cse:attribute name="twitter:app:url:googleplay" value="http://www.youtube.com/watch?v=7yECGSh97gs" /> 
+   <cse:attribute name="twitter:player" value="https://www.youtube.com/embed/7yECGSh97gs" /> 
+   <cse:attribute name="twitter:player:width" value="1280" /> 
+   <cse:attribute name="twitter:player:height" value="720" /> 
+   <cse:attribute name="attribution" value="bbc_global_news/" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="videoobject"> 
+   <cse:attribute name="url" value="http://www.youtube.com/watch?v=7yECGSh97gs" /> 
+   <cse:attribute name="name" value="TYPHOON HAIYAN BATTERS THE PHILIPPINES - BBC NEWS" /> 
+   <cse:attribute name="description" value="Mai Zamora from the charity World Vision describes the scene in the Philippines, as the super Typhoon Haiyan, one of the strongest storms on record makes lan..." /> 
+   <cse:attribute name="paid" value="False" /> 
+   <cse:attribute name="channelid" value="UC16niRr50-MSBwiO3YDb3RA" /> 
+   <cse:attribute name="videoid" value="7yECGSh97gs" /> 
+   <cse:attribute name="duration" value="PT2M23S" /> 
+   <cse:attribute name="unlisted" value="False" /> 
+   <cse:attribute name="thumbnailurl" value="http://i1.ytimg.com/vi/7yECGSh97gs/hqdefault.jpg" /> 
+   <cse:attribute name="embedurl" value="https://www.youtube.com/embed/7yECGSh97gs" /> 
+   <cse:attribute name="playertype" value="HTML5 Flash" /> 
+   <cse:attribute name="width" value="1280" /> 
+   <cse:attribute name="height" value="720" /> 
+   <cse:attribute name="isfamilyfriendly" value="False" /> 
+   <cse:attribute name="regionsallowed" value="AD,AE,AF,AG,AI,AL,AM,AO,AQ,AR,AS,AT,AU,AW,AX,AZ,BA,BB,BD,BE,BF,BG,BH,BI,BJ,BL,BM,BN,BO,BQ,BR,BS,BT,BV,BW,BY,BZ,CA,CC,CD,CF,CG,CH,CI,CK,CL,CM,CN,CO,CR,CU,CV,CW,CX,CY,CZ,DE,DJ,DK,DM,DO,DZ,EC,EE,EG,EH..." /> 
+  </cse:dataobject> 
+  <cse:dataobject type="person"> 
+   <cse:attribute name="url" value="http://www.youtube.com/user/bbcnews" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="person"> 
+   <cse:attribute name="url" value="https://plus.google.com/107045876535773972576" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="url" value="http://i1.ytimg.com/vi/7yECGSh97gs/hqdefault.jpg" /> 
+   <cse:attribute name="width" value="480" /> 
+   <cse:attribute name="height" value="360" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="cse_image"> 
+   <cse:attribute name="src" value="http://i1.ytimg.com/vi/7yECGSh97gs/hqdefault.jpg" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="cse_thumbnail"> 
+   <cse:attribute name="width" value="259" /> 
+   <cse:attribute name="height" value="194" /> 
+   <cse:attribute name="src" value="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTjkLvYY8z6E-vgWt_jeVUXEihwz6i-Wrgx0paK1RJhTwK7qlsJ90eqSzoc" /> 
+  </cse:dataobject> 
+ </cse:pagemap> 
+ <opensearch:totalresults>
+   420000 
+ </opensearch:totalresults>
+</entry>
+</feed>

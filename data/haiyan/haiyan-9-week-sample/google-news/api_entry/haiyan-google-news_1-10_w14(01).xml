@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed gd:kind="customsearch#search" xmlns="http://www.w3.org/2005/Atom" xmlns:cse="http://schemas.google.com/cseapi/2010" xmlns:gd="http://schemas.google.com/g/2005" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">
+<entry gd:kind="customsearch#result"> 
+ <id>
+   http://www.redcross.org/news/article/Red-Cross-Sends-Support-to-Philippines-for-Typhoon-Response 
+ </id> 
+ <updated>
+   1970-01-17T03:12:57.600Z 
+ </updated> 
+ <title type="html">Global Red Cross Response Effort Underway in Wake of &lt;b&gt;Typhoon&lt;/b&gt;</title> 
+ <link href="http://www.redcross.org/news/article/Red-Cross-Sends-Support-to-Philippines-for-Typhoon-Response" title="www.redcross.org" /> 
+ <summary type="html">... months on, the global Red Cross network continues to help families rebuild &lt;br&gt; and rebound from &lt;b&gt;Typhoon Haiyan&lt;/b&gt;. ... Posted March 05, 2014 , Updated &lt;b&gt;article&lt;/b&gt;.</summary> 
+ <cse:cacheid>
+   QHLsEbnIlecJ 
+ </cse:cacheid> 
+ <cse:formattedurl type="html">
+   www.redcross.org/&lt;b&gt;news&lt;/b&gt;/&lt;b&gt;article&lt;/b&gt;/Red-Cross-Sends-Support-to-Philippines-for- &lt;b&gt;Typhoon&lt;/b&gt;-Response 
+ </cse:formattedurl> 
+ <cse:pagemap> 
+  <cse:dataobject type="metatags"> 
+   <cse:attribute name="viewport" value="width=device-width, initial-scale=1.0" /> 
+  </cse:dataobject> 
+ </cse:pagemap> 
+ <opensearch:totalresults>
+   65900 
+ </opensearch:totalresults>
+</entry>
+</feed>

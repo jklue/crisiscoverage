@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed gd:kind="customsearch#search" xmlns="http://www.w3.org/2005/Atom" xmlns:cse="http://schemas.google.com/cseapi/2010" xmlns:gd="http://schemas.google.com/g/2005" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">
+<entry gd:kind="customsearch#result"> 
+ <id>
+   http://lionsclubs.org/blog/lionsrelief-for-typhoon-haiyan/ 
+ </id> 
+ <updated>
+   1970-01-17T00:40:19.200Z 
+ </updated> 
+ <title type="html">&lt;b&gt;Typhoon Haiyan&lt;/b&gt; #LionsRelief : The Lions &lt;b&gt;Blog&lt;/b&gt;</title> 
+ <link href="http://lionsclubs.org/blog/lionsrelief-for-typhoon-haiyan/" title="lionsclubs.org" /> 
+ <summary type="html">See our social media coverage on Lions disaster relief for &lt;b&gt;Typhoon Haiyan&lt;/b&gt;. How &lt;br&gt; is your Lions club responding? Share your relief efforts through Facebook and&amp;nbsp;...</summary> 
+ <cse:cacheid>
+   iKdyxr_bLsgJ 
+ </cse:cacheid> 
+ <cse:formattedurl type="html">
+   lionsclubs.org/&lt;b&gt;blog&lt;/b&gt;/lionsrelief-for-&lt;b&gt;typhoon&lt;/b&gt;-&lt;b&gt;haiyan&lt;/b&gt;/ 
+ </cse:formattedurl> 
+ <cse:pagemap> 
+  <cse:dataobject type="metatags"> 
+   <cse:attribute name="viewport" value="width=device-width" /> 
+  </cse:dataobject> 
+ </cse:pagemap> 
+ <opensearch:totalresults>
+   423000 
+ </opensearch:totalresults>
+</entry>
+</feed>

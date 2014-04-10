@@ -1,5 +1,5 @@
 /* Setup */
-	var allDates, bbDetail, bbOverview, traditionalDates, blogDates, storyPoints, duplicateAllDates, duplicateTraditonalDates, duplicateBlogDates, padding, parseYear, svg, xDetailScale, xOverviewScale ;
+	var allDates, bbDetail, bbOverview, detailFrame, traditionalDates, blogDates, storyPoints, duplicateAllDates, duplicateTraditonalDates, duplicateBlogDates, padding, parseYear, svg, xDetailScale, xOverviewScale ;
 
 	var margin = {
 	    top: 50,
@@ -27,19 +27,20 @@
 	};
 
   // define color
-  color = d3.scale.ordinal().range(['#CC1452', '#14A6CC']);
-  // color = d3.scale.category10();
-
-	padding = 30;
+  var color = d3.scale.ordinal().domain(['traditional','blog']).range(['#CC1452', '#14A6CC']);
+  
+	var padding = 30;
 
 	// read in date format from csv, convert to js object to be read by d3
-  parseDate = d3.time.format("%Y-%m-%dT%H:%M:%S+00:00").parse;
+  var parseDate = d3.time.format("%Y-%m-%dT%H:%M:%S+00:00").parse;
+  // read in date from date_query column
+  var parseDateQuery = d3.time.format("%Y-%m-%d").parse;
   // remove hour from date so can aggregate articles by date w/out regard to hour
-  parseDateSimple = d3.time.format("%b %d %Y");
+  var parseDateSimple = d3.time.format("%b %d %Y");
   // format date for tooltip
-  parseDateTips = d3.time.format("%b %d, %Y");
+  var parseDateTips = d3.time.format("%b %d, %Y");
   // convert storypoints date to js object for graphing on x axis
-  parseStorypoint = d3.time.format("%Y-%m-%d").parse;
+  var parseStorypoint = d3.time.format("%Y-%m-%d").parse;
 
   // array for all dates
   allDates = []; // master list for date, traditional media count, and blog media count
@@ -66,94 +67,53 @@
     .attr("width", width)
     .attr("height", height);
 
-/* Get traditional media data */
-	d3.csv("data/2014-04-03-12.09.57_all_no_text-no2011.csv", function(data) {
- 	
- 	// make globally available
-    originalData = data;
+/* Set initial data sources */
+  // Traditional source
+    var traditionalSource = 'data/haiyan/haiyan-9-week-sample/google-news/meta/2014-04-10 12.52.22_haiyan-google-news_query_stats.csv';
 
-	  // define colors
-	    // var keys = d3.keys(data[0]).filter(function(key) { return key !== "AnalysisDate"; });
-      // convert dates to js object and get list of all dates with duplicates
-	    originalData.forEach(function(d,i) {
+  // Blog source
+    var blogSource = 'data/haiyan/haiyan-9-week-sample/google-blog/meta/2014-04-10 12.53.14_haiyan-google-blog_query_stats.csv';
+
+  // start it off!
+  traditionalData();
+
+/* Get traditional media data */
+
+  function traditionalData(){
+
+    d3.csv(traditionalSource, function(data) {
+    
+    // convert date to js object
+      traditionalDates = data.map(function(d) {
         // convert each date to js date
-        d.date_published = parseDate(d.date_published);
-        // get all dates if not null
-        if(d.date_published != null)
-          duplicateTraditonalDates.push(d.date_published);
-	    });
-      // sort dates
-      duplicateTraditonalDates.sort(function(a, b) {
-        return d3.ascending(a, b);
+        var date = parseDateQuery(d.date_query_start);
+          return { date: date, count: +d.result_count, type: "traditional" };
       });
-    // define previous date
-    var previousDate;
-    // go through dates and add to previous is date is same
-    duplicateTraditonalDates.forEach(function(d,i) {
-      // current date without time so can compare by day instead of hour
-      var currentDate = parseDateSimple(d);
-      // if current date not first element, set date and count
-      if(currentDate != previousDate) {
-        traditionalDates.push(
-          { date: d, count: 1, type: 'traditional' } // set type for coloring dots later on
-        );
-        // set last date
-        previousDate = currentDate;
-      } else {
-        // add one to previous date
-        traditionalDates[traditionalDates.length-1].count++;
-      }
+
+      // go get data from blog search
+      return blogData();
     });
-    // go get data from blog search
-    return blogData();
-  });
+  }
 
 /* Get blog media data */
 
   function blogData() {
 
-    d3.csv("data/2014-04-03-12.09.57_all_no_text-no2011-blog.csv", function(data) {
-  // console.log(data);
-      // convert dates to js object and get list of all dates with duplicates
-      data.forEach(function(d,i) {
+    d3.csv(blogSource, function(data) {
+
+    // convert date to js object
+      blogDates = data.map(function(d) {
         // convert each date to js date
-        d.date_published = parseDate(d.date_published);
-        // get all dates if not null
-        if(d.date_published != null)
-          duplicateBlogDates.push(d.date_published);
+        var date = parseDateQuery(d.date_query_start);
+          return { date: date, count: +d.result_count, type: "blog" };
       });
-      // sort dates
-      duplicateBlogDates.sort(function(a, b) {
-        return d3.ascending(a, b);
+        // go get data from story point document
+        return mergeData();
       });
-      // define previous date
-      var previousDate;
-      // go through dates and add to previous if date is same
-      duplicateBlogDates.forEach(function(d,i) {
-        // current date without time so can compare by day instead of hour
-        var currentDate = parseDateSimple(d);
-        // if current date not last date in array (and not first element), set date and count
-        if(currentDate != previousDate) {
-          blogDates.push(
-            { date: d, count: 1, type:'blog' } // setting type for easy dot coloring later on.
-          );
-          // set last date
-          previousDate = currentDate;
-        } else {
-          // add one to previous date
-          blogDates[blogDates.length-1].count++;
-        }
-      });
-      // go get data from story point document
-      return mergeData();
-    });
   }
 
 /* Merge traditional and blog data */
   function mergeData() {
-
-  // define colors
-    color.domain(['traditional','blog']);
 
   // add blog data to master array
     // wrapper array for blog data
@@ -212,16 +172,14 @@
 	      class: 'detailFrame',
         transform: "translate(" + bbDetail.x + "," + bbDetail.y +")",
 	  });
-
 	// use that minimum and maximum possible y values for domain in log scale
-	  yDetailScale = d3.scale.linear().domain([0, d3.max(allDates, function(d) { return d3.max(d.values, function(v) { return v.count; }) })]).range([bbDetail.h, 0]);
-
+    yDetailScale = d3.scale.linear().domain([0, d3.max(allDates, function(d) { return d3.max(d.values, function(v) { return v.count; }) })]).range([bbDetail.h, 0]);
   // x axis
     xDetailAxis = d3.svg.axis()
                   .scale(xDetailScale)
                   .orient('bottom')
-                  .ticks(7)
-                  .tickFormat(d3.time.format('%b'));
+                  .ticks(4)
+                  .tickFormat(d3.time.format('%b %d'));
 
   // y axis for consolidated population line
     yDetailAxis = d3.svg.axis()
@@ -304,6 +262,7 @@
       .style({
         fill: function(d) { 
           // get color of type (traditional or blog color)
+          console.log(d.type);
           var typeColor = color(d.type);
           // darken color
           var d3color = d3.rgb(typeColor).darker();
@@ -406,7 +365,7 @@
 
     // Invoke the tip in the context of your visualization
     detailFrame.call(tip)
-
+  }
  //  /* add vertical line mouseover - initial code with help from Richard @ http://stackoverflow.com/questions/18882642/d3-js-drawing-a-line-on-linegraph-on-mouseover */
 
  //    // // define vertical line group to hold line and tooltip
@@ -471,4 +430,400 @@
  //      d3.select('.factpoints').style('display','none');
  //    }
 
+/* Make legend */
+  var legend = svg.selectAll(".legend")
+      .data(['traditional articles','blog articles'])
+    .enter().append("g")
+      .attr("class", "legend")
+      .attr("transform", function(d, i) { return "translate(0," + i * 28 + ")"; })
+      .on('mouseover',function(d){
+        // decrease opacity of other rectangles
+        d3.selectAll('rect')
+          .attr('opacity',function(e){
+            if(e.name != d && e != d)
+              return 0.2;
+          });
+      })
+      .on('mouseout', function (d) {
+        // Restore opacity to all rectangles on mouseout
+        d3.selectAll('rect')
+          .attr('opacity','1');
+      });
+
+  // make color box
+  legend.append("rect")
+      .attr("x", width - 18)
+      .attr("width", 18)
+      .attr("height", 18)
+      .style("fill", color);
+
+  // make name box
+  legend.append("text")
+      .attr("x", width - 24)
+      .attr("y", 9)
+      .attr("dy", ".35em")
+      .style("text-anchor", "end")
+      .text(function(d) { return d; });
+
+/* button click control. From AmeliaBR on "putting the country on drop down list using d3 via csv file" on StackOverflow */
+  // add event handler  
+  d3.select("#dataSourceSelect").on("change", sourceChanged);
+
+  // define change function
+  function sourceChanged() {
+
+    // get selected value
+    var selectedSource = d3.event.target.value;
+
+    // hide one viz or another
+    if(selectedSource == 'bbc')
+      doBBC();
+    else if(selectedSource == 'google')
+      doGoogle();
+  }
+
+/* BBC chart */
+  function doBBC() {
+
+    /* Clear old chart */
+      d3.selectAll('.axis').remove();
+      d3.selectAll('.dataTypes').remove();
+      d3.selectAll('.storyline').remove();
+      d3.selectAll('.storyTriangle').remove();
+
+    /* Clear global vars */ 
+      traditionalDates.length = 0;
+      blogDates.length = 0;
+      allDates.length = 0;
+    
+    /* Get traditional media data */
+      d3.csv("data/2014-04-03-12.09.57_all_no_text-no2011.csv", function(data) {
+      
+          // convert dates to js object and get list of all dates with duplicates
+          data.forEach(function(d,i) {
+            // convert each date to js date
+            d.date_published = parseDate(d.date_published);
+            // get all dates if not null
+            if(d.date_published != null)
+              duplicateTraditonalDates.push(d.date_published);
+          });
+          // sort dates
+          duplicateTraditonalDates.sort(function(a, b) {
+            return d3.ascending(a, b);
+          });
+        // define previous date
+        var previousDate;
+        // go through dates and add to previous is date is same
+        duplicateTraditonalDates.forEach(function(d,i) {
+          // current date without time so can compare by day instead of hour
+          var currentDate = parseDateSimple(d);
+          // if current date not first element, set date and count
+          if(currentDate != previousDate) {
+            traditionalDates.push(
+              { date: d, count: 1, type: 'traditional' } // set type for coloring dots later on
+            );
+            // set last date
+            previousDate = currentDate;
+          } else {
+            // add one to previous date
+            traditionalDates[traditionalDates.length-1].count++;
+          }
+        });
+        // go get data from blog search
+        return blogData();
+      });
+
+  /* Get blog media data */
+
+  function blogData() {
+
+    d3.csv("data/2014-04-03-12.09.57_all_no_text-no2011-blog.csv", function(data) {
+  // console.log(data);
+      // convert dates to js object and get list of all dates with duplicates
+      data.forEach(function(d,i) {
+        // convert each date to js date
+        d.date_published = parseDate(d.date_published);
+        // get all dates if not null
+        if(d.date_published != null)
+          duplicateBlogDates.push(d.date_published);
+      });
+      // sort dates
+      duplicateBlogDates.sort(function(a, b) {
+        return d3.ascending(a, b);
+      });
+      // define previous date
+      var previousDate;
+      // go through dates and add to previous if date is same
+      duplicateBlogDates.forEach(function(d,i) {
+        // current date without time so can compare by day instead of hour
+        var currentDate = parseDateSimple(d);
+        // if current date not last date in array (and not first element), set date and count
+        if(currentDate != previousDate) {
+          blogDates.push(
+            { date: d, count: 1, type:'blog' } // setting type for easy dot coloring later on.
+          );
+          // set last date
+          previousDate = currentDate;
+        } else {
+          // add one to previous date
+          blogDates[blogDates.length-1].count++;
+        }
+      });
+      // go get data from story point document
+      return mergeData();
+    });
+  }
+
+  /* Merge traditional and blog data */
+    function mergeData() {
+
+    // define colors
+      color.domain(['traditional','blog']);
+
+    // add blog data to master array
+      // wrapper array for blog data
+      var blogData = [];
+      // prepare blog date data for master array
+      blogData.values = blogDates.map(function(d){ return d; });
+      // set type
+      blogData.type = 'blog';
+      // send blog data to master array
+      allDates.push(blogData);
+
+    // add traditional data to master array
+      // wrapper array for traditional data
+      var traditionalData = [];
+      // prepare traditional date data for master array
+      traditionalData.values = traditionalDates.map(function(d){ return d; });
+      // set type
+      traditionalData.type = 'traditional';
+      // send traditional data to master array
+      allDates.push(traditionalData);
+
+      // go get data from story point document
+      return storypoints();
+    }
+
+    /* Make detail */
+    function detailVis() {
+
+    // Reset
+      var xDetailAxis, yDetailAxis, yDetailScale;
+
+    // normal scale
+      xDetailScale = d3.time.scale().domain(d3.extent(traditionalDates, function(d) { return d.date; })).range([0, bbDetail.w]);  // define the right domain
+
+    // use that minimum and maximum possible y values for domain in log scale
+      yDetailScale = d3.scale.linear().domain([0, d3.max(allDates, function(d) { return d3.max(d.values, function(v) { return v.count; }) })]).range([bbDetail.h, 0]);
+
+    // x axis
+      xDetailAxis = d3.svg.axis()
+                    .scale(xDetailScale)
+                    .orient('bottom')
+                    .ticks(7)
+                    .tickFormat(d3.time.format('%b'));
+
+    // y axis for consolidated population line
+      yDetailAxis = d3.svg.axis()
+                    .scale(yDetailScale)
+                    .orient('left')
+                    .ticks(6);
+
+      var area = d3.svg.area()
+                       .x(function(d) { return xDetailScale(d.date); })
+                       .y0(bbDetail.h)
+                       .y1(function(d) { return yDetailScale(d.count); });
+
+      var areaLine = d3.svg.line()
+                       .x(function(d) { return xDetailScale(d.date); })
+                       .y(function(d) { return yDetailScale(d.count); })
+                       .interpolate('linear');
+
+      // could not figure out how to set static y0 and y1 values using d3 line generator
+      // var storypointLine = d3.BBCsvg.line();
+    // add x axis to BBCsvg
+      detailFrame.append('g')
+              .attr({
+                class: 'x axis',
+                transform: 'translate(0,' + bbDetail.h +')'
+              })
+              .call(xDetailAxis);
+
+    // add y axis to BBCsvg
+      detailFrame.append('g')
+              .attr({
+                class: 'y axis',
+              })
+              .call(yDetailAxis)
+            .append("text")
+              .attr('x', -5)
+              .attr("y", -45)
+              .attr("dy", "30px")
+              .style("text-anchor", "end")
+              .text("Coverage");
+
+    // bind data
+      var dataTypes = BBCsvg.selectAll('.dataTypes')
+                          .data(allDates)
+                        .enter().append('g')
+                          .attr('class','dataTypes');
+
+    // add line
+      dataTypes.append('path')
+                 .attr({
+                    class: 'traditionalMediaPath',
+                    d: function(e){ console.log(e);return areaLine(e.values); },
+                    transform: 'translate(0,' + bbDetail.y + ')'                  
+                 })
+                 .style({
+                  'stroke': function(e) { return color(e.type); },
+                  'fill': 'none',
+                 });
+
+    // add fill
+      dataTypes.append("path")
+                .attr({
+                  class: "traditionalMediaArea",
+                  d: function(e) { return area(e.values); },
+                  transform: 'translate(0,' + bbDetail.y + ')'                  
+                })
+                .style({
+                  'fill': function(e) { return color(e.type); }
+                 });
+
+    /* add dots for each line */
+      dataTypes.selectAll('circle').data(function(d) { return d.values;})
+        .enter().append('circle')
+        .attr({
+          class: 'dot',
+          cx: function(d) { return xDetailScale(d.date); },
+          cy: function(d) { return yDetailScale(d.count); },
+          r: 4,
+          transform: 'translate(0,' + bbDetail.y + ')'
+        })
+        .style({
+          fill: function(d) { 
+            // get color of type (traditional or blog color)
+            var typeColor = color(d.type);
+            // darken color
+            var d3color = d3.rgb(typeColor).darker();
+            // return color
+            return d3color; 
+          }
+        })
+
+        // make dot bigger and show tip
+        .on('mouseover', function(d){
+          d3.select(this)
+            .transition()
+            .duration(25)
+            .attr('r',10);
+          tip.show(d);
+        })
+        // make dot smaller and hide tip
+        .on('mouseleave', function(d){
+          d3.select(this)
+            .transition()
+            .duration(25)
+            .attr('r',4)
+          tip.hide(d);
+        });
+
+    // /* Storypoints */
+      // add intro title and summary
+      d3.select("#crisisTitle").html('<h3>Typhoon Haiyan</h3>');
+      d3.select('#crisisStory').html('Typhoon Haiyan, known as Typhoon Yolanda in the Philippines, was a powerful tropical cyclone that devastated portions of Southeast Asia, particularly the Philippines, on November 8, 2013. <a href="http://en.wikipedia.org/wiki/Typhoon_Haiyan" class="storySource">&mdash; Wikipedia</a>');
+
+      // add dotted lines
+      detailFrame.selectAll('.line')
+                 .data(storyPoints)
+              .enter().append('line')
+                 .attr({
+                    class: 'storyline',
+                    x1: function(d) { return xDetailScale(d.date); },
+                    x2: function(d) { return xDetailScale(d.date); },
+                    y1: -bbDetail.y, // make taller than chart
+                    y2: bbDetail.h
+                  });
+
+      // add triangles
+      detailFrame.selectAll('.storyTriangle')
+             .data(storyPoints)
+          .enter().append('path')
+             .attr({
+                class: 'storyTriangle',
+                transform: function(d){ return 'translate(' + xDetailScale(d.date) + ',' + -bbDetail.y + ')'; },
+                d: d3.svg.symbol().type('triangle-down').size(256)
+              })
+             // add mouseover story details
+             .on('mouseover',function(d){
+                // convert story date to readable
+                var storyDate = parseDateTips(d.date);
+                /* Dates */
+                  // remove any previously shown dates
+                  d3.select('.crisisDate')
+                    .remove();
+                  // show new date
+                  d3.select('#crisisTitle')
+                    .append('span')
+                    .html(storyDate)
+                    .attr('class','crisisDate');    
+
+                // add new content to div
+                d3.select('#crisisStory').html(d.title);
+                /* color and size handling */
+
+                  /* Lines */
+
+
+                  /* Triangles */
+                  // revert to original color on other triangles and shrink
+                  d3.selectAll('.storyTriangle')
+                    .transition()
+                    .style('fill','#919191')
+                    .attr('d',d3.svg.symbol().type('triangle-down').size(256));
+                  // change color of current triangle and enlarge
+                  d3.select(this)
+                    .transition()
+                    .style('fill','#3D8699')
+                    .attr('d',d3.svg.symbol().type('triangle-down').size(512));
+
+             });
+
+   //  /* Tool tips */
+      // Initialize tooltip
+      tip = d3.tip()
+              .html(function(d) { 
+                // if 1 article, use singular 'article'
+                if(d.count == 1)
+                  return d.count + " '" + d.type + "' article on " + parseDateTips(d.date); 
+                // else use 'articles'
+                else
+                  return d.count + " '" + d.type + "' articles on " + parseDateTips(d.date); 
+              })
+              .direction('e')
+              .attr('class','d3-tip e');
+
+      // Invoke the tip in the context of your visualization
+      detailFrame.call(tip)
+
+    }
+  }
+
+/* Redraw Google chart */
+  function doGoogle() {
+
+    /* Clear old chart */
+      d3.selectAll('.axis').remove();
+      d3.selectAll('.dataTypes').remove();
+      d3.selectAll('.storyline').remove();
+      d3.selectAll('.storyTriangle').remove();
+
+    /* Clear global vars */ 
+      traditionalDates.length = 0;
+      blogDates.length = 0;
+      allDates.length = 0;
+
+    // return to beginning
+    traditionalData();
   }

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed gd:kind="customsearch#search" xmlns="http://www.w3.org/2005/Atom" xmlns:cse="http://schemas.google.com/cseapi/2010" xmlns:gd="http://schemas.google.com/g/2005" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">
+<entry gd:kind="customsearch#result"> 
+ <id>
+   http://world.time.com/2013/11/10/supertyphoon-haiyan-the-aftermath-live-blog/ 
+ </id> 
+ <updated>
+   1970-01-17T00:30:14.400Z 
+ </updated> 
+ <title type="html">Struggling to Cope — &lt;b&gt;Haiyan&amp;#39;s&lt;/b&gt; Aftermath: Live &lt;b&gt;Blog&lt;/b&gt; | TIME.com</title> 
+ <link href="http://world.time.com/2013/11/10/supertyphoon-haiyan-the-aftermath-live-blog/" title="world.time.com" /> 
+ <summary type="html">12, 10:30 a.m.: &lt;b&gt;Typhoon Haiyan&lt;/b&gt;, by the numbers: Revised numbers are coming &lt;br&gt; out of the Philippines, as officials receive reports from some of the more remote&amp;nbsp;...</summary> 
+ <cse:cacheid>
+   dk4caxLk3GYJ 
+ </cse:cacheid> 
+ <cse:formattedurl type="html">
+   world.time.com/2013/.../super&lt;b&gt;typhoon&lt;/b&gt;-&lt;b&gt;haiyan&lt;/b&gt;-the-aftermath-live-&lt;b&gt;blog&lt;/b&gt;/ 
+ </cse:formattedurl> 
+ <cse:pagemap> 
+  <cse:dataobject type="metatags"> 
+   <cse:attribute name="viewport" value="width=device-width,initial-scale=1" /> 
+   <cse:attribute name="news_keywords" value="the philippines," /> 
+   <cse:attribute name="og:site_name" value="TIME.com" /> 
+   <cse:attribute name="og:type" value="article" /> 
+   <cse:attribute name="og:title" value="Struggling to Cope — Haiyan’s Aftermath: Live Blog | TIME.com" /> 
+   <cse:attribute name="og:url" value="http://world.time.com/2013/11/10/supertyphoon-haiyan-the-aftermath-live-blog/" /> 
+   <cse:attribute name="og:description" value="Five days after the world’s strongest typhoon to date wreaked havoc across the Philippine archipelago, the extent of the damage wrought by Haiyan (known in the Philippines as Yolanda) is just starting to become known. TIME will continue to update this page with the latest information about ongoing relief efforts and stories from affected areas. Times given are U.S. Eastern time." /> 
+   <cse:attribute name="article:publisher" value="http://www.facebook.com/time" /> 
+   <cse:attribute name="og:image" value="http://timeglobalspin.files.wordpress.com/2013/11/phil_haiyan_damage_1112.jpg?w=600" /> 
+   <cse:attribute name="fb:admins" value="1124331582,512158401,808970553,100000018008769" /> 
+   <cse:attribute name="fb:app_id" value="53177223193" /> 
+   <cse:attribute name="application-name" value="World" /> 
+   <cse:attribute name="msapplication-window" value="width=device-width;height=device-height" /> 
+   <cse:attribute name="msapplication-tooltip" value="International Headlines, Stories, Photos and Video" /> 
+   <cse:attribute name="msapplication-task" value="name=Subscribe;action-uri=http://world.time.com/feed/;icon-uri=http://0.gravatar.com/blavatar/cc11696603a3fcd1feebe897ef74065c?s=16" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="organization"> 
+   <cse:attribute name="url" value="Time.com" /> 
+   <cse:attribute name="logo" value="http://s2.wp.com/wp-content/themes/vip/time2014/img/time_logo.png?m=1387270705g" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="cse_image"> 
+   <cse:attribute name="src" value="http://timeglobalspin.files.wordpress.com/2013/11/phil_haiyan_damage_1112.jpg?w=600" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="cse_thumbnail"> 
+   <cse:attribute name="width" value="275" /> 
+   <cse:attribute name="height" value="183" /> 
+   <cse:attribute name="src" value="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTtGKtxQCEjmcRsoUFD0fsrixS4Ptc-JjIlkIjTvfUdkb4JzSj-9yyG49M" /> 
+  </cse:dataobject> 
+ </cse:pagemap> 
+ <opensearch:totalresults>
+   885000 
+ </opensearch:totalresults>
+</entry>
+</feed>

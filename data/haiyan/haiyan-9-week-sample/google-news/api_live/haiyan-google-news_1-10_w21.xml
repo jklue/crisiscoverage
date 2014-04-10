@@ -1,0 +1,649 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<feed gd:kind="customsearch#search" xmlns="http://www.w3.org/2005/Atom" xmlns:cse="http://schemas.google.com/cseapi/2010" xmlns:gd="http://schemas.google.com/g/2005" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/"> 
+ <title>Google Custom Search - typhoon haiyan news OR article OR coverage --blog --weather.com --wikipedia.org</title> 
+ <id>
+  tag:www.googleapis.com,2010-09-29:/customsearch/v1?q=typhoon haiyan news OR article OR coverage --blog --weather.com --wikipedia.org&amp;cx=007061251080714295857:nhvoqbzpcim&amp;num=10&amp;start=1&amp;safe=high
+ </id> 
+ <author> 
+  <name>
+   CrisesCoverage - Google Custom Search
+  </name> 
+ </author> 
+ <updated>
+  1970-01-17T04:05:48.312Z
+ </updated> 
+ <opensearch:url type="application/atom+xml" template="https://www.googleapis.com/customsearch/v1?q={searchTerms}&amp;num={count?}&amp;start={startIndex?}&amp;lr={language?}&amp;safe={cse:safe?}&amp;cx={cse:cx?}&amp;cref={cse:cref?}&amp;sort={cse:sort?}&amp;filter={cse:filter?}&amp;gl={cse:gl?}&amp;cr={cse:cr?}}&amp;googlehost={cse:googleHost?}&amp;c2coff={?cse:disableCnTwTranslation}&amp;hq={cse:hq?}&amp;hl={cse:hl?}&amp;siteSearch={cse:siteSearch?}&amp;siteSearchFilter={cse:siteSearchFilter?}&amp;exactTerms={cse:exactTerms?}&amp;excludeTerms={cse:excludeTerms?}&amp;linkSite={cse:linkSite?}&amp;orTerms={cse:orTerms?}&amp;relatedSite={cse:relatedSite?}&amp;dateRestrict={cse:dateRestrict?}&amp;lowRange={cse:lowRange?}&amp;highRange={cse:highRange?}&amp;searchType={cse:searchType?}&amp;fileType={cse:fileType?}&amp;rights={cse:rights?}&amp;imgsz={cse:imgsz?}&amp;imgtype={cse:imgtype?}&amp;imgc={cse:imgc?}&amp;imgcolor={cse:imgcolor?}&amp;alt=atom" /> 
+ <opensearch:query role="request" title="Google Custom Search - typhoon haiyan news OR article OR coverage --blog --weather.com --wikipedia.org" totalresults="409000" searchterms="typhoon haiyan news OR article OR coverage --blog --weather.com --wikipedia.org" count="10" startindex="1" inputencoding="utf8" outputencoding="utf8" cse:safe="high" cse:cx="007061251080714295857:nhvoqbzpcim" cse:hl="en" cse:daterestrict="w21" /> 
+ <opensearch:query role="cse:nextPage" title="Google Custom Search - typhoon haiyan news OR article OR coverage --blog --weather.com --wikipedia.org" totalresults="409000" searchterms="typhoon haiyan news OR article OR coverage --blog --weather.com --wikipedia.org" count="10" startindex="11" inputencoding="utf8" outputencoding="utf8" cse:safe="high" cse:cx="007061251080714295857:nhvoqbzpcim" cse:hl="en" cse:daterestrict="w21" /> 
+ <opensearch:totalresults>
+  409000
+ </opensearch:totalresults> 
+ <opensearch:startindex>
+  1
+ </opensearch:startindex> 
+ <cse:context title="CrisesCoverage" /> 
+ <cse:searchinformation> 
+  <cse:searchtime>
+   1.834732
+  </cse:searchtime> 
+  <cse:formattedsearchtime>
+   1.83
+  </cse:formattedsearchtime> 
+  <cse:totalresults>
+   409000
+  </cse:totalresults> 
+  <cse:formattedtotalresults>
+   409,000
+  </cse:formattedtotalresults> 
+ </cse:searchinformation> 
+ <cse:spelling> 
+  <cse:correctedquery type="html" /> 
+ </cse:spelling> 
+ <entry gd:kind="customsearch#result"> 
+  <id>
+   http://www.nbcnews.com/news/other/typhoon-haiyan-crisis-numbers-f2D11609327
+  </id> 
+  <updated>
+   1970-01-17T00:37:26.400Z
+  </updated> 
+  <title type="html">&lt;b&gt;Typhoon Haiyan&lt;/b&gt;: A crisis by the numbers - NBC &lt;b&gt;News&lt;/b&gt;</title> 
+  <link href="http://www.nbcnews.com/news/other/typhoon-haiyan-crisis-numbers-f2D11609327" title="www.nbcnews.com" /> 
+  <summary type="html">Kevin Frayer / Getty ImagesPhilippines rescue workers search for bodies in the &lt;br&gt; rubble in Tacloban on Saturday.More than a week after one of the most powerful.</summary> 
+  <cse:cacheid>
+   GrOrv_cO61oJ
+  </cse:cacheid> 
+  <cse:formattedurl type="html">
+   www.nbc&lt;b&gt;news&lt;/b&gt;.com/&lt;b&gt;news&lt;/b&gt;/.../&lt;b&gt;typhoon&lt;/b&gt;-&lt;b&gt;haiyan&lt;/b&gt;-crisis-numbers-f2D11609327
+  </cse:formattedurl> 
+  <cse:pagemap> 
+   <cse:dataobject type="metatags"> 
+    <cse:attribute name="viewport" value="width=device-width, initial-scale=1.0, maximum-scale=1.0" /> 
+    <cse:attribute name="canonical" value="http://www.nbcnews.com/news/other/typhoon-haiyan-crisis-numbers-f2D11609327" /> 
+    <cse:attribute name="fb:app_id" value="10150138890205613" /> 
+    <cse:attribute name="og:site_name" value="NBC News" /> 
+    <cse:attribute name="og:description" value="Kevin Frayer / Getty ImagesPhilippines rescue workers search for bodies in the rubble in Tacloban on Saturday.More than a week after one of the most powerful..." /> 
+    <cse:attribute name="og:title" value="Typhoon Haiyan: A crisis by the numbers - NBC News" /> 
+    <cse:attribute name="og:url" value="http://www.nbcnews.com/news/other/typhoon-haiyan-crisis-numbers-f2D11609327" /> 
+    <cse:attribute name="og:type" value="article" /> 
+    <cse:attribute name="og:image" value="http://media3.s-nbcnews.com/i/streams/2013/November/131117/2D9706782-ss-131116-typhoon-philippines-09.jpg" /> 
+    <cse:attribute name="twitter:card" value="summary" /> 
+    <cse:attribute name="twitter:site" value="@NBCNews" /> 
+    <cse:attribute name="twitter:title" value="Typhoon Haiyan: A crisis by the numbers - NBC News" /> 
+    <cse:attribute name="twitter:description" value="Kevin Frayer / Getty ImagesPhilippines rescue workers search for bodies in the rubble in Tacloban on Saturday.More than a week after one of the most powerful..." /> 
+    <cse:attribute name="twitter:creator" value="@NBCNews" /> 
+    <cse:attribute name="twitter:domain" value="NBCNews.com" /> 
+    <cse:attribute name="twitter:image:src" value="http://media3.s-nbcnews.com/i/streams/2013/November/131117/2D9706782-ss-131116-typhoon-philippines-09.jpg" /> 
+    <cse:attribute name="tp:preferredruntimes" value="HTML5" /> 
+    <cse:attribute name="tp:preferredformats" value="Unknown,3GPP,3GPP2,AAC,ASX,AVI,BMP,CSS,DFXP,DV,EMF,EPS,Excel,EXE,F4M,Flash,FLV,FLX,GIF,HTML,Icon,ISM,JPEG,LXF,M3U,Matroska,Move,MP3,MPEG,MPEG-DASH,MPEG4,MSI,MXF,Ogg,PDF,PLS,PNG,PPT,QT,RAM,Real,RGB,SAMI,SBV,SCC,Script,SMIL,SMPTE-TT,SRT,SUB,Text,TIFF,VAST,WAV,WebM,WebVTT,Widevine,WM,Word,XML,Zip" /> 
+    <cse:attribute name="dc.date.issued" value="2013-11-17" /> 
+   </cse:dataobject> 
+   <cse:dataobject type="cse_image"> 
+    <cse:attribute name="src" value="http://media3.s-nbcnews.com/i/streams/2013/November/131117/2D9706782-ss-131116-typhoon-philippines-09.jpg" /> 
+   </cse:dataobject> 
+   <cse:dataobject type="cse_thumbnail"> 
+    <cse:attribute name="width" value="272" /> 
+    <cse:attribute name="height" value="186" /> 
+    <cse:attribute name="src" value="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpQRKWwbvwLKQeuy6RFMg-XjTpid1NvBq01yYrqpeqO31u20ljtF4tovw" /> 
+   </cse:dataobject> 
+  </cse:pagemap> 
+ </entry> 
+ <entry gd:kind="customsearch#result"> 
+  <id>
+   http://www.foxnews.com/world/2013/12/13/typhoon-haiyan-deaths-in-philippines-passes-6000/
+  </id> 
+  <updated>
+   1970-01-17T01:14:52.800Z
+  </updated> 
+  <title type="html">&lt;b&gt;Typhoon Haiyan&lt;/b&gt; deaths in Philippines passes 6,000 | Fox &lt;b&gt;News&lt;/b&gt;</title> 
+  <link href="http://www.foxnews.com/world/2013/12/13/typhoon-haiyan-deaths-in-philippines-passes-6000/" title="www.foxnews.com" /> 
+  <summary type="html">The death toll from &lt;b&gt;Typhoon Haiyan&lt;/b&gt; that struck the central Philippines on Nov. 8 &lt;br&gt; has passed 6000 with nearly 1800 people missing, officials said Friday.</summary> 
+  <cse:cacheid>
+   0Mnl6q9WDlEJ
+  </cse:cacheid> 
+  <cse:formattedurl type="html">
+   www.fox&lt;b&gt;news&lt;/b&gt;.com/.../&lt;b&gt;typhoon&lt;/b&gt;-&lt;b&gt;haiyan&lt;/b&gt;-deaths-in-philippines-passes-6000/
+  </cse:formattedurl> 
+  <cse:pagemap> 
+   <cse:dataobject type="metatags"> 
+    <cse:attribute name="viewport" value="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" /> 
+    <cse:attribute name="dc.title" value="Typhoon Haiyan deaths in Philippines passes 6,000" /> 
+    <cse:attribute name="dc.description" value="The death toll from Typhoon Haiyan that struck the central Philippines on Nov. 8 has passed 6,000 with nearly 1,800 people missing, officials said Friday." /> 
+    <cse:attribute name="dcterms.abstract" value="The death toll from Typhoon Haiyan that struck the central Philippines on Nov. 8 has passed 6,000 with nearly 1,800 people missing, officials said Friday." /> 
+    <cse:attribute name="dc.publisher" value="Fox News" /> 
+    <cse:attribute name="dc.source" value="Associated Press" /> 
+    <cse:attribute name="dc.date" value="2013-12-13" /> 
+    <cse:attribute name="dcterms.created" value="2013-12-13 09:22:13 EST" /> 
+    <cse:attribute name="dcterms.modified" value="2013-12-13 09:22:13 EST" /> 
+    <cse:attribute name="dc.type" value="Text.Article" /> 
+    <cse:attribute name="dc.identifier" value="urn:uuid:23cfb7a9d0ae2410VgnVCM200000d6c1a8c0RCRD" /> 
+    <cse:attribute name="dc.subject" value="Philippines,natural disaster,death toll,Disaster Risk,Risk Reduction,emergency shelters" /> 
+    <cse:attribute name="prism.aggregationtype" value="subsection" /> 
+    <cse:attribute name="prism.channel" value="fnc" /> 
+    <cse:attribute name="prism.section" value="world" /> 
+    <cse:attribute name="prism.subsection1" value="disasters" /> 
+    <cse:attribute name="og:title" value="Typhoon Haiyan deaths in Philippines passes 6,000" /> 
+    <cse:attribute name="og:description" value="The death toll from Typhoon Haiyan that struck the central Philippines on Nov." /> 
+    <cse:attribute name="og:type" value="article" /> 
+    <cse:attribute name="og:image" value="http://a57.foxnews.com/global.fncstatic.com/static/managed/img/0/0/Philippines%20Typhoon%20O_Leff.jpg" /> 
+    <cse:attribute name="og:url" value="http://www.foxnews.com/world/2013/12/13/typhoon-haiyan-deaths-in-philippines-passes-6000/" /> 
+    <cse:attribute name="og:site_name" value="Fox News" /> 
+    <cse:attribute name="fb:app_id" value="113186182048399" /> 
+    <cse:attribute name="classification" value="WORLD/DISASTERS/Analysis, WORLD/DISASTERS/Aftermath, WORLD/DISASTERS/Hurricanes - Typhoons" /> 
+    <cse:attribute name="classification-isa" value="analysis, aftermath, hurricanes" /> 
+    <cse:attribute name="twitter:card" value="summary" /> 
+    <cse:attribute name="twitter:site" value="@foxnews" /> 
+    <cse:attribute name="parsely-page" value="{&quot;title&quot;:&quot;Typhoon Haiyan deaths in Philippines passes 6,000&quot;,&quot;link&quot;:&quot;http://www.foxnews.com/world/2013/12/13/typhoon-haiyan-deaths-in-philippines-passes-6000/&quot;,&quot;image_url&quot;:&quot;http://a57.foxnews.com/global.fncstatic.com/static/managed/img/0/0/Philippines%20Typhoon%20O_Leff.jpg?ve=1&amp;tl=1&quot;,&quot;type&quot;:&quot;article&quot;,&quot;post_id&quot;:&quot;23cfb7a9d0ae2410VgnVCM200000d6c1a8c0RCRD&quot;,&quot;section&quot;:&quot;world/disasters&quot;,&quot;pub_date&quot;:&quot;2013-12-13T14:22:13Z&quot;,&quot;tags&quot;:[&quot;WORLD/DISASTERS/Analysis&quot;,&quot; WORLD/DISASTERS/Aftermath&quot;,&quot; WORLD/DISASTERS/Hurricanes - Typhoons&quot;]}" /> 
+    <cse:attribute name="parsely-metadata" value="{&quot;title&quot;:&quot;Typhoon Haiyan deaths in Philippines passes 6,000&quot;,&quot;link&quot;:&quot;http://www.foxnews.com/world/2013/12/13/typhoon-haiyan-deaths-in-philippines-passes-6000/&quot;,&quot;image_url&quot;:&quot;http://a57.foxnews.com/global.fncstatic.com/static/managed/img/0/0/Philippines%20Typhoon%20O_Leff.jpg?ve=1&amp;tl=1&quot;,&quot;type&quot;:&quot;article&quot;,&quot;identifier&quot;:&quot;23cfb7a9d0ae2410VgnVCM200000d6c1a8c0RCRD&quot;,&quot;section&quot;:&quot;world/disasters&quot;,&quot;pub_date&quot;:&quot;2013-12-13T14:22:13Z&quot;,&quot;tags&quot;:[&quot;WORLD/DISASTERS/Analysis&quot;,&quot; WORLD/DISASTERS/Aftermath&quot;,&quot; WORLD/DISASTERS/Hurricanes - Typhoons&quot;]}" /> 
+    <cse:attribute name="dc.format" value="text/html" /> 
+    <cse:attribute name="dc.language" value="en-US" /> 
+    <cse:attribute name="apple-mobile-web-app-title" value="World" /> 
+   </cse:dataobject> 
+   <cse:dataobject type="newsarticle"> 
+    <cse:attribute name="description" value="The death toll from Typhoon Haiyan that struck the central Philippines on Nov. 8 has passed 6,000 with nearly 1,800 people missing, officials said Friday." /> 
+   </cse:dataobject> 
+   <cse:dataobject type="newsarticle"> 
+    <cse:attribute name="headline" value="Typhoon Haiyan deaths in Philippines passes 6,000" /> 
+    <cse:attribute name="datepublished" value="2013-12-13T09:22-05:00" /> 
+    <cse:attribute name="articlebody" value="Dec. 9, 2013 - Typhoon survivor and district property custodian Norman Acala examines a book as he tries to save pieces from the school library at the Daniel Z. Romualdez Memorial Elementary..." /> 
+    <cse:attribute name="url" value="http://www.foxnews.com/world/2013/12/13/typhoon-haiyan-deaths-in-philippines-passes-6000/" /> 
+    <cse:attribute name="image" value="http://a57.foxnews.com/global.fncstatic.com/static/managed/img/876/493/Philippines%20Typhoon%20O_Leff.jpg?ve=1&amp;tl=1" /> 
+   </cse:dataobject> 
+   <cse:dataobject type="organization"> 
+    <cse:attribute name="name" value="AP" /> 
+   </cse:dataobject> 
+   <cse:dataobject type="newsarticle"> 
+    <cse:attribute name="headline" value="Renewed demands for special Benghazi committee" /> 
+   </cse:dataobject> 
+   <cse:dataobject type="mediaobject"> 
+    <cse:attribute name="image" value="http://a57.foxnews.com/a57.foxnews.com/media2.foxnews.com/thumbnails/i/040914/640/360/156/88/040914_otr_benghazi_640.jpg?ve=1&amp;tl=1" /> 
+   </cse:dataobject> 
+   <cse:dataobject type="newsarticle"> 
+    <cse:attribute name="headline" value="Judge Napolitano on role of credibility in Pistorius trial" /> 
+   </cse:dataobject> 
+   <cse:dataobject type="mediaobject"> 
+    <cse:attribute name="image" value="http://a57.foxnews.com/a57.foxnews.com/media2.foxnews.com/thumbnails/i/040914/640/360/156/88/040914_Shep_Pistorius_640.jpg?ve=1&amp;tl=1" /> 
+   </cse:dataobject> 
+   <cse:dataobject type="newsarticle"> 
+    <cse:attribute name="headline" value="Probe for Malaysia Airlines jet a 'race against time'" /> 
+   </cse:dataobject> 
+   <cse:dataobject type="mediaobject"> 
+    <cse:attribute name="image" value="http://a57.foxnews.com/a57.foxnews.com/media2.foxnews.com/thumbnails/i/040914/640/360/156/88/040914_Shep_MissingPlane_640.jpg?ve=1&amp;tl=1" /> 
+   </cse:dataobject> 
+   <cse:dataobject type="newsarticle"> 
+    <cse:attribute name="headline" value="Flight 370 effort could soon shift from search to recovery" /> 
+   </cse:dataobject> 
+   <cse:dataobject type="newsarticle"> 
+    <cse:attribute name="headline" value="Chernobyl cap could be casualty of Ukraine crisis" /> 
+   </cse:dataobject> 
+   <cse:dataobject type="newsarticle"> 
+    <cse:attribute name="headline" value="Pro-Kremlin viral video portrays Ukraine invading Russia" /> 
+   </cse:dataobject> 
+   <cse:dataobject type="newsarticle"> 
+    <cse:attribute name="headline" value="Search teams relocated signals in search for Malaysia plane" /> 
+   </cse:dataobject> 
+   <cse:dataobject type="newsarticle"> 
+    <cse:attribute name="headline" value="Iran's UN ambassador pick accused in political assassination" /> 
+   </cse:dataobject> 
+   <cse:dataobject type="itemlist"> 
+    <cse:attribute name="itemlistelement" value="Sgt. Travis Mills defies odds after critical injury" /> 
+    <cse:attribute name="datepublished" value="2014-04-09T17:08:52Z" /> 
+    <cse:attribute name="description" value="Important milestone for wounded warrior" /> 
+   </cse:dataobject> 
+   <cse:dataobject type="itemlist"> 
+    <cse:attribute name="itemlistelement" value="French and US volunteers tend to graves, honor lives of fallen WWII heroes" /> 
+    <cse:attribute name="datepublished" value="2014-04-07T17:19:36Z" /> 
+    <cse:attribute name="description" value="A group of volunteers on both sides of the Atlantic has found a way to bring back to life dozens of Wisconsin men who died fighting Nazis in the Second World War." /> 
+   </cse:dataobject> 
+   <cse:dataobject type="organization"> 
+    <cse:attribute name="name" value="2013 FOX News Network, LLC. All rights reserved." /> 
+    <cse:attribute name="email" value="newsmanager@foxnews.com" /> 
+    <cse:attribute name="image" value="global.fncstatic.com/static/v/all/img/head/logo-foxnews.png" /> 
+   </cse:dataobject> 
+   <cse:dataobject type="cse_image"> 
+    <cse:attribute name="src" value="http://a57.foxnews.com/global.fncstatic.com/static/managed/img/876/493/Philippines%20Typhoon%20O_Leff.jpg?ve=1&amp;tl=1" /> 
+   </cse:dataobject> 
+   <cse:dataobject type="cse_thumbnail"> 
+    <cse:attribute name="width" value="299" /> 
+    <cse:attribute name="height" value="168" /> 
+    <cse:attribute name="src" value="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcShdI52rOHksJm9gd-jnrdiaIXQg3oAqXOIFfZKlwRiwFqmHXn7vznY07I7" /> 
+   </cse:dataobject> 
+  </cse:pagemap> 
+ </entry> 
+ <entry gd:kind="customsearch#result"> 
+  <id>
+   http://online.wsj.com/news/articles/SB10001424052702304465604579217671422015220
+  </id> 
+  <updated>
+   1970-01-17T00:50:24.000Z
+  </updated> 
+  <title type="html">&lt;b&gt;Typhoon Haiyan&lt;/b&gt;: How a Catastrophe Unfolded - WSJ.com</title> 
+  <link href="http://online.wsj.com/news/articles/SB10001424052702304465604579217671422015220" title="online.wsj.com" /> 
+  <summary type="html">What resonated from the &lt;b&gt;news coverage&lt;/b&gt; this time was &lt;b&gt;Haiyan&amp;#39;s&lt;/b&gt; label as a &amp;quot;&lt;br&gt; &lt;b&gt;supertyphoon&lt;/b&gt;.&amp;quot; They also heard the words &amp;quot;storm surge,&amp;quot; but no one around them&lt;br&gt; &amp;nbsp;...</summary> 
+  <cse:cacheid>
+   H71DdZFyfxMJ
+  </cse:cacheid> 
+  <cse:formattedurl type="html">
+   online.wsj.com/&lt;b&gt;news&lt;/b&gt;/&lt;b&gt;article&lt;/b&gt;s/ SB10001424052702304465604579217671422015220
+  </cse:formattedurl> 
+  <cse:pagemap> 
+   <cse:dataobject type="metatags"> 
+    <cse:attribute name="dj.asn" value="ip-211" /> 
+    <cse:attribute name="user.type" value="nonsubscriber" /> 
+    <cse:attribute name="user.exp" value="google_bot" /> 
+    <cse:attribute name="page.site" value="wsj" /> 
+    <cse:attribute name="page.region" value="na,us" /> 
+    <cse:attribute name="page.section" value="Article" /> 
+    <cse:attribute name="page.content.type" value="article" /> 
+    <cse:attribute name="og:type" value="article" /> 
+    <cse:attribute name="page.content.source" value="WSJ Online Article" /> 
+    <cse:attribute name="article.template" value="full" /> 
+    <cse:attribute name="article.id" value="SB10001424052702304465604579217671422015220" /> 
+    <cse:attribute name="article.type" value="World News" /> 
+    <cse:attribute name="article.access" value="free" /> 
+    <cse:attribute name="article.origheadline" value="Typhoon Haiyan: How a Catastrophe Unfolded" /> 
+    <cse:attribute name="article.headline" value="Typhoon Haiyan: How a catastrophe unfolded" /> 
+    <cse:attribute name="article.summary" value="Tacloban was a city on the rise. In the first week of November, the city of 220,000 sat directly in the line of the most powerful storm ever recorded. Officials had days of warning and rushed to prepare. In the run-up to the storm, Philippine President Benigno Aquino III called on officials to ensure a &quot;zero-casualty&quot; event. As of Wednesday morning, the death toll from Typhoon Haiyan reached 5,500. Most of the dead were in Tacloban and the areas around it." /> 
+    <cse:attribute name="article.page" value="World" /> 
+    <cse:attribute name="article.section" value="World" /> 
+    <cse:attribute name="article.published" value="2013-11-27T01:02:00.000Z" /> 
+    <cse:attribute name="article.updated" value="2013-11-27T01:02:00.000Z" /> 
+    <cse:attribute name="article.created" value="2013-11-24T15:23:00.000Z" /> 
+    <cse:attribute name="author" value="Te-Ping Chen, James T. Areddy and James Hookway" /> 
+    <cse:attribute name="news_keywords" value="political,general news,disasters,accidents,hurricanes,storms,natural disasters,catastrophes,risk news,weather" /> 
+    <cse:attribute name="language" value="en-US" /> 
+    <cse:attribute name="twitter:title" value="Typhoon Haiyan: How a catastrophe unfolded" /> 
+    <cse:attribute name="twitter:description" value="Tacloban was a city on the rise. In the first week of November, the city of 220,000 sat directly in the line of the most powerful storm ever recorded. Officials had days of warning and rushed to prepare. In the run-up to the storm, Philippine President Benigno Aquino III called on officials to ensure a &quot;zero-casualty&quot; event. As of Wednesday morning, the death toll from Typhoon Haiyan reached 5,500. Most of the dead were in Tacloban and the areas around it." /> 
+    <cse:attribute name="twitter:image" value="http://si.wsj.net/public/resources/images/WO-AQ374_SURGE_D_20131124184428.jpg" /> 
+    <cse:attribute name="fb:app_id" value="368513495882" /> 
+    <cse:attribute name="og:title" value="Typhoon Haiyan: How a catastrophe unfolded" /> 
+    <cse:attribute name="og:description" value="Tacloban was a city on the rise. In the first week of November, the city of 220,000 sat directly in the line of the most powerful storm ever recorded. Officials had days of warning and rushed to prepare. In the run-up to the storm, Philippine President Benigno Aquino III called on officials to ensure a &quot;zero-casualty&quot; event. As of Wednesday morning, the death toll from Typhoon Haiyan reached 5,500. Most of the dead were in Tacloban and the areas around it." /> 
+    <cse:attribute name="og:image" value="http://si.wsj.net/public/resources/images/WO-AQ374_SURGE_G_20131124184428.jpg" /> 
+    <cse:attribute name="viewport" value="width=device-width, user-scalable=yes, target-densitydpi=160" /> 
+   </cse:dataobject> 
+   <cse:dataobject type="newsarticle"> 
+    <cse:attribute name="datepublished" value="2013-11-27T01:02:00.000Z" /> 
+    <cse:attribute name="datemodified" value="2013-11-27T01:02:00.000Z" /> 
+    <cse:attribute name="datecreated" value="2013-11-24T15:23:00.000Z" /> 
+    <cse:attribute name="description" value="Tacloban was a city on the rise. In the first week of November, the city of 220,000 sat directly in the line of the most powerful storm ever recorded. Officials had days of warning and rushed..." /> 
+    <cse:attribute name="inlanguage" value="en-US" /> 
+    <cse:attribute name="image" value="http://si.wsj.net/public/resources/images/WO-AQ374_SURGE_G_20131124184428.jpg" /> 
+    <cse:attribute name="headline" value="Typhoon Haiyan: How a Catastrophe Unfolded" /> 
+    <cse:attribute name="author" value="Te-Ping Chen" /> 
+    <cse:attribute name="articlebody" value="After Supertyphoon Haiyan hit the Philippines, even key leaders were swept up in the tsunami-like storm surge. The WSJ's Ramy Inocencio speaks with a national Cabinet minister, the Tacloban..." /> 
+   </cse:dataobject> 
+   <cse:dataobject type="cse_image"> 
+    <cse:attribute name="src" value="http://si.wsj.net/public/resources/images/BN-AN396_PHpred_G_20131124055435.jpg" /> 
+   </cse:dataobject> 
+   <cse:dataobject type="cse_thumbnail"> 
+    <cse:attribute name="width" value="275" /> 
+    <cse:attribute name="height" value="183" /> 
+    <cse:attribute name="src" value="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcR8jwRrBEwOJPXJm1m3ZQRoEKtGfwbwzTEvT6OSzp5uaPQZKuUD_slP58Y" /> 
+   </cse:dataobject> 
+  </cse:pagemap> 
+ </entry> 
+ <entry gd:kind="customsearch#result"> 
+  <id>
+   http://www.redcross.org/news/article/Red-Cross-Sends-Support-to-Philippines-for-Typhoon-Response
+  </id> 
+  <updated>
+   1970-01-17T03:12:57.600Z
+  </updated> 
+  <title type="html">Global Red Cross Response Effort Underway in Wake of &lt;b&gt;Typhoon&lt;/b&gt;</title> 
+  <link href="http://www.redcross.org/news/article/Red-Cross-Sends-Support-to-Philippines-for-Typhoon-Response" title="www.redcross.org" /> 
+  <summary type="html">... months on, the global Red Cross network continues to help families rebuild &lt;br&gt; and rebound from &lt;b&gt;Typhoon Haiyan&lt;/b&gt;. ... Posted March 05, 2014 , Updated &lt;b&gt;article&lt;/b&gt;.</summary> 
+  <cse:cacheid>
+   QHLsEbnIlecJ
+  </cse:cacheid> 
+  <cse:formattedurl type="html">
+   www.redcross.org/&lt;b&gt;news&lt;/b&gt;/&lt;b&gt;article&lt;/b&gt;/Red-Cross-Sends-Support-to-Philippines-for- &lt;b&gt;Typhoon&lt;/b&gt;-Response
+  </cse:formattedurl> 
+  <cse:pagemap> 
+   <cse:dataobject type="metatags"> 
+    <cse:attribute name="viewport" value="width=device-width, initial-scale=1.0" /> 
+   </cse:dataobject> 
+  </cse:pagemap> 
+ </entry> 
+ <entry gd:kind="customsearch#result"> 
+  <id>
+   http://www.theguardian.com/world/2013/dec/22/typhoon-haiyan-philippines-aid-workers-diary-of-disaster
+  </id> 
+  <updated>
+   1970-01-17T01:26:24.000Z
+  </updated> 
+  <title type="html">&lt;b&gt;Typhoon Haiyan&lt;/b&gt;: an aid worker&amp;#39;s diary of a disaster | World &lt;b&gt;news&lt;/b&gt; &lt;b&gt;...&lt;/b&gt;</title> 
+  <link href="http://www.theguardian.com/world/2013/dec/22/typhoon-haiyan-philippines-aid-workers-diary-of-disaster" title="www.theguardian.com" /> 
+  <summary type="html">When &lt;b&gt;typhoon Haiyan&lt;/b&gt; hit the Philippines early last month, she was among the &lt;br&gt; first ... On the way to the Geneva office, I check the &lt;b&gt;news&lt;/b&gt;, but there&amp;#39;s not much&amp;nbsp;...</summary> 
+  <cse:cacheid>
+   HB6F-KPDLWUJ
+  </cse:cacheid> 
+  <cse:formattedurl type="html">
+   www.theguardian.com/.../&lt;b&gt;typhoon&lt;/b&gt;-&lt;b&gt;haiyan&lt;/b&gt;-philippines-aid-workers-diary-of- disaster
+  </cse:formattedurl> 
+  <cse:pagemap> 
+   <cse:dataobject type="metatags"> 
+    <cse:attribute name="dc.date.issued" value="2013-12-21" /> 
+    <cse:attribute name="llt" value="AUMa8GYY" /> 
+    <cse:attribute name="og:title" value="Typhoon Haiyan: an aid worker's diary of a disaster" /> 
+    <cse:attribute name="article:published_time" value="2013-12-21T23:06:42Z" /> 
+    <cse:attribute name="article:modified_time" value="2013-12-22T15:33:18Z" /> 
+    <cse:attribute name="article:tag" value="Typhoon Haiyan" /> 
+    <cse:attribute name="article:section" value="World news" /> 
+    <cse:attribute name="og:url" value="http://www.theguardian.com/world/2013/dec/22/typhoon-haiyan-philippines-aid-workers-diary-of-disaster" /> 
+    <cse:attribute name="og:type" value="article" /> 
+    <cse:attribute name="og:image" value="https://static-secure.guim.co.uk/sys-images/Guardian/About/General/2013/12/18/1387370313813/Care-communications-offic-010.jpg" /> 
+    <cse:attribute name="og:site_name" value="the Guardian" /> 
+    <cse:attribute name="og:description" value="Aid agency worker Sandra Bulling was part of a team that flew to the Philippines when it was hit by the devastating storm last month. This is what she saw" /> 
+    <cse:attribute name="fb:app_id" value="180444840287" /> 
+    <cse:attribute name="news_keywords" value="Typhoon Haiyan,Natural disasters and extreme weather,Asia Pacific,Philippines,World news,Global development,World news" /> 
+    <cse:attribute name="application-name" value="The Guardian" /> 
+    <cse:attribute name="msapplication-tilecolor" value="#004983" /> 
+    <cse:attribute name="msapplication-tileimage" value="http://static.guim.co.uk/static/4392bae2e147b76c290713aa65e7a357263f92bd/common/images/favicons/windows_tile_144_b.png" /> 
+    <cse:attribute name="content-id" value="/world/2013/dec/22/typhoon-haiyan-philippines-aid-workers-diary-of-disaster" /> 
+    <cse:attribute name="twitter:card" value="summary_large_image" /> 
+    <cse:attribute name="twitter:site" value="@guardian" /> 
+    <cse:attribute name="twitter:app:name:iphone" value="The Guardian" /> 
+    <cse:attribute name="twitter:app:id:iphone" value="409128287" /> 
+    <cse:attribute name="twitter:app:name:googleplay" value="The Guardian" /> 
+    <cse:attribute name="twitter:app:id:googleplay" value="com.guardian" /> 
+    <cse:attribute name="twitter:app:url:googleplay" value="guardian://www.theguardian.com/world/2013/dec/22/typhoon-haiyan-philippines-aid-workers-diary-of-disaster" /> 
+    <cse:attribute name="p:domain_verify" value="4f4576e6bac27d86fd926c4579b97f23" /> 
+    <cse:attribute name="pocket-site-verification" value="be6d97bc1f6961ce6348e7ced4f1f4" /> 
+   </cse:dataobject> 
+   <cse:dataobject type="Breadcrumb"> 
+    <cse:attribute name="title" value="News" /> 
+    <cse:attribute name="url" value="News" /> 
+   </cse:dataobject> 
+   <cse:dataobject type="Breadcrumb"> 
+    <cse:attribute name="title" value="World news" /> 
+    <cse:attribute name="url" value="World news" /> 
+   </cse:dataobject> 
+   <cse:dataobject type="Breadcrumb"> 
+    <cse:attribute name="title" value="Typhoon Haiyan" /> 
+    <cse:attribute name="url" value="Typhoon Haiyan" /> 
+   </cse:dataobject> 
+   <cse:dataobject type="newsarticle"> 
+    <cse:attribute name="name" value="Typhoon Haiyan: an aid worker's diary of a disaster" /> 
+    <cse:attribute name="headline" value="Typhoon Haiyan: an aid worker's diary of a disaster" /> 
+    <cse:attribute name="description" value="Aid agency worker Sandra Bulling was part of a team that flew to the Philippines when it was hit by the devastating storm last month. This is what she saw" /> 
+    <cse:attribute name="publisher" value="The Observer" /> 
+    <cse:attribute name="datepublished" value="2013-12-21T18:06EST" /> 
+   </cse:dataobject> 
+   <cse:dataobject type="imageobject"> 
+    <cse:attribute name="contenturl" value="http://static.guim.co.uk/sys-images/Guardian/About/General/2013/12/18/1387370312265/Care-communications-offic-009.jpg" /> 
+    <cse:attribute name="representativeofpage" value="http://static.guim.co.uk/sys-images/Guardian/About/General/2013/12/18/1387370312265/Care-communications-offic-009.jpg" /> 
+    <cse:attribute name="caption" value="Care communications officer Sandra Bulling on her satellite phone amid the devastation left by typhoon Haiyan in Ormoc. Photograph: Peter Caton/CARE" /> 
+   </cse:dataobject> 
+   <cse:dataobject type="cse_image"> 
+    <cse:attribute name="src" value="https://static-secure.guim.co.uk/sys-images/Guardian/About/General/2013/12/18/1387370313813/Care-communications-offic-010.jpg" /> 
+   </cse:dataobject> 
+   <cse:dataobject type="cse_thumbnail"> 
+    <cse:attribute name="width" value="290" /> 
+    <cse:attribute name="height" value="174" /> 
+    <cse:attribute name="src" value="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRH1u9UkRr5Cybh3u8RYFdOW10Z6UejjAR46UjcB8p1IXKVavKJl9ZjPT0" /> 
+   </cse:dataobject> 
+  </cse:pagemap> 
+ </entry> 
+ <entry gd:kind="customsearch#result"> 
+  <id>
+   http://www.voanews.com/content/philippines-coconut-industry-struggles-to-recover-after-typhon-haiyan/1866180.html
+  </id> 
+  <updated>
+   1970-01-17T03:15:50.400Z
+  </updated> 
+  <title type="html">Philippines Coconut Industry Struggles to Recover after &lt;b&gt;Typhoon&lt;/b&gt; &lt;b&gt;...&lt;/b&gt;</title> 
+  <link href="http://www.voanews.com/content/philippines-coconut-industry-struggles-to-recover-after-typhon-haiyan/1866180.html" title="www.voanews.com" /> 
+  <summary type="html">Last December, &lt;b&gt;Typhoon Haiyan&amp;#39;s&lt;/b&gt; destructive winds devastated the Philippines. &lt;br&gt; ... Non-Confrontational Approach in Venezuela Means Less Media &lt;b&gt;Coverage&lt;/b&gt;.</summary> 
+  <cse:cacheid>
+   U_z6BCeVdcsJ
+  </cse:cacheid> 
+  <cse:formattedurl type="html">
+   www.voa&lt;b&gt;news&lt;/b&gt;.com/content/...to...&lt;b&gt;typhon&lt;/b&gt;-&lt;b&gt;haiyan&lt;/b&gt;/1866180.html
+  </cse:formattedurl> 
+  <cse:pagemap> 
+   <cse:dataobject type="metatags"> 
+    <cse:attribute name="title" value="Philippines Coconut Industry Struggles to Recover after Typhoon Haiyan" /> 
+    <cse:attribute name="news_keywords" value="Asia, Economy, Philippines, Leyte, Haiyan, Coconuts, Haiyan destruction" /> 
+    <cse:attribute name="twitter:card" value="summary" /> 
+    <cse:attribute name="twitter:site" value="@VOA_News" /> 
+    <cse:attribute name="og:title" value="Philippines Coconut Industry Struggles to Recover after Typhoon Haiyan" /> 
+    <cse:attribute name="og:description" value="Last December, Typhoon Haiyan&amp;#39;s destructive winds devastated the Philippines. Parts of the archipelago nation are still recovering. Among those hardest hit were farmers, nearly half of who..." /> 
+    <cse:attribute name="og:type" value="article" /> 
+    <cse:attribute name="og:url" value="http://www.voanews.com/content/philippines-coconut-industry-struggles-to-recover-after-typhon-haiyan/1866180.html" /> 
+    <cse:attribute name="og:site_name" value="VOA" /> 
+    <cse:attribute name="article:publisher" value="https://www.facebook.com/voiceofamerica" /> 
+    <cse:attribute name="author" value="Jason Strother / Malte Kollenberg" /> 
+    <cse:attribute name="og:image" value="http://www.voanews.com/video/f72aedc2-fa86-4205-b71a-bf0a306c9cdb.jpgx?w=1024&amp;amp;h=1500" /> 
+    <cse:attribute name="abstract" value="The Voice of America is one of the world's most trusted sources for news and information from the United States and around the world. VOA is a  multimedia news organization using radio, television, and the internet to distribute content in 43 languages." /> 
+    <cse:attribute name="msvalidate.01" value="BC94811461B7BF0C2662E5BC33B01969" /> 
+   </cse:dataobject> 
+   <cse:dataobject type="cse_image"> 
+    <cse:attribute name="src" value="http://www.voanews.com/video/f72aedc2-fa86-4205-b71a-bf0a306c9cdb.jpgx?w=1024&amp;amp;h=1500" /> 
+   </cse:dataobject> 
+   <cse:dataobject type="cse_thumbnail"> 
+    <cse:attribute name="width" value="300" /> 
+    <cse:attribute name="height" value="168" /> 
+    <cse:attribute name="src" value="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQDDuZAEX6IB0uWjg9eJdrsefOmuevQHmUVhs81XvB2XCXVbmcG9B4iJ6Y" /> 
+   </cse:dataobject> 
+  </cse:pagemap> 
+ </entry> 
+ <entry gd:kind="customsearch#result"> 
+  <id>
+   http://www.mirror.co.uk/all-about/typhoon%20haiyan
+  </id> 
+  <updated>
+   1970-01-17T01:23:31.200Z
+  </updated> 
+  <title type="html">&lt;b&gt;Typhoon Haiyan&lt;/b&gt; - &lt;b&gt;News&lt;/b&gt;, views, gossip, pictures, video - Mirror Online</title> 
+  <link href="http://www.mirror.co.uk/all-about/typhoon%20haiyan" title="www.mirror.co.uk" /> 
+  <summary type="html">&lt;b&gt;Typhoon Haiyan&lt;/b&gt; left thousands dead in The Philippines after it struck on 7 &lt;br&gt; November 2013. The category five super storm - believed to the biggest storm &lt;br&gt; ever to&amp;nbsp;...</summary> 
+  <cse:cacheid>
+   MB2sx7kJ57MJ
+  </cse:cacheid> 
+  <cse:formattedurl type="html">
+   www.mirror.co.uk/all-about/&lt;b&gt;typhoon&lt;/b&gt;%20&lt;b&gt;haiyan&lt;/b&gt;
+  </cse:formattedurl> 
+  <cse:pagemap> 
+   <cse:dataobject type="metatags"> 
+    <cse:attribute name="fb:page_id" value="6149699161" /> 
+    <cse:attribute name="fb:app_id" value="123792601022133" /> 
+    <cse:attribute name="og:site_name" value="mirror" /> 
+    <cse:attribute name="og:language" value="en" /> 
+    <cse:attribute name="og:type" value="article" /> 
+    <cse:attribute name="og:title" value="Typhoon Haiyan" /> 
+    <cse:attribute name="og:url" value="http://www.mirror.co.uk/all-about/Typhoon Haiyan" /> 
+    <cse:attribute name="og:description" value="Typhoon Haiyan left thousands dead in The Philippines after it struck on 7 November 2013. The category five super storm - believed to the biggest storm ever to make landfall - brought severe flooding, huge landslides and 195mph winds and left a trail of devastation." /> 
+    <cse:attribute name="og:section" value="News" /> 
+    <cse:attribute name="og:image" value="http://i1.mirror.co.uk/incoming/article2688694.ece/ALTERNATES/s2197/Typhoon-Haiyan-is-pictured-in-this-NOAA-satellite-image-2688694.jpg" /> 
+    <cse:attribute name="og:tags" value="Typhoon Haiyan" /> 
+    <cse:attribute name="article:tag" value="Typhoon Haiyan" /> 
+    <cse:attribute name="article:section" value="Typhoon Haiyan" /> 
+    <cse:attribute name="msvalidate.01" value="17DA4C91A126705A8B1E2A5FD7CAC9EF" /> 
+   </cse:dataobject> 
+   <cse:dataobject type="cse_image"> 
+    <cse:attribute name="src" value="http://i1.mirror.co.uk/incoming/article2688694.ece/ALTERNATES/s2197/Typhoon-Haiyan-is-pictured-in-this-NOAA-satellite-image-2688694.jpg" /> 
+   </cse:dataobject> 
+   <cse:dataobject type="cse_thumbnail"> 
+    <cse:attribute name="width" value="275" /> 
+    <cse:attribute name="height" value="183" /> 
+    <cse:attribute name="src" value="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsmdJWSjIdqddzYhbM5tnuXjSvEFrk70CtPXFs-HZWonzwiE4YTSWBMosR" /> 
+   </cse:dataobject> 
+  </cse:pagemap> 
+ </entry> 
+ <entry gd:kind="customsearch#result"> 
+  <id>
+   http://www.telegraph.co.uk/news/worldnews/asia/philippines/10469656/Typhoon-Haiyan-Philippines-death-toll-rises-above-5200.html
+  </id> 
+  <updated>
+   1970-01-17T00:46:04.800Z
+  </updated> 
+  <title type="html">&lt;b&gt;Typhoon Haiyan&lt;/b&gt;: Philippines death toll rises above 5,200 - Telegraph</title> 
+  <link href="http://www.telegraph.co.uk/news/worldnews/asia/philippines/10469656/Typhoon-Haiyan-Philippines-death-toll-rises-above-5200.html" title="www.telegraph.co.uk" /> 
+  <summary type="html">The death toll from &lt;b&gt;Typhoon Haiyan&lt;/b&gt; has risen above 5,200, making it one of the &lt;br&gt; ... told a &lt;b&gt;news&lt;/b&gt; conference at UN headquarters after a trip to the Philippines.</summary> 
+  <cse:formattedurl type="html">
+   www.telegraph.co.uk/&lt;b&gt;news&lt;/b&gt;/world&lt;b&gt;news&lt;/b&gt;/.../&lt;b&gt;Typhoon&lt;/b&gt;-&lt;b&gt;Haiyan&lt;/b&gt;-Philippines-death -toll-rises-above-5200.html
+  </cse:formattedurl> 
+  <cse:pagemap> 
+   <cse:dataobject type="metatags"> 
+    <cse:attribute name="tmgads.zone" value="news.worldnews.asia.philippines" /> 
+    <cse:attribute name="tmgads.channel" value="news" /> 
+    <cse:attribute name="tmgads.section" value="news-worldnews-asia-philippines" /> 
+    <cse:attribute name="tmgads.articleid" value="10469656" /> 
+    <cse:attribute name="tmgads.pagetype" value="story" /> 
+    <cse:attribute name="tmgads.level" value="5" /> 
+    <cse:attribute name="tmgads.geo" value="US" /> 
+    <cse:attribute name="dcsext.akamigeo" value="US" /> 
+    <cse:attribute name="section-id" value="2139" /> 
+    <cse:attribute name="last-modified" value="2013-11-23" /> 
+    <cse:attribute name="article-id" value="10469656" /> 
+    <cse:attribute name="title" value="Typhoon Haiyan: Philippines death toll rises above 5,200" /> 
+    <cse:attribute name="author" value="AFP" /> 
+    <cse:attribute name="gsamlc" value="news/worldnews/asia/philippines" /> 
+    <cse:attribute name="gsachannel" value="news" /> 
+    <cse:attribute name="gsachannelname" value="News" /> 
+    <cse:attribute name="gsacategory" value="worldnews" /> 
+    <cse:attribute name="gsagenre" value="asia" /> 
+    <cse:attribute name="gsasectionuniquename" value="news-world_news-asia-philippines" /> 
+    <cse:attribute name="gsaarticletype" value="Story" /> 
+    <cse:attribute name="dc.date.issued" value="2013-11-23" /> 
+    <cse:attribute name="fb:app_id" value="120118784736295" /> 
+    <cse:attribute name="fb:admins" value="686953094,531239902,100002344351237" /> 
+    <cse:attribute name="og:description" value="Official figures from Philippines government sees death toll from deadly Typhoon Haiyan rise above 5,200 with 1,611 people still unaccounted for two weeks after the disaster" /> 
+    <cse:attribute name="og:site_name" value="Telegraph.co.uk" /> 
+    <cse:attribute name="og:title" value="Typhoon Haiyan: Philippines death toll rises above 5,200  - Telegraph" /> 
+    <cse:attribute name="og:url" value="http://www.telegraph.co.uk/news/worldnews/asia/philippines/10469656/Typhoon-Haiyan-Philippines-death-toll-rises-above-5200.html" /> 
+    <cse:attribute name="og:image" value="http://i.telegraph.co.uk/multimedia/archive/02736/Candahug_2736489k.jpg" /> 
+    <cse:attribute name="og:type" value="article" /> 
+    <cse:attribute name="twitter:card" value="summary" /> 
+    <cse:attribute name="twitter:site" value="@Telegraph" /> 
+    <cse:attribute name="dcsext.mlc" value="/news/worldnews/asia/philippines" /> 
+    <cse:attribute name="dcsext.genre" value="asia" /> 
+    <cse:attribute name="dcsext.category" value="worldnews" /> 
+    <cse:attribute name="wt.cg_s" value="worldnews" /> 
+    <cse:attribute name="dcsext.channel" value="news" /> 
+    <cse:attribute name="wt.cg_n" value="news" /> 
+    <cse:attribute name="dcsext.content_type" value="Story" /> 
+    <cse:attribute name="dcsext.level" value="5" /> 
+    <cse:attribute name="dcsext.author" value="AFP" /> 
+    <cse:attribute name="dcsext.articlefirstpublished" value="2013-11-23 01:52" /> 
+    <cse:attribute name="dcsext.articleid" value="10469656" /> 
+    <cse:attribute name="dcsext.cf" value="1" /> 
+    <cse:attribute name="dcsext.pd" value="1" /> 
+   </cse:dataobject> 
+   <cse:dataobject type="article"> 
+    <cse:attribute name="headline" value="Typhoon Haiyan: Philippines death toll rises above 5,200" /> 
+    <cse:attribute name="name" value="Typhoon Haiyan: Philippines death toll rises above 5,200" /> 
+    <cse:attribute name="alternativeheadline" value="Official figures from Philippines government sees death toll from deadly Typhoon Haiyan rise above 5,200 with 1,611 people still unaccounted for two weeks after the disaster" /> 
+    <cse:attribute name="description" value="Official figures from Philippines government sees death toll from deadly Typhoon Haiyan rise above 5,200 with 1,611 people still unaccounted for two weeks after the disaster" /> 
+    <cse:attribute name="image" value="http://i.telegraph.co.uk/multimedia/archive/02736/Candahug_2736489b.jpg" /> 
+    <cse:attribute name="author" value="AFP" /> 
+    <cse:attribute name="datepublished" value="2013-11-23" /> 
+    <cse:attribute name="articlebody" value="The death toll from Typhoon Haiyan has risen above 5,200, making it one of the Philippines' deadliest ever natural disasters, the government said on Friday, two weeks after the devastating..." /> 
+   </cse:dataobject> 
+   <cse:dataobject type="cse_image"> 
+    <cse:attribute name="src" value="http://i.telegraph.co.uk/multimedia/archive/02736/Candahug_2736489k.jpg" /> 
+   </cse:dataobject> 
+   <cse:dataobject type="cse_thumbnail"> 
+    <cse:attribute name="width" value="284" /> 
+    <cse:attribute name="height" value="177" /> 
+    <cse:attribute name="src" value="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTlNr2yhGvmN_1d5mfi2q_sgb4HXUPMr0UEceTj2f97oxGtWU8cos-I8zE" /> 
+   </cse:dataobject> 
+  </cse:pagemap> 
+ </entry> 
+ <entry gd:kind="customsearch#result"> 
+  <id>
+   http://www.cnn.com/2013/12/08/us/typhoon-haiyan-one-month/
+  </id> 
+  <updated>
+   1970-01-17T01:09:07.200Z
+  </updated> 
+  <title type="html">&lt;b&gt;Typhoon Haiyan&lt;/b&gt;: Death toll rising month after storm hits Philippines &lt;b&gt;...&lt;/b&gt;</title> 
+  <link href="http://www.cnn.com/2013/12/08/us/typhoon-haiyan-one-month/" title="www.cnn.com" /> 
+  <summary type="html">One month after &lt;b&gt;Typhoon Haiyan&lt;/b&gt; tore through six Philippine islands, the death &lt;br&gt; toll stands at 5924 and 1779 people are still missing, according to government&amp;nbsp;...</summary> 
+  <cse:formattedurl type="html">
+   www.cnn.com/2013/12/08/us/&lt;b&gt;typhoon&lt;/b&gt;-&lt;b&gt;haiyan&lt;/b&gt;-one-month/
+  </cse:formattedurl> 
+  <cse:pagemap> 
+   <cse:dataobject type="metatags"> 
+    <cse:attribute name="viewport" value="width=1024" /> 
+    <cse:attribute name="medium" value="news" /> 
+    <cse:attribute name="title" value="Typhoon Haiyan: Death toll rising month after storm hits Philippines - CNN.com" /> 
+    <cse:attribute name="author" value="Susanna Capelouto, CNN" /> 
+    <cse:attribute name="section" value="us" /> 
+    <cse:attribute name="source" value="CNN" /> 
+    <cse:attribute name="pubdate" value="2013-12-09T03:42:23Z" /> 
+    <cse:attribute name="lastmod" value="2013-12-09T10:17:13Z" /> 
+    <cse:attribute name="og:title" value="A month later, Typhoon Haiyan death toll still rising in the Philippines" /> 
+    <cse:attribute name="og:type" value="article" /> 
+    <cse:attribute name="og:url" value="http://www.cnn.com/2013/12/08/us/typhoon-haiyan-one-month/index.html" /> 
+    <cse:attribute name="og:site_name" value="CNN" /> 
+    <cse:attribute name="og:image" value="http://i2.cdn.turner.com/cnn/dam/assets/131127182809-01-typhoon-1127-story-top.jpg" /> 
+    <cse:attribute name="vr:canonical" value="http://www.cnn.com/2013/12/08/us/typhoon-haiyan-one-month/index.html" /> 
+    <cse:attribute name="fb:page_id" value="129343697106537" /> 
+    <cse:attribute name="fb:app_id" value="80401312489" /> 
+    <cse:attribute name="twitter:card" value="summary" /> 
+    <cse:attribute name="twitter:site" value="@CNN" /> 
+    <cse:attribute name="twitter:site:id" value="759251" /> 
+    <cse:attribute name="twitter:creator" value="@CNN" /> 
+    <cse:attribute name="twitter:creator:id" value="759251" /> 
+   </cse:dataobject> 
+   <cse:dataobject type="newsarticle"> 
+    <cse:attribute name="genre" value="news" /> 
+    <cse:attribute name="inlanguage" value="en-US" /> 
+    <cse:attribute name="description" value="One month after Typhoon Haiyan tore through six Philippine islands, the death toll stands at 5,924 and 1,779 people are still missing, according to government figures released Sunday." /> 
+    <cse:attribute name="author" value="Susanna Capelouto, CNN" /> 
+    <cse:attribute name="articlesection" value="us" /> 
+    <cse:attribute name="sourceorganization" value="CNN" /> 
+    <cse:attribute name="datepublished" value="2013-12-09T03:42:23Z" /> 
+    <cse:attribute name="datemodified" value="2013-12-09T10:17:13Z" /> 
+    <cse:attribute name="datecreated" value="2013-12-09T03:42:23Z" /> 
+    <cse:attribute name="headline" value="A month later, Typhoon Haiyan death toll still rising in the Philippines" /> 
+    <cse:attribute name="url" value="http://www.cnn.com/2013/12/08/us/typhoon-haiyan-one-month/index.html" /> 
+    <cse:attribute name="thumbnailurl" value="http://i2.cdn.turner.com/cnn/dam/assets/131127182809-01-typhoon-1127-story-top.jpg" /> 
+   </cse:dataobject> 
+   <cse:dataobject type="cse_image"> 
+    <cse:attribute name="src" value="http://i2.cdn.turner.com/cnn/dam/assets/131127182809-01-typhoon-1127-story-top.jpg" /> 
+   </cse:dataobject> 
+  </cse:pagemap> 
+ </entry> 
+ <entry gd:kind="customsearch#result"> 
+  <id>
+   http://www.cbc.ca/news/world/typhoon-haiyan-creates-testing-ground-for-crisis-mappers-1.2462119
+  </id> 
+  <updated>
+   1970-01-17T01:22:04.800Z
+  </updated> 
+  <title type="html">&lt;b&gt;Typhoon Haiyan&lt;/b&gt; creates testing ground for crisis mappers - World &lt;b&gt;...&lt;/b&gt;</title> 
+  <link href="http://www.cbc.ca/news/world/typhoon-haiyan-creates-testing-ground-for-crisis-mappers-1.2462119" title="www.cbc.ca" /> 
+  <summary type="html">By Amber Hildebrandt, CBC &lt;b&gt;News&lt;/b&gt; Posted: Dec 18, 2013 5:00 AM ET Last &lt;br&gt; Updated: Dec ... A month after &lt;b&gt;Typhoon Haiyan&lt;/b&gt;, signs of progress in the hard-hit &lt;br&gt; Leyte&amp;nbsp;...</summary> 
+  <cse:formattedurl type="html">
+   www.cbc.ca/&lt;b&gt;news&lt;/b&gt;/.../&lt;b&gt;typhoon&lt;/b&gt;-&lt;b&gt;haiyan&lt;/b&gt;-creates-testing-ground-for-crisis- mappers-1.2462119
+  </cse:formattedurl> 
+  <cse:pagemap> 
+   <cse:dataobject type="metatags"> 
+    <cse:attribute name="application-name" value="www.cbc.ca" /> 
+    <cse:attribute name="msapplication-id" value="App" /> 
+    <cse:attribute name="msapplication-packagefamilyname" value="CanadianBroadcastingCorpo.CBC_pw8q9bvavk68p" /> 
+    <cse:attribute name="date" value="2013/12/18" /> 
+    <cse:attribute name="original-headline" value="typhoon-haiyan-creates-testing-ground-for-crisis-mappers" /> 
+    <cse:attribute name="twitter:site" value="@cbcnews" /> 
+    <cse:attribute name="twitter:url" value="http://www.cbc.ca/1.2462119" /> 
+    <cse:attribute name="twitter:card" value="summary_large_image" /> 
+    <cse:attribute name="twitter:image:src" value="http://i.cbc.ca/1.2469029.1387388180!/cpImage/httpImage/image.jpg_gen/derivatives/16x9_460/philippines-storm.jpg" /> 
+    <cse:attribute name="og:title" value="Typhoon Haiyan creates testing ground for crisis mappers" /> 
+    <cse:attribute name="og:url" value="http://www.cbc.ca/1.2462119" /> 
+    <cse:attribute name="og:image" value="http://i.cbc.ca/1.2469029.1387388180!/cpImage/httpImage/image.jpg_gen/derivatives/16x9_460/philippines-storm.jpg" /> 
+    <cse:attribute name="og:description" value="The Southeast Asian country may be the perfect place to try out new tools for sifting through the social media noise during disasters to quickly help those in need." /> 
+    <cse:attribute name="vf:unique_id" value="1.2462119" /> 
+    <cse:attribute name="vf:section" value="2.633" /> 
+   </cse:dataobject> 
+   <cse:dataobject type="cse_image"> 
+    <cse:attribute name="src" value="http://i.cbc.ca/1.2469029.1387388180!/cpImage/httpImage/image.jpg_gen/derivatives/16x9_460/philippines-storm.jpg" /> 
+   </cse:dataobject> 
+   <cse:dataobject type="cse_thumbnail"> 
+    <cse:attribute name="width" value="299" /> 
+    <cse:attribute name="height" value="168" /> 
+    <cse:attribute name="src" value="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQPLP0AxKzqxOTe7BGfR46uNtnOWVshNR0CCEItrFA8tw0KKA5E-TBL9MM" /> 
+   </cse:dataobject> 
+  </cse:pagemap> 
+ </entry> 
+</feed>

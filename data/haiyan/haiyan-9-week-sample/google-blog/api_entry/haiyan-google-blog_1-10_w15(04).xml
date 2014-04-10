@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed gd:kind="customsearch#search" xmlns="http://www.w3.org/2005/Atom" xmlns:cse="http://schemas.google.com/cseapi/2010" xmlns:gd="http://schemas.google.com/g/2005" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">
+<entry gd:kind="customsearch#result"> 
+ <id>
+   http://newint.org/blog/2014/02/07/typhoon-haiyan-three-months-on/ 
+ </id> 
+ <updated>
+   1970-01-17T02:35:31.200Z 
+ </updated> 
+ <title type="html">&lt;b&gt;Typhoon Haiyan&lt;/b&gt;, three months on -- New Internationalist</title> 
+ <link href="http://newint.org/blog/2014/02/07/typhoon-haiyan-three-months-on/" title="newint.org" /> 
+ <summary type="html">Home › &amp;middot; New Internationalist &lt;b&gt;Blogs&lt;/b&gt; › ... It was six days after &lt;b&gt;Typhoon Haiyan&lt;/b&gt; &lt;br&gt; struck. ... The region was one of the poorest in the country even before Haiyan hit.</summary> 
+ <cse:cacheid>
+   cy5nXO2ur6oJ 
+ </cse:cacheid> 
+ <cse:formattedurl type="html">
+   newint.org/&lt;b&gt;blog&lt;/b&gt;/2014/02/07/&lt;b&gt;typhoon&lt;/b&gt;-&lt;b&gt;haiyan&lt;/b&gt;-three-months-on/ 
+ </cse:formattedurl> 
+ <cse:pagemap> 
+  <cse:dataobject type="hatomfeed" /> 
+  <cse:dataobject type="xfn" /> 
+  <cse:dataobject type="metatags"> 
+   <cse:attribute name="original-source" value="http://newint.org/blog/2014/02/07/typhoon-haiyan-three-months-on/" /> 
+   <cse:attribute name="search-type" value="blog_post" /> 
+   <cse:attribute name="cover_date" value="February 2014" /> 
+   <cse:attribute name="search-title" value="Typhoon Haiyan, three months on" /> 
+   <cse:attribute name="author" value="Maila  Quiring" /> 
+   <cse:attribute name="search-teaser" value="Filipino NGO worker Maila Quiring, reports on efforts to rebuild the worst affected areas in Eastern Samar." /> 
+   <cse:attribute name="search-mtime" value="1391787660" /> 
+   <cse:attribute name="search-thumb" value="http://newint.org/blog/2014/02/07/2014-02-07-typhoon_thumb.jpg" /> 
+   <cse:attribute name="search-tags" value="phillipines, Typhoon Haiyan" /> 
+   <cse:attribute name="copyright" value="All rights reserved, unless otherwise noted. New Internationalist 1973-2013. Text content may be used under a Creative Commons BY-NC-ND licence" /> 
+   <cse:attribute name="apple-itunes-app" value="app-id=596778023" /> 
+   <cse:attribute name="twitter:card" value="summary" /> 
+   <cse:attribute name="twitter:site" value="@newint" /> 
+   <cse:attribute name="twitter:domain" value="newint.org" /> 
+   <cse:attribute name="twitter:creator" value="@" /> 
+   <cse:attribute name="twitter:title" value="Typhoon Haiyan, three months on" /> 
+   <cse:attribute name="twitter:description" value="Filipino NGO worker &lt;strong&gt;Maila Quiring&lt;/strong&gt;, reports on efforts to rebuild the worst affected areas in Eastern Samar." /> 
+   <cse:attribute name="twitter:image" value="http://newint.org/blog/2014/02/07/2014-02-07-typhoon.jpg" /> 
+   <cse:attribute name="twitter:image:src" value="http://newint.org/blog/2014/02/07/2014-02-07-typhoon.jpg" /> 
+   <cse:attribute name="twitter:app:name:ipad" value="New Internationalist for iPad" /> 
+   <cse:attribute name="twitter:app:id:ipad" value="id596778023" /> 
+  </cse:dataobject> 
+ </cse:pagemap> 
+ <opensearch:totalresults>
+   105000 
+ </opensearch:totalresults>
+</entry>
+</feed>

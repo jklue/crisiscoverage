@@ -1,0 +1,785 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed gd:kind="customsearch#search" xmlns="http://www.w3.org/2005/Atom" xmlns:cse="http://schemas.google.com/cseapi/2010" xmlns:gd="http://schemas.google.com/g/2005" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">
+<entry gd:kind="customsearch#result"> 
+ <id>
+   http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/ 
+ </id> 
+ <updated>
+   1970-01-17T00:28:48.000Z 
+ </updated> 
+ <title type="html">Philippines sifting through horror in &lt;b&gt;Typhoon Haiyan&lt;/b&gt;</title> 
+ <link href="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" title="www.usatoday.com" /> 
+ <summary type="html">A weakened &lt;b&gt;Typhon Haiyan&lt;/b&gt; made it way across the border from northern &lt;br&gt; Vietnam ...... After two days with no &lt;b&gt;news&lt;/b&gt; from her family, elementary teacher &lt;br&gt; Cherry&amp;nbsp;...</summary> 
+ <cse:cacheid>
+   Jpr_Nx09cKAJ 
+ </cse:cacheid> 
+ <cse:formattedurl type="html">
+   www.usatoday.com/story/&lt;b&gt;news&lt;/b&gt;/world/.../&lt;b&gt;typhoon&lt;/b&gt;-&lt;b&gt;haiyan&lt;/b&gt;.../3488431/ 
+ </cse:formattedurl> 
+ <cse:pagemap> 
+  <cse:dataobject type="metatags"> 
+   <cse:attribute name="google" value="notranslate" /> 
+   <cse:attribute name="fb:app_id" value="215046668549694" /> 
+   <cse:attribute name="og:image" value="http://www.gannett-cdn.com/-mm-/36e07859a7cfa1716654febd1ef52f9699100f80/c=0-0-2418-1812&amp;r=x117&amp;c=155x114/local/-/media/USATODAY/test/2013/11/10/1384138909000-GTY-187570109.jpg" /> 
+   <cse:attribute name="og:image:width" value="400" /> 
+   <cse:attribute name="og:image:height" value="400" /> 
+   <cse:attribute name="og:title" value="Philippines sifting through horror in Typhoon Haiyan" /> 
+   <cse:attribute name="og:description" value="As many as 10,000 people may have died when one of the most powerful typhoons ever recorded destroyed entire villages and devastated cities with huge waves and winds of nearly 150 mph." /> 
+   <cse:attribute name="og:url" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="og:type" value="article" /> 
+   <cse:attribute name="news_keywords" value="Philippines, Typhoon Haiyan, Vietnam" /> 
+   <cse:attribute name="viewport" value="width=1070" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="newsarticle"> 
+   <cse:attribute name="description" value="As many as 10,000 people may have died when one of the most powerful typhoons ever recorded destroyed entire villages and devastated cities with huge waves and winds of nearly 150 mph." /> 
+   <cse:attribute name="datemodified" value="2013-11-11T08:12:30.0000000" /> 
+   <cse:attribute name="datepublished" value="2013-11-10T04:58:45.0000000" /> 
+   <cse:attribute name="articlesection" value="news,world" /> 
+   <cse:attribute name="thumbnailurl" value="http://www.gannett-cdn.com/-mm-/342e9fadba77079bd2800d07eff3757a41fc2cc4/c=126-114-1830-1818&amp;r=x153&amp;c=150x150/local/-/media/USATODAY/test/2013/11/10/1384138909000-GTY-187570109.jpg" /> 
+   <cse:attribute name="image" value="http://www.gannett-cdn.com/-mm-/3b56c15df1b5d1bcdcc2cc2be090d089d299a9ca/c=126-114-1830-1818&amp;r=x203&amp;c=200x200/local/-/media/USATODAY/test/2013/11/10/1384138909000-GTY-187570109.jpg" /> 
+   <cse:attribute name="headline" value="Philippines sifting through horror in Typhoon Haiyan" /> 
+   <cse:attribute name="articlebody" value="If the typhoon death toll is confirmed, it would be the deadliest natural catastrophe on record in the Philippines.An aerial view of buildings destroyed in the aftermath of Typhoon Haiyan on..." /> 
+  </cse:dataobject> 
+  <cse:dataobject type="videoobject"> 
+   <cse:attribute name="width" value="880" /> 
+   <cse:attribute name="height" value="495" /> 
+   <cse:attribute name="thumbnailurl" value="http://videos.usatoday.net/Brightcove2/29906170001/2013/11/29906170001_2827346082001_thumb-bd484a3b0712c826420f6a706700d083.jpg?pubId=29906170001" /> 
+   <cse:attribute name="contenturl" value="http://www.usatoday.com/videos/news/nation/2013/11/11/3493369/" /> 
+   <cse:attribute name="uploaddate" value="11/11/2013 3:51:40 AM" /> 
+   <cse:attribute name="expires" value="1/1/0001 12:00:00 AM" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="person"> 
+   <cse:attribute name="name" value="Sunshine Lichauco de Leon and Calum MacLeod, USA TODAY" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="url" value="http://www.gannett-cdn.com/-mm-/c0425cdb71358576360796f85211e4f9f8794127/c=0-0-2418-1812&amp;r=x404&amp;c=534x401/local/-/media/USATODAY/test/2013/11/10/1384138909000-GTY-187570109.jpg" /> 
+   <cse:attribute name="name" value="typhoon" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="url" value="http://www.gannett-cdn.com/-mm-/d8716e249fd691352dfc3ba8419790f88e60e110/c=0-0-3105-2327&amp;r=x383&amp;c=540x380/local/-/media/USATODAY/test/2013/11/10/1384138254000-GTY-187570216.jpg" /> 
+   <cse:attribute name="name" value="typhoon" /> 
+   <cse:attribute name="height" value="380" /> 
+   <cse:attribute name="width" value="540" /> 
+   <cse:attribute name="copyrightholder" value="Jeoffrey Maitem, Getty Images" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="videoobject"> 
+   <cse:attribute name="width" value="540" /> 
+   <cse:attribute name="height" value="304" /> 
+   <cse:attribute name="thumbnailurl" value="http://www.gannett-cdn.com/-mm-/b9968a625ac27b854c8f71bd4d8e755d677a3221/r=500x365/local/-/media/USATODAY/USATODAY/2013/11/10/1384118946000-AP-Philippines-Typhoon.jpg" /> 
+   <cse:attribute name="contenturl" value="http://www.usatoday.com/videos/news/2013/11/10/3489237/" /> 
+   <cse:attribute name="uploaddate" value="11/10/2013 1:50:31 PM" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.gannett-cdn.com/-mm-/ab8fb6d93bc3b4e389879398e5c90ef668743f6a/c=164-49-1911-1361&amp;r=x513&amp;c=680x510/local/-/media/USATODAY/USATODAY/2013/11/27//1385558567000-typhoon112713-001.jpg" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="A man rebuilds his home which was destroyed by Typhoon Haiyan on a bay on Nov. 27 in Tacloban, Philippines. (Photo: Noel Celis, AFP/Getty Images)" /> 
+   <cse:attribute name="copyrightholder" value="Noel Celis, AFP/Getty Images" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="A man shows an electric shaver he found outside a damaged grocery store in Tacloban city. (Photo: Bullit Marquez, AP)" /> 
+   <cse:attribute name="copyrightholder" value="Bullit Marquez, AP" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="A typhoon survivor rebuilds his home in Tacloban near a ship that was washed ashore during the storm. (Photo: Noel Celis, AFP/Getty Images)" /> 
+   <cse:attribute name="copyrightholder" value="Noel Celis, AFP/Getty Images" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="Members of a South Korean Ddisaster team removes bodies of typhoon victims in Tacloban city. (Photo: Bullit Marquez, AP)" /> 
+   <cse:attribute name="copyrightholder" value="Bullit Marquez, AP" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="A typhoon survivor plays with his younger brother in Palo township. (Photo: Bullit Marquez, AP)" /> 
+   <cse:attribute name="copyrightholder" value="Bullit Marquez, AP" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="People bicycle along a damaged highway in Palo township. (Photo: Bullit Marquez, AP)" /> 
+   <cse:attribute name="copyrightholder" value="Bullit Marquez, AP" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="A man cleans up debris after Typhoon Haiyan on Nov. 26 in Tacloban city. (Photo: Bullit Marquez, AP)" /> 
+   <cse:attribute name="copyrightholder" value="Bullit Marquez, AP" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="Red Cross volunteers prepare relief supplies at a temporary evacuation center at a public school in Tacloban. (Photo: Dennis M. Sabangan, epa)" /> 
+   <cse:attribute name="copyrightholder" value="Dennis M. Sabangan, epa" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="Red Cross volunteers conduct a psychosocial support class for children in Tacloban. (Photo: Dennis M. Sabangan, epa)" /> 
+   <cse:attribute name="copyrightholder" value="Dennis M. Sabangan, epa" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="Typhoon survivors and volunteers clean up Tacloban city. (Photo: Bullit Marquez, AP)" /> 
+   <cse:attribute name="copyrightholder" value="Bullit Marquez, AP" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="Men prepare to sell roasted pork on a street in Tacloban. (Photo: Dennis M. Sabangan, epa)" /> 
+   <cse:attribute name="copyrightholder" value="Dennis M. Sabangan, epa" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="A man sits near destroyed homes in Tacloban. (Photo: Noel Celis, AFP/Getty Images)" /> 
+   <cse:attribute name="copyrightholder" value="Noel Celis, AFP/Getty Images" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="People walk past ships washed ashore by Typhoon Haiyan on Nov. 25 in Tacloban, Philippines. (Photo: Noel Celis, AFP/Getty Images)" /> 
+   <cse:attribute name="copyrightholder" value="Noel Celis, AFP/Getty Images" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="A commercial aircraft flies over Tacloban. (Photo: Bullit Marquez, AP)" /> 
+   <cse:attribute name="copyrightholder" value="Bullit Marquez, AP" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="Typhoon survivors prepare to board a C-130 aircraft at the airport in Tacloban. (Photo: Dennis M. Sabangan, epa)" /> 
+   <cse:attribute name="copyrightholder" value="Dennis M. Sabangan, epa" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="Police officers prepare to place dead bodies onto a truck in Tacloban. (Photo: Noel Celis, AFP/Getty Images)" /> 
+   <cse:attribute name="copyrightholder" value="Noel Celis, AFP/Getty Images" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="Children cover their noses as they walk past bodies in Tacloban. (Photo: Dennis M. Sabangan, epa)" /> 
+   <cse:attribute name="copyrightholder" value="Dennis M. Sabangan, epa" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="Chinese medical personnel unload supplies from a hospital ship in Tacloban. (Photo: AP)" /> 
+   <cse:attribute name="copyrightholder" value="AP" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="Children wait in a makeshift home in Tacloban. (Photo: Ritchie B. Tongo, epa)" /> 
+   <cse:attribute name="copyrightholder" value="Ritchie B. Tongo, epa" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="Eunice Rustillo searches for food in Tacloban. All of Rustillo's relatives were killed during the typhoon. (Photo: Ritchie B. Tongo, epa)" /> 
+   <cse:attribute name="copyrightholder" value="Ritchie B. Tongo, epa" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="People charge their mobile phones at a roadside charging station in Tacloban. (Photo: Noel Celis, AFP/Getty Images)" /> 
+   <cse:attribute name="copyrightholder" value="Noel Celis, AFP/Getty Images" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="Relatives light candles at a mass grave containing typhoon victims outside San Joaquin church at Palo township. (Photo: Bullit Marquez, AP)" /> 
+   <cse:attribute name="copyrightholder" value="Bullit Marquez, AP" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="A typhoon survivor rebuilds his home in Tacloban. (Photo: Bullit Marquez, AP)" /> 
+   <cse:attribute name="copyrightholder" value="Bullit Marquez, AP" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="A man rests in his damaged home in Tacloban. (Photo: Noel Celis, AFP/Getty Images)" /> 
+   <cse:attribute name="copyrightholder" value="Noel Celis, AFP/Getty Images" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="A typhoon victim melts copper wire he salvaged from the debris on Nov. 24 in Tacloban. (Photo: Ritchie B. Tongo, epa)" /> 
+   <cse:attribute name="copyrightholder" value="Ritchie B. Tongo, epa" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="Destroyed homes in Palo, Philippines. (Photo: Noel Celis, AFP/Getty Images)" /> 
+   <cse:attribute name="copyrightholder" value="Noel Celis, AFP/Getty Images" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="Bodies of victims lie on the street in Tacloban. (Photo: Dennis M. Sabangan, epa)" /> 
+   <cse:attribute name="copyrightholder" value="Dennis M. Sabangan, epa" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="A man rides past piles of debris near the shoreline where several tankers ran aground in Leyte. (Photo: Dan Kitwood, Getty Images)" /> 
+   <cse:attribute name="copyrightholder" value="Dan Kitwood, Getty Images" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="A rooster sits near a family's makeshift shelter under the hull of a ship in Tacloban. (Photo: Odd Andersen, AFP/Getty Images)" /> 
+   <cse:attribute name="copyrightholder" value="Odd Andersen, AFP/Getty Images" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="A boy uses an umbrella to protect himself from the rain in a neighborhood destroyed by Typhoon Haiyan on Nov. 22 in Tacloban, Philippines. (Photo: David Guttenfelder, AP)" /> 
+   <cse:attribute name="copyrightholder" value="David Guttenfelder, AP" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="Villagers carry religious statues during a procession at a local chapel in Santa Rita township in Eastern Samar, Philippines. (Photo: Dan Kitwood, Getty Images)" /> 
+   <cse:attribute name="copyrightholder" value="Dan Kitwood, Getty Images" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="Typhoon survivors watch as a Philippine air force helicopter unloads sacks of relief supplies at Tanauan township. (Photo: Bullit Marquez, AP)" /> 
+   <cse:attribute name="copyrightholder" value="Bullit Marquez, AP" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="A man transports containers of fresh water in a toy car in Tanauan township. (Photo: Bullit Marquez, AP)" /> 
+   <cse:attribute name="copyrightholder" value="Bullit Marquez, AP" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="Relatives of Rolando Palermo check body bags as they search for his body in Tanuan. (Photo: Bullit Marquez, AP)" /> 
+   <cse:attribute name="copyrightholder" value="Bullit Marquez, AP" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="U.S. Air Force Sgt. Jody Dessicino helps a mother carry her baby to an evacuation aircraft at the airport in Tacloban. (Photo: Dita Alangkara, AP)" /> 
+   <cse:attribute name="copyrightholder" value="Dita Alangkara, AP" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="People walk back to their destroyed home in Tacloban. (Photo: Odd Andersen, AFP/Getty Images)" /> 
+   <cse:attribute name="copyrightholder" value="Odd Andersen, AFP/Getty Images" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="A man and his child sleep at a Catholic cathedral in Tacloban. (Photo: David Guttenfelder, AP)" /> 
+   <cse:attribute name="copyrightholder" value="David Guttenfelder, AP" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="People walk past damaged and destroyed homes on Nov. 21 in Tolosa, Philippines. (Photo: Dan Kitwood, Getty Images)" /> 
+   <cse:attribute name="copyrightholder" value="Dan Kitwood, Getty Images" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="A Red Cross rescue team removes a body in Tacloban. (Photo: Nic Bothma, epa)" /> 
+   <cse:attribute name="copyrightholder" value="Nic Bothma, epa" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="A Philippine air force helicopter flies past boys searching through debris in Tacloban. (Photo: Bullit Marquez, AP)" /> 
+   <cse:attribute name="copyrightholder" value="Bullit Marquez, AP" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="A worker dries customer documents as he prepares to open for business in Taclaban. (Photo: Dan Kitwood, Getty Images)" /> 
+   <cse:attribute name="copyrightholder" value="Dan Kitwood, Getty Images" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="A Philippines air force crew member carries a baby to an evacuation aircraft at the airport in Tacloban. (Photo: Wally Santana, AP)" /> 
+   <cse:attribute name="copyrightholder" value="Wally Santana, AP" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="People walk past a truck hanging from a tree in Tacloban. (Photo: Nic Bothma, epa)" /> 
+   <cse:attribute name="copyrightholder" value="Nic Bothma, epa" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="A man shelters from the wind as he tries to light a fire in Tacloban. (Photo: Odd Andersen, AFP/Getty Images)" /> 
+   <cse:attribute name="copyrightholder" value="Odd Andersen, AFP/Getty Images" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="John Ay-ay displays a toy he found in Tacloban city. (Photo: Bullit Marquez, AP)" /> 
+   <cse:attribute name="copyrightholder" value="Bullit Marquez, AP" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="A typhoon survivor from Tacloban, Phillippines, cries as she arrives at the Villamor Airbase on Nov. 20 in Manila. (Photo: Noel Celis, AFP/Getty Images)" /> 
+   <cse:attribute name="copyrightholder" value="Noel Celis, AFP/Getty Images" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="Typhoon survivors and Philippine soldiers carry relief goods from a U.S. helicopter in Tanauan, Leyte province, central Philippines. (Photo: Aaron Favila, AP)" /> 
+   <cse:attribute name="copyrightholder" value="Aaron Favila, AP" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="Typhoon survivors seek refuge inside Redemptorist Church in Tacloban. (Photo: Bullit Marquez, AP)" /> 
+   <cse:attribute name="copyrightholder" value="Bullit Marquez, AP" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="A woman grieves in front of her damaged house in Santa Rita on Samar island. (Photo: Bagus Indahono, epa)" /> 
+   <cse:attribute name="copyrightholder" value="Bagus Indahono, epa" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="Desperate villagers fight for relief supplies dropped from a Philippines air force helicopter near Palo. (Photo: Mark Ralston, AFP/Getty Images)" /> 
+   <cse:attribute name="copyrightholder" value="Mark Ralston, AFP/Getty Images" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="A man plays a guitar in Dagami. (Photo: Aaron Favila, AP)" /> 
+   <cse:attribute name="copyrightholder" value="Aaron Favila, AP" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="Typhoon survivors crowd a house with a standby generator to recharge their cellphones in Tacloban. (Photo: Bullit Marquez, AP)" /> 
+   <cse:attribute name="copyrightholder" value="Bullit Marquez, AP" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="A military cargo aircraft flies over survivors of Typhoon Haiyan as they search for belongings in the rubble of their destroyed homes in Tacoblan on Nov. 20. (Photo: Nicolas Asfouri, AFP/Getty Images)" /> 
+   <cse:attribute name="copyrightholder" value="Nicolas Asfouri, AFP/Getty Images" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="U.S. Navy Aviation ASW Operator 3rd Class Caleb Rausch, right, dodges typhoon victims as they remove relief supplies from a U.S. Navy Seahawk helicopter in Palo, Philippines. (Photo: Wally..." /> 
+   <cse:attribute name="copyrightholder" value="Wally Santana, AP" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="U.S. Navy Chief Julio Grullon delivers fruit to typhoon victims in Palo. (Photo: Wally Santana, AP)" /> 
+   <cse:attribute name="copyrightholder" value="Wally Santana, AP" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="Typhoon survivors arrive at a temporary shelter at Villamor Airbase Elementary School in Manila. (Photo: Noel Celis, AFP/Getty Images)" /> 
+   <cse:attribute name="copyrightholder" value="Noel Celis, AFP/Getty Images" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="Villagers toss grocery items from a container that washed up on the beach at Tacloban. (Photo: Ritchie B. Tongo, epa)" /> 
+   <cse:attribute name="copyrightholder" value="Ritchie B. Tongo, epa" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="A boy sits in front of destroyed homes near the waterfront in Tacloban. (Photo: Odd Andersen, AFP/Getty Images)" /> 
+   <cse:attribute name="copyrightholder" value="Odd Andersen, AFP/Getty Images" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="Bodies are prepared for burial in a mass grave outside Tacloban city. (Photo: Chris McGrath, Getty Images)" /> 
+   <cse:attribute name="copyrightholder" value="Chris McGrath, Getty Images" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="Typhoon survivors line up as they prepare to board a Japanese air force C-130 cargo plane bound for Cebu at Tacloban airport. (Photo: Mark Ralston, AFP/Getty Images)" /> 
+   <cse:attribute name="copyrightholder" value="Mark Ralston, AFP/Getty Images" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="U.S. military personnel unload boxes of relief supplies at the airport in Tacloban. (Photo: Ritchie B.Tongo, epa)" /> 
+   <cse:attribute name="copyrightholder" value="Ritchie B.Tongo, epa" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="A crew member aboard a Philippines air force helicopter looks at typhoon damage as they fly over Tacloban. (Photo: Mark Ralston, AFP/Getty Images)" /> 
+   <cse:attribute name="copyrightholder" value="Mark Ralston, AFP/Getty Images" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="A man clears damaged trees outside Tacloban. (Photo: Chris McGrath, Getty Images)" /> 
+   <cse:attribute name="copyrightholder" value="Chris McGrath, Getty Images" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="A boy climbs across debris near the Tacloban astrodome evacuation center. (Photo: Dan Kitwood, Getty Images)" /> 
+   <cse:attribute name="copyrightholder" value="Dan Kitwood, Getty Images" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="380" /> 
+   <cse:attribute name="caption" value="Typhoon survivors wait for a flight out of Tacloban. (Photo: Aaron Favila, AP)" /> 
+   <cse:attribute name="copyrightholder" value="Aaron Favila, AP" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="Stuffed toys dry on a clothesline in Quinapundan town on Nov. 19 in Eastern Samar province, central Philippines. (Photo: Ted Aljibe, AFP/Getty Images)" /> 
+   <cse:attribute name="copyrightholder" value="Ted Aljibe, AFP/Getty Images" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="Typhoon victims stand by tents at an evacuation center in Tacloban. (Photo: Francis R. Malasig, epa)" /> 
+   <cse:attribute name="copyrightholder" value="Francis R. Malasig, epa" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="A man fans a fire in Tanauan. (Photo: Dan Kitwood, Getty Images)" /> 
+   <cse:attribute name="copyrightholder" value="Dan Kitwood, Getty Images" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="Children play on a pool table in Leyte. (Photo: Dan Kitwood, Getty Images)" /> 
+   <cse:attribute name="copyrightholder" value="Dan Kitwood, Getty Images" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="380" /> 
+   <cse:attribute name="caption" value="A man carries his dog and waves as he walks to board a South Korean cargo plane to evacuate in Tacloban. (Photo: Jeoffrey Maitem, Getty Images)" /> 
+   <cse:attribute name="copyrightholder" value="Jeoffrey Maitem, Getty Images" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="Typhoon victims leave with some of their belongings from their destroyed homes in Tacloban on Nov. 19. (Photo: Nicolas Asfouri, AFP/Getty Images)" /> 
+   <cse:attribute name="copyrightholder" value="Nicolas Asfouri, AFP/Getty Images" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="Young Filipinos push a cart of water containers in an area destroyed in the aftermath of Typhoon Haiyan in Tacloban. (Photo: Kevin Frayer, Getty Images)" /> 
+   <cse:attribute name="copyrightholder" value="Kevin Frayer, Getty Images" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="Residents play basketball with a makeshift net in Tacloban. (Photo: Kevin Frayer, Getty Images)" /> 
+   <cse:attribute name="copyrightholder" value="Kevin Frayer, Getty Images" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="Residents sit around a fire in Tacloban. (Photo: Kevin Frayer, Getty Images)" /> 
+   <cse:attribute name="copyrightholder" value="Kevin Frayer, Getty Images" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="Philippine typhoon victims salvage timber as they rebuild their homes in Tacloban. (Photo: Nic Bothma, epa)" /> 
+   <cse:attribute name="copyrightholder" value="Nic Bothma, epa" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="A person washes in the rubble of a destroyed home in Tacloban. (Photo: Odd Anderson, AFP/Getty Images)" /> 
+   <cse:attribute name="copyrightholder" value="Odd Anderson, AFP/Getty Images" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="People wait in line to receive food at a community center in Tacloban. (Photo: Chris McGrath, Getty Images)" /> 
+   <cse:attribute name="copyrightholder" value="Chris McGrath, Getty Images" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="A typhoon victim climbs out of his destroyed house in Jaro on Nov. 18, 2013. (Photo: Nicolas Asfouri, AFP/Getty Images)" /> 
+   <cse:attribute name="copyrightholder" value="Nicolas Asfouri, AFP/Getty Images" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="A U.S. helicopter lands with relief supplies on a beach south of Palo. The United Nations estimates that 13 million people were affected by Typhoon Haiyan, with around 1.9 million losing their..." /> 
+   <cse:attribute name="copyrightholder" value="Odd Anderson, AFP/Getty Images" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="A survivor of the typhoon wears mismatched shoes in the San Jose fishing village on the outskirts of Tacloban on the eastern Philippine island of Leyte. (Photo: Philippe Lopez, AFP/Getty Images)" /> 
+   <cse:attribute name="copyrightholder" value="Philippe Lopez, AFP/Getty Images" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="A single tree is seen standing amid the rubble in Tacloban. (Photo: Chris McGrath, Getty Images)" /> 
+   <cse:attribute name="copyrightholder" value="Chris McGrath, Getty Images" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="A boy sits on an upturned car in Leyte, Philippines. (Photo: Dan Kitwood, Getty Images)" /> 
+   <cse:attribute name="copyrightholder" value="Dan Kitwood, Getty Images" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="Keith Wheeler walks with a cross along the road from Tacloban to Tanauan spreading the word of God and saying prayers for the people he meets in Leyte, Philippines. (Photo: Dan Kitwood, Getty Images)" /> 
+   <cse:attribute name="copyrightholder" value="Dan Kitwood, Getty Images" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="A young Filipino takes a shower at a school turned into a temporary shelter. (Photo: Dita Alangkara, AP)" /> 
+   <cse:attribute name="copyrightholder" value="Dita Alangkara, AP" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="Survivor Mario Petilla looks out from his home damaged by Typhoon Haiyan at Tacloban, Leyte province, central Philippines. (Photo: Aaron Favila, AP)" /> 
+   <cse:attribute name="copyrightholder" value="Aaron Favila, AP" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="Typhoon survivors who were evacuated from Tacloban city cheer while seated onboard a U.S. military C-17 aircraft after they landed at Manila Airport in Manila, Philippines. (Photo: Vincent Yu, AP)" /> 
+   <cse:attribute name="copyrightholder" value="Vincent Yu, AP" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="Villagers stranded by Typhoon Haiyan scramble for aid from a U.S. Navy Seahawk helicopter from the U.S. aircraft carrier USS George Washington in the coastal town of Tanauan, central Philippines...." /> 
+   <cse:attribute name="copyrightholder" value="Vincent Yu, AP" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="U.S. military personnel load relief supplies into a U.S. Navy Seahawk helicopter at Tacloban Airport. (Photo: Mark Ralston, AFP/Getty Images)" /> 
+   <cse:attribute name="copyrightholder" value="Mark Ralston, AFP/Getty Images" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="A resident watches as he burns scrap wood on a fire in a devastated area in the aftermath of Typhoon Haiyan in Tacloban. (Photo: Kevin Frayer, Getty Images)" /> 
+   <cse:attribute name="copyrightholder" value="Kevin Frayer, Getty Images" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="Children light candles in the Cathedral of Our Lord's Transfiguration Parish, Palo church which has been converted into a shelter for displaced people in Leyte province, Philippines. (Photo:..." /> 
+   <cse:attribute name="copyrightholder" value="Dan Kitwood, Getty Images" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="A relative of typhoon victim Cristile Cahutay watches her being put to rest in a grave in Palo, Philippines on Nov. 17, 2013. The 22-year-old woman was washed out to sea from her house during..." /> 
+   <cse:attribute name="copyrightholder" value="Odd Anderson, AFP/Getty Images" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="Typhoon survivors walk through the ruins in the streets of Tacloban as the volunteers and government officials work to help all those affected by the massive storm. (Photo: David Guttenfelder, AP)" /> 
+   <cse:attribute name="copyrightholder" value="David Guttenfelder, AP" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="Philippine typhoon survivors attend Sunday mass in the devastated city of Tacloban on Nov. 17, 2013. (Photo: Mast Irham, European Pressphoto Agency)" /> 
+   <cse:attribute name="copyrightholder" value="Mast Irham, European Pressphoto Agency" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="Filipinos rush to get relief goods from a U.S. Navy helicopter in the devastated town of Salcedo, Samar island province, Philippines on Nov. 16, 2013. (Photo: Francis R. Malasig, European Pressphot..." /> 
+   <cse:attribute name="copyrightholder" value="Francis R. Malasig, European Pressphoto Agency" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="Typhoon survivors wait for hours in the sun and rain for an evacuation flight at the airport, Nov. 16, 2013, in Tacloban, central Philippines. (Photo: Vincent Yu, AP)" /> 
+   <cse:attribute name="copyrightholder" value="Vincent Yu, AP" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="Marelom Cassanares, 37, who has five children and no home, cries at the grave of her husband in the aftermath of Typhoon Haiyan in Palo, on the outskirts of Tacloban. (Photo: Nicolas Asfouri,..." /> 
+   <cse:attribute name="copyrightholder" value="Nicolas Asfouri, AFP/Getty Images" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="A Typhoon Haiyan survivor puts up a plywood wall in his damaged house in Marabut, Samar Island, Philippines. (Photo: Dita Alangkara, AP)" /> 
+   <cse:attribute name="copyrightholder" value="Dita Alangkara, AP" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="Typhoon Haiyan survivors walk past open fires, set to remove debris from the ruins of the village of Marabut, Samar Island, Philippines. (Photo: David Guttenfelder, AP)" /> 
+   <cse:attribute name="copyrightholder" value="David Guttenfelder, AP" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="A young man bathes in the rubble of his destroyed house in the devastated town of Tanuan in the Philippines. (Photo: Kevin Frayer, Getty Images)" /> 
+   <cse:attribute name="copyrightholder" value="Kevin Frayer, Getty Images" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="image" value="http://www.usatoday.com/story/news/world/2013/11/10/typhoon-haiyan-philippines-vietnam/3488431/" /> 
+   <cse:attribute name="height" value="510" /> 
+   <cse:attribute name="width" value="680" /> 
+   <cse:attribute name="caption" value="Helicopter crews return to the aircraft carrier USS George Washington as they begin relief work near Tacloban after Typhoon Haiyan hit the east coast of the Philippines. (Photo: Mark Ralston,..." /> 
+   <cse:attribute name="copyrightholder" value="Mark Ralston, AFP/Getty Images" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="cse_image"> 
+   <cse:attribute name="src" value="http://videos.usatoday.net/Brightcove2/29906170001/2013/11/29906170001_2827346082001_thumb-bd484a3b0712c826420f6a706700d083.jpg" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="cse_thumbnail"> 
+   <cse:attribute name="width" value="259" /> 
+   <cse:attribute name="height" value="194" /> 
+   <cse:attribute name="src" value="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQDuEbmtJ8WWyNzdBaR_pAuSpJb3VE0Vfa0YxQPmjEvnd0k-lfsqZvBu_0-" /> 
+  </cse:dataobject> 
+ </cse:pagemap> 
+ <opensearch:totalresults>
+   420000 
+ </opensearch:totalresults>
+</entry>
+</feed>

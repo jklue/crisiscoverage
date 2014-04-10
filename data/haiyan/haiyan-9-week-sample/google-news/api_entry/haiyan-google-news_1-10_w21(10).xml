@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed gd:kind="customsearch#search" xmlns="http://www.w3.org/2005/Atom" xmlns:cse="http://schemas.google.com/cseapi/2010" xmlns:gd="http://schemas.google.com/g/2005" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">
+<entry gd:kind="customsearch#result"> 
+ <id>
+   http://www.cbc.ca/news/world/typhoon-haiyan-creates-testing-ground-for-crisis-mappers-1.2462119 
+ </id> 
+ <updated>
+   1970-01-17T01:22:04.800Z 
+ </updated> 
+ <title type="html">&lt;b&gt;Typhoon Haiyan&lt;/b&gt; creates testing ground for crisis mappers - World &lt;b&gt;...&lt;/b&gt;</title> 
+ <link href="http://www.cbc.ca/news/world/typhoon-haiyan-creates-testing-ground-for-crisis-mappers-1.2462119" title="www.cbc.ca" /> 
+ <summary type="html">By Amber Hildebrandt, CBC &lt;b&gt;News&lt;/b&gt; Posted: Dec 18, 2013 5:00 AM ET Last &lt;br&gt; Updated: Dec ... A month after &lt;b&gt;Typhoon Haiyan&lt;/b&gt;, signs of progress in the hard-hit &lt;br&gt; Leyte&amp;nbsp;...</summary> 
+ <cse:formattedurl type="html">
+   www.cbc.ca/&lt;b&gt;news&lt;/b&gt;/.../&lt;b&gt;typhoon&lt;/b&gt;-&lt;b&gt;haiyan&lt;/b&gt;-creates-testing-ground-for-crisis- mappers-1.2462119 
+ </cse:formattedurl> 
+ <cse:pagemap> 
+  <cse:dataobject type="metatags"> 
+   <cse:attribute name="application-name" value="www.cbc.ca" /> 
+   <cse:attribute name="msapplication-id" value="App" /> 
+   <cse:attribute name="msapplication-packagefamilyname" value="CanadianBroadcastingCorpo.CBC_pw8q9bvavk68p" /> 
+   <cse:attribute name="date" value="2013/12/18" /> 
+   <cse:attribute name="original-headline" value="typhoon-haiyan-creates-testing-ground-for-crisis-mappers" /> 
+   <cse:attribute name="twitter:site" value="@cbcnews" /> 
+   <cse:attribute name="twitter:url" value="http://www.cbc.ca/1.2462119" /> 
+   <cse:attribute name="twitter:card" value="summary_large_image" /> 
+   <cse:attribute name="twitter:image:src" value="http://i.cbc.ca/1.2469029.1387388180!/cpImage/httpImage/image.jpg_gen/derivatives/16x9_460/philippines-storm.jpg" /> 
+   <cse:attribute name="og:title" value="Typhoon Haiyan creates testing ground for crisis mappers" /> 
+   <cse:attribute name="og:url" value="http://www.cbc.ca/1.2462119" /> 
+   <cse:attribute name="og:image" value="http://i.cbc.ca/1.2469029.1387388180!/cpImage/httpImage/image.jpg_gen/derivatives/16x9_460/philippines-storm.jpg" /> 
+   <cse:attribute name="og:description" value="The Southeast Asian country may be the perfect place to try out new tools for sifting through the social media noise during disasters to quickly help those in need." /> 
+   <cse:attribute name="vf:unique_id" value="1.2462119" /> 
+   <cse:attribute name="vf:section" value="2.633" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="cse_image"> 
+   <cse:attribute name="src" value="http://i.cbc.ca/1.2469029.1387388180!/cpImage/httpImage/image.jpg_gen/derivatives/16x9_460/philippines-storm.jpg" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="cse_thumbnail"> 
+   <cse:attribute name="width" value="299" /> 
+   <cse:attribute name="height" value="168" /> 
+   <cse:attribute name="src" value="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQPLP0AxKzqxOTe7BGfR46uNtnOWVshNR0CCEItrFA8tw0KKA5E-TBL9MM" /> 
+  </cse:dataobject> 
+ </cse:pagemap> 
+ <opensearch:totalresults>
+   409000 
+ </opensearch:totalresults>
+</entry>
+</feed>

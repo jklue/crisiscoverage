@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed gd:kind="customsearch#search" xmlns="http://www.w3.org/2005/Atom" xmlns:cse="http://schemas.google.com/cseapi/2010" xmlns:gd="http://schemas.google.com/g/2005" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">
+<entry gd:kind="customsearch#result"> 
+ <id>
+   http://politicsofpoverty.oxfamamerica.org/2014/02/philippines-livelihoods-crisis-looms-typhoon-haiyan/ 
+ </id> 
+ <updated>
+   1970-01-17T03:00:00.000Z 
+ </updated> 
+ <title type="html">Dispatch from the Philippines: A livelihoods crisis looms in the wake &lt;b&gt;...&lt;/b&gt;</title> 
+ <link href="http://politicsofpoverty.oxfamamerica.org/2014/02/philippines-livelihoods-crisis-looms-typhoon-haiyan/" title="politicsofpoverty.oxfamamerica.org" /> 
+ <summary type="html">Rainero and Vilma Silvano outside their home in Tanauan, Leyte. The coconut &lt;br&gt; industry suffered widespread damage during &lt;b&gt;Typhoon Haiyan&lt;/b&gt;, putting the&amp;nbsp;...</summary> 
+ <cse:cacheid>
+   WbqUxzwuWzUJ 
+ </cse:cacheid> 
+ <cse:formattedurl type="html">
+   politicsofpoverty.oxfamamerica.org/.../philippines-livelihoods-crisis-looms- &lt;b&gt;typhoon&lt;/b&gt;-&lt;b&gt;haiyan&lt;/b&gt;/ 
+ </cse:formattedurl> 
+ <cse:pagemap> 
+  <cse:dataobject type="metatags"> 
+   <cse:attribute name="handheldfriendly" value="True" /> 
+   <cse:attribute name="mobileoptimized" value="320" /> 
+   <cse:attribute name="viewport" value="width=device-width, initial-scale=1" /> 
+   <cse:attribute name="og:locale" value="en_US" /> 
+   <cse:attribute name="og:type" value="article" /> 
+   <cse:attribute name="og:title" value="Dispatch from the Philippines: A livelihoods crisis looms in the wake of Typhoon Haiyan | Oxfam America The Politics of Poverty Blog" /> 
+   <cse:attribute name="og:description" value="Restoring rural families’ livelihoods may be the biggest challenge that remains following Typhoon Haiyan." /> 
+   <cse:attribute name="og:url" value="http://politicsofpoverty.oxfamamerica.org/2014/02/philippines-livelihoods-crisis-looms-typhoon-haiyan/" /> 
+   <cse:attribute name="og:site_name" value="The Politics of Poverty" /> 
+   <cse:attribute name="article:tag" value="cash for work" /> 
+   <cse:attribute name="article:section" value="Conflicts &amp; disasters" /> 
+   <cse:attribute name="article:published_time" value="2014-02-24T15:30:01+00:00" /> 
+   <cse:attribute name="article:modified_time" value="2014-02-25T15:29:28+00:00" /> 
+   <cse:attribute name="og:image" value="http://blog.oxfamamerica.org.s3.amazonaws.com/politicsofpoverty/2014/02/Vilma-Philippines.jpg" /> 
+   <cse:attribute name="twitter:card" value="summary" /> 
+   <cse:attribute name="twitter:site" value="@oxfamamerica" /> 
+   <cse:attribute name="twitter:domain" value="The Politics of Poverty" /> 
+   <cse:attribute name="twitter:creator" value="@oxfamamerica" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="cse_image"> 
+   <cse:attribute name="src" value="http://blog.oxfamamerica.org.s3.amazonaws.com/politicsofpoverty/2014/02/Vilma-Philippines.jpg" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="cse_thumbnail"> 
+   <cse:attribute name="width" value="275" /> 
+   <cse:attribute name="height" value="183" /> 
+   <cse:attribute name="src" value="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRMDA7Tik878SfvQ7tOl2ETzimgg8pQuoQgCuBqMk61avDYHG-gGAaSuTs" /> 
+  </cse:dataobject> 
+ </cse:pagemap> 
+ <opensearch:totalresults>
+   104000 
+ </opensearch:totalresults>
+</entry>
+</feed>

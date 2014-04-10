@@ -41,6 +41,10 @@
 	.storyTriangle{
 		fill: $darkGray;
 	}
+	#dataSourceSelect {
+		float:right;
+		color: $darkGray;
+	}
 // detail path
 	.traditionalMediaPath {
 		stroke: $red;
@@ -65,9 +69,8 @@
 	.storyline{
 		stroke: $gray;
 		stroke-dasharray: 15 25;
-		// stroke-dashoffset: 35;
+		stroke-dashoffset: 12;
 	}
-
 
 /* Tooltips */
 	.d3-tip {
