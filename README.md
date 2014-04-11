@@ -12,12 +12,12 @@
 ## Work so far
 We have made quite a bit of progress since the project effort kicked off. First, we put together a robust [proposal](assets/proposal_dalal_hatfield_johns.pdf). The breadth of hypothesis and potential data sources was necessary until we really understood which few directions we could really pursue. The potentials have boiled down to the more concrete efforts discussed below.
 
-### Data Ingestion Effort
-We were unable to get historic Twitter data and had no clear choices among a number of search providers other than one of the biggies, namely Google, Bing, or Yahoo. A couple of potentials that didn't pan out due to incomplete results and/or lack of API are [BackTweets](http://backtweets.com), [DuckDuckGo](http://duckduckgo.com) and [Farooq (get url)](). We may still re-assess [Enginuity](http://theenginuity.com/) which offers social interest on pages returned in searches.
-1. Use [Google Custom Search API (v1)](https://developers.google.com/custom-search/docs/overview) for primary statistical data as it offers total results and can be crawled up to complete results under certain service tiers. We are currently using the free level service which affords 100 queries per day per user, with 10 results per query. However, we have access to increased search results as we deem necessary. The Google API allows a number of restrictions including language, date, and countries which will give us a few outlets for effective visualization of crises coverage.
-2. Use a [customized java API client](https://github.com/lukehatfield/crisiscoverage.info/tree/master/crisis-crawler/src/main/java/info/crisiscoverage/crawler) which we wrote in Java for backend processing. This console application wraps around [Crawler4j](http://code.google.com/p/crawler4j/) to crawl any pages identified. This effort is complete for initial goals.
-3. Clean crawled pages for potential text indexing using [Apache Solr](https://lucene.apache.org/solr/‎) or similar and/or [Semantria](http://semantria.com/) for sentiment analysis. We have explored both of these options and have run a small dataset from BBC through Semantria with positive results. We are also interested in word cloud options for results. The cleaning is done by the customized Java client mentioned above.
-4. [TALK about META DATA HERE]
+### Data Ingestion Effort  
+We were unable to get historic Twitter data and had no clear choices among a number of search providers other than one of the biggies, namely Google, Bing, or Yahoo. A couple of potentials that didn't pan out due to incomplete results and/or lack of API are [BackTweets](http://backtweets.com), [DuckDuckGo](http://duckduckgo.com) and [Farooq (get url)](). We may still re-assess [Enginuity](http://theenginuity.com/) which offers social interest on pages returned in searches.  
+1. Use [Google Custom Search API (v1)](https://developers.google.com/custom-search/docs/overview) for primary statistical data as it offers total results and can be crawled up to complete results under certain service tiers. We are currently using the free level service which affords 100 queries per day per user, with 10 results per query. However, we have access to increased search results as we deem necessary. The Google API allows a number of restrictions including language, date, and countries which will give us a few outlets for effective visualization of crises coverage.  
+2. Use a [customized java API client](https://github.com/lukehatfield/crisiscoverage.info/tree/master/crisis-crawler/src/main/java/info/crisiscoverage/crawler) which we wrote in Java for backend processing. This console application wraps around [Crawler4j](http://code.google.com/p/crawler4j/) to crawl any pages identified. This effort is complete for initial goals.  
+3. Clean crawled pages for potential text indexing using [Apache Solr](https://lucene.apache.org/solr/‎) or similar and/or [Semantria](http://semantria.com/) for sentiment analysis. We have explored both of these options and have run a small dataset from BBC through Semantria with positive results. We are also interested in word cloud options for results. The cleaning is done by the customized Java client mentioned above.  
+4. [TALK about META DATA HERE]  
 
 
 ### Data Visualization
@@ -42,4 +42,7 @@ Each query was used populate the general Google Custom Search API (v1), reapeati
 _Note: In order to keep the sample light-weight, for each week of the 9 queried, only the first 10 results have been returned and processed. So, this is not complete in any stretch but the metadata does offer a blunt instrument. And in its entirety (along with other concepts and more robust samples) this should demonstrate that we have a solid handle on addressing data needs of the project._ 
 
 ## Next Steps
-
+1. Use the Google API `cr` param to restrict to countries and build TBD choropleths from the results.  
+2. Make use of unstructured indexing / sentiment analysis / word clouds.  
+3. Consider crawling the entire corpus of select sites, such as [Top 15 Traditional News Sites](http://www.ebizmba.com/articles/news-websites) and TBD Social Media equivalents.  
+4. Introduce crisis comparisons.  
