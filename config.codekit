@@ -3469,6 +3469,18 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
+	"\/design_studio_feedback.md": {
+		"enableFootnoteSupport": 0,
+		"enableSmartyPants": 1,
+		"expandTabs": 1,
+		"fileType": 4096,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/design_studio_feedback.md",
+		"outputAbbreviatedPath": "\/design_studio_feedback.html",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
 	"\/images\/icons\/github.png": {
 		"fileType": 32768,
 		"ignore": 0,
@@ -3487,6 +3499,61 @@
 		"initialSize": 1814,
 		"inputAbbreviatedPath": "\/images\/icons\/processbook.png",
 		"outputAbbreviatedPath": "\/images\/icons\/processbook.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/images\/processbook\/data.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 92269,
+		"inputAbbreviatedPath": "\/images\/processbook\/data.png",
+		"outputAbbreviatedPath": "\/images\/processbook\/data.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/images\/processbook\/initialsketch.jpg": {
+		"fileType": 16384,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 310081,
+		"inputAbbreviatedPath": "\/images\/processbook\/initialsketch.jpg",
+		"outputAbbreviatedPath": "\/images\/processbook\/initialsketch.jpg",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/images\/processbook\/overview.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 100972,
+		"inputAbbreviatedPath": "\/images\/processbook\/overview.png",
+		"outputAbbreviatedPath": "\/images\/processbook\/overview.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/images\/processbook\/timeline-annotated.jpg": {
+		"fileType": 16384,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 124902,
+		"inputAbbreviatedPath": "\/images\/processbook\/timeline-annotated.jpg",
+		"outputAbbreviatedPath": "\/images\/processbook\/timeline-annotated.jpg",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/images\/processbook\/timeline.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 109869,
+		"inputAbbreviatedPath": "\/images\/processbook\/timeline.png",
+		"outputAbbreviatedPath": "\/images\/processbook\/timeline.png",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"processed": 0
@@ -3559,18 +3626,6 @@
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/includes\/header.html",
 		"outputAbbreviatedPath": "No Output Path",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0
-		},
-	"\/includes\/vis-process.md": {
-		"enableFootnoteSupport": 0,
-		"enableSmartyPants": 1,
-		"expandTabs": 1,
-		"fileType": 4096,
-		"ignore": 1,
-		"ignoreWasSetByUser": 1,
-		"inputAbbreviatedPath": "\/includes\/vis-process.md",
-		"outputAbbreviatedPath": "\/includes\/vis-process.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
@@ -3698,18 +3753,6 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/README.md": {
-		"enableFootnoteSupport": 0,
-		"enableSmartyPants": 1,
-		"expandTabs": 1,
-		"fileType": 4096,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/README.md",
-		"outputAbbreviatedPath": "\/README.html",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0
-		},
 	"\/timeline-bak.js": {
 		"fileType": 64,
 		"ignore": 0,
@@ -3738,6 +3781,18 @@
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/timeline.php",
 		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
+	"\/vis-process.md": {
+		"enableFootnoteSupport": 0,
+		"enableSmartyPants": 1,
+		"expandTabs": 1,
+		"fileType": 4096,
+		"ignore": 1,
+		"ignoreWasSetByUser": 1,
+		"inputAbbreviatedPath": "\/vis-process.md",
+		"outputAbbreviatedPath": "\/vis-process.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		}

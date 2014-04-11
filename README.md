@@ -98,7 +98,7 @@ What are the different visualizations you considered? Justify the design decisio
 
 Initially we considered a worldmap that would show locations of Twitter data that related to a certain 'crisis.' When we realized Twitter data is unavailable past one week, we realized we would have to show less geographic data and more 2d chart data. A timeline was suggested to show crisis media according to its published date. The following is an image of our initial sketch.
 
-![Initial Timeline Sketch](images/processbook/initialsketch.tiff "Initial Sketch")
+![Initial Timeline Sketch](images/processbook/initialsketch.jpg "Initial Sketch")
 
 We refined this initial sketch using [Balsamiq Mockups](http://balsamiq.com/products/mockups/ "Balsamiq Mockups"). This version is substantially the same, but gave an idea of the page layout on the project site.
 
