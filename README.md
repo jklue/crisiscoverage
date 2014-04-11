@@ -41,12 +41,18 @@ We were unable to get historic Twitter data and had no clear choices among a num
 
 4. Supply meaningful metadata results for use in front-end visualization products. We currently supply metadata results in a tabular format (as CSV) and operate on a single configuration at a time. As previously mentioned, the configurations are locally scoped to the collection and tag phrase level. Given the consistency in Columns supported in our tabular metadata output, it is quite easy to join results across multiple tables or use the file output separation as series data and handle it separately within the visualization products.  As of 10 APR 2014, we have two major varieties of metadata export -- summary (referenced as `query_stats_only`) and entries, with the latter being further refined into `entries_no_text` and `entries_with_text`. Text is the cleaned text discussed briefly above. Here is the `MetaMode` enum for reference.
 
-`public static enum MetaMode { query_stats_only, entries_no_text, entries_with_text; ...}`  
+```public static enum MetaMode {  
+query_stats_only, entries_no_text, entries_with_text;  
+...  
+}```
 
 Entry metadata consists of up to all of the available column fields, with the only exception being the presence or absence of the `clean_text` column. Here is the `Column` enum for reference.
 
-`public static enum Column { query_run_date, query_period, periods_back, days_back, result_count, date_query_start, date_query_end,`  
-`doc_id, domain, title, date_published, collection, tags, url, summary, clean_text; ...}`
+```public static enum Column {  
+  query_run_date, query_period, periods_back, days_back, result_count, date_query_start, date_query_end,  
+  doc_id, domain, title, date_published, collection, tags, url, summary, clean_text;  
+...  
+}```
 
 Summary metadata consists of the following subset of column fields (the first line of the `Column` enum code snipped shown above):
 
@@ -76,11 +82,11 @@ _Note: In order to keep the sample light-weight, for each week of the 9 queried,
 #### Next Data Steps
 1. Use the Google API `cr` param to restrict to countries and build TBD choropleths from the results.  We will be able to get a single number per period queried up to the entire crisis. The power of this approach is that each crisis only requires 1 query per period per country to use in our choropleth, so if we look at the top 25 countries in the world, only 25 queries are required to build our total aggregate choropleth. Further, if we want to show country responses over time, we can run 10 weekly queries per country and achieve desired results in only 250 total queries. This is a very obtainable result. One challenge will be the search terms across languages as was mentioned in the [design studio](design_studio_feedback.md) discussion, so we will consider the effectiveness of non-english languages being included in in results.
 
-2. Via the Google API, we are heavily considering crawling the corpus of select sites re, such as [Top 15 Traditional News Sites](http://www.ebizmba.com/articles/news-websites) and same number of Social Media equivalents. By doing a direct comparison of known quantities, a controlled sampling of the myriad possible results, we expact to work-around the otherwise opaque nature of sorting out social from traditional media via terms -- especially if we hope to remain in the free service tier and hope to avoid intensive crawling endeavors. By taking a domain focused approach similar to the previously mentioned country strategy, we will get the same frequency information in 1 query per domain per period, but we can also crawl the crisis related information on the domains which will be of importance to the next discussion point.
+2. Via the Google API, we are heavily considering crawling the corpus of select sites, such as [Top 15 Traditional News Sites](http://www.ebizmba.com/articles/news-websites) and same number of non-traditional / social media equivalents. By doing a direct comparison of known quantities, a controlled sampling of the myriad possible results, we expect to work-around the otherwise opaque nature of sorting out social from traditional media via terms -- especially if we hope to remain in the free service tier and hope to avoid intensive crawling endeavors. By taking a domain focused approach similar to the previously mentioned country strategy, we will get the same frequency information in 1 query per domain per period, but we can also crawl the crisis related information on the domains which will be of importance to the next discussion point.
 
 3. Make use of unstructured indexing / sentiment analysis / word clouds.  This falls out of strategic crawling as discussed above as we certainly do not want to try and bite off too much.
 
-4. Introduce crisis comparisons.  
+4. Introduce crisis comparisons. After we are able to fully visualize a single crisis, we hope to then introduce additional crises with TBD comparison tools.  
 
 ### Exploratory Data Analysis: What visualizations did you use to initially look at your data? What insights did you gain? How did these insights inform your design?
 We had a running catalog of visualizations from the course lectures and from d3 oriented sites. The initial mock-up which included the line chart, story points, and brush and link behavior for sentiment or word cloud or similar behavior came to the group nearly immediately as a really good fit for our goals. The data exploration itself was quite dicey. Our original project proposal had many sources that ultimately were not going to be predictably useful, either because the results were sparse or were too opaque to compare among datasets. Additionally, the crawling exploratory efforts were marked with challenges as well. A promising black-box solution [Crawl Anywhere](http://www.crawl-anywhere.com/download-crawl-anywhere/) turned out to have to many issues for our purposes and we ultimately abandoned it in favor of the solution laid out in the ‘Data’ section.
