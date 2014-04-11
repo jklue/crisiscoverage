@@ -36,7 +36,7 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 	private int tmpCount = 0;
 	
 	public static enum Param{
-		hl,safe,q,key,cx,alt,site,num,start,dateRestrict;//lr is problemmatic
+		hl,safe,q,key,cx,alt,site,num,start,dateRestrict,lr,cr;
 		
 		public String appendToEscaped(String q, String paramVal){
 			String r = q == null? "" : q;
@@ -46,8 +46,10 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 			switch(this){
 			case hl: r += hlParam + v;
 			break;
-//			case lr: r += lrParam + v;
-//			break;
+			case lr: r += lrParam + v;
+			break;
+			case cr: r += crParam + v;
+			break;
 			case safe: r += safeParam + v;
 			break;
 			case q: r += qParam + v;
@@ -228,11 +230,15 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 //	SAMPLE QUERY FOR 14 weeks back (early DEC as of APR 09)
 /*
  * 	GOOD --> https://www.googleapis.com/customsearch/v1?safe=high&alt=atom&cx=007061251080714295857:nhvoqbzpcim&hl=en&key=AIzaSyAmUPgD01HIXrwtDP5Xf0vMWmUpDglFXyQ&q=Typhoon%20Haiyan&num=10&start=1&dateRestrict=w14
- *  Remove lr!
+ *  NOTE: support adding lr=lang_en, cr=countryUS
  */
 	
+	//FIXME: ADD Browser Query in MetaData results
+	//https://www.google.com/search?q=typhoon+haiyan+news+or+article+or+coverage+--blog+--weather.com+--wikipedia.org&safe=high&tbs=cdr:1,cd_min:11/7/2013,cd_max:11/14/2013
+	
 	public static final String defaultHl = "en";//Interface lang
-//	public static final String defaultLr = "en";//Restrict to lang //NOTE: PROBLEMMATIC
+	public static final String defaultLr = "lang_en";
+	public static final String defaultCr = "countryUS";
 	public static final String defaultSafe = "high";
 	public static final String defaultAlt = "atom";
 	public static final int defaultNum = 10;
@@ -241,6 +247,7 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 	
 	public static final String hlParam = "hl=";
 	public static final String lrParam = "lr=";
+	public static final String crParam = "cr=";
 	public static final String safeParam = "safe=";
 	public static final String qParam = "q=";
 	public static final String keyParam = "key=";

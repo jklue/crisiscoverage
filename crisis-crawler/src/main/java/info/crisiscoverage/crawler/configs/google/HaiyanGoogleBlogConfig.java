@@ -45,6 +45,8 @@ public class HaiyanGoogleBlogConfig extends AbstractGoogleConfig{
 		//		        paramMap.put(Param.num, defaultNum);
 		//		        paramMap.put(Param.site, "cnn.com");
 		//		        paramMap.put(Param.dateRestrict, DateRestrict.years.valFor("1"));
+//		paramMap.put(Param.lr, defaultLr);
+//		paramMap.put(Param.cr, defaultCr);
 		paramMap.put(Param.q, blogQueryVal);
 
 		boolean archive = false;
