@@ -39,7 +39,8 @@ We were unable to get historic Twitter data and had no clear choices among a num
 3. Clean crawled pages for potential text indexing using [Apache Solr](https://lucene.apache.org/solr/‎) or similar and/or [Semantria](http://semantria.com/) for sentiment analysis. We have explored both of these options and have run a small dataset from BBC through Semantria with positive results. We are also interested in word cloud options for results. The cleaning is done by the customized Java client mentioned above.  
 
 4. Supply meaningful metadata results for use in front-end visualization products. We currently suply metadata results in a tabular format (as CSV) and operate on a single configuration at a time. As previously mentioned, the configurations are locally scoped to the collection and tag phrase level. Given the consistency in Columns supported in our tabular metadata output, it is quite easy to join results across multiple tables or use the file output separation as series data and handle it separately within the visualization products.  As of 10 APR 2014, we have two major varieties of metadata export -- ‘summary’ and ‘entries’, with the latter being further refined into ‘entries_no_text’ and ‘entries_with_text. Text is the cleaned text discussed briefly above. Here is the MetaMode enum for reference.  
-```	
+
+```
 /**
   * What mode is meta in for output.
   * @author mjohns
