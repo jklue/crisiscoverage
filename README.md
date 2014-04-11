@@ -73,10 +73,10 @@ Below are the "starter" queries that drove this collection -- we will most certa
 Each query was used populate the general Google Custom Search API (v1), reapeating over the weeks of interest, relative to the date of query which was 10 APR 2014. Here is the query pattern used in calling the API, where of variable %DATERESTRICT% ranged from 'w22' (week prior to crisis) down to 'w14' (~8 weeks after crisis); also, note that %CX% and %KEY% are Google API authorization params and are masked for privacy. :
 
 [google-news] (numberBack() result --> [days= 154], would be start date: Thu Nov 07 12:08:28 EST 2013)  
-```https://www.googleapis.com/customsearch/v1?hl=en&alt=atom&dateRestrict=__%DATERESTRICT%__&q=typhoon%20haiyan%20news%20OR%20article%20OR%20coverage%20--blog%20--weather.com%20--wikipedia.org&cx=__%CX%__&safe=high&key=__%KEY%__&num=10&start=1```
+https://www.googleapis.com/customsearch/v1?hl=en&alt=atom&dateRestrict=__%DATERESTRICT%__&q=typhoon%20haiyan%20news%20OR%20article%20OR%20coverage%20--blog%20--weather.com%20--wikipedia.org&cx=__%CX%__&safe=high&key=__%KEY%__&num=10&start=1
 
 [google-blog] (numberBack() result --> [days= 154], would be start date: Thu Nov 07 12:08:28 EST 2013)  
-```https://www.googleapis.com/customsearch/v1?hl=en&alt=atom&dateRestrict=__%DATERESTRICT%__&q=typhoon%20haiyan%20blog%20--weather.com%20--wikipedia.org&cx=__%CX%__&safe=high&key=__%KEY%__&num=10&start=1```  
+https://www.googleapis.com/customsearch/v1?hl=en&alt=atom&dateRestrict=__%DATERESTRICT%__&q=typhoon%20haiyan%20blog%20--weather.com%20--wikipedia.org&cx=__%CX%__&safe=high&key=__%KEY%__&num=10&start=1
 
 _Note: In order to keep the sample light-weight, for each week of the 9 queried, only the first 10 results have been returned and processed. So, this is not complete in any stretch but the metadata does offer a blunt instrument. And in its entirety (along with other concepts and more robust samples) this should demonstrate that we have a solid handle on addressing data needs of the project._ 
 
