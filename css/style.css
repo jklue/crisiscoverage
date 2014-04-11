@@ -242,6 +242,7 @@ footer {
     float: left;
     margin-left: 7em; }
     footer .links img {
+      vertical-align: middle;
       opacity: 0.5;
       transition: opacity 0.5s ease; }
     footer .links img:hover {
