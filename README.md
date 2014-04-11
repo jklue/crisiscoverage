@@ -41,20 +41,24 @@ We were unable to get historic Twitter data and had no clear choices among a num
 
 4. Supply meaningful metadata results for use in front-end visualization products. We currently supply metadata results in a tabular format (as CSV) and operate on a single configuration at a time. As previously mentioned, the configurations are locally scoped to the collection and tag phrase level. Given the consistency in Columns supported in our tabular metadata output, it is quite easy to join results across multiple tables or use the file output separation as series data and handle it separately within the visualization products.  As of 10 APR 2014, we have two major varieties of metadata export -- summary (referenced as `query_stats_only`) and entries, with the latter being further refined into `entries_no_text` and `entries_with_text`. Text is the cleaned text discussed briefly above. Here is the `MetaMode` enum for reference.
 
-```public static enum MetaMode {  
-query_stats_only, entries_no_text, entries_with_text;  
-...  
-}```
+```java
+public static enum MetaMode {  
+  query_stats_only, entries_no_text, entries_with_text;  
+//...  
+}
+```  
 
 Entry metadata consists of up to all of the available column fields, with the only exception being the presence or absence of the `clean_text` column. Here is the `Column` enum for reference.
 
-```public static enum Column {  
+```java
+public static enum Column {  
   query_run_date, query_period, periods_back, days_back, result_count, date_query_start, date_query_end,  
   doc_id, domain, title, date_published, collection, tags, url, summary, clean_text;  
-...  
-}```
+//...  
+}
+```  
 
-Summary metadata consists of the following subset of column fields (the first line of the `Column` enum code snipped shown above):
+Summary metadata consists of the following subset of column fields (the first 7 from the `Column` enum code snipped shown above):
 
 `query_run_date, query_period, periods_back, days_back, result_count, date_query_start, date_query_end`  
 
