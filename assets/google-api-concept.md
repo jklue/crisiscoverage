@@ -1,15 +1,16 @@
+# Crisis-Coverage Project: Google API Custom Search Engine Overview
 A Google API key to be used in RESTful queries, e.g. `&key=__%YOURKEY%__` can be set up rather quickly for a user to run queries against our two established Google Custom Search Engines (see [documentation](https://developers.google.com/custom-search/json-api/v1/overview)) -- [GlobalCrisisCoverage](https://www.google.com/cse/publicurl?cx=007061251080714295857:nhvoqbzpcim) with cx `&cx=007061251080714295857:nhvoqbzpcim` and [MediaCrisisCoverage](https://www.google.com/cse/publicurl?cx=007061251080714295857:cfwcevip5-s) with cx `&cx=007061251080714295857:cfwcevip5-s`. The API key can be generated from your gmail account by going to [Google Developer Console](https://console.developers.google.com). Once you get to the page, it will require you to create a project which is any name or phrase which acts as  a container for services, e.g. "news-to-mary" or "my-project", the name really is not important. Then you will see the developer's console. Click on "Credentials", then "Create New Key" for Browser, and don't add any restrictions in the text area that appears with the create dialog, referencing the screenshot below. 
 
 The API key is afforded 100 queries per day, with 10 results for each query in the free tier. As long as the account you create the key for is not manually upgraded to paid tiers, there is no way to end up in a situation where you are in trouble or owe as the Google servers just give a 503 error for 101+ queries within a day. Also, it is important to note that the free tier maxes out at 100 results per query, meaning that you simply cannot see results 101+ for a given time period queried. Due to this restriction, it is important to use smaller time windows (i.e. days or weeks) in order to obtain more results.
 
-TODO: api image 1
+![Public API Access](Public-API-Access.PNG)
 
 As mentioned, the API key is used to call pre-existing Custom Search Engines. We have established 2 of importance to our efforts:
 1. [GlobalCrisisCoverage](https://www.google.com/cse/publicurl?cx=007061251080714295857:nhvoqbzpcim) is what we had used to get through our initial prototyping and is used to search all of Google (i.e. useful for Country choropleth).
 2. [MediaCrisisCoverage](https://www.google.com/cse/publicurl?cx=007061251080714295857:cfwcevip5-s) we set up with 19 traditional news sites with a nod to sources around the world (though english speaking heavy). Below are those sites. The total hits for these ~45K for Typhoon Haiyan, our first crisis of interest and the crisis used in our initial prototyping efforts. We can possibly refine back on either completeness of pages crawled and/or number of sites used in our engine. 
 
-Sites: image 1
+![MediaCrisisCoverage Sites 1-10](MediaCrisisCoverage-sites_1-to-10.PNG)
 
-Sites: image 2
+![MediaCrisisCoverage Sites 11-19](MediaCrisisCoverage-sites_11-to-19.PNG)
 
-Also, we have yet to accumulate a list of non-traditional sites that will counter-balance the traditional sites and serve in response comparisons. I am thinking that we want a smattering of news sites from around the world as they will geocode nicely, so the many US / UK sites may need to be cut back. Finally, once we really understand our strategy, then we can go after a paid set of searches to get 100,000 results for $50 down to a minimum of $10,000 for $5, this is a per day min and max as Google will let you spend as much as you want over time.
+Also, we have yet to accumulate a list of non-traditional sites that will counter-balance the traditional sites and serve in response comparisons. I am thinking that we want a smattering of news sites from around the world as they will geo-code nicely, so the many US / UK sites may need to be cut back. Finally, once we really understand our strategy, then we can go after a paid set of searches to get 100,000 results for $50 down to a minimum of $10,000 for $5, this is a per day min and max as Google will let you spend as much as you want over time.
