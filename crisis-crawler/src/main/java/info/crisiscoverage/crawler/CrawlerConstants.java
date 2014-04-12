@@ -109,7 +109,7 @@ public interface CrawlerConstants {
 	 * @author mjohns
 	 */
 	public static enum MetaMode{
-		query_stats_only, entries_no_text, entries_with_text;
+		query_stats_only, query_stats_with_url, entries_no_text, entries_with_text;
 		
 		public boolean isCleanTextMode(){
 			switch(this){
@@ -121,7 +121,17 @@ public interface CrawlerConstants {
 		
 		public boolean isQueryStatsMode(){
 			switch(this){
-			case query_stats_only: return true;
+			case query_stats_only:
+			case query_stats_with_url:	
+				return true;
+			default: 
+				return false;
+			}
+		}
+		
+		public boolean isWithQuery(){
+			switch(this){
+			case query_stats_with_url: return true;
 			default: 
 				return false;
 			}
@@ -134,11 +144,12 @@ public interface CrawlerConstants {
 	 * @author mjohns
 	 */
 	public static enum Column{
-		query_run_date,query_period,periods_back,days_back,result_count,date_query_start,date_query_end,
+		query_url,query_run_date,query_period,periods_back,days_back,result_count,date_query_start,date_query_end,
 		doc_id,domain,title,date_published,collection,tags,url,summary,clean_text;
 		
 		public boolean isQueryAndResultColumn(){
 			switch(this){
+			case query_url:
 			case query_run_date:
 			case query_period:
 			case periods_back:

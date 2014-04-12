@@ -23,6 +23,12 @@ public class GoogleApiMetaMapper extends DefaultHtmlMetaMapper{
 		
 		map.put(Column.query_run_date, dateQueryFormat.format(dateToday));
 		
+		//query
+		Element queryElement = AbstractGoogleConfig.queryElementFrom(element);
+		String query = "";
+		if (queryElement != null) query = queryStringFromQueryElement(queryElement);
+		if (!Strings.isNullOrEmpty(query)) map.put(Column.query_url, query);
+		
 		//result_count
 		String resultCount = AbstractGoogleConfig.resultCountFromEntry(element, docId);
 		if (!Strings.isNullOrEmpty(resultCount)) map.put(Column.result_count, resultCount);
@@ -59,6 +65,15 @@ public class GoogleApiMetaMapper extends DefaultHtmlMetaMapper{
 		}
 	}
 	
+	/**
+	 * Sub-classes may want to override for specifics.
+	 * @param queryElement
+	 * @return
+	 */
+	protected String queryStringFromQueryElement(Element queryElement){
+		if (queryElement == null) return "";
+		return queryElement.outerHtml();
+	}
 	
 	@Override
 	public String getFallbackDatePublished(Element element, String docId){

@@ -32,7 +32,7 @@ public abstract class AbstractCrawlerConfig<O> implements CrawlerConstants{
 	final protected String collectionName;
 	final protected String tags;
 	final protected AbstractRuleController<O> ruleController;
-	final protected MetaMapper<O> metaMapper;
+	protected MetaMapper<O> metaMapper;
 	final protected String textFolderExt;
 
 	protected int numCrawlers = defaultNumCrawlers;
@@ -107,10 +107,12 @@ public abstract class AbstractCrawlerConfig<O> implements CrawlerConstants{
 	 * @param offsetStepVal
 	 * @param archive
 	 * @param applyHttpPatternMatcher
+	 * @param customDocIdPortion
 	 * @throws Exception
 	 */
 	public void runLiveSearch(
-			String template, String queryValue, int minPageOrOffset, int maxPageOrOffset, int offsetStepVal, boolean archive,boolean applyHttpPatternMatcher) throws Exception{
+			String template, String queryValue, int minPageOrOffset, int maxPageOrOffset, int offsetStepVal, 
+			boolean archive,boolean applyHttpPatternMatcher, String customDocIdPortion) throws Exception{
 		resetForRun();
 		urls.addAll(LinkUtils.urlSetFromSearchResults(template, queryValue, minPageOrOffset, maxPageOrOffset, applyHttpPatternMatcher));
 		LinkUtils.handleIgnoreUrls(urls,ignoreUrlsStartingWith(),ignoreUrlsExact());
@@ -265,7 +267,6 @@ public abstract class AbstractCrawlerConfig<O> implements CrawlerConstants{
 		}
 
 		Map<Column,String> row = metaMapper.populateColumnMap(collectionName, tags, docId, text, generateMetaToTableObjectFromText(docId, text), url, cleanText, ruleController);
-		if (!metaMode.isCleanTextMode()) 
 		
 		if (metaMode.isQueryStatsMode()){
 			Column.removeEntryLevelColumns(row);
@@ -273,6 +274,10 @@ public abstract class AbstractCrawlerConfig<O> implements CrawlerConstants{
 		
 		if (!metaMode.isCleanTextMode()) {
 			row.remove(Column.clean_text);
+		}
+		
+		if (!metaMode.isWithQuery()){
+			row.remove(Column.query_url);
 		}
 
 		if (!isDuplicate(metaMode,row,dedupList)){
@@ -286,6 +291,7 @@ public abstract class AbstractCrawlerConfig<O> implements CrawlerConstants{
 		if (row == null || dedupList == null) return false;
 		
 		//Summary columns to test -- all must be equal.
+		Column qUrl = Column.query_url;
 		Column dateQ = Column.date_query_start;
 		Column qPeriod = Column.query_period;
 		Column pBack = Column.periods_back;
@@ -295,8 +301,10 @@ public abstract class AbstractCrawlerConfig<O> implements CrawlerConstants{
 		
 		for (Map<Column,String> d : dedupList){
 			if (metaMode.isQueryStatsMode()){
-				if (row.get(dateQ).equals(d.get(dateQ)) && row.get(qPeriod).equals(d.get(qPeriod)) && row.get(pBack).equals(d.get(pBack)))
+				if (metaMode.equals(MetaMode.query_stats_only) && row.get(dateQ).equals(d.get(dateQ)) && row.get(qPeriod).equals(d.get(qPeriod)) && row.get(pBack).equals(d.get(pBack)))
 					return true;
+				else if (metaMode.equals(MetaMode.query_stats_with_url) && row.get(qUrl).equals(d.get(qUrl)))
+						return true;
 			} else if (row.get(u).equals(d.get(u))) return true; 
 		}
 		

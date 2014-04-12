@@ -39,8 +39,8 @@ public class HaiyanGoogleBlogConfig extends AbstractGoogleConfig{
 		HaiyanGoogleBlogConfig config = new HaiyanGoogleBlogConfig();
 
 		Map<Param,String> paramMap = new HashMap<>();
-		paramMap.put(Param.key, defaultKey);
-		paramMap.put(Param.cx, defaultCx);
+		paramMap.put(Param.key, config.apiKey);
+		paramMap.put(Param.cx, config.cxAll);
 		paramMap.put(Param.alt, defaultAlt);
 		//		        paramMap.put(Param.num, defaultNum);
 		//		        paramMap.put(Param.site, "cnn.com");

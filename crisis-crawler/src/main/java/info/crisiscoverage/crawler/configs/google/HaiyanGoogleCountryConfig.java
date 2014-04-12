@@ -1,21 +1,31 @@
 package info.crisiscoverage.crawler.configs.google;
 
+
+import info.crisiscoverage.crawler.IOUtils;
+import info.crisiscoverage.crawler.CrawlerConstants.Column;
+import info.crisiscoverage.crawler.CrawlerConstants.MetaMode;
+
 import java.io.IOException;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class HaiyanGoogleNewsConfig extends AbstractGoogleConfig{
+import org.apache.commons.lang3.StringUtils;
 
-/* THIS IS FOR NEWS */
-public static final String newsQueryVal = "typhoon haiyan news OR article OR coverage --blog --weather.com --wikipedia.org"; 
+public class HaiyanGoogleCountryConfig extends AbstractGoogleConfig{
 
-	public HaiyanGoogleNewsConfig()
+public static final String queryVal = "news OR article OR coverage OR Yolanda \"typhoon haiyan\" --weather.com --wikipedia.org"; 
+
+	public HaiyanGoogleCountryConfig()
 			throws IOException {
-		super("haiyan", "google-news");
+		super("haiyan", "google-country");
+		metaMapper = new GoogleCountryMetaMapper();
 	}
 
 	@Override
@@ -35,7 +45,7 @@ public static final String newsQueryVal = "typhoon haiyan news OR article OR cov
      */
 	public static void main(String[] args) throws Exception {
 //		Properties extractProperties = new Properties();
-        HaiyanGoogleNewsConfig config = new HaiyanGoogleNewsConfig();
+        HaiyanGoogleCountryConfig config = new HaiyanGoogleCountryConfig();
 
         Map<Param,String> paramMap = new HashMap<>();
         paramMap.put(Param.key, config.apiKey);
@@ -43,24 +53,38 @@ public static final String newsQueryVal = "typhoon haiyan news OR article OR cov
         paramMap.put(Param.alt, defaultAlt);
 //        paramMap.put(Param.num, defaultNum);
 //        paramMap.put(Param.site, "cnn.com");
-//        paramMap.put(Param.dateRestrict, DateRestrict.years.valFor("1"));
-        paramMap.put(Param.q, newsQueryVal);
+        paramMap.put(Param.dateRestrict, DateRestrict.years.valFor("1"));
+        paramMap.put(Param.q, queryVal);
         
         boolean archive = false;
         boolean crawl = false;
+        boolean forceEnglish = false;
         Calendar crisisCal = Calendar.getInstance();
+        Date todayDate = crisisCal.getTime();
         crisisCal.clear();
         crisisCal.set(2013, 10, 07);
         Date crisisDate = crisisCal.getTime();
         
+//        int countryStartFrom = 201;
+//        int countryGoTo = 242;
+//        for (int i=countryStartFrom; i< countryGoTo; i++){
+//        	String countryName = crLookup.get(i);
+//        	paramMap.put(Param.cr, countryName);
+//        	System.out.println("\n#"+i+" COUNTRY NAME: "+countryName);
+//        	config.runLiveApiSearch(paramMap, 1, defaultNum, archive, countryName, forceEnglish);
+//        }
+        
 //        config.runLiveSearch(paramMap, 1, defaultNum, archive, DateRestrict.weeks, crisisDate,9);//9 for full. 
+        
+//        IOUtils.findReplaceAllFilenames(
+//        		IOUtils.entriesWithinDir(config.apiLiveFolder, false), "-country", "-country",true);
         
 //         config.extractFromApiDir(archive, crawl);
         
 //      config.cleanText(true);
          
 //        config.metaToTable(MetaMode.entries_no_text, true, defaultValLimit, "dedup_all_no_text");
-//        config.metaToTable(MetaMode.query_stats_only, true, defaultValLimit, "query_stats");
+        config.metaToTable(MetaMode.query_stats_with_url, true, defaultValLimit, "stats_by_query_url");
 //        config.metaToTable(MetaMode.entries_with_text, true, defaultValLimit, "all_with_text");
 //        config.metaToTable(MetaMode.entries_with_text, true, 500, "all_500_chars_text");
 //        config.metaToTable(MetaMode.entries_with_text, true, 8000, "all_8000_chars_text");

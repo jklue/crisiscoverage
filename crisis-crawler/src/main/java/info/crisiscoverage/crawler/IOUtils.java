@@ -5,6 +5,8 @@ import info.crisiscoverage.crawler.CrawlerConstants.Column;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
@@ -112,13 +114,29 @@ public class IOUtils implements CrawlerConstants{
 	}
 	
 	/**
+	 * Read input stream to list of lines
+	 * @param in InputStream
+	 * @return List<String>
+	 * @throws IOException
+	 */
+	public static List<String> readLines(InputStream in) throws IOException{
+		List<String> list = new ArrayList<>();
+		BufferedReader reader = new BufferedReader(new InputStreamReader(in,StandardCharsets.UTF_8));
+		String line = null;
+		while ((line = reader.readLine()) != null) {
+				list.add(line);
+		}
+		return list;
+	}
+	
+	/**
 	 * Read a file to a list of lines
 	 * @param file
 	 * @return List<String>
 	 * @throws IOException
 	 */
 	public static List<String> readLines(Path file) throws IOException{
-		List<String> list = new ArrayList<String>();
+		List<String> list = new ArrayList<>();
 		BufferedReader reader = Files.newBufferedReader(file, StandardCharsets.UTF_8);
 		String line = null;
 		while ((line = reader.readLine()) != null) {
@@ -386,5 +404,59 @@ public class IOUtils implements CrawlerConstants{
 			String e = subSetOf(s, maxChars/2, StringSample.end_only);
 			return b+truncatedToken+e;
 		}		
+	}
+	
+	/**
+	 * Find/Replace for filenames. 
+	 * @param paths
+	 * @param find
+	 * @param replace
+	 * @param replaceOnce
+	 * @throws IOException 
+	 */
+	public static void findReplaceAllFilenames(List<Path> paths, String find, String replace,boolean replaceOnce) throws IOException{
+		for (Path path : paths){
+			findReplaceFilename(path, find, replace,replaceOnce);
+		}
+	}
+	
+	/**
+	 * Find/Replace filename.
+	 * @param path
+	 * @param find
+	 * @param replace
+	 * @param replaceOnce
+	 * @throws IOException 
+	 */
+	public static void findReplaceFilename(Path path, String find, String replace, boolean replaceOnce) throws IOException{
+		if (path == null) return;
+		String newName = path.getFileName().toString();
+		if (newName.contains(find)){
+			System.out.println("... replacing '"+find+"' with '"+replace+"' in file '"+path.getFileName().toString()+"'");
+			if (replaceOnce) newName = StringUtils.replaceOnce(path.getFileName().toString(),find,replace);
+			else newName = StringUtils.replace(path.getFileName().toString(),find,replace);
+			renameFile(path, newName); 
+		}
+	}
+	
+	/**
+	 * Rename File. This is for files not dirs.
+	 * @param path
+	 * @param newName
+	 * @throws IOException 
+	 */
+	public static void renameFile(Path path, String newName) throws IOException{
+		if (
+				path == null || !Files.exists(path) || Strings.isNullOrEmpty(newName)
+				|| path.getFileName().toString().equals(newName)
+				) {
+			System.err.println("... conditions not met");
+			return;
+		}
+		
+		Path newPath = Paths.get(path.getParent().toString(),newName);
+		System.out.println("... renaming file from '"+path.getFileName().toString()+"' to '"+newName+"'");
+		Files.copy(path, newPath);
+		Files.delete(path);
 	}
 }

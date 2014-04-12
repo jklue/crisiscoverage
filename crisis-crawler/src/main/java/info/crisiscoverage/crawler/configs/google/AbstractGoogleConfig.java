@@ -12,12 +12,15 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Properties;
 import java.util.Set;
 
 import org.apache.commons.lang3.StringEscapeUtils;
@@ -34,6 +37,25 @@ import com.google.common.net.UrlEscapers;
 public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfig{
 	
 	private int tmpCount = 0;
+	
+	public static final List<String> crLookup = new ArrayList<>();
+	public static final Map<String, String> crNameMap = new HashMap<>();
+	static{
+		try {
+			List<String> crLines = IOUtils.readLines(AbstractGoogleConfig.class.getResourceAsStream("cr_lookup.csv"));
+			for (String line : crLines){
+				if (!Strings.isNullOrEmpty(line) && line.contains("country")){
+					String country = "country"+StringUtils.substringAfter(line, "country"); 
+					crLookup.add(country);
+					crNameMap.put(country, StringUtils.substringBefore(line,country).trim());
+//				System.out.println("... adding available cr: "+country);
+				}
+			}
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+	}
 	
 	public static enum Param{
 		hl,safe,q,key,cx,alt,site,num,start,dateRestrict,lr,cr;
@@ -242,8 +264,6 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 	public static final String defaultSafe = "high";
 	public static final String defaultAlt = "atom";
 	public static final int defaultNum = 10;
-	public static final String defaultKey = "AIzaSyAmUPgD01HIXrwtDP5Xf0vMWmUpDglFXyQ";
-	public static final String defaultCx = "007061251080714295857:nhvoqbzpcim";
 	
 	public static final String hlParam = "hl=";
 	public static final String lrParam = "lr=";
@@ -270,8 +290,29 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 //			(AbstractHtmlDomRule)new AttrValueRule("content")
 			);
 	
+	//THIS NEEDS TO BE LOADED FROM api-key.properties.
+	final protected Properties keyProps = new Properties();
+	
+// THIS MUST BE SUPPLIED VIA RESOURCE (see constructor)	
+	protected String apiKey = "";
+	
+//	ALL GOOGLE
+	protected String cxAll= "007061251080714295857:nhvoqbzpcim";
+	
+//	GOOGLE NEWS
+	protected String cxGoogleNews = "007061251080714295857:rmjqamjlvci";
+	
+//	MEDIA CRISIS COVERAGE
+	protected String cxMedia = "c007061251080714295857:cfwcevip5-s";
+	
 	public AbstractGoogleConfig(String collectionName, String tags) throws IOException {
 		super(collectionName, tags, new DefaultHtmlRuleController(), new GoogleApiMetaMapper(), defaultHtmlExt, defaultXmlExt);
+		
+		keyProps.load(AbstractGoogleConfig.class.getResourceAsStream("api-key.properties"));
+		if (keyProps.containsKey("apiKey")){
+			apiKey = keyProps.getProperty("apiKey");
+			System.out.println("... initialized with apiKey: "+apiKey);
+		}
 		
 //		clean_string
     	ruleController.addRuleTo(
@@ -280,8 +321,8 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 	
 	@Override
 	public void runLiveSearch(
-			String template, String queryValue, int minPageOrOffset, int maxPageOrOffset, int offsetStepVal,
-			boolean archive, boolean applyHttpPatternMatcher) throws Exception{
+			final String template, final String queryValue, int minPageOrOffset, int maxPageOrOffset, int offsetStepVal,
+			boolean archive, boolean applyHttpPatternMatcher, final String customDocIdPortion) throws Exception{
 		resetForRun();
 		
 		int sv = offsetStepVal > 0? offsetStepVal : 1;
@@ -295,12 +336,14 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 		}
 		
 		while (p < (maxPageOrOffset)){	
-			String url = urlFromTemplate(template, Param.num.appendToEscaped(queryValue,Integer.toString(sv)), offsetVal(p));
+			String qv = Param.num.appendToEscaped(queryValue,Integer.toString(sv));
+			String url = urlFromTemplate(template, qv, offsetVal(p));
 			System.out.println("... building url for live run search --> "+url);
 		
 			String dateName = dateNameFromUrl(url);
 			
-			String filename = collectionName+"-"+tags+"_"+p+(aStep > 0 ? "-"+aStep : "")+"_"+dateName+apiFolderExt;
+			String filename = collectionName+"-"+tags+"_"+(customDocIdPortion == null? "" : customDocIdPortion+"-") + p +
+					(aStep > 0 ? "-"+aStep : "")+"_"+dateName+apiFolderExt;
 			System.out.println("... now writing filename ["+filename+"]");
 			
 			Document doc = LinkUtils.readUrlPolitely(url,true);
@@ -348,12 +391,14 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 	 * @param dateRestrict DateRestrict
 	 * @param dateStart Date
 	 * @param numberOfDateIncrements int
+	 * @param customDocIdPortion
+	 * @param forceEnglish
 	 * @throws Exception
 	 */
-	protected void runLiveSearch(
+	protected void runLiveApiSearch(
 			final Map<Param,String> params, int minPageOrOffset, int maxPageOrOffset, boolean archive,
-			DateRestrict dateRestrict, Date dateStart, int numberOfDateIncrements) throws Exception{
-		runLiveSearch(params, minPageOrOffset, maxPageOrOffset, archive, dateRestrict, dateStart, numberOfDateIncrements, 0);
+			DateRestrict dateRestrict, Date dateStart, int numberOfDateIncrements,String customDocIdPortion, boolean forceEnglish) throws Exception{
+		runLiveApiSearch(params, minPageOrOffset, maxPageOrOffset, archive, dateRestrict, dateStart, numberOfDateIncrements, customDocIdPortion, forceEnglish, 0);
 	}
 	
 	/**
@@ -365,12 +410,14 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 	 * @param dateRestrict DateRestrict
 	 * @param dateStart Date
 	 * @param numberOfDateIncrements int
+	 * @param customDocIdPortion
+	 * @param forceEnglish
 	 * @param jumpForwardNPeriods
 	 * @throws Exception
 	 */
-	protected void runLiveSearch(
+	protected void runLiveApiSearch(
 			final Map<Param,String> params, int minPageOrOffset, int maxPageOrOffset, boolean archive,
-			DateRestrict dateRestrict, Date dateStart, int numberOfDateIncrements, int jumpForwardNPeriods) throws Exception{
+			DateRestrict dateRestrict, Date dateStart, int numberOfDateIncrements,String customDocIdPortion, boolean forceEnglish, int jumpForwardNPeriods) throws Exception{
 		
 		//handle archive
 		if (archive) archiveCalled();
@@ -391,7 +438,7 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 				if (d > 0){
 					params.put(Param.dateRestrict, dateRestrict.valFor(Integer.toString(d)));
 					System.out.println("#"+d+"... runLiveSearch() for next dateRestrict: "+params.get(Param.dateRestrict));
-					runLiveSearch(params, minPageOrOffset, maxPageOrOffset, false);
+					runLiveApiSearch(params, minPageOrOffset, maxPageOrOffset, false,customDocIdPortion, forceEnglish);
 					d--;//Next run will be closer to NOW!
 				} else {
 					System.err.println("... calculated number for dateRestrict invalid, skipping.");
@@ -407,9 +454,13 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 	 * @param minPageOrOffset
 	 * @param maxPageOrOffset
 	 * @param archive
+	 * @param customDocIdPortion
+	 * @param forceEnglish
 	 * @throws Exception
 	 */
-	protected void runLiveSearch(Map<Param,String> params, int minPageOrOffset, int maxPageOrOffset, boolean archive) throws Exception{
+	protected void runLiveApiSearch(
+			Map<Param,String> params, int minPageOrOffset, int maxPageOrOffset, boolean archive, 
+			String customDocIdPortion, boolean forceEnglish) throws Exception{
 		String q = "";
 		if (archive){
 			archiveFolder(apiLiveFolder);
@@ -418,8 +469,11 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 		params.remove(Param.num);//this is handled inline.
 		params.remove(Param.start);//this is handled inline.
 		
-		if (!params.containsKey(Param.hl)) params.put(Param.hl, defaultHl);
-//		if (!params.containsKey(Param.lr)) params.put(Param.lr, defaultLr);
+		if (forceEnglish){
+			if (!params.containsKey(Param.hl)) params.put(Param.hl, defaultHl); //THIS FORCES USER INTERFACE
+			if (!params.containsKey(Param.lr)) params.put(Param.lr, defaultLr);	//THIS FORCES LANGUAGE		
+		}
+
 		if (!params.containsKey(Param.safe)) params.put(Param.safe, defaultSafe);
 		
 		for (Entry<Param,String> entry : params.entrySet()){
@@ -429,7 +483,7 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 			 
 			 System.out.println("... now q --> "+q);
 		}
-		runLiveSearch(template, q, minPageOrOffset, maxPageOrOffset, defaultNum, archive, false);
+		runLiveSearch(template, q, minPageOrOffset, maxPageOrOffset, defaultNum, archive, false,customDocIdPortion);
 	}
 	
 	/**
@@ -600,6 +654,20 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 	 * @param entry
 	 * @return Element
 	 */
+	public static Element queryElementFrom(Element entry){
+		if (entry == null) return null;
+		Elements elements = entry.getElementsByTag("opensearch:query");
+		if (elements != null && !elements.isEmpty()){
+			return elements.first();
+		}
+		return null;
+	}
+	
+	/**
+	 * Result Count element from entry (or feed).
+	 * @param entry
+	 * @return Element
+	 */
 	public static Element resultCountElementFrom(Element entry){
 		if (entry == null) return null;
 		Elements elements = entry.getElementsByTag("opensearch:totalresults");
@@ -682,6 +750,9 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 		
 		Element rc = resultCountElementFrom(doc);
 		if (rc != null) entry.appendChild(rc);
+		
+		Element q = queryElementFrom(doc);
+		if (q != null) entry.appendChild(q);
 		
 		return wrapEntryInFeedXml(entry.outerHtml());
 	}
