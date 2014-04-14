@@ -1,0 +1,30 @@
+#overview {
+	#overviewVis{
+		width: 960px;
+		margin: 0 auto 7em;
+		position: relative;
+		top: 5em;
+	}
+	.sphere{
+    fill: none;
+    stroke: #777;
+    stroke-width: .5px;
+    stroke-opacity: .5;
+  }
+ .graticule {
+	  fill: none;
+	  stroke: #777;
+	  stroke-width: .5px;
+    stroke-opacity: .5;
+	}
+	.country {
+	  stroke: #666;
+	  stroke-width: 1px;
+	  transition: all 0.5s;
+
+	  &:hover {
+	    fill: #777;
+	  }
+	}
+
+}
