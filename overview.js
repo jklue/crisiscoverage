@@ -42,15 +42,12 @@ var svg = d3.select("#overviewVis").append("svg")
 
 /* Map and other data */
   // Queue function from MBostock for multiple file loading
-  queue().defer(d3.json, "/jameslafa/app/data/world_110m_admin_countries-capitals_simplified.json")
-         .defer(d3.json, "/jameslafa/app/data/life_expectancy_at_birth.json")
+  queue().defer(d3.json, "/productiondata/globe.json")
          .defer(d3.csv, "/data/overview/2014-04-12 09.33.11_haiyan-google-country_stats_by_query_name.csv")
          .await(loadedDataCallBack);
 
   // when all data is loaded
-  function loadedDataCallBack(error, world, lifeExpectancy, media) {
-console.log('life: ',lifeExpectancy);
-console.log('media: ',media);
+  function loadedDataCallBack(error, world, media) {
     // convert world map data to d3 topo
     var countries = topojson.feature(world, world.objects.countries).features;
     /* convert media data to json object */

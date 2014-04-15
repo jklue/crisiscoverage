@@ -229,14 +229,13 @@ h3 {
   text-align: center;
   color: #cccccc;
   width: 900px;
-  margin: 1.5em auto 3em;
-  padding-bottom: 4em; }
+  margin: 1.5em auto 5em; }
 
 footer {
   text-align: center;
   color: #cccccc;
   width: 900px;
-  margin: 1.5em auto 0;
+  margin: 3.5em auto 0;
   clear: both; }
   footer .links {
     float: left;
@@ -248,8 +247,9 @@ footer {
     footer .links img:hover {
       opacity: 1; }
   footer .credit {
-    padding-top: 1em;
-    clear: both; }
+    float: right; }
+    footer .credit p {
+      margin: 0; }
 
 /* Setup */
 /* General */
@@ -266,9 +266,40 @@ footer {
         width: 175px; }
 #welcome div.title {
   width: 900px;
-  margin: 300px auto 0;
+  margin: 0 auto 0;
   text-align: right;
   position: relative; }
+
+/* Martini elements */
+.arrow img {
+  vertical-align: middle; }
+
+.left.arrow {
+  position: absolute;
+  left: 0; }
+
+.right.arrow {
+  position: absolute;
+  right: 0; }
+
+#rotatingGlobe {
+  width: 320px;
+  margin: 100px auto 0; }
+
+/* Navigation */
+nav {
+  position: relative; }
+  nav ul.home {
+    position: absolute;
+    top: -270px;
+    left: 100px;
+    width: 630px; }
+
+.view {
+  float: left; }
+
+.skip {
+  float: right; }
 
 /* Animation */
 .fadeInOut {
