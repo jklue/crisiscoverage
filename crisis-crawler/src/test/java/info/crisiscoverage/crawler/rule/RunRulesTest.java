@@ -1,7 +1,7 @@
 package info.crisiscoverage.crawler.rule;
 
 import info.crisiscoverage.crawler.configs.AbstractHtmlCrawlerConfig;
-import info.crisiscoverage.crawler.configs.bbc.HaiyanBbcConfig;
+import info.crisiscoverage.crawler.configs.archive.bbc.HaiyanBbcConfig;
 
 import java.io.IOException;
 import java.nio.file.Path;

@@ -1,4 +1,4 @@
-package info.crisiscoverage.crawler.configs.bbc;
+package info.crisiscoverage.crawler.configs.archive.bbc;
 
 import info.crisiscoverage.crawler.configs.BaseCleanupStringRule;
 import info.crisiscoverage.crawler.rule.string.FindReplaceStringRule;

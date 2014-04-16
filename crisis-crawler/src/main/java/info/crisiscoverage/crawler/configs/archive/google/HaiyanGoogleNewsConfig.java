@@ -1,4 +1,7 @@
-package info.crisiscoverage.crawler.configs.google;
+package info.crisiscoverage.crawler.configs.archive.google;
+
+import info.crisiscoverage.crawler.configs.google.AbstractGoogleConfig;
+import info.crisiscoverage.crawler.configs.google.AbstractGoogleConfig.Param;
 
 import java.io.IOException;
 import java.util.Calendar;
@@ -38,7 +41,7 @@ public static final String newsQueryVal = "typhoon haiyan news OR article OR cov
         HaiyanGoogleNewsConfig config = new HaiyanGoogleNewsConfig();
 
         Map<Param,String> paramMap = new HashMap<>();
-        paramMap.put(Param.key, config.apiKey);
+        paramMap.put(Param.key, config.apiKeys[0]);
         paramMap.put(Param.cx, config.cxAll);
         paramMap.put(Param.alt, defaultAlt);
 //        paramMap.put(Param.num, defaultNum);

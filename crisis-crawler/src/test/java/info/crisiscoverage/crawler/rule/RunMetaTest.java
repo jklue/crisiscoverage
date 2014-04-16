@@ -3,7 +3,7 @@ package info.crisiscoverage.crawler.rule;
 import static org.junit.Assert.*;
 import info.crisiscoverage.crawler.CrawlerConstants;
 import info.crisiscoverage.crawler.IOUtils;
-import info.crisiscoverage.crawler.configs.bbc.HaiyanBbcConfig;
+import info.crisiscoverage.crawler.configs.archive.bbc.HaiyanBbcConfig;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;

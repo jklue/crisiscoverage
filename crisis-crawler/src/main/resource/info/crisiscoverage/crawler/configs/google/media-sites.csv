@@ -1,0 +1,23 @@
+site_num	site_name	site_domain	site_category	site_url	site_country_base_names	site_country_base_codes	site_city_bases
+1	Aljazeera	aljazeera.com	Traditional	http://america.aljazeera.com/	Qatar	QA	Doha
+2	AlterNet	alternet.org	Independent	http://www.alternet.org/	United States	US	"San Fransisco, CA"
+3	BBC	bbc.co.uk	Traditional	http://www.bbc.co.uk/	United Kingdom	UK	London
+4	Blogspot	blogspot.com	Blogs-Social	http://www.blogspot.com			
+5	CBC	cbc.ca	Traditional	http://www.cbc.ca/	Canada	CA	Toronto
+6	CNN	cnn.com	Traditional	http://www.cnn.com/	United States	US	"Atlanta, GA"
+7	FoxNews.com	foxnews.com	Traditional	http://www.foxnews.com/	United States	US	
+8	IOL	iol.co.za	Traditional	http://www.iol.co.za/	South Africa	ZA	Johannesburg
+9	Los Angeles Times	latimes.com	Traditional	http://www.latimes.com/	United States	US	"Los Angeles, CA"
+10	News.com.au	news.com.au	Traditional	http://www.news.com.au/	Australia	AU	Sydney
+11	Reddit	reddit.com	Blogs-Social	http://www.reddit.com/			
+12	Spiegel	spiegel.de	Traditional	http://www.spiegel.de/international	Germany	DE	Hamburg
+13	The Daily Beast	thedailybeast.com	Independent	http://www.thedailybeast.com/	United States	US	"New York, NY"
+14	The Guardian	theguardian.com	Traditional	http://www.theguardian.com/uk	United Kingdom	UK	London
+15	The Huffington Post	huffingtonpost.com	Traditional	http://www.huffingtonpost.com/	United States	US	"New York, NY"
+16	The Independent	independent.co.uk	Independent	http://www.independent.co.uk/	United Kingdom	UK	London
+17	The New York Times	nytimes.com	Traditional	http://www.nytimes.com/	United States	US	"New York, NY"
+18	The Washington Post	washingtonpost.com	Traditional	http://www.washingtonpost.com/regional/	United States	US	"Washington, DC"
+19	theRealNews.com	therealnews.com	Independent	http://therealnews.com/t2/	United States	US	"Baltimore, MD"
+20	Wordpress	wordpress.com	Blogs-Social	http://wordpress.com/			
+21	WorldNews Network	wn.com	Independent	http://wn.com/			
+22	Xinhuanet	xinhuanet.com	Traditional	http://www.news.cn/english/	China	CN	Beijing

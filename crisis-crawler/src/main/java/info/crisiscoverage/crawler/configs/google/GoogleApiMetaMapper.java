@@ -27,11 +27,11 @@ public class GoogleApiMetaMapper extends DefaultHtmlMetaMapper{
 		Element queryElement = AbstractGoogleConfig.queryElementFrom(element);
 		String query = "";
 		if (queryElement != null) query = queryStringFromQueryElement(queryElement);
-		if (!Strings.isNullOrEmpty(query)) map.put(Column.query_url, query);
+		if (!Strings.isNullOrEmpty(query)) map.put(Column.query_distinct, query);
 		
 		//result_count
 		String resultCount = AbstractGoogleConfig.resultCountFromEntry(element, docId);
-		if (!Strings.isNullOrEmpty(resultCount)) map.put(Column.result_count, resultCount);
+		if (!Strings.isNullOrEmpty(resultCount)) map.put(Column.raw_result_count, resultCount);
 		
 		String dqStr = StringUtils.substringAfterLast(docId, "_");
 		if (docId.contains("(")) 

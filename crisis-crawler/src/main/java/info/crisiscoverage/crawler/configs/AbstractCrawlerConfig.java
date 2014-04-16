@@ -5,6 +5,9 @@ import info.crisiscoverage.crawler.CrawlerConstants;
 import info.crisiscoverage.crawler.CurrentCrawlExt;
 import info.crisiscoverage.crawler.IOUtils;
 import info.crisiscoverage.crawler.LinkUtils;
+import info.crisiscoverage.crawler.CrawlerConstants.Column;
+import info.crisiscoverage.crawler.configs.google.AbstractGoogleConfig.DateRestrict;
+import info.crisiscoverage.crawler.configs.google.ComparedResultObj;
 import info.crisiscoverage.crawler.rule.AbstractRuleController;
 import info.crisiscoverage.crawler.rule.MetaMapper;
 
@@ -14,12 +17,17 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.StringTokenizer;
 
 import org.apache.commons.lang3.StringUtils;
+
+import com.google.common.base.Strings;
 
 /**
  * All Configs for crawling should extend this class for best practices.
@@ -217,6 +225,7 @@ public abstract class AbstractCrawlerConfig<O> implements CrawlerConstants{
 		
 		List<Path> entries = IOUtils.entriesWithinDir(docIdFolder,false);
 		boolean firstRun = true;
+		
 		for (Path entry : entries){
 			
 			CsvOptions csvOptions = CsvOptions.append_data;
@@ -230,6 +239,20 @@ public abstract class AbstractCrawlerConfig<O> implements CrawlerConstants{
 			metaToTable(metaMode, csvFile, csvOptions, entry, includeHeaders, cellSizeLimit, filenameAppend,dedupList);
 		}
 		
+		return additionalMetaToTable(csvFile, metaMode, includeHeaders, cellSizeLimit, filenameAppend);
+	}
+	
+	/**
+	 * Sub-classes may want to override.
+	 * @param csvFile
+	 * @param metaMode
+	 * @param includeHeaders
+	 * @param cellSizeLimit
+	 * @param filenameAppend
+	 * @return
+	 * @throws Exception
+	 */
+	protected Path additionalMetaToTable(Path csvFile, MetaMode metaMode, boolean includeHeaders, int cellSizeLimit, String filenameAppend) throws Exception{
 		return csvFile;
 	}
 	
@@ -243,7 +266,6 @@ public abstract class AbstractCrawlerConfig<O> implements CrawlerConstants{
 	 * @param cellSizeLimit int if < 1, no limit.
 	 * @param filenameAppend optional String to append to filename
 	 * @param dedupList List of previous rows for dedup.
-	 * @return Path
 	 * @throws Exception 
 	 */
 	public void metaToTable(MetaMode metaMode, Path csvFile, CsvOptions csvOptions, Path entry, boolean includeHeaders, int cellSizeLimit, String filenameAppend, List<Map<Column,String>> dedupList) throws Exception{
@@ -277,7 +299,7 @@ public abstract class AbstractCrawlerConfig<O> implements CrawlerConstants{
 		}
 		
 		if (!metaMode.isWithQuery()){
-			row.remove(Column.query_url);
+			row.remove(Column.query_distinct);
 		}
 
 		if (!isDuplicate(metaMode,row,dedupList)){
@@ -286,12 +308,31 @@ public abstract class AbstractCrawlerConfig<O> implements CrawlerConstants{
 		}
 	}
 	
+	/**
+	 * Strip out the dateRestrict portion .... this is naive so be careful.
+	 * @param queryDistinct
+	 * @return
+	 */
+	protected String stripDateRestrictFromQueryDistinct(String queryDistinct){
+		if (!Strings.isNullOrEmpty(queryDistinct)){
+			if (queryDistinct.contains("-")) return StringUtils.substringBeforeLast(queryDistinct, "-");
+		}
+		return "";
+	}
+	
+	/**
+	 * Sub-classes may override.
+	 * @param metaMode
+	 * @param row
+	 * @param dedupList
+	 * @return
+	 */
 	protected boolean isDuplicate(MetaMode metaMode, Map<Column,String> row, List<Map<Column,String>> dedupList){
 		
 		if (row == null || dedupList == null) return false;
 		
 		//Summary columns to test -- all must be equal.
-		Column qUrl = Column.query_url;
+		Column qDistinct = Column.query_distinct;
 		Column dateQ = Column.date_query_start;
 		Column qPeriod = Column.query_period;
 		Column pBack = Column.periods_back;
@@ -303,7 +344,7 @@ public abstract class AbstractCrawlerConfig<O> implements CrawlerConstants{
 			if (metaMode.isQueryStatsMode()){
 				if (metaMode.equals(MetaMode.query_stats_only) && row.get(dateQ).equals(d.get(dateQ)) && row.get(qPeriod).equals(d.get(qPeriod)) && row.get(pBack).equals(d.get(pBack)))
 					return true;
-				else if (metaMode.equals(MetaMode.query_stats_with_url) && row.get(qUrl).equals(d.get(qUrl)))
+				else if (metaMode.equals(MetaMode.query_stats_with_distinct) && row.get(qDistinct).equals(d.get(qDistinct)))
 						return true;
 			} else if (row.get(u).equals(d.get(u))) return true; 
 		}

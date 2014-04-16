@@ -1,22 +1,12 @@
 package info.crisiscoverage.crawler.configs.google;
 
-
-import info.crisiscoverage.crawler.IOUtils;
-import info.crisiscoverage.crawler.CrawlerConstants.Column;
-import info.crisiscoverage.crawler.CrawlerConstants.MetaMode;
-
 import java.io.IOException;
-import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import org.apache.commons.lang3.StringUtils;
 
 public class HaiyanGoogleCountryConfig extends AbstractGoogleConfig{
 
@@ -24,7 +14,7 @@ public static final String queryVal = "news OR article OR coverage OR Yolanda \"
 
 	public HaiyanGoogleCountryConfig()
 			throws IOException {
-		super("haiyan", "google-country");
+		super("haiyan", "google-all-country");
 		metaMapper = new GoogleCountryMetaMapper();
 	}
 
@@ -48,7 +38,7 @@ public static final String queryVal = "news OR article OR coverage OR Yolanda \"
         HaiyanGoogleCountryConfig config = new HaiyanGoogleCountryConfig();
 
         Map<Param,String> paramMap = new HashMap<>();
-        paramMap.put(Param.key, config.apiKey);
+        paramMap.put(Param.key, config.apiKeys[0]);
         paramMap.put(Param.cx, config.cxAll);
         paramMap.put(Param.alt, defaultAlt);
 //        paramMap.put(Param.num, defaultNum);
@@ -84,7 +74,7 @@ public static final String queryVal = "news OR article OR coverage OR Yolanda \"
 //      config.cleanText(true);
          
 //        config.metaToTable(MetaMode.entries_no_text, true, defaultValLimit, "dedup_all_no_text");
-        config.metaToTable(MetaMode.query_stats_with_url, true, defaultValLimit, "stats_by_query_url");
+        config.metaToTable(MetaMode.query_stats_with_distinct, true, defaultValLimit, "stats_by_query_url");
 //        config.metaToTable(MetaMode.entries_with_text, true, defaultValLimit, "all_with_text");
 //        config.metaToTable(MetaMode.entries_with_text, true, 500, "all_500_chars_text");
 //        config.metaToTable(MetaMode.entries_with_text, true, 8000, "all_8000_chars_text");

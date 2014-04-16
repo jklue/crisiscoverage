@@ -109,7 +109,7 @@ public interface CrawlerConstants {
 	 * @author mjohns
 	 */
 	public static enum MetaMode{
-		query_stats_only, query_stats_with_url, entries_no_text, entries_with_text;
+		query_stats_only, query_stats_with_distinct, entries_no_text, entries_with_text;
 		
 		public boolean isCleanTextMode(){
 			switch(this){
@@ -122,7 +122,7 @@ public interface CrawlerConstants {
 		public boolean isQueryStatsMode(){
 			switch(this){
 			case query_stats_only:
-			case query_stats_with_url:	
+			case query_stats_with_distinct:	
 				return true;
 			default: 
 				return false;
@@ -131,7 +131,7 @@ public interface CrawlerConstants {
 		
 		public boolean isWithQuery(){
 			switch(this){
-			case query_stats_with_url: return true;
+			case query_stats_with_distinct: return true;
 			default: 
 				return false;
 			}
@@ -144,17 +144,18 @@ public interface CrawlerConstants {
 	 * @author mjohns
 	 */
 	public static enum Column{
-		query_url,query_run_date,query_period,periods_back,days_back,result_count,date_query_start,date_query_end,
+		query_distinct,query_run_date,query_period,periods_back,days_back,raw_result_count,compared_result_count,date_query_start,date_query_end,
 		doc_id,domain,title,date_published,collection,tags,url,summary,clean_text;
 		
 		public boolean isQueryAndResultColumn(){
 			switch(this){
-			case query_url:
+			case query_distinct:
 			case query_run_date:
 			case query_period:
 			case periods_back:
 			case days_back:
-			case result_count:
+			case raw_result_count:
+			case compared_result_count:
 			case date_query_start:
 			case date_query_end:
 				return true;
@@ -254,4 +255,5 @@ public interface CrawlerConstants {
 	public static final String defaultSpaceNormalizerRegex = " {2,}";//
 	public static final String defaultAnyWhitespaceRegex = "[\\s]+";
 	public static final long millisInDays = 1000 * 60 * 60 * 24;
+	public static final String defaultBaselineQueryVal = "news OR article OR coverage";
 }
