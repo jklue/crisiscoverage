@@ -32,7 +32,6 @@ public class HaiyanGoogleMediaConfig implements CrawlerConstants{
 				isPaidQuery
 		);
 
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //GOOGLE-MEDIA CONFIG (ACTUAL QUERY) OVER 6 MONTHS
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -68,7 +67,7 @@ public class HaiyanGoogleMediaConfig implements CrawlerConstants{
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /** MANAGE APPLICABLE SETTINGS AFFECTING RUNTIME */		
-AbstractGoogleConfig.dryRun = false;//<-- !!! UTILIZE THIS SETTING TO PRESERVE API CALLS !!!
+AbstractGoogleConfig.dryRun = true;//<-- !!! UTILIZE THIS SETTING TO PRESERVE API CALLS !!!
 //msq.setOnlyRunPadPeriods(true);
 //msq.setApiKeyStartFrom(1);
 msq.setRunAdditional(true);
