@@ -74,7 +74,7 @@ public static final String queryVal = "news OR article OR coverage OR Yolanda \"
 //      config.cleanText(true);
          
 //        config.metaToTable(MetaMode.entries_no_text, true, defaultValLimit, "dedup_all_no_text");
-        config.metaToTable(MetaMode.query_stats_with_distinct, true, defaultValLimit, "stats_by_query_url");
+//        config.metaToTable(MetaMode.query_stats_with_distinct, true, defaultValLimit, "stats_by_query_url",false);
 //        config.metaToTable(MetaMode.entries_with_text, true, defaultValLimit, "all_with_text");
 //        config.metaToTable(MetaMode.entries_with_text, true, 500, "all_500_chars_text");
 //        config.metaToTable(MetaMode.entries_with_text, true, 8000, "all_8000_chars_text");

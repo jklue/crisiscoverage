@@ -11,7 +11,8 @@ public class MultiSiteMetaMapper extends GoogleApiMetaMapper {
 		if (queryElement == null) return "";
 		String q = queryElement.attr("cse:sitesearch");
 		if (!Strings.isNullOrEmpty(q)){
-			q +=("-"+queryElement.attr("cse:daterestrict"));
+			String dr = queryElement.attr("cse:daterestrict");
+			if (!Strings.isNullOrEmpty(dr)) q +=("-"+dr);
 			return q;
 		} else if (q != null){
 			q = queryElement.attr("cse:daterestrict");

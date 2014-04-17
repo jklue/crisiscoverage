@@ -13,8 +13,11 @@ public class MultiSiteQueryObj {
 	boolean archive = false;
 	boolean crawl = false;
 	boolean forceEnglish = false;
+	boolean runAdditional = false;
 
-	int numberOfPeriods = 10;
+	int padPeriods = 1;//Important to see the lead up!
+	boolean onlyRunPadPeriods;
+	int numberOfPeriods = 5;
 	int queriesPerPeriod = 1;
 	int jumpForwardNPeriods = 0;
 
@@ -32,7 +35,7 @@ public class MultiSiteQueryObj {
 	List<String> sites = new ArrayList<>();
 	Map<String,String> siteTypeMap = new HashMap<>();
 	
-	DateRestrict dateRestrict = DateRestrict.weeks;
+	DateRestrict dateRestrict = DateRestrict.months;
 
 	MultiSiteGoogleConfig config;
 	
@@ -145,9 +148,10 @@ public class MultiSiteQueryObj {
 		return dateRestrict;
 	}
 
-	public void setDateRestrictAndPeriods(DateRestrict dateRestrict, int numberOfPeriods) {
+	public void setDateRestrictAndPeriods(DateRestrict dateRestrict, int numberOfPeriods, int padPeriods) {
 		this.dateRestrict = dateRestrict;
 		this.numberOfPeriods = numberOfPeriods;
+		this.padPeriods = padPeriods;
 	}
 	
 	public List<String> getSites() {
@@ -186,5 +190,29 @@ public class MultiSiteQueryObj {
 
 	public void setConfig(MultiSiteGoogleConfig config) {
 		this.config = config;
+	}
+
+	public boolean isRunAdditional() {
+		return runAdditional;
+	}
+
+	public void setRunAdditional(boolean runAdditional) {
+		this.runAdditional = runAdditional;
+	}
+
+	public int getPadPeriods() {
+		return padPeriods;
+	}
+
+	public void setPadPeriods(int padPeriods) {
+		this.padPeriods = padPeriods;
+	}
+
+	public boolean isOnlyRunPadPeriods() {
+		return onlyRunPadPeriods;
+	}
+
+	public void setOnlyRunPadPeriods(boolean onlyRunPadPeriods) {
+		this.onlyRunPadPeriods = onlyRunPadPeriods;
 	}	
 }

@@ -10,6 +10,7 @@ import java.util.Set;
 
 public class MultiSiteGoogleConfig  extends AbstractGoogleConfig{
 
+	protected final Date dateToday;
 	protected final String queryVal; 
 	protected final Date crisisDate;  
 	
@@ -31,6 +32,7 @@ public class MultiSiteGoogleConfig  extends AbstractGoogleConfig{
 		this.queryVal = queryVal;
 		
   	    Calendar crisisCal = Calendar.getInstance();
+  	    dateToday = crisisCal.getTime();
         crisisCal.clear();
         crisisCal.set(crisisYear, crisisMonth-1, crisisDay);
         crisisDate = crisisCal.getTime();
@@ -121,15 +123,31 @@ public class MultiSiteGoogleConfig  extends AbstractGoogleConfig{
         	System.out.println("\n### Site #"+i+", domain: '"+mediaDomain+"', running next queries, queriesPerPeriod: "+queriesPerPeriod+", numberOfPeriods: "+numberOfPeriods+". ###");
         	
         	String customDocIdPortion = mediaType+"-"+mediaDomain;
-        	if (isDateRestricted){
+        	
+        	//HANDLE THE PERIODS PRIOR TO THE CRISIS UNDER PROPER CONDITIONS
+        	if (msq.getPadPeriods() > 0 && isDateRestricted && msq.getJumpForwardNPeriods() < 1){
+        		
+        		int d = msq.dateRestrict.periodsBack(dateToday, crisisDate, roundDown(msq.dateRestrict));
+        		int periodsBack = d + msq.padPeriods;
+        		System.out.println("\n... running padPeriod query --> starting from crisis period: "+d+", going back #"+msq.getPadPeriods()+", for a total back to period: "+periodsBack);
+        		
         		runLiveApiSearch(
-        				paramMap, 1, defaultNum*queriesPerPeriod, archive, msq.dateRestrict, crisisDate, numberOfPeriods, customDocIdPortion, forceEnglish, msq.getJumpForwardNPeriods());
-        		apiKeyQueryCount += (queriesPerPeriod * (numberOfPeriods - msq.getJumpForwardNPeriods()));//increment by periods, accounting for jumpForwardNPeriods
+    					paramMap, 1, defaultNum*queriesPerPeriod, archive, msq.dateRestrict, periodsBack, msq.getPadPeriods(), customDocIdPortion, forceEnglish, 0);
+    			apiKeyQueryCount += (queriesPerPeriod * (msq.getPadPeriods()));//increment by pad periods
+        	} 
+        	
+        	//HANDLE THE OTHER PERIODS AS LONG AS THIS ISN'T A RUN EXCLUSIVELY FOR PERIODS PRIOR
+        	if (!msq.isOnlyRunPadPeriods()){
+        		if (isDateRestricted){
+        			runLiveApiSearch(
+        					paramMap, 1, defaultNum*queriesPerPeriod, archive, msq.dateRestrict, crisisDate, numberOfPeriods, customDocIdPortion, forceEnglish, msq.getJumpForwardNPeriods());
+        			apiKeyQueryCount += (queriesPerPeriod * (numberOfPeriods - msq.getJumpForwardNPeriods()));//increment by periods, accounting for jumpForwardNPeriods
 
-        	} else {
-        		runLiveApiSearch(paramMap, 1, defaultNum, archive, customDocIdPortion, forceEnglish);
-        		apiKeyQueryCount ++;//single increment
-        	}
+        		} else {
+        			runLiveApiSearch(paramMap, 1, defaultNum, archive, customDocIdPortion, forceEnglish);
+        			apiKeyQueryCount ++;//single increment
+        		}
+        	} else System.out.println("... only running pad periods as directed.");
         }
         
         totalQueryCount += apiKeyQueryCount;

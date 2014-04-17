@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import com.google.common.base.Strings;
 
@@ -30,13 +31,13 @@ public class ComparedResultObj {
 	final DateRestrict dateRestrict;
 	
 	/** Key is the PERIOD, value is the row. */
-	final Map<Integer,List<String>> rowPeriodValMap = new HashMap<>();
+	final Map<Integer,List<String>> rowPeriodValMap = new TreeMap<>();
 	
 	/** Key is the PERIOD, value is the 'raw_result_count' */
-	final Map<Integer,Integer> periodRawResultMap = new HashMap<>();
+	final Map<Integer,Integer> periodRawResultMap = new TreeMap<>();
 	
 	/** Key is the PERIOD, value is the 'compared_result_count' NOTE: THIS WILL BE REGENERATED UPON REQUEST. */
-	final Map<Integer,Integer> periodCompareResultMap = new HashMap<>();
+	final Map<Integer,Integer> periodCompareResultMap = new TreeMap<>();
 	
 	int minPeriod = -1;
 	int maxPeriod = -1;
@@ -126,15 +127,13 @@ public class ComparedResultObj {
 
 			//Figure out the compare values.
 			periodCompareResultMap.clear();
+			
 			for(int i = maxPeriod; i >= minPeriod; i--){
 				System.out.println("i: "+i);
 				int raw = periodRawResultMap.get(Integer.valueOf(i)); 
 				int r = raw;
-				if (i-1 >=minPeriod){
-					for (int j = i-1; j >= minPeriod; j-- ){
-						System.out.println("j: "+j);
-						r -= periodRawResultMap.get(Integer.valueOf(j));
-					}
+				if (i+1 <=maxPeriod){
+						r = raw - periodRawResultMap.get(Integer.valueOf(i+1));
 				}
 				System.out.println("... for queryDistinctKey: "+queryDistinctKey+" at period: "+i+", compare_result_count: "+r+
 						", raw_result_count: '"+raw+"' ... dateRestrict: "+dateRestrict.name());

@@ -198,6 +198,19 @@ public interface CrawlerConstants {
 		create_headers, create_no_headers, create_headers_data, create_no_headers_data, append_data;
 	}
 	
+	/**
+	 * For indicating String match rules
+	 * @author mjohns
+	 *
+	 */
+	public static enum StringMatch{
+		starting_with, starting_without, ending_with, ending_without, containing, not_containing, regex, without_regex;  
+	}
+	
+	public static enum FilePart{
+		path, filename_full, filename_no_extension, content, extension;
+	}
+	
 	public static final ParseStage firstStage = ParseStage.init.nextStage();
 	public static final StringSample defaultStringSample = StringSample.begin_and_end;
 	public static final int defaultPrintMax = 100;
@@ -256,4 +269,5 @@ public interface CrawlerConstants {
 	public static final String defaultAnyWhitespaceRegex = "[\\s]+";
 	public static final long millisInDays = 1000 * 60 * 60 * 24;
 	public static final String defaultBaselineQueryVal = "news OR article OR coverage";
+	public static final String defaultXmlHeader = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
 }

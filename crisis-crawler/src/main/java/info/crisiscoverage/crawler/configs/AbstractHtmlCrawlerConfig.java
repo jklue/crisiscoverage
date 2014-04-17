@@ -2,6 +2,7 @@ package info.crisiscoverage.crawler.configs;
 
 import info.crisiscoverage.crawler.IOUtils;
 import info.crisiscoverage.crawler.JsoupUtils;
+import info.crisiscoverage.crawler.configs.google.AbstractGoogleConfig;
 import info.crisiscoverage.crawler.rule.AbstractRuleController;
 import info.crisiscoverage.crawler.rule.MetaMapper;
 import info.crisiscoverage.crawler.rule.ParseObj;
@@ -55,6 +56,7 @@ public abstract class AbstractHtmlCrawlerConfig extends AbstractCrawlerConfig<El
 	public void cleanText(Whitelist whitelist, EscapeMode escapeMode, boolean applyParseRules) throws IOException{
 		
 		System.out.println("\n--- Cleaning HTML for folder '"+textFolder+"' into CLEAN Folder ---\n");
+		if (AbstractGoogleConfig.dryRun) System.err.println("--> NOTICE ::: 'AbstractGoogleConfig.dryRun' is enabled <--");
 		if (ruleController instanceof DefaultHtmlRuleController){
 			((DefaultHtmlRuleController)ruleController).setWhitelist(whitelist);
 			((DefaultHtmlRuleController)ruleController).setEscapeMode(escapeMode);
@@ -93,14 +95,20 @@ public abstract class AbstractHtmlCrawlerConfig extends AbstractCrawlerConfig<El
 			if (success && resultObj.isAnyResultValid()){
 				System.out.println("Success in cleaning, now writing docId '"+docId+"'");
 
-				resultObj.writeWhichOneResultsToFile(toFile);
+				if (!AbstractGoogleConfig.dryRun){
+					resultObj.writeWhichOneResultsToFile(toFile);
+				}
 			} else {
 				Path errFile = Paths.get(errorFolder,docId+textFolderExt);
 				System.err.println("Error in cleaning, copying original for triage to '"+errFile.getFileName().toString()+"'");
-				IOUtils.write(errFile, text);
+				if (!AbstractGoogleConfig.dryRun){
+					IOUtils.write(errFile, text);
+				}
 			}
 		} else {
-			IOUtils.write(toFile, text);
+			if (!AbstractGoogleConfig.dryRun){
+				IOUtils.write(toFile, text);
+			}
 		}
 	}
 

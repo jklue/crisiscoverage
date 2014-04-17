@@ -5,9 +5,6 @@ import info.crisiscoverage.crawler.CrawlerConstants;
 import info.crisiscoverage.crawler.CurrentCrawlExt;
 import info.crisiscoverage.crawler.IOUtils;
 import info.crisiscoverage.crawler.LinkUtils;
-import info.crisiscoverage.crawler.CrawlerConstants.Column;
-import info.crisiscoverage.crawler.configs.google.AbstractGoogleConfig.DateRestrict;
-import info.crisiscoverage.crawler.configs.google.ComparedResultObj;
 import info.crisiscoverage.crawler.rule.AbstractRuleController;
 import info.crisiscoverage.crawler.rule.MetaMapper;
 
@@ -17,13 +14,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.StringTokenizer;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -214,10 +208,11 @@ public abstract class AbstractCrawlerConfig<O> implements CrawlerConstants{
 	 * @param includeHeaders boolean
 	 * @param cellSizeLimit int if < 1, no limit.
 	 * @param filenameAppend optional String to append to filename
+	 * @param runAdditional
 	 * @return Path
 	 * @throws Exception 
 	 */
-	public Path metaToTable(MetaMode metaMode, boolean includeHeaders, int cellSizeLimit, String filenameAppend) throws Exception{
+	public Path metaToTable(MetaMode metaMode, boolean includeHeaders, int cellSizeLimit, String filenameAppend, boolean runAdditional) throws Exception{
 		resetForRun();
 		
 		List<Map<Column,String>> dedupList = new ArrayList<>();
@@ -239,7 +234,9 @@ public abstract class AbstractCrawlerConfig<O> implements CrawlerConstants{
 			metaToTable(metaMode, csvFile, csvOptions, entry, includeHeaders, cellSizeLimit, filenameAppend,dedupList);
 		}
 		
-		return additionalMetaToTable(csvFile, metaMode, includeHeaders, cellSizeLimit, filenameAppend);
+		if (runAdditional)
+			return additionalMetaToTable(csvFile, metaMode, includeHeaders, cellSizeLimit, filenameAppend);
+		else return csvFile;
 	}
 	
 	/**

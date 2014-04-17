@@ -3,9 +3,6 @@ package info.crisiscoverage.crawler.configs.google;
 import info.crisiscoverage.crawler.IOUtils;
 import info.crisiscoverage.crawler.JsoupUtils;
 import info.crisiscoverage.crawler.LinkUtils;
-import info.crisiscoverage.crawler.CrawlerConstants.Column;
-import info.crisiscoverage.crawler.CrawlerConstants.CsvOptions;
-import info.crisiscoverage.crawler.CrawlerConstants.MetaMode;
 import info.crisiscoverage.crawler.configs.AbstractApiXmlDomCrawlerConfig;
 import info.crisiscoverage.crawler.configs.BaseCleanupStringRule;
 import info.crisiscoverage.crawler.rule.html.AbstractHtmlDomRule;
@@ -26,6 +23,7 @@ import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.Set;
 import java.util.StringTokenizer;
+import java.util.TreeMap;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -39,7 +37,12 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.net.UrlEscapers;
 
 public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfig{
-
+	
+	public static final String defaultSiteTypeAll = "All";
+	public static final String defaultSiteTypeTraditional = "Traditional";
+	public static final String defaultSiteTypeIndependent = "Independent";
+	public static final String defaultSiteTypeBlogsSocial = "Blogs-Social";
+	
 	private int tmpCount = 0;
 
 	public static boolean dryRun = false;
@@ -52,7 +55,7 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 
 			/* FOR ALL GOOGLE */
 			mediaLookup.add("");
-			mediaTypeMap.put("", "All");
+			mediaTypeMap.put("", defaultSiteTypeAll);
 
 			boolean firstRow = true;
 			for (String line : siteLines){
@@ -482,29 +485,45 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 	protected void runLiveApiSearch(
 			final Map<Param,String> params, int minPageOrOffset, int maxPageOrOffset, boolean archive,
 			DateRestrict dateRestrict, Date dateStart, int numberOfDateIncrements,String customDocIdPortion, boolean forceEnglish, int jumpForwardNPeriods) throws Exception{
+		
+		int periodsBack = dateRestrict.periodsBack(Calendar.getInstance().getTime(), dateStart, roundDown(dateRestrict));	
+		runLiveApiSearch(
+				params, minPageOrOffset, maxPageOrOffset, archive, dateRestrict, periodsBack, numberOfDateIncrements, customDocIdPortion, forceEnglish, jumpForwardNPeriods);
+	}
+	
+	/**
+	 * Build Query and run live search, directing date ranges.
+	 * @param params
+	 * @param minPageOrOffset
+	 * @param maxPageOrOffset
+	 * @param archive
+	 * @param dateRestrict
+	 * @param periodsBack
+	 * @param numberOfDateIncrements
+	 * @param customDocIdPortion
+	 * @param forceEnglish
+	 * @param jumpForwardNPeriods
+	 * @throws Exception
+	 */
+	protected void runLiveApiSearch(
+			final Map<Param,String> params, int minPageOrOffset, int maxPageOrOffset, boolean archive,
+			DateRestrict dateRestrict, int periodsBack, int numberOfDateIncrements,String customDocIdPortion, boolean forceEnglish, int jumpForwardNPeriods) throws Exception{
 
 		//handle archive
 		if (archive) archiveCalled();
 
-		//Main work here is to figure out how many increments is the start, stored as 'd'.
-
-		boolean roundDown = dateRestrict.equals(DateRestrict.years) || dateRestrict.equals(DateRestrict.months) ? true : false;
-		//		boolean roundDown = false;//NOTE: MAY NEED TO ADJUST THIS MORE
-
-		int d = dateRestrict.periodsBack(Calendar.getInstance().getTime(), dateStart, roundDown);
-
 		//number of increments is 8 ... i, result calculated from 21 ... 14.  If jumpForward, then 15 ... 14. 
-		System.out.println("... original d: "+d+", new d: "+(d-jumpForwardNPeriods));
-		if (jumpForwardNPeriods > 0) d -= jumpForwardNPeriods;
+		System.out.println("... original periodsBack: "+periodsBack+", new periodsBack: "+(periodsBack-jumpForwardNPeriods));
+		if (jumpForwardNPeriods > 0) periodsBack -= jumpForwardNPeriods;
 
-		if (d > 0){
+		if (periodsBack > 0){
 			//decrement d down to 1 over loop.
 			for (int i= jumpForwardNPeriods > 0? jumpForwardNPeriods : 1; i<= numberOfDateIncrements; i++){
-				if (d > 0){
-					params.put(Param.dateRestrict, dateRestrict.valFor(Integer.toString(d)));
-					System.out.println("#"+d+"... runLiveSearch() for next dateRestrict: "+params.get(Param.dateRestrict));
+				if (periodsBack > 0){
+					params.put(Param.dateRestrict, dateRestrict.valFor(Integer.toString(periodsBack)));
+					System.out.println("#"+periodsBack+"... runLiveSearch() for next dateRestrict: "+params.get(Param.dateRestrict));
 					runLiveApiSearch(params, minPageOrOffset, maxPageOrOffset, false,customDocIdPortion, forceEnglish);
-					d--;//Next run will be closer to NOW!
+					periodsBack--;//Next run will be closer to NOW!
 				} else {
 					System.err.println("... calculated number for dateRestrict invalid, skipping.");
 					break;
@@ -512,6 +531,18 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 			}
 		} else System.err.println("... calculated number for dateRestrict invalid, skipping.");
 	}
+	
+	/**
+	 * roundDown?
+	 * @param dateRestrict
+	 * @return
+	 */
+	public boolean roundDown(DateRestrict dateRestrict){
+		boolean roundDown = dateRestrict.equals(DateRestrict.years) ? true : false;
+		return roundDown;
+	}
+	
+	
 
 	/**
 	 * Build Query and run live search. This doesn't account for changing date ranges.
@@ -548,17 +579,6 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 
 			System.out.println("... now q --> "+q);
 		}
-
-		//		if (q.contains(":"))
-		//			q.replace(":", "%3A");
-
-		//		.replaceAll("\\%28", "(") 
-		//		.replaceAll("\\%29", ")") 
-		//		.replaceAll("\\+", "%20") 
-		//		.replaceAll("\\%27", "'") 
-		//		.replaceAll("\\%21", "!") 
-		//		.replaceAll("\\%7E", "~");
-
 		runLiveSearch(template, q, minPageOrOffset, maxPageOrOffset, defaultNum, archive, false,customDocIdPortion);
 	}
 
@@ -582,6 +602,9 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 	 */
 	public void extractFromApiDir(boolean archive, boolean crawlUrls) throws Exception{
 
+		System.out.println("\n--- Extracting Api Entries for folder '"+apiLiveFolder+"', archive? "+archive+", crawlUrls? "+crawlUrls+" ---\n");
+		if (AbstractGoogleConfig.dryRun) System.err.println("--> NOTICE ::: 'AbstractGoogleConfig.dryRun' is enabled <--");
+		
 		//handle archive
 		if (archive) archiveCalled();
 		extractFromApiEntries(IOUtils.entriesWithinDir(apiLiveFolder,false), false, crawlUrls);
@@ -595,8 +618,7 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 	 * @throws Exception
 	 */
 	public void extractFromApiEntries(List<Path> entries, boolean archive, boolean crawlUrls)
-			throws Exception {
-
+			throws Exception {		
 		tmpCount = 0;
 
 		//handle archive
@@ -663,48 +685,50 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 
 			System.out.println("#"+tmpCount+" ... extracting docId: "+docId+", title: "+title+", date: "+date+", url: "+url);
 
-			//write entry
-			Path entryPath = Paths.get(apiEntryFolder, docId+apiFolderExt);
-			IOUtils.write(entryPath, wrapEntryInFeedXml(doc,tag));
+			if (!AbstractGoogleConfig.dryRun){
+				//write entry
+				Path entryPath = Paths.get(apiEntryFolder, docId+apiFolderExt);
+				IOUtils.write(entryPath, wrapEntryInFeedXml(doc,tag));
 
-			//write urls as docId
-			Path urlPath = Paths.get(docIdFolder, docId+urlFolderExt);
-			IOUtils.write(urlPath, url);
+				//write urls as docId
+				Path urlPath = Paths.get(docIdFolder, docId+urlFolderExt);
+				IOUtils.write(urlPath, url);
 
-			//write abstract
-			Path abstractPath = Paths.get(abstractFolder, docId+textFolderExt);
-			abstractText = JsoupUtils.cleanDocBodyToStringForce(abstractText, defaultCleaner, defaultEscapeMode);
-			IOUtils.write(abstractPath, abstractText);
+				//write abstract
+				Path abstractPath = Paths.get(abstractFolder, docId+textFolderExt);
+				abstractText = JsoupUtils.cleanDocBodyToStringForce(abstractText, defaultCleaner, defaultEscapeMode);
+				IOUtils.write(abstractPath, abstractText);
 
-			//write text
-			if (crawlUrls){
+				//write text
+				if (crawlUrls){
 
-				Document textDoc = null;
-				Exception _e = null;
-				try{
-					textDoc = LinkUtils.readUrlPolitely(url,false);
-				} catch (Exception e){
-					_e = e;
-				}
-
-				if (textDoc == null){
+					Document textDoc = null;
+					Exception _e = null;
 					try{
-						String altUrl = tag.getElementsByTag("link").first().attr("href");
-						System.err.println("after normal crawl fail, attempting with alt url: "+altUrl);
-						textDoc = LinkUtils.readUrlPolitely(altUrl,false);
-					} catch (Exception e){}
-				}
+						textDoc = LinkUtils.readUrlPolitely(url,false);
+					} catch (Exception e){
+						_e = e;
+					}
 
-				if (textDoc != null){
-					String text = textDoc.outerHtml();
-					Path textPath = Paths.get(textFolder, docId+textFolderExt);
-					IOUtils.write(textPath, text);
-				} else {
-					Path errorPath = Paths.get(errorFolder, docId+textFolderExt);
-					IOUtils.write(errorPath,  
-							("exception crawling: "+url+" -->\n" + _e == null? "(no stack)" : _e.toString()));
-					System.err.println("ERROR CRAWLING ID: "+docId+" -->");
-					_e.printStackTrace();
+					if (textDoc == null){
+						try{
+							String altUrl = tag.getElementsByTag("link").first().attr("href");
+							System.err.println("after normal crawl fail, attempting with alt url: "+altUrl);
+							textDoc = LinkUtils.readUrlPolitely(altUrl,false);
+						} catch (Exception e){}
+					}
+
+					if (textDoc != null){
+						String text = textDoc.outerHtml();
+						Path textPath = Paths.get(textFolder, docId+textFolderExt);
+						IOUtils.write(textPath, text);
+					} else {
+						Path errorPath = Paths.get(errorFolder, docId+textFolderExt);
+						IOUtils.write(errorPath,  
+								("exception crawling: "+url+" -->\n" + _e == null? "(no stack)" : _e.toString()));
+						System.err.println("ERROR CRAWLING ID: "+docId+" -->");
+						_e.printStackTrace();
+					}
 				}
 			}
 		}
@@ -840,7 +864,7 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 	 */
 	protected String wrapEntryInFeedXml(String entry){
 		StringBuilder sb = new StringBuilder();
-		sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>").append("\n"); 
+		sb.append(defaultXmlHeader).append("\n"); 
 		sb.append("<feed gd:kind=\"customsearch#search\" xmlns=\"http://www.w3.org/2005/Atom\" xmlns:cse=\"http://schemas.google.com/cseapi/2010\" "+
 				"xmlns:gd=\"http://schemas.google.com/g/2005\" xmlns:opensearch=\"http://a9.com/-/spec/opensearch/1.1/\">").append("\n");
 		sb.append(entry).append("\n");
@@ -890,124 +914,125 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 	 */
 	protected abstract Set<String> extenderIgnoreUrlsExact();
 
-//	@Override
-//	protected Path additionalMetaToTable(
-//			Path csvFile, MetaMode metaMode, boolean includeHeaders, int cellSizeLimit, String filenameAppend) throws Exception{
-//
-//		//ADD COMPARED_RESULTS
-//		if (metaMode.isQueryStatsMode()){
-//			System.out.println("\n### NOW ATTEMPTING TO APPEND COMPARED RESULTS ###\n");
-//			try {
-//				List<String> siteLines = IOUtils.readLines(csvFile);
-//
-//				boolean firstRow = true;
-//				List<Column> headers = new ArrayList<>();
-//				List<Column> resultHeaders = new ArrayList<>();
-//				for (Column c : Column.values()){
-//					if (c.isQueryAndResultColumn()) resultHeaders.add(c);
-//				}
-//
-//				/* key is the queryDistinct with dateRestrict stripped. */
-//				Map<String, ComparedResultObj> comparedMap = new HashMap<>();
-//
-//				int lineNum = -1;
-//				for (String line : siteLines){
-//					lineNum++;
-//					if (!Strings.isNullOrEmpty(line)){
-//
-//						List<String> row = new ArrayList<String>();
-//					    
-//						String l;
-//						if(firstRow) l = StringUtils.replace(line,",","\t");
-//						else l = StringUtils.replace(line,"\",\"","\"\t\"");//get a valid separator
-//						StringTokenizer tokenizer = new StringTokenizer(l,"\t");
-//						
-//						while (tokenizer.hasMoreTokens()){
-//							row.add(StringUtils.replace(tokenizer.nextToken(),"\"",""));
-//						}						
-//
-//						if (firstRow){
-//							firstRow = false;
-//							for (String cell : row){
-//								try{
-//									Column c = Column.valueOf(cell);
-//									System.out.println("... detected header column: '"+c.name()+"'");
-//									headers.add(c);
-//								} catch(Exception e){
-//									System.err.println("WARNING ::: cell '"+cell+"' in header row not recognized as a Column!");
-//									headers.add(null);
-//								}
-//							}
-//							continue;
-//						}
-//
-//						int qdIdx = headers.indexOf(Column.query_distinct);
-//						if (qdIdx > -1){
-//
-//							String qdId = stripDateRestrictFromQueryDistinct(row.get(qdIdx));
-//
-//							ComparedResultObj cro = null;
-//							if(comparedMap.containsKey(qdId)){
-//								cro = comparedMap.get(qdId);
-//							} else {
-//								int pIdx = headers.indexOf(Column.query_period);
-//								if (pIdx > -1){
-//									String pStr = row.get(pIdx);
-//									DateRestrict p = null;
-//									try{
-//										p = DateRestrict.valueOf(pStr);
-//									} catch(Exception e){
-//										e.printStackTrace();
-//									}
-//
-//									if (p != null){
-//										cro = new ComparedResultObj(qdId,p,headers,resultHeaders);
-//										comparedMap.put(qdId,cro);
-//									} else {
-//										System.err.println("... skipping row #"+lineNum+", no detected dateRestrict within query_period cell.");
-//									}
-//								} else {
-//									System.err.println("... skipping row #"+lineNum+", no query_period cell.");
-//								}
-//							}
-//
-//							if (cro == null) continue;
-//
-//							//HAVE CRO, POPULATE
-//							cro.addRowToPeriodValMap(row);
-//
-//						} else {
-//							System.err.println("... skipping row #"+lineNum+", no query_distinct cell.");
-//							continue;
-//						}
-//					}
-//				}//end for lines
-//
-//				//Write out the results
-//				Path csvFile2 = Paths.get(csvFile.getParent().toString(),"(Compared)"+csvFile.getFileName().toString());
-//				boolean firstRun = true;
-//				for (Map.Entry<String, ComparedResultObj> entry : comparedMap.entrySet()){
-//					List<Map<Column,String>> map = entry.getValue().populateCompareResult();
-//
-//					for (Map<Column,String> row : map){
-//						CsvOptions csvOptions = CsvOptions.append_data;
-//						if (firstRun){
-//							firstRun = false;
-//							if (includeHeaders)
-//								csvOptions = CsvOptions.create_headers_data;
-//							else csvOptions = CsvOptions.create_no_headers_data;
-//						}
-//						IOUtils.writeCsv(csvFile2, row, csvOptions, cellSizeLimit);
-//					}
-//				}
-//
-//				return csvFile2;
-//				
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
-//
-//		}
-//		return csvFile;
-//	}
+	@Override
+	protected Path additionalMetaToTable(
+			Path csvFile, MetaMode metaMode, boolean includeHeaders, int cellSizeLimit, String filenameAppend) throws Exception{
+
+		//ADD COMPARED_RESULTS
+		if (metaMode.isQueryStatsMode()){
+			System.out.println("\n### NOW ATTEMPTING TO APPEND COMPARED RESULTS ###\n");
+			try {
+				List<String> siteLines = IOUtils.readLines(csvFile);
+
+				boolean firstRow = true;
+				List<Column> headers = new ArrayList<>();
+				List<Column> resultHeaders = new ArrayList<>();
+				for (Column c : Column.values()){
+					if (c.isQueryAndResultColumn()) resultHeaders.add(c);
+				}
+
+				/* key is the queryDistinct with dateRestrict stripped. */
+				Map<String, ComparedResultObj> comparedMap = new TreeMap<>();
+
+				int lineNum = -1;
+				for (String line : siteLines){
+					lineNum++;
+					if (!Strings.isNullOrEmpty(line)){
+
+						List<String> row = new ArrayList<String>();
+					    
+						String l;
+						if(firstRow) l = StringUtils.replace(line,",","\t");
+						else l = StringUtils.replace(line,"\",\"","\"\t\"");//get a valid separator
+						StringTokenizer tokenizer = new StringTokenizer(l,"\t");
+						
+						while (tokenizer.hasMoreTokens()){
+							row.add(StringUtils.replace(tokenizer.nextToken(),"\"",""));
+						}						
+
+						if (firstRow){
+							firstRow = false;
+							for (String cell : row){
+								try{
+									Column c = Column.valueOf(cell);
+									System.out.println("... detected header column: '"+c.name()+"'");
+									headers.add(c);
+								} catch(Exception e){
+									System.err.println("WARNING ::: cell '"+cell+"' in header row not recognized as a Column!");
+									headers.add(null);
+								}
+							}
+							continue;
+						}
+
+						int qdIdx = headers.indexOf(Column.query_distinct);
+						if (qdIdx > -1){
+
+							String qdId = stripDateRestrictFromQueryDistinct(row.get(qdIdx));
+
+							ComparedResultObj cro = null;
+							if(comparedMap.containsKey(qdId)){
+								cro = comparedMap.get(qdId);
+							} else {
+								int pIdx = headers.indexOf(Column.query_period);
+								if (pIdx > -1){
+									String pStr = row.get(pIdx);
+									DateRestrict p = null;
+									try{
+										p = DateRestrict.valueOf(pStr);
+									} catch(Exception e){
+										e.printStackTrace();
+									}
+
+									if (p != null){
+										cro = new ComparedResultObj(qdId,p,headers,resultHeaders);
+										comparedMap.put(qdId,cro);
+									} else {
+										System.err.println("... skipping row #"+lineNum+", no detected dateRestrict within query_period cell.");
+									}
+								} else {
+									System.err.println("... skipping row #"+lineNum+", no query_period cell.");
+								}
+							}
+
+							if (cro == null) continue;
+
+							//HAVE CRO, POPULATE
+							cro.addRowToPeriodValMap(row);
+
+						} else {
+							System.err.println("... skipping row #"+lineNum+", no query_distinct cell.");
+							continue;
+						}
+					}
+				}//end for lines
+
+				//Write out the results
+				Path csvFile2 = Paths.get(csvFile.getParent().toString(),"(Compared)"+csvFile.getFileName().toString());
+				boolean firstRun = true;
+				
+				for (Map.Entry<String, ComparedResultObj> entry : comparedMap.entrySet()){
+					List<Map<Column,String>> map = entry.getValue().populateCompareResult();
+					
+					for (Map<Column,String> row : map){
+						CsvOptions csvOptions = CsvOptions.append_data;
+						if (firstRun){
+							firstRun = false;
+							if (includeHeaders)
+								csvOptions = CsvOptions.create_headers_data;
+							else csvOptions = CsvOptions.create_no_headers_data;
+						}
+						IOUtils.writeCsv(csvFile2, row, csvOptions, cellSizeLimit);
+					}
+				}
+
+				return csvFile2;
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+		}
+		return csvFile;
+	}
 }

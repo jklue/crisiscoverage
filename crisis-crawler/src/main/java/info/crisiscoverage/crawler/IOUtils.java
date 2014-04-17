@@ -17,6 +17,7 @@ import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -54,7 +55,7 @@ public class IOUtils implements CrawlerConstants{
 				}
 			}
 		}
-		
+		Collections.sort(entries);
 		System.out.println("# entries: "+entries.size());
 		System.out.println(Arrays.toString(entries.toArray()));
 		return entries;
@@ -67,16 +68,17 @@ public class IOUtils implements CrawlerConstants{
 	 * @throws IOException
 	 */
 	public static List<Path> getDirectories(final Path dir) throws IOException {
-		final List<Path> dirlist = new ArrayList<>();
+		final List<Path> dirList = new ArrayList<>();
 		try (DirectoryStream<Path> stream = Files.newDirectoryStream(dir)) {
 			for (final Iterator<Path> it = stream.iterator(); it.hasNext();) {
 				Path p = it.next();
 				if (!Files.isDirectory(p)) continue;
-				dirlist.add(p);
-				dirlist.addAll(getDirectories(p));//recurse
+				dirList.add(p);
+				dirList.addAll(getDirectories(p));//recurse
 			}
 		}
-		return dirlist;
+		Collections.sort(dirList);
+		return dirList;
 	}
 
 	/**
@@ -94,6 +96,7 @@ public class IOUtils implements CrawlerConstants{
 				entries.add(p);
 			}
 		}
+		Collections.sort(entries);
 		return entries;
 	}
 	
@@ -341,6 +344,18 @@ public class IOUtils implements CrawlerConstants{
 	}
 	
 	/**
+	 * Return extension from filename.
+	 * @param filenameFull
+	 * @return
+	 */
+	public static String filenameExt(String filenameFull){
+		if (Strings.isNullOrEmpty(filenameFull)) return "";
+		if (filenameFull.contains("."))
+			return StringUtils.substringAfterLast(filenameFull,".");
+		else return "";
+	}
+	
+	/**
 	 * Filename using current date.
 	 * @param filenameAppend optional String to append
 	 * @param ext String e.g. ".html"
@@ -458,5 +473,90 @@ public class IOUtils implements CrawlerConstants{
 		System.out.println("... renaming file from '"+path.getFileName().toString()+"' to '"+newName+"'");
 		Files.copy(path, newPath);
 		Files.delete(path);
+	}
+	
+	/**
+	 * Apply Match Rules to entries
+	 * @param dirPath
+	 * @param includeSubdirectories
+	 * @param filePart
+	 * @param stringMatch
+	 * @param matchStr
+	 * @param firstResult
+	 * @return List<Path>
+	 * @throws IOException
+	 */
+	public static List<Path> findEntriesMatching(
+			String dirPath, boolean includeSubdirectories, FilePart filePart, StringMatch stringMatch, String matchStr, boolean firstResult) throws IOException{
+		List<Path> matches = new ArrayList<>();
+		List<Path> files = IOUtils.entriesWithinDir(dirPath,includeSubdirectories);
+		System.out.println("\n### Running findEntriesMatching(...) on dirPath: "+dirPath+", includeSubDirectories? "+includeSubdirectories+", filePart: "+filePart.name()+", stringMatch: "+stringMatch.name()+", matchStr: "+matchStr+", firstResult? "+firstResult+"\n");
+		for (Path file : files){
+			if (isMatch(file,filePart,stringMatch,matchStr)){
+				matches.add(file);
+				System.out.println("... found match on file: "+file.getFileName().toString());
+				if (firstResult) break;
+			}
+		}
+		
+		return matches;
+	}
+	
+	/**
+	 * Is the path provided a match?
+	 * @param path
+	 * @param filePart
+	 * @param stringMatch
+	 * @param matchStr
+	 * @return
+	 * @throws IOException 
+	 */
+	public static boolean isMatch(Path path, FilePart filePart, StringMatch stringMatch, String matchStr) throws IOException{
+		
+		switch(filePart){
+		case path:
+			return isMatch(path.toString(),stringMatch,matchStr);
+		case filename_full:
+			return isMatch(path.getFileName().toString(),stringMatch,matchStr);
+		case filename_no_extension:
+			return isMatch(filenameWithoutExt(path.getFileName().toString()),stringMatch,matchStr);
+		case extension:
+			return isMatch(filenameExt(path.getFileName().toString()),stringMatch,matchStr);
+		case content:
+			if (Files.isDirectory(path)) return false;
+			return isMatch(read(path),stringMatch,matchStr);
+			default:
+				return false;
+		}
+	}
+	
+	/**
+	 * Is the String provided a match.
+	 * @param source
+	 * @param stringMatch
+	 * @param matchStr
+	 * @return
+	 */
+	public static boolean isMatch(String source, StringMatch stringMatch, String matchStr){
+		switch(stringMatch){
+		case starting_with:
+			return StringUtils.startsWith(source, matchStr);
+		case starting_without:
+			return !StringUtils.startsWith(source, matchStr);
+		case ending_with:
+			return StringUtils.endsWith(source, matchStr);
+		case ending_without:
+			return !StringUtils.endsWith(source, matchStr);
+		case containing:
+			return StringUtils.contains(source, matchStr);
+		case not_containing:
+			return !StringUtils.contains(source, matchStr);
+		case regex:
+			return source.matches(matchStr);
+		case without_regex:
+			return !source.matches(matchStr);
+			default:
+				return false;
+		}
 	}
 }
