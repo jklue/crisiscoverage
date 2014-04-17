@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed gd:kind="customsearch#search" xmlns="http://www.w3.org/2005/Atom" xmlns:cse="http://schemas.google.com/cseapi/2010" xmlns:gd="http://schemas.google.com/g/2005" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">
+<entry gd:kind="customsearch#result"> 
+ <id>
+   http://topics.nytimes.com/top/reference/timestopics/subjects/t/typhoon_haiyan_2013/ 
+ </id> 
+ <updated>
+   1970-01-17T01:40:48.000Z 
+ </updated> 
+ <title type="html">&lt;b&gt;Typhoon Haiyan&lt;/b&gt; (2013) - The New York Times</title> 
+ <link href="http://topics.nytimes.com/top/reference/timestopics/subjects/t/typhoon_haiyan_2013/" title="topics.nytimes.com" /> 
+ <summary type="html">&lt;b&gt;News&lt;/b&gt; about &lt;b&gt;Typhoon Haiyan&lt;/b&gt; (2013). Commentary and archival information &lt;br&gt; about &lt;b&gt;Typhoon Haiyan&lt;/b&gt; (2013) from The New York Times.</summary> 
+ <cse:cacheid>
+   S2BHvPlghr4J 
+ </cse:cacheid> 
+ <cse:formattedurl type="html">
+   topics.nytimes.com/top/reference/.../t/&lt;b&gt;typhoon&lt;/b&gt;_&lt;b&gt;haiyan&lt;/b&gt;_2013/ 
+ </cse:formattedurl> 
+ <cse:pagemap> 
+  <cse:dataobject type="metatags"> 
+   <cse:attribute name="name" value="Typhoon Haiyan (2013)" /> 
+   <cse:attribute name="node" value="Top/Reference/Times Topics/Subjects/T/Typhoon Haiyan (2013)" /> 
+   <cse:attribute name="path" value="top/reference/timestopics/subjects/t/typhoon_haiyan_2013" /> 
+   <cse:attribute name="dsk" value="World" /> 
+   <cse:attribute name="summary" value="News about Typhoon Haiyan (2013), including commentary and archival articles published in The New York Times." /> 
+   <cse:attribute name="k2id" value="100000002547973" /> 
+   <cse:attribute name="pt" value="Topic" /> 
+   <cse:attribute name="cg" value="World" /> 
+   <cse:attribute name="gtn" value="Typhoon Haiyan (2013)" /> 
+   <cse:attribute name="pst" value="Subject" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="cse_image"> 
+   <cse:attribute name="src" value="http://graphics8.nytimes.com/images/2014/02/04/multimedia/aquino-interview/aquino-interview-thumbWide-v3.jpg" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="cse_thumbnail"> 
+   <cse:attribute name="width" value="152" /> 
+   <cse:attribute name="height" value="100" /> 
+   <cse:attribute name="src" value="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQ0oWQdyBMtFtOragCrszDu95TZXUfvMB401cxzNM6ALDYWe9pAA6Xm5w" /> 
+  </cse:dataobject> 
+ </cse:pagemap> 
+ <opensearch:totalresults>
+   102000 
+ </opensearch:totalresults>
+</entry>
+</feed>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed gd:kind="customsearch#search" xmlns="http://www.w3.org/2005/Atom" xmlns:cse="http://schemas.google.com/cseapi/2010" xmlns:gd="http://schemas.google.com/g/2005" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">
+<entry gd:kind="customsearch#result"> 
+ <id>
+   http://www.asiantour.com/2013/12/03/els-blog-thoughts-with-victims-of-typhoon-haiyan/ 
+ </id> 
+ <updated>
+   1970-01-17T01:00:28.800Z 
+ </updated> 
+ <title type="html">Els &lt;b&gt;Blog&lt;/b&gt;: Thoughts with victims of &lt;b&gt;Typhoon Haiyan&lt;/b&gt; | Asian Tour &lt;b&gt;...&lt;/b&gt;</title> 
+ <link href="http://www.asiantour.com/2013/12/03/els-blog-thoughts-with-victims-of-typhoon-haiyan/" title="www.asiantour.com" /> 
+ <summary type="html">By Ernie Els. Golf these days is a global game and we&amp;#39;re all part of one big family, &lt;br&gt; so my latest &lt;b&gt;blog&lt;/b&gt; could only begin with a thought and a prayer sent to those&amp;nbsp;...</summary> 
+ <cse:cacheid>
+   BIBlKzAgaOUJ 
+ </cse:cacheid> 
+ <cse:formattedurl type="html">
+   www.asiantour.com/.../els-&lt;b&gt;blog&lt;/b&gt;-thoughts-with-victims-of-&lt;b&gt;typhoon&lt;/b&gt;-&lt;b&gt;haiyan&lt;/b&gt;/ 
+ </cse:formattedurl> 
+ <cse:pagemap> 
+  <cse:dataobject type="metatags"> 
+   <cse:attribute name="viewport" value="width=device-width, initial-scale=1.0, maximum-scale=1.0" /> 
+   <cse:attribute name="apple-itunes-app" value="app-id=751132091" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="cse_image"> 
+   <cse:attribute name="src" value="http://www.asiantour.com/wp-content/uploads/2013/10/20131020DPM009_Ernie_Els-700x300.jpg" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="cse_thumbnail"> 
+   <cse:attribute name="width" value="343" /> 
+   <cse:attribute name="height" value="147" /> 
+   <cse:attribute name="src" value="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXccNopXRe88nXWm5ynTqNzpuec1xQQKK5JU-FMQwlHAOLjkBLWMcFivWp" /> 
+  </cse:dataobject> 
+ </cse:pagemap> 
+ <opensearch:totalresults>
+   105000 
+ </opensearch:totalresults>
+</entry>
+</feed>

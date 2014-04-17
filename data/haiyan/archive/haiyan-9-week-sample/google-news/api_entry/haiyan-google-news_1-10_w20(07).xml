@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed gd:kind="customsearch#search" xmlns="http://www.w3.org/2005/Atom" xmlns:cse="http://schemas.google.com/cseapi/2010" xmlns:gd="http://schemas.google.com/g/2005" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">
+<entry gd:kind="customsearch#result"> 
+ <id>
+   http://www.telegraph.co.uk/news/worldnews/asia/philippines/10469656/Typhoon-Haiyan-Philippines-death-toll-rises-above-5200.html 
+ </id> 
+ <updated>
+   1970-01-17T00:46:04.800Z 
+ </updated> 
+ <title type="html">&lt;b&gt;Typhoon Haiyan&lt;/b&gt;: Philippines death toll rises above 5,200 - Telegraph</title> 
+ <link href="http://www.telegraph.co.uk/news/worldnews/asia/philippines/10469656/Typhoon-Haiyan-Philippines-death-toll-rises-above-5200.html" title="www.telegraph.co.uk" /> 
+ <summary type="html">The death toll from &lt;b&gt;Typhoon Haiyan&lt;/b&gt; has risen above 5,200, making it one of the &lt;br&gt; ... told a &lt;b&gt;news&lt;/b&gt; conference at UN headquarters after a trip to the Philippines.</summary> 
+ <cse:formattedurl type="html">
+   www.telegraph.co.uk/&lt;b&gt;news&lt;/b&gt;/world&lt;b&gt;news&lt;/b&gt;/.../&lt;b&gt;Typhoon&lt;/b&gt;-&lt;b&gt;Haiyan&lt;/b&gt;-Philippines-death -toll-rises-above-5200.html 
+ </cse:formattedurl> 
+ <cse:pagemap> 
+  <cse:dataobject type="metatags"> 
+   <cse:attribute name="tmgads.zone" value="news.worldnews.asia.philippines" /> 
+   <cse:attribute name="tmgads.channel" value="news" /> 
+   <cse:attribute name="tmgads.section" value="news-worldnews-asia-philippines" /> 
+   <cse:attribute name="tmgads.articleid" value="10469656" /> 
+   <cse:attribute name="tmgads.pagetype" value="story" /> 
+   <cse:attribute name="tmgads.level" value="5" /> 
+   <cse:attribute name="tmgads.geo" value="US" /> 
+   <cse:attribute name="dcsext.akamigeo" value="US" /> 
+   <cse:attribute name="section-id" value="2139" /> 
+   <cse:attribute name="last-modified" value="2013-11-23" /> 
+   <cse:attribute name="article-id" value="10469656" /> 
+   <cse:attribute name="title" value="Typhoon Haiyan: Philippines death toll rises above 5,200" /> 
+   <cse:attribute name="author" value="AFP" /> 
+   <cse:attribute name="gsamlc" value="news/worldnews/asia/philippines" /> 
+   <cse:attribute name="gsachannel" value="news" /> 
+   <cse:attribute name="gsachannelname" value="News" /> 
+   <cse:attribute name="gsacategory" value="worldnews" /> 
+   <cse:attribute name="gsagenre" value="asia" /> 
+   <cse:attribute name="gsasectionuniquename" value="news-world_news-asia-philippines" /> 
+   <cse:attribute name="gsaarticletype" value="Story" /> 
+   <cse:attribute name="dc.date.issued" value="2013-11-23" /> 
+   <cse:attribute name="fb:app_id" value="120118784736295" /> 
+   <cse:attribute name="fb:admins" value="686953094,531239902,100002344351237" /> 
+   <cse:attribute name="og:description" value="Official figures from Philippines government sees death toll from deadly Typhoon Haiyan rise above 5,200 with 1,611 people still unaccounted for two weeks after the disaster" /> 
+   <cse:attribute name="og:site_name" value="Telegraph.co.uk" /> 
+   <cse:attribute name="og:title" value="Typhoon Haiyan: Philippines death toll rises above 5,200  - Telegraph" /> 
+   <cse:attribute name="og:url" value="http://www.telegraph.co.uk/news/worldnews/asia/philippines/10469656/Typhoon-Haiyan-Philippines-death-toll-rises-above-5200.html" /> 
+   <cse:attribute name="og:image" value="http://i.telegraph.co.uk/multimedia/archive/02736/Candahug_2736489k.jpg" /> 
+   <cse:attribute name="og:type" value="article" /> 
+   <cse:attribute name="twitter:card" value="summary" /> 
+   <cse:attribute name="twitter:site" value="@Telegraph" /> 
+   <cse:attribute name="dcsext.mlc" value="/news/worldnews/asia/philippines" /> 
+   <cse:attribute name="dcsext.genre" value="asia" /> 
+   <cse:attribute name="dcsext.category" value="worldnews" /> 
+   <cse:attribute name="wt.cg_s" value="worldnews" /> 
+   <cse:attribute name="dcsext.channel" value="news" /> 
+   <cse:attribute name="wt.cg_n" value="news" /> 
+   <cse:attribute name="dcsext.content_type" value="Story" /> 
+   <cse:attribute name="dcsext.level" value="5" /> 
+   <cse:attribute name="dcsext.author" value="AFP" /> 
+   <cse:attribute name="dcsext.articlefirstpublished" value="2013-11-23 01:52" /> 
+   <cse:attribute name="dcsext.articleid" value="10469656" /> 
+   <cse:attribute name="dcsext.cf" value="1" /> 
+   <cse:attribute name="dcsext.pd" value="1" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="article"> 
+   <cse:attribute name="headline" value="Typhoon Haiyan: Philippines death toll rises above 5,200" /> 
+   <cse:attribute name="name" value="Typhoon Haiyan: Philippines death toll rises above 5,200" /> 
+   <cse:attribute name="alternativeheadline" value="Official figures from Philippines government sees death toll from deadly Typhoon Haiyan rise above 5,200 with 1,611 people still unaccounted for two weeks after the disaster" /> 
+   <cse:attribute name="description" value="Official figures from Philippines government sees death toll from deadly Typhoon Haiyan rise above 5,200 with 1,611 people still unaccounted for two weeks after the disaster" /> 
+   <cse:attribute name="image" value="http://i.telegraph.co.uk/multimedia/archive/02736/Candahug_2736489b.jpg" /> 
+   <cse:attribute name="author" value="AFP" /> 
+   <cse:attribute name="datepublished" value="2013-11-23" /> 
+   <cse:attribute name="articlebody" value="The death toll from Typhoon Haiyan has risen above 5,200, making it one of the Philippines' deadliest ever natural disasters, the government said on Friday, two weeks after the devastating..." /> 
+  </cse:dataobject> 
+  <cse:dataobject type="cse_image"> 
+   <cse:attribute name="src" value="http://i.telegraph.co.uk/multimedia/archive/02736/Candahug_2736489k.jpg" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="cse_thumbnail"> 
+   <cse:attribute name="width" value="284" /> 
+   <cse:attribute name="height" value="177" /> 
+   <cse:attribute name="src" value="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTlNr2yhGvmN_1d5mfi2q_sgb4HXUPMr0UEceTj2f97oxGtWU8cos-I8zE" /> 
+  </cse:dataobject> 
+ </cse:pagemap> 
+ <opensearch:totalresults>
+   101000 
+ </opensearch:totalresults>
+</entry>
+</feed>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed gd:kind="customsearch#search" xmlns="http://www.w3.org/2005/Atom" xmlns:cse="http://schemas.google.com/cseapi/2010" xmlns:gd="http://schemas.google.com/g/2005" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">
+<entry gd:kind="customsearch#result"> 
+ <id>
+   http://www.cnn.com/2014/03/26/world/asia/philippines-prince-charles-measles-vaccination/ 
+ </id> 
+ <updated>
+   1970-01-17T03:43:12.000Z 
+ </updated> 
+ <title type="html">Prince Charles arranges mass vaccination for &lt;b&gt;Typhoon Haiyan&lt;/b&gt; victims</title> 
+ <link href="http://www.cnn.com/2014/03/26/world/asia/philippines-prince-charles-measles-vaccination/" title="www.cnn.com" /> 
+ <summary type="html">The virus has ravaged the country since &lt;b&gt;Typhoon Haiyan&lt;/b&gt; -- known as Yolanda in &lt;br&gt; the Philippines -- hit on November 8 last year, ... Part of complete &lt;b&gt;coverage&lt;/b&gt; on.</summary> 
+ <cse:formattedurl type="html">
+   www.cnn.com/2014/03/.../philippines-prince-charles-measles-vaccination/ 
+ </cse:formattedurl> 
+ <cse:pagemap> 
+  <cse:dataobject type="metatags"> 
+   <cse:attribute name="viewport" value="width=1024" /> 
+   <cse:attribute name="medium" value="news" /> 
+   <cse:attribute name="title" value="Prince Charles arranges mass vaccination for Typhoon Haiyan victims - CNN.com" /> 
+   <cse:attribute name="news_keywords" value="Prince Charles measles vaccination" /> 
+   <cse:attribute name="author" value="Max Foster, CNN" /> 
+   <cse:attribute name="section" value="world" /> 
+   <cse:attribute name="source" value="CNN" /> 
+   <cse:attribute name="subsection" value="asia" /> 
+   <cse:attribute name="pubdate" value="2014-03-26T06:44:06Z" /> 
+   <cse:attribute name="lastmod" value="2014-03-26T12:22:47Z" /> 
+   <cse:attribute name="og:title" value="Prince Charles arranges mass vaccination for Typhoon Haiyan victims" /> 
+   <cse:attribute name="og:type" value="article" /> 
+   <cse:attribute name="og:url" value="http://www.cnn.com/2014/03/26/world/asia/philippines-prince-charles-measles-vaccination/index.html" /> 
+   <cse:attribute name="og:site_name" value="CNN" /> 
+   <cse:attribute name="og:image" value="http://i2.cdn.turner.com/cnn/dam/assets/140325171339-philippines-child-measles-vaccination-story-top.jpg" /> 
+   <cse:attribute name="vr:canonical" value="http://www.cnn.com/2014/03/26/world/asia/philippines-prince-charles-measles-vaccination/index.html" /> 
+   <cse:attribute name="fb:page_id" value="129343697106537" /> 
+   <cse:attribute name="fb:app_id" value="80401312489" /> 
+   <cse:attribute name="twitter:card" value="summary" /> 
+   <cse:attribute name="twitter:site" value="@CNN" /> 
+   <cse:attribute name="twitter:site:id" value="759251" /> 
+   <cse:attribute name="twitter:creator" value="@CNN" /> 
+   <cse:attribute name="twitter:creator:id" value="759251" /> 
+   <cse:attribute name="twitter:image" value="http://i2.cdn.turner.com/cnn/dam/assets/140325171339-philippines-child-measles-vaccination-left-tease.jpg" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="newsarticle"> 
+   <cse:attribute name="genre" value="news" /> 
+   <cse:attribute name="inlanguage" value="en-US" /> 
+   <cse:attribute name="description" value="Five million doses of measles and rubella vaccine will be delivered to the Philippines, following a donation organized by Britain's Prince Charles." /> 
+   <cse:attribute name="keywords" value="Prince Charles measles vaccination" /> 
+   <cse:attribute name="author" value="Max Foster, CNN" /> 
+   <cse:attribute name="articlesection" value="world" /> 
+   <cse:attribute name="sourceorganization" value="CNN" /> 
+   <cse:attribute name="datepublished" value="2014-03-26T06:44:06Z" /> 
+   <cse:attribute name="datemodified" value="2014-03-26T12:22:47Z" /> 
+   <cse:attribute name="datecreated" value="2014-03-26T06:44:06Z" /> 
+   <cse:attribute name="contentlocation" value="London" /> 
+   <cse:attribute name="headline" value="Prince Charles arranges mass vaccination for Typhoon Haiyan victims" /> 
+   <cse:attribute name="url" value="http://www.cnn.com/2014/03/26/world/asia/philippines-prince-charles-measles-vaccination/index.html" /> 
+   <cse:attribute name="thumbnailurl" value="http://i2.cdn.turner.com/cnn/dam/assets/140325171339-philippines-child-measles-vaccination-story-top.jpg" /> 
+   <cse:attribute name="image" value="http://i2.cdn.turner.com/cnn/dam/assets/140325171339-philippines-child-measles-vaccination-video-tease.jpg" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="cse_image"> 
+   <cse:attribute name="src" value="http://i2.cdn.turner.com/cnn/dam/assets/140325171339-philippines-child-measles-vaccination-story-top.jpg" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="cse_thumbnail"> 
+   <cse:attribute name="width" value="300" /> 
+   <cse:attribute name="height" value="168" /> 
+   <cse:attribute name="src" value="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQRFJyP4Y3Fy7m2HDHUWfB553XWeOvis_8Am7OX73C3laUOxUlXqbteLo0" /> 
+  </cse:dataobject> 
+ </cse:pagemap> 
+ <opensearch:totalresults>
+   65900 
+ </opensearch:totalresults>
+</entry>
+</feed>

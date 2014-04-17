@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed gd:kind="customsearch#search" xmlns="http://www.w3.org/2005/Atom" xmlns:cse="http://schemas.google.com/cseapi/2010" xmlns:gd="http://schemas.google.com/g/2005" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">
+<entry gd:kind="customsearch#result"> 
+ <id>
+   http://globalnews.ca/tag/super-typhoon-haiyan/ 
+ </id> 
+ <updated>
+   1970-01-17T02:03:50.400Z 
+ </updated> 
+ <title type="html">Super &lt;b&gt;Typhoon Haiyan&lt;/b&gt; | &lt;b&gt;News&lt;/b&gt;, Videos &amp;amp; Articles</title> 
+ <link href="http://globalnews.ca/tag/super-typhoon-haiyan/" title="globalnews.ca" /> 
+ <summary type="html">Super &lt;b&gt;Typhoon Haiyan&lt;/b&gt; videos and latest &lt;b&gt;news&lt;/b&gt; articles; GlobalNews.ca your &lt;br&gt; source for the latest &lt;b&gt;news&lt;/b&gt; on Super &lt;b&gt;Typhoon Haiyan&lt;/b&gt; .</summary> 
+ <cse:cacheid>
+   B1IAkx6o2vcJ 
+ </cse:cacheid> 
+ <cse:formattedurl type="html">
+   global&lt;b&gt;news&lt;/b&gt;.ca/tag/super-&lt;b&gt;typhoon&lt;/b&gt;-&lt;b&gt;haiyan&lt;/b&gt;/ 
+ </cse:formattedurl> 
+ <cse:pagemap> 
+  <cse:dataobject type="metatags"> 
+   <cse:attribute name="viewport" value="width=device-width, initial-scale=1" /> 
+   <cse:attribute name="title" value="Super Typhoon Haiyan | News, Videos &amp; Articles" /> 
+   <cse:attribute name="og:title" value="Super Typhoon Haiyan | News, Videos &amp; Articles" /> 
+   <cse:attribute name="og:description" value="Super Typhoon Haiyan videos and latest news articles" /> 
+   <cse:attribute name="og:url" value="http://globalnews.ca/tag/super-typhoon-haiyan/" /> 
+   <cse:attribute name="og:site_name" value="Global News" /> 
+   <cse:attribute name="twitter:title" value="Super Typhoon Haiyan | News, Videos &amp; Articles" /> 
+   <cse:attribute name="twitter:url" value="http://globalnews.ca/tag/super-typhoon-haiyan/" /> 
+   <cse:attribute name="twitter:description" value="Super Typhoon Haiyan videos and latest news articles" /> 
+   <cse:attribute name="twitter:card" value="summary" /> 
+   <cse:attribute name="twitter:site" value="@globalnews" /> 
+   <cse:attribute name="application-name" value="Global News" /> 
+   <cse:attribute name="msapplication-window" value="width=device-width;height=device-height" /> 
+   <cse:attribute name="msapplication-task" value="name=Subscribe;action-uri=http://globalnews.ca/feed/;icon-uri=http://1.gravatar.com/blavatar/37cef602b5b54d05533ea477943e87b6?s=16" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="cse_image"> 
+   <cse:attribute name="src" value="http://vipmedia.globalnews.ca/2013/11/adg105-1122_2013_174254_high1.jpg?w=256&amp;h=144&amp;crop=1" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="cse_thumbnail"> 
+   <cse:attribute name="width" value="204" /> 
+   <cse:attribute name="height" value="115" /> 
+   <cse:attribute name="src" value="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRP8IPG1oaOi3_yHbrq1nXoFg0o-0IkbMRaaberofmtpPsYBSYNjByMrcY" /> 
+  </cse:dataobject> 
+ </cse:pagemap> 
+ <opensearch:totalresults>
+   65900 
+ </opensearch:totalresults>
+</entry>
+</feed>

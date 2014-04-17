@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed gd:kind="customsearch#search" xmlns="http://www.w3.org/2005/Atom" xmlns:cse="http://schemas.google.com/cseapi/2010" xmlns:gd="http://schemas.google.com/g/2005" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">
+<entry gd:kind="customsearch#result"> 
+ <id>
+   http://www.deseretnews.com/article/865597766/Typhoon-Haiyan-recovery.html?pg=all 
+ </id> 
+ <updated>
+   1970-01-17T03:10:04.800Z 
+ </updated> 
+ <title type="html">LDS Church continues to aid in recovery efforts following &lt;b&gt;Typhoon&lt;/b&gt; &lt;b&gt;...&lt;/b&gt;</title> 
+ <link href="http://www.deseretnews.com/article/865597766/Typhoon-Haiyan-recovery.html?pg=all" title="www.deseretnews.com" /> 
+ <summary type="html">Three months after &lt;b&gt;Typhoon Haiyan&lt;/b&gt; struck the Philippines, recovery is underway. &lt;br&gt; ... By Sarah Jane Weaver, Church &lt;b&gt;News&lt;/b&gt; staff writer. Published: Monday, March&amp;nbsp;...</summary> 
+ <cse:cacheid>
+   kJAZ3vzqliIJ 
+ </cse:cacheid> 
+ <cse:formattedurl type="html">
+   www.deseret&lt;b&gt;news&lt;/b&gt;.com/&lt;b&gt;article&lt;/b&gt;/.../&lt;b&gt;Typhoon&lt;/b&gt;-&lt;b&gt;Haiyan&lt;/b&gt;-recovery.html?pg... 
+ </cse:formattedurl> 
+ <cse:pagemap> 
+  <cse:dataobject type="metatags"> 
+   <cse:attribute name="copyright" value="&copy; 2014 Deseret News Publishing Company" /> 
+   <cse:attribute name="title" value="LDS Church continues to aid in recovery efforts following Typhoon Haiyan" /> 
+   <cse:attribute name="author" value="Sarah Jane Weaver" /> 
+   <cse:attribute name="fb:app_id" value="320112201431112" /> 
+   <cse:attribute name="fb:admins" value="683545112" /> 
+   <cse:attribute name="article:author" value="Sarah Jane Weaver" /> 
+   <cse:attribute name="og:title" value="LDS Church continues to aid in recovery efforts following Typhoon Haiyan" /> 
+   <cse:attribute name="og:url" value="http://www.deseretnews.com/article/865597766/Typhoon-Haiyan-recovery.html?pg=all" /> 
+   <cse:attribute name="og:site_name" value="DeseretNews.com" /> 
+   <cse:attribute name="og:type" value="article" /> 
+   <cse:attribute name="og:image" value="http://www.deseretnews.com/media/photos/web-1309340.jpg" /> 
+   <cse:attribute name="thumbnail" value="http://www.deseretnews.com/media/photos/web-1309340.jpg" /> 
+   <cse:attribute name="image" value="http://www.deseretnews.com/media/photos/web-1309340.jpg" /> 
+   <cse:attribute name="article:published_time" value="2014-03-03T08:00-07:00" /> 
+   <cse:attribute name="medium" value="news" /> 
+   <cse:attribute name="datepublished" value="2014-03-03" /> 
+   <cse:attribute name="datemodified" value="2014-03-03" /> 
+   <cse:attribute name="dsk" value="faith" /> 
+   <cse:attribute name="articleid" value="865597766" /> 
+   <cse:attribute name="twitter:card" value="summary" /> 
+   <cse:attribute name="twitter:site" value="@deseretnews" /> 
+   <cse:attribute name="twitter:creator" value="@" /> 
+   <cse:attribute name="twitter:title" value="LDS Church continues to aid in recovery efforts following Typhoon..." /> 
+   <cse:attribute name="twitter:description" value="Three months after Typhoon Haiyan struck the Philippines, recovery is underway." /> 
+   <cse:attribute name="twitter:app:name:iphone" value="Deseret News" /> 
+   <cse:attribute name="twitter:app:name:ipad" value="Deseret News" /> 
+   <cse:attribute name="twitter:app:name:googleplay" value="Deseret News" /> 
+   <cse:attribute name="twitter:app:url:iphone" value="itms://itunes.apple.com/us/app/deseret-news/id425758986?mt=8&amp;uo=4" /> 
+   <cse:attribute name="twitter:app:url:ipad" value="itms://itunes.apple.com/us/app/deseret-news/id425758986?mt=8&amp;uo=4" /> 
+   <cse:attribute name="twitter:app:url:googleplay" value="https://play.google.com/store/apps/details?id=com.deseretnews.android" /> 
+   <cse:attribute name="twitter:app:id:iphone" value="425758986" /> 
+   <cse:attribute name="twitter:app:id:ipad" value="425758986" /> 
+   <cse:attribute name="twitter:app:id:googleplay" value="com.deseretnews.android" /> 
+   <cse:attribute name="vr:type" value="article" /> 
+   <cse:attribute name="vr:category" value="faith" /> 
+   <cse:attribute name="viewport" value="width=1024, initial-scale=0.1" /> 
+   <cse:attribute name="cxenseparse:recs:recommendable" value="false" /> 
+   <cse:attribute name="parsely-page" value="{&quot;author&quot;:&quot;Sarah Jane Weaver&quot;,&quot;title&quot;:&quot;LDS Church continues to aid in recovery efforts following Typhoon Haiyan&quot;,&quot;section&quot;:&quot;faith&quot;,&quot;type&quot;:&quot;post&quot;,&quot;post_id&quot;:&quot;865597766&quot;,&quot;image_url&quot;:&quot;http:\/\/www.deseretnews.com\/media\/photos\/web-1309340.jpg&quot;,&quot;pub_date&quot;:&quot;2014-03-03T08:00-07:00&quot;}" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="newsarticle"> 
+   <cse:attribute name="description" value="Three months after Typhoon Haiyan struck the Philippines, recovery is underway." /> 
+   <cse:attribute name="thumbnailurl" value="http://www.deseretnews.com/media/photos/web-1309340.jpg" /> 
+   <cse:attribute name="image" value="http://www.deseretnews.com/media/photos/web-1309340.jpg" /> 
+   <cse:attribute name="wordcount" value="1781" /> 
+   <cse:attribute name="datepublished" value="2014-03-03" /> 
+   <cse:attribute name="datemodified" value="2014-03-03" /> 
+   <cse:attribute name="articlesection" value="faith" /> 
+   <cse:attribute name="identifier" value="865597766" /> 
+   <cse:attribute name="headline" value="LDS Church continues to aid in recovery efforts following Typhoon Haiyan" /> 
+   <cse:attribute name="printpage" value="Print" /> 
+   <cse:attribute name="discussionurl" value="1 Comment &raquo;" /> 
+   <cse:attribute name="interactioncount" value="UserComments:1" /> 
+   <cse:attribute name="articlebody" value="TOCLOBAN, Philippines — On the day Typhoon Haiyan caused the water to rise in Tocloban, Analyn Esperas held her only child close. Annammer, 6, was scared; she wrapped her arms around her..." /> 
+  </cse:dataobject> 
+  <cse:dataobject type="person"> 
+   <cse:attribute name="name" value="Sarah Jane Weaver" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="organization"> 
+   <cse:attribute name="name" value="Church News staff writer" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="imageobject"> 
+   <cse:attribute name="url" value="http://img.deseretnews.com/images/article/contentimage/1309340/1309340.jpg" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="usercomments"> 
+   <cse:attribute name="creator" value="J.A. Jones" /> 
+   <cse:attribute name="name" value="J.A. Jones" /> 
+   <cse:attribute name="commenttext" value="It is so important to have follow up articles after major disastrous events. This was a great article that showed a small part of the suffering and tragedy following a major typhoon. It also..." /> 
+   <cse:attribute name="commenttime" value="5:42 p.m. March 3, 2014" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="thumbnail"> 
+   <cse:attribute name="src" value="http://www.deseretnews.com/media/photos/web-1309340.jpg" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="cse_image"> 
+   <cse:attribute name="src" value="http://www.deseretnews.com/media/photos/web-1309340.jpg" /> 
+   <cse:attribute name="type" value="1" /> 
+   <cse:attribute name="width" value="244" /> 
+   <cse:attribute name="height" value="162" /> 
+  </cse:dataobject> 
+ </cse:pagemap> 
+ <opensearch:totalresults>
+   101000 
+ </opensearch:totalresults>
+</entry>
+</feed>

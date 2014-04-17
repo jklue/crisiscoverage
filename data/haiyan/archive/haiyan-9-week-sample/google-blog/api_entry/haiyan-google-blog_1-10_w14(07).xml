@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed gd:kind="customsearch#search" xmlns="http://www.w3.org/2005/Atom" xmlns:cse="http://schemas.google.com/cseapi/2010" xmlns:gd="http://schemas.google.com/g/2005" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">
+<entry gd:kind="customsearch#result"> 
+ <id>
+   http://www.convoyofhope.org/blog/features/disaster-response/philippines-typhoon-response/ 
+ </id> 
+ <updated>
+   1970-01-17T02:15:21.600Z 
+ </updated> 
+ <title type="html">Philippines &lt;b&gt;Typhoon&lt;/b&gt; Response</title> 
+ <link href="http://www.convoyofhope.org/blog/features/disaster-response/philippines-typhoon-response/" title="www.convoyofhope.org" /> 
+ <summary type="html">Super &lt;b&gt;Typhoon Haiyan&lt;/b&gt; Response Update 5 | Download ... The remains of a &lt;br&gt; children&amp;#39;s play area after being hit by &lt;b&gt;Typhoon Haiyan&lt;/b&gt;. | Download. Children &lt;br&gt; wander through the aftermath of Super &lt;b&gt;Typhoon Haiyan&lt;/b&gt; in ..... &lt;b&gt;Blog&lt;/b&gt; Categories &amp;amp; &lt;br&gt; Tags&amp;nbsp;...</summary> 
+ <cse:cacheid>
+   nFZkPizNyjoJ 
+ </cse:cacheid> 
+ <cse:formattedurl type="html">
+   www.convoyofhope.org/&lt;b&gt;blog&lt;/b&gt;/.../philippines-&lt;b&gt;typhoon&lt;/b&gt;-response/ 
+ </cse:formattedurl> 
+ <cse:pagemap> 
+  <cse:dataobject type="metatags"> 
+   <cse:attribute name="viewport" value="width=device-width, initial-scale=1" /> 
+   <cse:attribute name="og:locale" value="en_US" /> 
+   <cse:attribute name="og:type" value="article" /> 
+   <cse:attribute name="og:title" value="Philippines Typhoon Response" /> 
+   <cse:attribute name="og:description" value="Convoy of Hope has a Philippines Typhoon Response team and aid on the ground ready to help those suffering from Super Typhoon Haiyan." /> 
+   <cse:attribute name="og:url" value="http://www.convoyofhope.org/blog/features/disaster-response/philippines-typhoon-response/" /> 
+   <cse:attribute name="og:site_name" value="Convoy of Hope" /> 
+   <cse:attribute name="article:tag" value="Super Typhoon Haiyan" /> 
+   <cse:attribute name="article:section" value="Disaster Services" /> 
+   <cse:attribute name="article:published_time" value="2013-11-08T14:42:38+00:00" /> 
+   <cse:attribute name="article:modified_time" value="2014-03-08T12:46:51+00:00" /> 
+   <cse:attribute name="og:updated_time" value="2014-03-08T12:46:51+00:00" /> 
+   <cse:attribute name="og:image" value="http://www.convoyofhope.org/wp-content/themes/convoy2014/assets/images/fb-share-photo.jpg" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="cse_image"> 
+   <cse:attribute name="src" value="http://www.convoyofhope.org/wp-content/themes/convoy2014/assets/images/fb-share-photo.jpg" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="cse_thumbnail"> 
+   <cse:attribute name="width" value="275" /> 
+   <cse:attribute name="height" value="183" /> 
+   <cse:attribute name="src" value="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyeT1jwAPGo2QhEHgzm79qo-gzBToNaWN4iLEXUKAxN9nl86Rkne1yCcid" /> 
+  </cse:dataobject> 
+ </cse:pagemap> 
+ <opensearch:totalresults>
+   64000 
+ </opensearch:totalresults>
+</entry>
+</feed>

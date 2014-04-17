@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed gd:kind="customsearch#search" xmlns="http://www.w3.org/2005/Atom" xmlns:cse="http://schemas.google.com/cseapi/2010" xmlns:gd="http://schemas.google.com/g/2005" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">
+<entry gd:kind="customsearch#result"> 
+ <id>
+   http://www.oxfam.org/en/emergencies/philippines-typhoon-haiyan 
+ </id> 
+ <updated>
+   1970-01-17T02:31:12.000Z 
+ </updated> 
+ <title type="html">Philippines &lt;b&gt;Typhoon Haiyan&lt;/b&gt; | Oxfam International</title> 
+ <link href="http://www.oxfam.org/en/emergencies/philippines-typhoon-haiyan" title="www.oxfam.org" /> 
+ <summary type="html">Thank you banner, in a village hit by &lt;b&gt;Typhoon Haiyan&lt;/b&gt;, in the Philippines ... &lt;b&gt;Blog&lt;/b&gt;: &lt;br&gt; One month after &lt;b&gt;Typhoon Haiyan&lt;/b&gt;: Rebuilding a just and resilient society.</summary> 
+ <cse:cacheid>
+   nUbfmw5MAXwJ 
+ </cse:cacheid> 
+ <cse:formattedurl type="html">
+   www.oxfam.org/en/emergencies/philippines-&lt;b&gt;typhoon&lt;/b&gt;-&lt;b&gt;haiyan&lt;/b&gt; 
+ </cse:formattedurl> 
+ <cse:pagemap> 
+  <cse:dataobject type="cse_image"> 
+   <cse:attribute name="src" value="http://www.oxfam.org/sites/www.oxfam.org/files/imagecache/middlewidth/philippines-thank-you-460.jpg" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="cse_thumbnail"> 
+   <cse:attribute name="width" value="314" /> 
+   <cse:attribute name="height" value="161" /> 
+   <cse:attribute name="src" value="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQdf_twxlQhckEgEDr9Ch1ncg8BuMn5EHc-HVjnJZgkd2oPrNtQW7JZmKQ" /> 
+  </cse:dataobject> 
+ </cse:pagemap> 
+ <opensearch:totalresults>
+   423000 
+ </opensearch:totalresults>
+</entry>
+</feed>

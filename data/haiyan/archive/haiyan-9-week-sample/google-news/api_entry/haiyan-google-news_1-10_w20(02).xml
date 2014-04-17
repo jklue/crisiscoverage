@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed gd:kind="customsearch#search" xmlns="http://www.w3.org/2005/Atom" xmlns:cse="http://schemas.google.com/cseapi/2010" xmlns:gd="http://schemas.google.com/g/2005" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">
+<entry gd:kind="customsearch#result"> 
+ <id>
+   http://online.wsj.com/news/articles/SB10001424052702304465604579217671422015220 
+ </id> 
+ <updated>
+   1970-01-17T00:50:24.000Z 
+ </updated> 
+ <title type="html">&lt;b&gt;Typhoon Haiyan&lt;/b&gt;: How a Catastrophe Unfolded - WSJ.com</title> 
+ <link href="http://online.wsj.com/news/articles/SB10001424052702304465604579217671422015220" title="online.wsj.com" /> 
+ <summary type="html">What resonated from the &lt;b&gt;news coverage&lt;/b&gt; this time was &lt;b&gt;Haiyan&amp;#39;s&lt;/b&gt; label as a &amp;quot;&lt;br&gt; &lt;b&gt;supertyphoon&lt;/b&gt;.&amp;quot; They also heard the words &amp;quot;storm surge,&amp;quot; but no one around them&lt;br&gt; &amp;nbsp;...</summary> 
+ <cse:cacheid>
+   H71DdZFyfxMJ 
+ </cse:cacheid> 
+ <cse:formattedurl type="html">
+   online.wsj.com/&lt;b&gt;news&lt;/b&gt;/&lt;b&gt;article&lt;/b&gt;s/ SB10001424052702304465604579217671422015220 
+ </cse:formattedurl> 
+ <cse:pagemap> 
+  <cse:dataobject type="metatags"> 
+   <cse:attribute name="dj.asn" value="ip-211" /> 
+   <cse:attribute name="user.type" value="nonsubscriber" /> 
+   <cse:attribute name="user.exp" value="google_bot" /> 
+   <cse:attribute name="page.site" value="wsj" /> 
+   <cse:attribute name="page.region" value="na,us" /> 
+   <cse:attribute name="page.section" value="Article" /> 
+   <cse:attribute name="page.content.type" value="article" /> 
+   <cse:attribute name="og:type" value="article" /> 
+   <cse:attribute name="page.content.source" value="WSJ Online Article" /> 
+   <cse:attribute name="article.template" value="full" /> 
+   <cse:attribute name="article.id" value="SB10001424052702304465604579217671422015220" /> 
+   <cse:attribute name="article.type" value="World News" /> 
+   <cse:attribute name="article.access" value="free" /> 
+   <cse:attribute name="article.origheadline" value="Typhoon Haiyan: How a Catastrophe Unfolded" /> 
+   <cse:attribute name="article.headline" value="Typhoon Haiyan: How a catastrophe unfolded" /> 
+   <cse:attribute name="article.summary" value="Tacloban was a city on the rise. In the first week of November, the city of 220,000 sat directly in the line of the most powerful storm ever recorded. Officials had days of warning and rushed to prepare. In the run-up to the storm, Philippine President Benigno Aquino III called on officials to ensure a &quot;zero-casualty&quot; event. As of Wednesday morning, the death toll from Typhoon Haiyan reached 5,500. Most of the dead were in Tacloban and the areas around it." /> 
+   <cse:attribute name="article.page" value="World" /> 
+   <cse:attribute name="article.section" value="World" /> 
+   <cse:attribute name="article.published" value="2013-11-27T01:02:00.000Z" /> 
+   <cse:attribute name="article.updated" value="2013-11-27T01:02:00.000Z" /> 
+   <cse:attribute name="article.created" value="2013-11-24T15:23:00.000Z" /> 
+   <cse:attribute name="author" value="Te-Ping Chen, James T. Areddy and James Hookway" /> 
+   <cse:attribute name="news_keywords" value="political,general news,disasters,accidents,hurricanes,storms,natural disasters,catastrophes,risk news,weather" /> 
+   <cse:attribute name="language" value="en-US" /> 
+   <cse:attribute name="twitter:title" value="Typhoon Haiyan: How a catastrophe unfolded" /> 
+   <cse:attribute name="twitter:description" value="Tacloban was a city on the rise. In the first week of November, the city of 220,000 sat directly in the line of the most powerful storm ever recorded. Officials had days of warning and rushed to prepare. In the run-up to the storm, Philippine President Benigno Aquino III called on officials to ensure a &quot;zero-casualty&quot; event. As of Wednesday morning, the death toll from Typhoon Haiyan reached 5,500. Most of the dead were in Tacloban and the areas around it." /> 
+   <cse:attribute name="twitter:image" value="http://si.wsj.net/public/resources/images/WO-AQ374_SURGE_D_20131124184428.jpg" /> 
+   <cse:attribute name="fb:app_id" value="368513495882" /> 
+   <cse:attribute name="og:title" value="Typhoon Haiyan: How a catastrophe unfolded" /> 
+   <cse:attribute name="og:description" value="Tacloban was a city on the rise. In the first week of November, the city of 220,000 sat directly in the line of the most powerful storm ever recorded. Officials had days of warning and rushed to prepare. In the run-up to the storm, Philippine President Benigno Aquino III called on officials to ensure a &quot;zero-casualty&quot; event. As of Wednesday morning, the death toll from Typhoon Haiyan reached 5,500. Most of the dead were in Tacloban and the areas around it." /> 
+   <cse:attribute name="og:image" value="http://si.wsj.net/public/resources/images/WO-AQ374_SURGE_G_20131124184428.jpg" /> 
+   <cse:attribute name="viewport" value="width=device-width, user-scalable=yes, target-densitydpi=160" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="newsarticle"> 
+   <cse:attribute name="datepublished" value="2013-11-27T01:02:00.000Z" /> 
+   <cse:attribute name="datemodified" value="2013-11-27T01:02:00.000Z" /> 
+   <cse:attribute name="datecreated" value="2013-11-24T15:23:00.000Z" /> 
+   <cse:attribute name="description" value="Tacloban was a city on the rise. In the first week of November, the city of 220,000 sat directly in the line of the most powerful storm ever recorded. Officials had days of warning and rushed..." /> 
+   <cse:attribute name="inlanguage" value="en-US" /> 
+   <cse:attribute name="image" value="http://si.wsj.net/public/resources/images/WO-AQ374_SURGE_G_20131124184428.jpg" /> 
+   <cse:attribute name="headline" value="Typhoon Haiyan: How a Catastrophe Unfolded" /> 
+   <cse:attribute name="author" value="Te-Ping Chen" /> 
+   <cse:attribute name="articlebody" value="After Supertyphoon Haiyan hit the Philippines, even key leaders were swept up in the tsunami-like storm surge. The WSJ's Ramy Inocencio speaks with a national Cabinet minister, the Tacloban..." /> 
+  </cse:dataobject> 
+  <cse:dataobject type="cse_image"> 
+   <cse:attribute name="src" value="http://si.wsj.net/public/resources/images/BN-AN396_PHpred_G_20131124055435.jpg" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="cse_thumbnail"> 
+   <cse:attribute name="width" value="275" /> 
+   <cse:attribute name="height" value="183" /> 
+   <cse:attribute name="src" value="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcR8jwRrBEwOJPXJm1m3ZQRoEKtGfwbwzTEvT6OSzp5uaPQZKuUD_slP58Y" /> 
+  </cse:dataobject> 
+ </cse:pagemap> 
+ <opensearch:totalresults>
+   101000 
+ </opensearch:totalresults>
+</entry>
+</feed>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed gd:kind="customsearch#search" xmlns="http://www.w3.org/2005/Atom" xmlns:cse="http://schemas.google.com/cseapi/2010" xmlns:gd="http://schemas.google.com/g/2005" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">
+<entry gd:kind="customsearch#result"> 
+ <id>
+   http://live.aljazeera.com/Event/Typhoon_Haiyan_2 
+ </id> 
+ <updated>
+   1970-01-17T00:25:55.200Z 
+ </updated> 
+ <title type="html">&lt;b&gt;Typhoon Haiyan&lt;/b&gt; - Live &lt;b&gt;Blogs&lt;/b&gt; - Al Jazeera English</title> 
+ <link href="http://live.aljazeera.com/Event/Typhoon_Haiyan_2" title="live.aljazeera.com" /> 
+ <summary type="html">Latest updates on the powerful storm that caused death and destruction in the &lt;br&gt; Philippines.</summary> 
+ <cse:cacheid>
+   DRulepNf3CoJ 
+ </cse:cacheid> 
+ <cse:formattedurl type="html">
+   live.aljazeera.com/Event/&lt;b&gt;Typhoon&lt;/b&gt;_&lt;b&gt;Haiyan&lt;/b&gt;_2 
+ </cse:formattedurl> 
+ <cse:pagemap> 
+  <cse:dataobject type="metatags"> 
+   <cse:attribute name="icbm" value="25.500000000000000, 51.250000000000000" /> 
+   <cse:attribute name="twitter:card" value="summary" /> 
+   <cse:attribute name="og:title" value="Typhoon Haiyan" /> 
+   <cse:attribute name="og:type" value="article" /> 
+   <cse:attribute name="og:url" value="http://live.aljazeera.com/Event/Typhoon_Haiyan_2?Page=0" /> 
+   <cse:attribute name="og:image" value="http://images.scribblelive.com/2013/11/9/661348e5-c6a3-4771-8373-c87ee7de729f.jpg" /> 
+   <cse:attribute name="og:description" value="Latest updates on the powerful storm that caused death and destruction in the Philippines." /> 
+   <cse:attribute name="og:site_name" value="AJE Live Events" /> 
+   <cse:attribute name="viewport" value="width=device-width, initial-scale=1" /> 
+   <cse:attribute name="title" value="live - Al Jazeera English" /> 
+   <cse:attribute name="guid" value="2013724143032809666" /> 
+   <cse:attribute name="twitter:account_id" value="4970411" /> 
+   <cse:attribute name="publisher" value="Al Jazeera IT" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="cse_image"> 
+   <cse:attribute name="src" value="http://images.scribblelive.com/2013/11/9/661348e5-c6a3-4771-8373-c87ee7de729f.jpg" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="cse_thumbnail"> 
+   <cse:attribute name="width" value="276" /> 
+   <cse:attribute name="height" value="183" /> 
+   <cse:attribute name="src" value="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRIPPN0Avd0fZbAavb0yYkBVjI2cg3o-o6t7olbzQDBQR-zFTYXwtF70nU" /> 
+  </cse:dataobject> 
+ </cse:pagemap> 
+ <opensearch:totalresults>
+   885000 
+ </opensearch:totalresults>
+</entry>
+</feed>

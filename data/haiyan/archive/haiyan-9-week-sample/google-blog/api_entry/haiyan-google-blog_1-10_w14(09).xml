@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed gd:kind="customsearch#search" xmlns="http://www.w3.org/2005/Atom" xmlns:cse="http://schemas.google.com/cseapi/2010" xmlns:gd="http://schemas.google.com/g/2005" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">
+<entry gd:kind="customsearch#result"> 
+ <id>
+   http://www.helpage.org/blogs/carolyn-canham-2758/typhoon-haiyan-inspiring-recovery-lasting-damage-690/ 
+ </id> 
+ <updated>
+   1970-01-17T03:50:24.000Z 
+ </updated> 
+ <title type="html">&lt;b&gt;Typhoon Haiyan&lt;/b&gt;: Inspiring recovery, lasting damage | &lt;b&gt;Blogs&lt;/b&gt; &lt;b&gt;...&lt;/b&gt;</title> 
+ <link href="http://www.helpage.org/blogs/carolyn-canham-2758/typhoon-haiyan-inspiring-recovery-lasting-damage-690/" title="www.helpage.org" /> 
+ <summary type="html">This is the sight that greets you as you approach Tacloban – one of the areas &lt;br&gt; most devastated by &lt;b&gt;Typhoon Haiyan&lt;/b&gt; (known in the Philippines as Yolanda).</summary> 
+ <cse:cacheid>
+   9EUlRzY2ImAJ 
+ </cse:cacheid> 
+ <cse:formattedurl type="html">
+   www.helpage.org/&lt;b&gt;blogs&lt;/b&gt;/.../&lt;b&gt;typhoon&lt;/b&gt;-&lt;b&gt;haiyan&lt;/b&gt;-inspiring-recovery-lasting- damage-690/ 
+ </cse:formattedurl> 
+ <cse:pagemap> 
+  <cse:dataobject type="metatags"> 
+   <cse:attribute name="copyright" value="Copyright &copy;2014" /> 
+   <cse:attribute name="p:domain_verify" value="23e21d5f7260ba26b7bf431d75f254aa" /> 
+  </cse:dataobject> 
+ </cse:pagemap> 
+ <opensearch:totalresults>
+   64000 
+ </opensearch:totalresults>
+</entry>
+</feed>
