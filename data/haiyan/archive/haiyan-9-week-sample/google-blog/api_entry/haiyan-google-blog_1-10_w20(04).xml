@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed gd:kind="customsearch#search" xmlns="http://www.w3.org/2005/Atom" xmlns:cse="http://schemas.google.com/cseapi/2010" xmlns:gd="http://schemas.google.com/g/2005" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">
+<entry gd:kind="customsearch#result"> 
+ <id>
+   http://blog.twitch.tv/2013/12/twitch-raises-90000-for-typhoon-haiyan-relief/ 
+ </id> 
+ <updated>
+   1970-01-17T01:09:07.200Z 
+ </updated> 
+ <title type="html">The Official Twitch &lt;b&gt;Blog&lt;/b&gt; Twitch Raises $90,000 for &lt;b&gt;Typhoon Haiyan&lt;/b&gt; &lt;b&gt;...&lt;/b&gt;</title> 
+ <link href="http://blog.twitch.tv/2013/12/twitch-raises-90000-for-typhoon-haiyan-relief/" title="blog.twitch.tv" /> 
+ <summary type="html">When &lt;b&gt;Typhoon Haiyan&lt;/b&gt; devastated the Philippines, many of us here at Twitch &lt;br&gt; were quick to express interest in organizing a charitable campaign. We also &lt;br&gt; knew&amp;nbsp;...</summary> 
+ <cse:cacheid>
+   qZB-XjdNhVwJ 
+ </cse:cacheid> 
+ <cse:formattedurl type="html">
+   &lt;b&gt;blog&lt;/b&gt;.twitch.tv/2013/.../twitch-raises-90000-for-&lt;b&gt;typhoon&lt;/b&gt;-&lt;b&gt;haiyan&lt;/b&gt;-relief/ 
+ </cse:formattedurl> 
+ <cse:pagemap> 
+  <cse:dataobject type="metatags"> 
+   <cse:attribute name="viewport" value="width=device-width, initial-scale=1.0" /> 
+   <cse:attribute name="og:locale" value="en_US" /> 
+   <cse:attribute name="fb:admins" value="592289823" /> 
+   <cse:attribute name="og:title" value="Twitch Raises $90,000 for Typhoon Haiyan Relief - The Official Twitch Blog" /> 
+   <cse:attribute name="og:description" value="On November 19 we reopened the Twitch store with a special selection of merchandise, the proceeds of which went towards the Red Cross' efforts." /> 
+   <cse:attribute name="og:url" value="http://blog.twitch.tv/2013/12/twitch-raises-90000-for-typhoon-haiyan-relief/" /> 
+   <cse:attribute name="og:site_name" value="The Official Twitch Blog" /> 
+   <cse:attribute name="og:type" value="article" /> 
+  </cse:dataobject> 
+ </cse:pagemap> 
+ <opensearch:totalresults>
+   105000 
+ </opensearch:totalresults>
+</entry>
+</feed>

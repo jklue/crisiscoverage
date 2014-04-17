@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed gd:kind="customsearch#search" xmlns="http://www.w3.org/2005/Atom" xmlns:cse="http://schemas.google.com/cseapi/2010" xmlns:gd="http://schemas.google.com/g/2005" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">
+<entry gd:kind="customsearch#result"> 
+ <id>
+   http://blogs.scientificamerican.com/observations/2013/11/12/was-typhoon-haiyan-a-record-storm/ 
+ </id> 
+ <updated>
+   1970-01-17T00:30:14.400Z 
+ </updated> 
+ <title type="html">Was &lt;b&gt;Typhoon Haiyan&lt;/b&gt; a Record Storm? | Observations, Scientific &lt;b&gt;...&lt;/b&gt;</title> 
+ <link href="http://blogs.scientificamerican.com/observations/2013/11/12/was-typhoon-haiyan-a-record-storm/" title="blogs.scientificamerican.com" /> 
+ <summary type="html">&lt;b&gt;Blogs&lt;/b&gt; &amp;middot; About the SA &lt;b&gt;Blog&lt;/b&gt; Network. Choose a ... From the editors and reporters of &lt;br&gt; Scientific American , this &lt;b&gt;blog&lt;/b&gt; delivers ... So it has been with &lt;b&gt;Typhoon Haiyan&lt;/b&gt;.</summary> 
+ <cse:cacheid>
+   pj8_avy1c7UJ 
+ </cse:cacheid> 
+ <cse:formattedurl type="html">
+   &lt;b&gt;blogs&lt;/b&gt;.scientificamerican.com/.../was-&lt;b&gt;typhoon&lt;/b&gt;-&lt;b&gt;haiyan&lt;/b&gt;-a-record-storm/ 
+ </cse:formattedurl> 
+ <cse:pagemap> 
+  <cse:dataobject type="metatags"> 
+   <cse:attribute name="viewport" value="width=device-width, initial-scale=1.0" /> 
+   <cse:attribute name="og:title" value="Was Typhoon Haiyan a Record Storm? | Observations, Scientific American Blog Network" /> 
+   <cse:attribute name="og:description" value="Breaking news can sometime include mistakes, and breaking news emerging from disaster areas can be fraught with errors. Journalists try to do follow-up stories to correct ..." /> 
+   <cse:attribute name="og:image" value="http://blogs.scientificamerican.com/observations/files/2013/11/haiyan-3001.jpg" /> 
+   <cse:attribute name="news_keywords" value="typhoon haiyan" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="cse_image"> 
+   <cse:attribute name="src" value="http://blogs.scientificamerican.com/observations/files/2013/11/haiyan-3001.jpg" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="cse_thumbnail"> 
+   <cse:attribute name="width" value="240" /> 
+   <cse:attribute name="height" value="160" /> 
+   <cse:attribute name="src" value="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6RWBhcPAj1eIcuynq2SpPU2nenwAFUkhhQ179s-G1scxE9nlhKkRF5-M" /> 
+  </cse:dataobject> 
+ </cse:pagemap> 
+ <opensearch:totalresults>
+   885000 
+ </opensearch:totalresults>
+</entry>
+</feed>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed gd:kind="customsearch#search" xmlns="http://www.w3.org/2005/Atom" xmlns:cse="http://schemas.google.com/cseapi/2010" xmlns:gd="http://schemas.google.com/g/2005" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">
+<entry gd:kind="customsearch#result"> 
+ <id>
+   http://www.rescue.org/blog/helping-homeowners-philippines-rebuild-after-typhoon-haiyan-photos 
+ </id> 
+ <updated>
+   1970-01-17T01:23:31.200Z 
+ </updated> 
+ <title type="html">Helping homeowners in the Philippines rebuild after &lt;b&gt;Typhoon Haiyan&lt;/b&gt;</title> 
+ <link href="http://www.rescue.org/blog/helping-homeowners-philippines-rebuild-after-typhoon-haiyan-photos" title="www.rescue.org" /> 
+ <summary type="html">IRC staff distribute vouchers to help homeowners after &lt;b&gt;Typhoon Haiyan&lt;/b&gt; ... Get &lt;br&gt; updates from IRC aid workers helping surviviors of &lt;b&gt;Typhoon Haiyan&lt;/b&gt; in the&amp;nbsp;...</summary> 
+ <cse:cacheid>
+   TzkiXGvXaz8J 
+ </cse:cacheid> 
+ <cse:formattedurl type="html">
+   www.rescue.org/&lt;b&gt;blog&lt;/b&gt;/helping-homeowners-philippines-rebuild-after-&lt;b&gt;typhoon&lt;/b&gt; -&lt;b&gt;haiyan&lt;/b&gt;-photos 
+ </cse:formattedurl> 
+ <cse:pagemap> 
+  <cse:dataobject type="metatags"> 
+   <cse:attribute name="og:title" value="Photos: Helping homeowners in the Philippines rebuild after Typhoon Haiyan" /> 
+   <cse:attribute name="og:description" value="The International Rescue Committe and our partner Philippines Business for Social Progress (PBSP) are providing vouchers to help 600 residents of San Dionisio, a municipality on the island of Panay, rebuild their homes after Typhoon Haiyan. Roughly 1.1 million houses were affected by the monster storm, nearly half of which were destroyed." /> 
+   <cse:attribute name="com.silverpop.brandeddomains" value="www.pages05.net,diy.rescue.org,fromharmtohome.org,gifts.rescue.org,rescue.org,rescuegifts.org" /> 
+   <cse:attribute name="fb:admins" value="73970658023" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="cse_image"> 
+   <cse:attribute name="src" value="http://www.rescue.org/sites/default/files/global/users17/IMG_9573.jpg" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="cse_thumbnail"> 
+   <cse:attribute name="width" value="254" /> 
+   <cse:attribute name="height" value="199" /> 
+   <cse:attribute name="src" value="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQsjxrvBfx9vbZqvpBsIHrklgox6QQNHf06zxgztY_txWSnjdTeLJ5tuQnV" /> 
+  </cse:dataobject> 
+ </cse:pagemap> 
+ <opensearch:totalresults>
+   104000 
+ </opensearch:totalresults>
+</entry>
+</feed>

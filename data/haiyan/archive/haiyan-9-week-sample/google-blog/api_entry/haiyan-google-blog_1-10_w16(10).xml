@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed gd:kind="customsearch#search" xmlns="http://www.w3.org/2005/Atom" xmlns:cse="http://schemas.google.com/cseapi/2010" xmlns:gd="http://schemas.google.com/g/2005" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">
+<entry gd:kind="customsearch#result"> 
+ <id>
+   http://www.helpage.org/blogs/vincent-henson-16083/philippines-christmas-after-typhoon-haiyan-663/ 
+ </id> 
+ <updated>
+   1970-01-17T01:24:57.600Z 
+ </updated> 
+ <title type="html">Philippines: Christmas after &lt;b&gt;Typhoon Haiyan&lt;/b&gt; | &lt;b&gt;Blogs&lt;/b&gt; | HelpAge &lt;b&gt;...&lt;/b&gt;</title> 
+ <link href="http://www.helpage.org/blogs/vincent-henson-16083/philippines-christmas-after-typhoon-haiyan-663/" title="www.helpage.org" /> 
+ <summary type="html">Philippines: Christmas after &lt;b&gt;Typhoon Haiyan&lt;/b&gt;. Posted By Vincent Henson at 15:44&lt;br&gt; , 20 December 2013. Generosa outside her house with her grandchildren.</summary> 
+ <cse:cacheid>
+   Zx-SkRi2uKgJ 
+ </cse:cacheid> 
+ <cse:formattedurl type="html">
+   www.helpage.org/&lt;b&gt;blogs&lt;/b&gt;/.../philippines-christmas-after-&lt;b&gt;typhoon&lt;/b&gt;-&lt;b&gt;haiyan&lt;/b&gt;-663/ 
+ </cse:formattedurl> 
+ <cse:pagemap> 
+  <cse:dataobject type="metatags"> 
+   <cse:attribute name="copyright" value="Copyright &copy;2014" /> 
+   <cse:attribute name="p:domain_verify" value="23e21d5f7260ba26b7bf431d75f254aa" /> 
+  </cse:dataobject> 
+ </cse:pagemap> 
+ <opensearch:totalresults>
+   105000 
+ </opensearch:totalresults>
+</entry>
+</feed>

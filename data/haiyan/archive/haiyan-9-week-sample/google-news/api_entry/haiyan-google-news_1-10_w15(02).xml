@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed gd:kind="customsearch#search" xmlns="http://www.w3.org/2005/Atom" xmlns:cse="http://schemas.google.com/cseapi/2010" xmlns:gd="http://schemas.google.com/g/2005" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">
+<entry gd:kind="customsearch#result"> 
+ <id>
+   http://www.voanews.com/content/philippines-coconut-industry-struggles-to-recover-after-typhon-haiyan/1866180.html 
+ </id> 
+ <updated>
+   1970-01-17T03:15:50.400Z 
+ </updated> 
+ <title type="html">Philippines Coconut Industry Struggles to Recover after &lt;b&gt;Typhoon&lt;/b&gt; &lt;b&gt;...&lt;/b&gt;</title> 
+ <link href="http://www.voanews.com/content/philippines-coconut-industry-struggles-to-recover-after-typhon-haiyan/1866180.html" title="www.voanews.com" /> 
+ <summary type="html">Last December, &lt;b&gt;Typhoon Haiyan&amp;#39;s&lt;/b&gt; destructive winds devastated the Philippines. &lt;br&gt; ... Non-Confrontational Approach in Venezuela Means Less Media &lt;b&gt;Coverage&lt;/b&gt;.</summary> 
+ <cse:cacheid>
+   U_z6BCeVdcsJ 
+ </cse:cacheid> 
+ <cse:formattedurl type="html">
+   www.voa&lt;b&gt;news&lt;/b&gt;.com/content/...to...&lt;b&gt;typhon&lt;/b&gt;-&lt;b&gt;haiyan&lt;/b&gt;/1866180.html 
+ </cse:formattedurl> 
+ <cse:pagemap> 
+  <cse:dataobject type="metatags"> 
+   <cse:attribute name="title" value="Philippines Coconut Industry Struggles to Recover after Typhoon Haiyan" /> 
+   <cse:attribute name="news_keywords" value="Asia, Economy, Philippines, Leyte, Haiyan, Coconuts, Haiyan destruction" /> 
+   <cse:attribute name="twitter:card" value="summary" /> 
+   <cse:attribute name="twitter:site" value="@VOA_News" /> 
+   <cse:attribute name="og:title" value="Philippines Coconut Industry Struggles to Recover after Typhoon Haiyan" /> 
+   <cse:attribute name="og:description" value="Last December, Typhoon Haiyan&amp;#39;s destructive winds devastated the Philippines. Parts of the archipelago nation are still recovering. Among those hardest hit were farmers, nearly half of who..." /> 
+   <cse:attribute name="og:type" value="article" /> 
+   <cse:attribute name="og:url" value="http://www.voanews.com/content/philippines-coconut-industry-struggles-to-recover-after-typhon-haiyan/1866180.html" /> 
+   <cse:attribute name="og:site_name" value="VOA" /> 
+   <cse:attribute name="article:publisher" value="https://www.facebook.com/voiceofamerica" /> 
+   <cse:attribute name="author" value="Jason Strother / Malte Kollenberg" /> 
+   <cse:attribute name="og:image" value="http://www.voanews.com/video/f72aedc2-fa86-4205-b71a-bf0a306c9cdb.jpgx?w=1024&amp;amp;h=1500" /> 
+   <cse:attribute name="abstract" value="The Voice of America is one of the world's most trusted sources for news and information from the United States and around the world. VOA is a  multimedia news organization using radio, television, and the internet to distribute content in 43 languages." /> 
+   <cse:attribute name="msvalidate.01" value="BC94811461B7BF0C2662E5BC33B01969" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="cse_image"> 
+   <cse:attribute name="src" value="http://www.voanews.com/video/f72aedc2-fa86-4205-b71a-bf0a306c9cdb.jpgx?w=1024&amp;amp;h=1500" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="cse_thumbnail"> 
+   <cse:attribute name="width" value="300" /> 
+   <cse:attribute name="height" value="168" /> 
+   <cse:attribute name="src" value="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQDDuZAEX6IB0uWjg9eJdrsefOmuevQHmUVhs81XvB2XCXVbmcG9B4iJ6Y" /> 
+  </cse:dataobject> 
+ </cse:pagemap> 
+ <opensearch:totalresults>
+   102000 
+ </opensearch:totalresults>
+</entry>
+</feed>

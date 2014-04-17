@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed gd:kind="customsearch#search" xmlns="http://www.w3.org/2005/Atom" xmlns:cse="http://schemas.google.com/cseapi/2010" xmlns:gd="http://schemas.google.com/g/2005" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">
+<entry gd:kind="customsearch#result"> 
+ <id>
+   http://www.telegraph.co.uk/news/worldnews/asia/philippines/10443097/Typhoon-Haiyan-the-result-of-climate-change.html 
+ </id> 
+ <updated>
+   1970-01-17T00:30:14.400Z 
+ </updated> 
+ <title type="html">&lt;b&gt;Typhoon Haiyan&lt;/b&gt; &amp;#39;the result of climate change&amp;#39; - Telegraph</title> 
+ <link href="http://www.telegraph.co.uk/news/worldnews/asia/philippines/10443097/Typhoon-Haiyan-the-result-of-climate-change.html" title="www.telegraph.co.uk" /> 
+ <summary type="html">Super &lt;b&gt;Typhoon Haiyan&lt;/b&gt; approaches the Philippines (AFP/Getty Images) ... &lt;br&gt; intense tropical storms,&amp;quot; he wrote in an &lt;b&gt;article&lt;/b&gt; published in The Guardian on &lt;br&gt; Tuesday.</summary> 
+ <cse:formattedurl type="html">
+   www.telegraph.co.uk/&lt;b&gt;news&lt;/b&gt;/world&lt;b&gt;news&lt;/b&gt;/.../&lt;b&gt;Typhoon&lt;/b&gt;-&lt;b&gt;Haiyan&lt;/b&gt;-the-result-of- climate-change.html 
+ </cse:formattedurl> 
+ <cse:pagemap> 
+  <cse:dataobject type="metatags"> 
+   <cse:attribute name="news_keywords" value="philippines, typhoon haiyan, UNFCC, climate change, yeb sano" /> 
+   <cse:attribute name="tmgads.zone" value="news.worldnews.asia.philippines" /> 
+   <cse:attribute name="tmgads.channel" value="news" /> 
+   <cse:attribute name="tmgads.section" value="news-worldnews-asia-philippines" /> 
+   <cse:attribute name="tmgads.articleid" value="10443097" /> 
+   <cse:attribute name="tmgads.videosrc" value="tmg" /> 
+   <cse:attribute name="tmgads.pagetype" value="story" /> 
+   <cse:attribute name="tmgads.level" value="5" /> 
+   <cse:attribute name="tmgads.geo" value="US" /> 
+   <cse:attribute name="dcsext.akamigeo" value="US" /> 
+   <cse:attribute name="section-id" value="2139" /> 
+   <cse:attribute name="last-modified" value="2013-11-12" /> 
+   <cse:attribute name="article-id" value="10443097" /> 
+   <cse:attribute name="title" value="Typhoon Haiyan 'the result of climate change'" /> 
+   <cse:attribute name="gsamlc" value="news/worldnews/asia/philippines" /> 
+   <cse:attribute name="gsachannel" value="news" /> 
+   <cse:attribute name="gsachannelname" value="News" /> 
+   <cse:attribute name="gsacategory" value="worldnews" /> 
+   <cse:attribute name="gsagenre" value="asia" /> 
+   <cse:attribute name="gsasectionuniquename" value="news-world_news-asia-philippines" /> 
+   <cse:attribute name="gsaarticletype" value="Story" /> 
+   <cse:attribute name="dc.date.issued" value="2013-11-12" /> 
+   <cse:attribute name="fb:app_id" value="120118784736295" /> 
+   <cse:attribute name="fb:admins" value="686953094,531239902,100002344351237" /> 
+   <cse:attribute name="og:description" value="The Philippines delegate at the UN Climate Change talks that began on Monday   has blamed Typhoon Haiyan on climate change, and urged sceptics to 'get off   their ivory towers'" /> 
+   <cse:attribute name="og:site_name" value="Telegraph.co.uk" /> 
+   <cse:attribute name="og:title" value="Typhoon Haiyan 'the result of climate change' - Telegraph" /> 
+   <cse:attribute name="og:url" value="http://www.telegraph.co.uk/news/worldnews/asia/philippines/10443097/Typhoon-Haiyan-the-result-of-climate-change.html" /> 
+   <cse:attribute name="og:image" value="http://i.telegraph.co.uk/multimedia/archive/02727/Philippines-Typhoo_2727781k.jpg" /> 
+   <cse:attribute name="og:type" value="article" /> 
+   <cse:attribute name="og:video" value="http://player.ooyala.com/player.swf?keepEmbedCode=true&amp;autoplay=1&amp;embedCode=50NGY1aDrVlsE1sIC-BssCYkN2KEnPxI&amp;adSetCode=76e453b09b71409581415f11b8b62eaa" /> 
+   <cse:attribute name="og:video:secure_url" value="https://player.ooyala.com/player.swf?keepEmbedCode=true&amp;autoplay=1&amp;embedCode=50NGY1aDrVlsE1sIC-BssCYkN2KEnPxI&amp;adSetCode=76e453b09b71409581415f11b8b62eaa" /> 
+   <cse:attribute name="og:video:type" value="application/x-shockwave-flash" /> 
+   <cse:attribute name="twitter:card" value="player" /> 
+   <cse:attribute name="twitter:site" value="@Telegraph" /> 
+   <cse:attribute name="twitter:creator" value="@h_alexander" /> 
+   <cse:attribute name="twitter:player" value="https://player.ooyala.com/player.swf?keepEmbedCode=true&amp;autoplay=1&amp;embedCode=50NGY1aDrVlsE1sIC-BssCYkN2KEnPxI&amp;adSetCode=b20883587d124da4a8f29205f8be38ea" /> 
+   <cse:attribute name="twitter:player:height" value="315" /> 
+   <cse:attribute name="twitter:player:width" value="560" /> 
+   <cse:attribute name="dcsext.mlc" value="/news/worldnews/asia/philippines" /> 
+   <cse:attribute name="dcsext.genre" value="asia" /> 
+   <cse:attribute name="dcsext.category" value="worldnews" /> 
+   <cse:attribute name="wt.cg_s" value="worldnews" /> 
+   <cse:attribute name="dcsext.channel" value="news" /> 
+   <cse:attribute name="wt.cg_n" value="news" /> 
+   <cse:attribute name="dcsext.content_type" value="Story" /> 
+   <cse:attribute name="dcsext.level" value="5" /> 
+   <cse:attribute name="dcsext.author" value="Harriet Alexander" /> 
+   <cse:attribute name="dcsext.articlefirstpublished" value="2013-11-12 10:56" /> 
+   <cse:attribute name="dcsext.articleid" value="10443097" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="article"> 
+   <cse:attribute name="headline" value="Typhoon Haiyan 'the result of climate change'" /> 
+   <cse:attribute name="name" value="Typhoon Haiyan 'the result of climate change'" /> 
+   <cse:attribute name="alternativeheadline" value="The Philippines delegate at the UN Climate Change talks that began on Monday has blamed Typhoon Haiyan on climate change, and urged sceptics to 'get off their ivory towers'" /> 
+   <cse:attribute name="description" value="The Philippines delegate at the UN Climate Change talks that began on Monday has blamed Typhoon Haiyan on climate change, and urged sceptics to 'get off their ivory towers'" /> 
+   <cse:attribute name="datepublished" value="2013-11-12" /> 
+   <cse:attribute name="articlebody" value="Typhoon Haiyan latest In pictures: Typhoon Haiyan Naderev &quot;Yeb&quot; Sano, representative for the Philippines at the UN Climate Change talks, broke down in tears as he addressed delegates in Warsaw...." /> 
+  </cse:dataobject> 
+  <cse:dataobject type="cse_image"> 
+   <cse:attribute name="src" value="http://i.telegraph.co.uk/multimedia/archive/02727/Philippines-Typhoo_2727781k.jpg" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="cse_thumbnail"> 
+   <cse:attribute name="width" value="284" /> 
+   <cse:attribute name="height" value="177" /> 
+   <cse:attribute name="src" value="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcT4QGvg80OZyGmb7zEbe2mMp51MEHkGCwiw51TeUoEGy7UQ93iwSCu11IGr" /> 
+  </cse:dataobject> 
+ </cse:pagemap> 
+ <opensearch:totalresults>
+   420000 
+ </opensearch:totalresults>
+</entry>
+</feed>

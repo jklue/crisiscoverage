@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed gd:kind="customsearch#search" xmlns="http://www.w3.org/2005/Atom" xmlns:cse="http://schemas.google.com/cseapi/2010" xmlns:gd="http://schemas.google.com/g/2005" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">
+<entry gd:kind="customsearch#result"> 
+ <id>
+   http://www.hawaiinewsnow.com/story/24812195/filmmaker-from-hawaii-releases-documentary-about-typhoon-haiyan 
+ </id> 
+ <updated>
+   1970-01-17T03:01:26.400Z 
+ </updated> 
+ <title type="html">Filmmaker from Hawaii releases documentary about &lt;b&gt;Typhoon Haiyan&lt;/b&gt;</title> 
+ <link href="http://www.hawaiinewsnow.com/story/24812195/filmmaker-from-hawaii-releases-documentary-about-typhoon-haiyan" title="www.hawaiinewsnow.com" /> 
+ <summary type="html">Three months after Super &lt;b&gt;Typhoon Haiyan&lt;/b&gt; devastated the Philippines, the &lt;br&gt; destruction and relief struggles are no longer dominating headlines -- but a &lt;br&gt; filmmaker&amp;nbsp;...</summary> 
+ <cse:formattedurl type="html">
+   www.hawaii&lt;b&gt;news&lt;/b&gt;now.com/.../filmmaker-from-hawaii-releases-documentary- about-&lt;b&gt;typhoon&lt;/b&gt;-&lt;b&gt;haiyan&lt;/b&gt; 
+ </cse:formattedurl> 
+ <cse:pagemap> 
+  <cse:dataobject type="metatags"> 
+   <cse:attribute name="news_keywords" value="KGMB,KHNL, Hawaii News Now, Honolulu, Hawaii, Weather, Sports, Hawaii Jobs, Video, Contests, University of Hawaii, #HINews" /> 
+   <cse:attribute name="date" value="2014/02/25" /> 
+   <cse:attribute name="owner" value="KHNL" /> 
+   <cse:attribute name="wn-version" value="ContainerE-Story" /> 
+   <cse:attribute name="wn-build" value="XSLT-v3-9-60" /> 
+   <cse:attribute name="wn-base" value="IIS09" /> 
+   <cse:attribute name="wnreadableurl" value="filmmaker-from-hawaii-releases-documentary-about-typhoon-haiyan" /> 
+   <cse:attribute name="og:title" value="Filmmaker from Hawaii releases documentary about Typhoon Haiyan" /> 
+   <cse:attribute name="og:type" value="article" /> 
+   <cse:attribute name="og:url" value="http://www.hawaiinewsnow.com/story/24812195/filmmaker-from-hawaii-releases-documentary-about-typhoon-haiyan" /> 
+   <cse:attribute name="og:image" value="http://KHNL.images.worldnow.com/images/24812195_BG1.jpg" /> 
+   <cse:attribute name="og:description" value="Three months after Super Typhoon Haiyan devastated the Philippines, the destruction and relief struggles are no longer dominating headlines -- but a filmmaker from Hawai&amp;#39;i is hoping to change that.&amp;nbsp;" /> 
+   <cse:attribute name="author" value="Mileka Lincoln" /> 
+   <cse:attribute name="twitter:card" value="Three months after Super Typhoon Haiyan devastated the Philippines, the destruction and relief struggles are no longer dominating headlines -- but a filmmaker from Hawai&amp;#39;i is hoping to change that.&amp;nbsp;" /> 
+   <cse:attribute name="y_key" value="292f5516520ce2c2" /> 
+   <cse:attribute name="msvalidate.01" value="5D1C45FAE4757A35612BDF76D5CAC370" /> 
+   <cse:attribute name="fb:app_id" value="211629172302975" /> 
+   <cse:attribute name="fb:admins" value="644426401" /> 
+   <cse:attribute name="article:publisher" value="http://www.facebook.com/HawaiiNewsNow" /> 
+   <cse:attribute name="twitter:account_id" value="1512917803" /> 
+   <cse:attribute name="twitter:site" value="@hawaiinewsnow" /> 
+   <cse:attribute name="twitter:creator" value="@hawaiinewsnow" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="cse_image"> 
+   <cse:attribute name="src" value="http://KHNL.images.worldnow.com/images/24812195_BG1.jpg" /> 
+  </cse:dataobject> 
+ </cse:pagemap> 
+ <opensearch:totalresults>
+   65900 
+ </opensearch:totalresults>
+</entry>
+</feed>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed gd:kind="customsearch#search" xmlns="http://www.w3.org/2005/Atom" xmlns:cse="http://schemas.google.com/cseapi/2010" xmlns:gd="http://schemas.google.com/g/2005" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">
+<entry gd:kind="customsearch#result"> 
+ <id>
+   http://scienceblogs.com/gregladen/2013/11/18/the-typhoon-haiyan-storm-surge-on-video/ 
+ </id> 
+ <updated>
+   1970-01-17T00:38:52.800Z 
+ </updated> 
+ <title type="html">The &lt;b&gt;Typhoon Haiyan&lt;/b&gt; Storm Surge on Video – Greg Laden&amp;#39;s &lt;b&gt;Blog&lt;/b&gt;</title> 
+ <link href="http://scienceblogs.com/gregladen/2013/11/18/the-typhoon-haiyan-storm-surge-on-video/" title="scienceblogs.com" /> 
+ <summary type="html">Storm surges are amazing. I&amp;#39;ve never seen one happen but I&amp;#39;ve seen the &lt;br&gt; aftermath. A video has surfaced of a storm surge hitting Hernani in Eastern &lt;br&gt; Samar, shot&amp;nbsp;...</summary> 
+ <cse:cacheid>
+   3voAhVZ-7lcJ 
+ </cse:cacheid> 
+ <cse:formattedurl type="html">
+   science&lt;b&gt;blogs&lt;/b&gt;.com/.../11/.../the-&lt;b&gt;typhoon&lt;/b&gt;-&lt;b&gt;haiyan&lt;/b&gt;-storm-surge-on-video/ 
+ </cse:formattedurl> 
+ <cse:pagemap> 
+  <cse:dataobject type="metatags"> 
+   <cse:attribute name="fb:admins" value="10200068" /> 
+   <cse:attribute name="og:title" value="The Typhoon Haiyan Storm Surge on Video" /> 
+   <cse:attribute name="og:type" value="article" /> 
+   <cse:attribute name="og:image" value="http://scienceblogs.com/gregladen/files/2013/11/Screen-Shot-2013-11-09-at-5.40.33-PM.png" /> 
+   <cse:attribute name="og:url" value="http://scienceblogs.com/gregladen/2013/11/18/the-typhoon-haiyan-storm-surge-on-video/" /> 
+   <cse:attribute name="og:description" value="Storm surges are amazing. I’ve never seen one happen but I’ve seen the aftermath. A video has surfaced of a storm surge hitting Hernani in Eastern Samar, shot from the second floor of a house that was a few hundred meters from the coast. A storm surge is a mound of water caused by the…" /> 
+   <cse:attribute name="og:site_name" value="Greg Laden's Blog" /> 
+   <cse:attribute name="pinterest" value="nopin" /> 
+   <cse:attribute name="twitter:site" value="@jetpack" /> 
+   <cse:attribute name="twitter:image" value="http://scienceblogs.com/gregladen/files/2013/11/Screen-Shot-2013-11-09-at-5.40.33-PM.png" /> 
+   <cse:attribute name="twitter:card" value="photo" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="cse_image"> 
+   <cse:attribute name="src" value="http://scienceblogs.com/gregladen/files/2013/11/Screen-Shot-2013-11-09-at-5.40.33-PM.png" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="cse_thumbnail"> 
+   <cse:attribute name="width" value="273" /> 
+   <cse:attribute name="height" value="185" /> 
+   <cse:attribute name="src" value="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTS1OsrdVQ6d2wk-UL-qnbolw_5dppW2Qtok18WfKdOLEhklKCC_p6FGScX" /> 
+  </cse:dataobject> 
+ </cse:pagemap> 
+ <opensearch:totalresults>
+   423000 
+ </opensearch:totalresults>
+</entry>
+</feed>

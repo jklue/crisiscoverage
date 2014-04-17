@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed gd:kind="customsearch#search" xmlns="http://www.w3.org/2005/Atom" xmlns:cse="http://schemas.google.com/cseapi/2010" xmlns:gd="http://schemas.google.com/g/2005" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/">
+<entry gd:kind="customsearch#result"> 
+ <id>
+   http://www.irinnews.org/report/99547/philippine-calamities-in-the-shadow-of-typhoon-haiyan 
+ </id> 
+ <updated>
+   1970-01-17T02:21:07.200Z 
+ </updated> 
+ <title type="html">IRIN Asia | Philippine calamities in the shadow of &lt;b&gt;Typhoon Haiyan&lt;/b&gt; &lt;b&gt;...&lt;/b&gt;</title> 
+ <link href="http://www.irinnews.org/report/99547/philippine-calamities-in-the-shadow-of-typhoon-haiyan" title="www.irinnews.org" /> 
+ <summary type="html">MANILA, 28 January 2014 (IRIN) - In the wake of &lt;b&gt;Typhoon Haiyan&lt;/b&gt;, the ... of &lt;br&gt; coastal communities according to the Philippine Water Code&amp;#39;s &lt;b&gt;article&lt;/b&gt; 51, which&amp;nbsp;...</summary> 
+ <cse:cacheid>
+   t079UYFUo4MJ 
+ </cse:cacheid> 
+ <cse:formattedurl type="html">
+   www.irin&lt;b&gt;news&lt;/b&gt;.org/.../philippine-calamities-in-the-shadow-of-&lt;b&gt;typhoon&lt;/b&gt;-&lt;b&gt;haiyan&lt;/b&gt; 
+ </cse:formattedurl> 
+ <cse:pagemap> 
+  <cse:dataobject type="metatags"> 
+   <cse:attribute name="og:title" value="Philippine calamities in the shadow of Typhoon Haiyan" /> 
+   <cse:attribute name="og:image" value="http://www.irinnews.org/images/2013/201310180742010565.jpg" /> 
+   <cse:attribute name="og:description" value="In the wake of Typhoon Haiyan [ http://www.unocha.org/crisis/typhoonhaiyan ], the Philippine government is struggling to meet the needs of survivors in other areas of the archipelago that have experienced calamity as well as conflict." /> 
+   <cse:attribute name="og:url" value="http://www.irinnews.org/Report/99547/Philippine-calamities-in-the-shadow-of-Typhoon-Haiyan" /> 
+   <cse:attribute name="og:type" value="non_profit" /> 
+   <cse:attribute name="og:site_name" value="IRINnews" /> 
+   <cse:attribute name="fb:admins" value="747450396" /> 
+   <cse:attribute name="fb:app_id" value="127212647355336" /> 
+   <cse:attribute name="application-name" value="IRINnews" /> 
+   <cse:attribute name="msapplication-tilecolor" value="#ffffff" /> 
+   <cse:attribute name="msapplication-tileimage" value="d0405f8b-def4-47ec-9384-e26e028afbe9.png" /> 
+  </cse:dataobject> 
+  <cse:dataobject type="cse_image"> 
+   <cse:attribute name="src" value="http://www.irinnews.org/images/2013/201310180742010565.jpg" /> 
+  </cse:dataobject> 
+ </cse:pagemap> 
+ <opensearch:totalresults>
+   102000 
+ </opensearch:totalresults>
+</entry>
+</feed>
