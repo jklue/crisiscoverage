@@ -13,6 +13,11 @@
 	<!-- Overview Vis -->
 	<div id="overviewVisGIF"></div>
 
+	<!-- Tutorial -->
+	<div class="tutorial">
+		<p>So this is how you use this graph...</p>
+	</div>
+
 <!-- footer -->
 	<?php include 'includes/footer.html'; ?>
 </body>
