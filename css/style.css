@@ -217,6 +217,46 @@ h3 {
   font-weight: 400;
   margin-top: -5px; }
 
+/* Martini elements */
+.arrow img {
+  vertical-align: middle; }
+
+.left.arrow {
+  position: absolute;
+  left: 0; }
+
+.right.arrow {
+  position: absolute;
+  right: 0; }
+
+#rotatingGlobe {
+  width: 320px;
+  margin: 100px auto 0; }
+
+nav.martini {
+  position: relative;
+  text-align: center;
+  color: #cccccc;
+  width: 900px;
+  margin: 0em auto; }
+  nav.martini ul {
+    position: absolute;
+    top: 250px;
+    left: 0px;
+    width: 1000px;
+    z-index: 10; }
+
+#welcome nav ul {
+  top: -270px;
+  left: 100px;
+  width: 630px; }
+
+.view {
+  float: left; }
+
+.skip {
+  float: right; }
+
 /* Content */
 .content {
   max-width: 900px;
@@ -224,13 +264,26 @@ h3 {
   padding: 2em 0;
   clear: both; }
 
-/* Footer */
-#welcome nav {
-  text-align: center;
-  color: #cccccc;
-  width: 900px;
-  margin: 1.5em auto 5em; }
+/* GIFs */
+#overviewVisGIF {
+  background: url("../images/gif/overview.gif");
+  width: 616px;
+  height: 542px;
+  margin: 0 auto;
+  position: relative;
+  top: 80px;
+  z-index: -1; }
 
+#timelineVisGIF {
+  background: url("../images/gif/timeline-faded.gif");
+  width: 892px;
+  height: 548px;
+  margin: 0 auto;
+  position: relative;
+  top: 0px;
+  z-index: -1; }
+
+/* Footer */
 footer {
   text-align: center;
   color: #cccccc;
@@ -269,37 +322,6 @@ footer {
   margin: 0 auto 0;
   text-align: right;
   position: relative; }
-
-/* Martini elements */
-.arrow img {
-  vertical-align: middle; }
-
-.left.arrow {
-  position: absolute;
-  left: 0; }
-
-.right.arrow {
-  position: absolute;
-  right: 0; }
-
-#rotatingGlobe {
-  width: 320px;
-  margin: 100px auto 0; }
-
-/* Navigation */
-nav {
-  position: relative; }
-  nav ul.home {
-    position: absolute;
-    top: -270px;
-    left: 100px;
-    width: 630px; }
-
-.view {
-  float: left; }
-
-.skip {
-  float: right; }
 
 /* Animation */
 .fadeInOut {

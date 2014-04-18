@@ -25,36 +25,6 @@
 	}
 }
 
-/* Martini elements */
-	.arrow img {
-		vertical-align: middle;
-	}
-	.left.arrow {
-		position: absolute;
-		left: 0;
-	}
-	.right.arrow {
-		position: absolute;
-		right: 0;
-	}
-	#rotatingGlobe {
-		width: 320px;
-		margin: 100px auto 0;
-	}
-
-/* Navigation */
-nav {
-	position: relative;
-	ul.home{
-		position: absolute;
-		top: -270px;
-		left: 100px;
-		width: 630px;		
-	}
-}
-.view{float: left;}
-.skip{float: right;}
-
 /* Animation */
 	.fadeInOut {
 	    -webkit-animation-name: fader;
