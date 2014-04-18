@@ -53,8 +53,8 @@ public class MultiGoogleController implements CrawlerConstants{
 		
 		/** CONFIG-3: PICK MULTITYPE ??? {{ */
 //		MultiType multiType = MultiType.media_baseline;
-//		MultiType multiType = MultiType.media;
-		MultiType multiType = MultiType.country;
+		MultiType multiType = MultiType.media;
+//		MultiType multiType = MultiType.country;
 		
 		MultiQueryObj msq = MultiQueryObjFactory.create(
 				multiType, crisis.collectionName, crisis.crisisYear, crisis.crisisMonth, crisis.crisisDay, crisis.crisisQuery, isPaidQuery);
@@ -70,7 +70,7 @@ public class MultiGoogleController implements CrawlerConstants{
 		/** }} */
 		
 		/** CONFIG-5 ::: IS THIS ***REALLY*** A LIVE RUN ??? */
-		AbstractGoogleConfig.dryRun = true;
+		AbstractGoogleConfig.dryRun = false;
 		
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //ACTIONS
@@ -91,10 +91,10 @@ public class MultiGoogleController implements CrawlerConstants{
 //		if (multiType.equals(MultiType.media)) msq.getConfig().cleanText(true);		
 		
 /** STEP-5: GENERATE META CSV FILE VARIATIONS -- NOTE: FOR PRODUCTION, NOT NECESSARILY GENERATING THE TEXT VARIANTS */		
-//		if (multiType.equals(MultiType.country)) 
-//			msq.getConfig().metaToTable(MetaMode.query_stats_with_distinct, true, defaultValLimit, "stats", false);
-//		else msq.getConfig().metaToTable(MetaMode.query_stats_with_distinct, true, defaultValLimit, "stats", true);
-//		
+		if (multiType.equals(MultiType.country)) 
+			msq.getConfig().metaToTable(MetaMode.query_stats_with_distinct, true, defaultValLimit, "stats", false);
+		else msq.getConfig().metaToTable(MetaMode.query_stats_with_distinct, true, defaultValLimit, "stats", true);
+		
 //		if (multiType.equals(MultiType.media))
 //			msq.getConfig().metaToTable(MetaMode.entries_no_text, true, defaultValLimit, "results_subset", false);
 		

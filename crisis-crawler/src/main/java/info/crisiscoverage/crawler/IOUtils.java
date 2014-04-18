@@ -185,12 +185,13 @@ public class IOUtils implements CrawlerConstants{
 	/**
 	 * Write Map<Column,String> to file.
 	 * @param file Path
-	 * @param columnMap Map<Column,String>
+	 * @param headers List
+	 * @param columnMap Map
 	 * @param csvOptions CsvOptions
 	 * @param cellSizeLimit int if < 1 then no limit.
 	 * @throws IOException
 	 */
-	public static void writeCsv(Path file, Map<Column,String> columnMap, CsvOptions csvOptions, int cellSizeLimit) throws IOException{
+	public static void writeCsv(Path file, List headers, Map columnMap, CsvOptions csvOptions, int cellSizeLimit) throws IOException{
 		
 		switch(csvOptions){
 		case create_no_headers:
@@ -202,21 +203,21 @@ public class IOUtils implements CrawlerConstants{
 		case create_headers:
 			//Overwrite existing file with headers
 			try (BufferedWriter writer = Files.newBufferedWriter(file, StandardCharsets.UTF_8,StandardOpenOption.CREATE)){
-				writer.write(columnMapToString(columnMap,csvDelim,true,cellSizeLimit));
+				writer.write(columnMapToString(headers,columnMap,csvDelim,true,cellSizeLimit));
 				writer.newLine();
 			}
 			break;
 		case create_no_headers_data:
 			//Overwrite existing file with headers
 			try (BufferedWriter writer = Files.newBufferedWriter(file, StandardCharsets.UTF_8,StandardOpenOption.CREATE)){
-				writer.write(columnMapToString(columnMap,csvDelim,false,cellSizeLimit));
+				writer.write(columnMapToString(headers,columnMap,csvDelim,false,cellSizeLimit));
 				writer.newLine();
 			}
 			break;
 		case append_data:
 			//Append to existing file
 			try (BufferedWriter writer = Files.newBufferedWriter(file, StandardCharsets.UTF_8,StandardOpenOption.APPEND)){
-				writer.write(columnMapToString(columnMap,csvDelim,false,cellSizeLimit));
+				writer.write(columnMapToString(headers,columnMap,csvDelim,false,cellSizeLimit));
 				writer.newLine();
 			}
 			break;
@@ -225,11 +226,11 @@ public class IOUtils implements CrawlerConstants{
 	    	//Overwrite existing file
 	    	try (BufferedWriter writer = Files.newBufferedWriter(file, StandardCharsets.UTF_8,StandardOpenOption.CREATE)){
 	    		//write headers
-				writer.write(columnMapToString(columnMap,csvDelim,true,cellSizeLimit));
+				writer.write(columnMapToString(headers,columnMap,csvDelim,true,cellSizeLimit));
 				writer.newLine();
 				
 				//write data (1 row)
-				writer.write(columnMapToString(columnMap,csvDelim,false,cellSizeLimit));
+				writer.write(columnMapToString(headers,columnMap,csvDelim,false,cellSizeLimit));
 				writer.newLine();
 			}
 		}
@@ -237,30 +238,31 @@ public class IOUtils implements CrawlerConstants{
 	
 	/**
 	 * These are written in the order of the {@link Column} enum
+	 * @param headers
 	 * @param columnMap
 	 * @param delim
 	 * @param headersMode
 	 * @param cellSizeLimit
 	 * @return
 	 */
-	public static String columnMapToString(Map<Column,String> columnMap, String delim, boolean headersMode, int cellSizeLimit){
+	public static String columnMapToString(List headers, Map columnMap, String delim, boolean headersMode, int cellSizeLimit){
 		
 		StringBuilder sb = new StringBuilder();
-		Column[] cols = Column.values();
 		boolean applyLimit = cellSizeLimit > 0;
 		
-		for (int i=0; i < cols.length; i++){
-			Column col = cols[i];
-			if (!columnMap.containsKey(col)) continue;
+		for (int i=0; i < headers.size(); i++){
 			
+			Object col = headers.get(i);
 			if (headersMode){
-				sb.append(col.name());
+				sb.append(col.toString());
 			} else {
-				String v = columnMap.get(col);
+				String v = "";
+				if (columnMap.containsKey(col))
+					v = columnMap.get(col).toString();
 				if (applyLimit) v =restrictValueSize(v,cellSizeLimit,true);
 				sb.append("\""+escapeCsvDisrupters(v)+"\"");
 			}
-			if (i < columnMap.size()-1) sb.append(delim);
+			if (i < headers.size()-1) sb.append(delim);
 		}
 		return sb.toString();
 	}

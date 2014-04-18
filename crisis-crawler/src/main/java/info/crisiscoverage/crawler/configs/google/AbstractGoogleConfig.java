@@ -38,6 +38,7 @@ import com.google.common.net.UrlEscapers;
 
 public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfig{
 	
+	public static final String googleSiteName = "Google";
 	public static final String defaultSiteTypeAll = "All";
 	public static final String defaultSiteTypeTraditional = "Traditional";
 	public static final String defaultSiteTypeIndependent = "Independent";
@@ -49,6 +50,7 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 
 	public static final List<String> mediaLookup = new ArrayList<>();
 	public static final Map<String, String> mediaTypeMap = new HashMap<>();
+	public static final Map<String, String> mediaNameMap = new HashMap<>();
 	static{
 		try {
 			List<String> siteLines = IOUtils.readLines(AbstractGoogleConfig.class.getResourceAsStream("media-sites.tsv"));
@@ -56,6 +58,7 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 			/* FOR ALL GOOGLE */
 			mediaLookup.add("");
 			mediaTypeMap.put("", defaultSiteTypeAll);
+			mediaNameMap.put("", googleSiteName);
 
 			boolean firstRow = true;
 			for (String line : siteLines){
@@ -72,10 +75,13 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 						row.add(tokenizer.nextToken());
 					}
 
+					String name = row.get(1);
 					String site = row.get(2);
 					String type = row.get(3);
+					
 					mediaLookup.add(site);
 					mediaTypeMap.put(site,type);
+					mediaNameMap.put(site, name);
 					//					System.out.println("... adding available media site: "+site+", of type: "+type);
 				}
 			}
@@ -926,11 +932,7 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 
 				boolean firstRow = true;
 				List<Column> headers = new ArrayList<>();
-				List<Column> resultHeaders = new ArrayList<>();
-				for (Column c : Column.values()){
-					if (c.isQueryAndResultColumn()) resultHeaders.add(c);
-				}
-
+				List<String> resultHeaders = getResultHeaders(metaMode);
 				/* key is the queryDistinct with dateRestrict stripped. */
 				Map<String, ComparedResultObj> comparedMap = new TreeMap<>();
 
@@ -985,7 +987,7 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 									}
 
 									if (p != null){
-										cro = new ComparedResultObj(qdId,p,headers,resultHeaders);
+										cro = createNewComparedResultObj(qdId,p,headers,resultHeaders);
 										comparedMap.put(qdId,cro);
 									} else {
 										System.err.println("... skipping row #"+lineNum+", no detected dateRestrict within query_period cell.");
@@ -1008,13 +1010,13 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 				}//end for lines
 
 				//Write out the results
-				Path csvFile2 = Paths.get(csvFile.getParent().toString(),"(Compared)"+csvFile.getFileName().toString());
+				Path csvFile2 = Paths.get(csvFile.getParent().toString(),"(Additional)"+csvFile.getFileName().toString());
 				boolean firstRun = true;
 				
 				for (Map.Entry<String, ComparedResultObj> entry : comparedMap.entrySet()){
-					List<Map<Column,String>> map = entry.getValue().populateCompareResult();
+					List<Map<String,String>> map = entry.getValue().populateCompareResult();
 					
-					for (Map<Column,String> row : map){
+					for (Map<String,String> row : map){
 						CsvOptions csvOptions = CsvOptions.append_data;
 						if (firstRun){
 							firstRun = false;
@@ -1022,7 +1024,7 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 								csvOptions = CsvOptions.create_headers_data;
 							else csvOptions = CsvOptions.create_no_headers_data;
 						}
-						IOUtils.writeCsv(csvFile2, row, csvOptions, cellSizeLimit);
+						IOUtils.writeCsv(csvFile2, resultHeaders, row, csvOptions, cellSizeLimit);
 					}
 				}
 
@@ -1035,4 +1037,38 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 		}
 		return csvFile;
 	}
+	
+	/**
+	 * Sub-classes can override.
+	 * @param qdId
+	 * @param p
+	 * @param headers
+	 * @param resultHeaders
+	 * @return
+	 * @throws Exception
+	 */
+	protected ComparedResultObj createNewComparedResultObj(
+			String qdId, DateRestrict p, List<Column> headers, List<String> resultHeaders) throws Exception{
+		 return new ComparedResultObj(qdId,p,headers,resultHeaders);
+	}
+	
+	/**
+	 * Handles the result headers.
+	 * @return
+	 */
+	final protected List<String> getResultHeaders(MetaMode metaMode){
+		List<String> list = new ArrayList<>();
+		for (Column c : Column.headersFor(metaMode)){
+			list.add(c.name());
+		}
+       addCustomResultHeaders(metaMode,list);
+       return list;
+	}
+	
+	/**
+	 * Sub-classes can customize.
+	 * @param metaMode
+	 * @param resultHeaders
+	 */
+	protected void addCustomResultHeaders(MetaMode metaMode, List<String> resultHeaders){}
 }

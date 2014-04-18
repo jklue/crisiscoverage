@@ -4,6 +4,8 @@ import info.crisiscoverage.crawler.rule.ParseObj;
 import info.crisiscoverage.crawler.rule.html.AttributeSelectRule;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
@@ -176,6 +178,24 @@ public interface CrawlerConstants {
 			for (Column c : Column.values()){
 				if (!c.isQueryAndResultColumn()) map.remove(c);
 			}
+		}
+		
+		public static List<Column> headersFor(MetaMode metaMode){
+			List<Column> list = new ArrayList<>();
+			for (Column c : Column.values()){
+
+				if (metaMode.isQueryStatsMode() && !c.isQueryAndResultColumn()){
+					continue;
+				} else if (!metaMode.isCleanTextMode() && c.equals(Column.clean_text)){
+					continue;
+				} else if (
+						!metaMode.isQueryStatsMode() && 
+						(c.equals(Column.compared_result_count) || c.equals(Column.query_distinct))
+						){
+					continue;
+				} else list.add(c);
+			}
+			return list;
 		}
 	}
 	

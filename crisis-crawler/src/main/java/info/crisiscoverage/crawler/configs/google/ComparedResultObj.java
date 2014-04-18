@@ -14,33 +14,33 @@ import info.crisiscoverage.crawler.configs.google.AbstractGoogleConfig.DateRestr
 public class ComparedResultObj {
 	
 	/** What are the row headers that are in play */
-	final List<Column> rowHeaders;
+	final protected List<Column> rowHeaders;
 	
-	final Integer rawResultIdx;
-	final Integer periodsBackIdx;
+	final protected Integer rawResultIdx;
+	final protected Integer periodsBackIdx;
 	
 	/** What are the result headers that are in play */
-	final List<Column> resultHeaders;
+	final protected List<String> resultHeaders;
 	
-	final Integer comparedResultIdx;
+	final protected Integer comparedResultIdx;
 	
 	/** What is the value of the query distinct key that should be tested when populating this object*/
-	final String queryDistinctKey;
+	final protected String queryDistinctKey;
 	
 	/** What is the Period*/
-	final DateRestrict dateRestrict;
+	final protected DateRestrict dateRestrict;
 	
 	/** Key is the PERIOD, value is the row. */
-	final Map<Integer,List<String>> rowPeriodValMap = new TreeMap<>();
+	final protected Map<Integer,List<String>> rowPeriodValMap = new TreeMap<>();
 	
 	/** Key is the PERIOD, value is the 'raw_result_count' */
-	final Map<Integer,Integer> periodRawResultMap = new TreeMap<>();
+	final protected Map<Integer,Integer> periodRawResultMap = new TreeMap<>();
 	
 	/** Key is the PERIOD, value is the 'compared_result_count' NOTE: THIS WILL BE REGENERATED UPON REQUEST. */
-	final Map<Integer,Integer> periodCompareResultMap = new TreeMap<>();
+	final protected Map<Integer,Integer> periodCompareResultMap = new TreeMap<>();
 	
-	int minPeriod = -1;
-	int maxPeriod = -1;
+	protected int minPeriod = -1;
+	protected int maxPeriod = -1;
 	
 	/**
 	 * Constructor.
@@ -51,7 +51,7 @@ public class ComparedResultObj {
 	 * @throws Exception
 	 */
 	public ComparedResultObj(
-			String queryDistinctKey, DateRestrict dateRestrict, List<Column> rowHeaders, List<Column> resultHeaders) throws Exception{
+			String queryDistinctKey, DateRestrict dateRestrict, List<Column> rowHeaders, List<String> resultHeaders) throws Exception{
 		this.queryDistinctKey = queryDistinctKey;
 		this.dateRestrict = dateRestrict;
 		this.rowHeaders = rowHeaders;
@@ -62,7 +62,7 @@ public class ComparedResultObj {
 		periodsBackIdx = Integer.valueOf(rowHeaders.indexOf(Column.periods_back));
 		
 		//Save time by 1x getting resultHeader indexes.
-		comparedResultIdx = Integer.valueOf(resultHeaders.indexOf(Column.compared_result_count));
+		comparedResultIdx = Integer.valueOf(resultHeaders.indexOf(Column.compared_result_count.toString()));
 	}
 	
 	/**
@@ -119,9 +119,9 @@ public class ComparedResultObj {
 	 * @param headers
 	 * @return List<Map<Column,String>>
 	 */
-	public List<Map<Column,String>> populateCompareResult(){
+	public List<Map<String,String>> populateCompareResult(){
 		
-		List<Map<Column,String>> rows = new ArrayList<>();
+		List<Map<String,String>> rows = new ArrayList<>();
 		System.out.println("--> POPULATING COMPARE RESULT, minPeriod: "+minPeriod+", maxPeriod: "+maxPeriod);
 		if (minPeriod > 0 && maxPeriod > 0){
 
@@ -158,30 +158,56 @@ public class ComparedResultObj {
 	 * Populate the Map with columns requested by results.
 	 * @param row
 	 * @param period
-	 * @return
+	 * @return Map<Object, String> where k: is Column OR String custom header.
 	 */
-	protected Map<Column,String> adjustToResultColumns(List<String> row, Integer period){
-		Map<Column,String> map = new HashMap<Column,String>();
+	final protected Map<String,String> adjustToResultColumns(List<String> row, Integer period){
 		
-		for (Column c : resultHeaders){
+		Map<String,String> map = new HashMap<>();
+
+		for (String header : resultHeaders){
 			String v = ""; 
-			if (c.equals(Column.compared_result_count)){
-				Integer vI = periodCompareResultMap.get(period);
-				if (vI != null){
-					System.out.println("... adding compared result: "+vI);
-					v = vI.toString();
-				} else System.err.println("... no compared_result_count found.");
-			} else {
-				int idx = rowHeaders.indexOf(c);
-				System.out.println("rowHeaders idx is '"+idx+"' for column: "+c.name());
-				if (idx > -1){
-					v = row.get(idx);
-				}
+
+			Column c = null;
+			try{
+				c = Column.valueOf(header);
+			} catch(Exception e){
+//				System.err.println("... header: '"+header+"' not determined to be a Column");
 			}
-			map.put(c,v == null? "" : v);
-		}
+			
+			if(c != null){
+				if (c.equals(Column.compared_result_count)){
+					Integer vI = periodCompareResultMap.get(period);
+					if (vI != null){
+						v = vI.toString();
+					} else System.err.println("... no compared_result_count found.");
+				} else {
+					int idx = rowHeaders.indexOf(c);
+					if (idx > -1){
+						v = row.get(idx);
+					}
+				}
+				System.out.println("... adding standard column: "+c+", value: "+v);
+				map.put(c.name(),v == null? "" : v);
+			} 
+			//HANDLE CUSTOM CELL VALUES HERE
+			else{
+				v = getCustomCellValueFor(header, row);
+				System.out.println("... adding custom header: "+header+", value: "+v);
+				map.put(header, v == null? "" : v);
+			}			
+		}        
 		
 		return map;
+	}
+	
+	/**
+	 * Sub-Classes can implement this to do something with result headers that are not from {@link Column}.
+	 * @param resultHeader
+	 * @param row
+	 * @return
+	 */
+	protected String getCustomCellValueFor(String resultHeader, List<String> row){
+		return "";
 	}
 
 	public String getQueryDistinctKey() {

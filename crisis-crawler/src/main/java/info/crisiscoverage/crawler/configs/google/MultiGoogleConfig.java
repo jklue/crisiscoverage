@@ -1,9 +1,12 @@
 package info.crisiscoverage.crawler.configs.google;
 
 import info.crisiscoverage.crawler.IOUtils;
+import info.crisiscoverage.crawler.CrawlerConstants.Column;
+import info.crisiscoverage.crawler.configs.google.AbstractGoogleConfig.DateRestrict;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
@@ -16,6 +19,9 @@ import org.apache.commons.lang3.StringUtils;
 import com.google.common.base.Strings;
 
 public class MultiGoogleConfig  extends AbstractGoogleConfig{
+	
+	public static final String siteTypeCol = "site_type";
+	public static final String siteNameCol = "site_name";
 	
 	protected final Date dateToday;
 	protected final String queryVal; 
@@ -205,6 +211,23 @@ public class MultiGoogleConfig  extends AbstractGoogleConfig{
 			System.err.println("ERROR: endsWith test found #"+matchEndsWith.size()+" improper file(s) in api_live folder, please correct prior to proceeding\n!!! (rerun 'extractFromApiDir(...)') !!!");
 			if (exitOnError) System.exit(1);
 		}
+	}
+	
+	@Override
+	protected ComparedResultObj createNewComparedResultObj(
+			String qdId, DateRestrict p, List<Column> headers, List<String> resultHeaders) throws Exception{
+		 return new MultiComparedResultObj(qdId,p,headers,resultHeaders);
+	}
+	
+	@Override
+	protected void addCustomResultHeaders(MetaMode metaMode, List<String> resultHeaders){		
+		resultHeaders.add(0,siteTypeCol);
+		resultHeaders.add(0,siteNameCol);
+		
+		System.out.println("\n::: START (RESULT HEADERS AFTER CUSTOM) :::");
+		for (String rh : resultHeaders)
+			System.out.println("... '"+rh+"'");
+		System.out.println("::: END (RESULT HEADERS AFTER CUSTOM) :::");
 	}
 
 	public String getQueryVal() {

@@ -14,6 +14,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -287,21 +288,21 @@ public abstract class AbstractCrawlerConfig<O> implements CrawlerConstants{
 
 		Map<Column,String> row = metaMapper.populateColumnMap(collectionName, tags, docId, text, generateMetaToTableObjectFromText(docId, text), url, cleanText, ruleController);
 		
-		if (metaMode.isQueryStatsMode()){
-			Column.removeEntryLevelColumns(row);
-		}
-		
-		if (!metaMode.isCleanTextMode()) {
-			row.remove(Column.clean_text);
-		}
-		
-		if (!metaMode.isWithQuery()){
-			row.remove(Column.query_distinct);
-		}
+//		if (metaMode.isQueryStatsMode()){
+//			Column.removeEntryLevelColumns(row);
+//		}
+//		
+//		if (!metaMode.isCleanTextMode()) {
+//			row.remove(Column.clean_text);
+//		}
+//		
+//		if (!metaMode.isWithQuery()){
+//			row.remove(Column.query_distinct);
+//		}
 
 		if (!isDuplicate(metaMode,row,dedupList)){
 			dedupList.add(row);
-			IOUtils.writeCsv(csvFile, row, csvOptions, cellSizeLimit);
+			IOUtils.writeCsv(csvFile, Column.headersFor(metaMode), row, csvOptions, cellSizeLimit);
 		}
 	}
 	
