@@ -1,7 +1,7 @@
 <?php include 'includes/head.html'; ?>
 
 <body id="data">
-	<?php include 'includes/header.html'; ?>
+	<?php include 'includes/martini-header.html'; ?>
 
 
 	<div class="content">
@@ -13,7 +13,7 @@
 		</ul>
 	</nav>
 
-		Data goes here. Please see <a href="timeline">Timeline</a>.
+		Data goes here.
 	</div>
 
 <!-- footer -->
