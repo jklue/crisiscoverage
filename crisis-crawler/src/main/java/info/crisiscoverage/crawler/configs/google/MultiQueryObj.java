@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MultiSiteQueryObj {
+public class MultiQueryObj {
 	
 	boolean archive = false;
 	boolean crawl = false;
@@ -37,9 +37,16 @@ public class MultiSiteQueryObj {
 	
 	DateRestrict dateRestrict = DateRestrict.months;
 
-	MultiSiteGoogleConfig config;
+	//Special Param to Loop over, e.g. country
+	boolean usingSpecialParam = false;
+	Param specialParam = null;
+	List<String> specialParamVals = new ArrayList<>();
+	int specialParamStartFrom = 0;
+	int specialParamGoTo = -1;//THIS WILL GET SET
 	
-	public MultiSiteQueryObj(MultiSiteGoogleConfig config, boolean paidQuery){
+	MultiGoogleConfig config;
+	
+	public MultiQueryObj(MultiGoogleConfig config, boolean paidQuery){
 		this.config = config;
 		this.paidQuery = paidQuery;
 		if (paidQuery) apiBailout = AbstractGoogleConfig.defaultPaidBailout;
@@ -52,7 +59,7 @@ public class MultiSiteQueryObj {
 	 * @param config
 	 * @return
 	 */
-	protected Map<Param,String> generateParamMapForConfig(MultiSiteGoogleConfig config){
+	protected Map<Param,String> generateParamMapForConfig(MultiGoogleConfig config){
 		paramMap.clear();
 	        paramMap.put(Param.cx,  config.cxAll);
 	        paramMap.put(Param.alt, AbstractGoogleConfig.defaultAlt);	      
@@ -167,6 +174,13 @@ public class MultiSiteQueryObj {
 		this.siteTypeMap.putAll(siteTypeMap);
 		this.usingSitesOverride = true;
 	}
+	
+	public void setSpecialParam(Param specialParam, List<String> specialParamVals) {
+		this.specialParam = specialParam;
+		this.specialParamVals.addAll(specialParamVals);
+		this.specialParamGoTo = this.specialParamVals.size()-1;
+		this.usingSpecialParam = true;
+	}
 
 	public boolean isUsingSitesOverride() {
 		return usingSitesOverride;
@@ -184,11 +198,11 @@ public class MultiSiteQueryObj {
 		this.jumpForwardNPeriods = jumpForwardNPeriods;
 	}
 
-	public MultiSiteGoogleConfig getConfig() {
+	public MultiGoogleConfig getConfig() {
 		return config;
 	}
 
-	public void setConfig(MultiSiteGoogleConfig config) {
+	public void setConfig(MultiGoogleConfig config) {
 		this.config = config;
 	}
 
@@ -214,5 +228,33 @@ public class MultiSiteQueryObj {
 
 	public void setOnlyRunPadPeriods(boolean onlyRunPadPeriods) {
 		this.onlyRunPadPeriods = onlyRunPadPeriods;
+	}
+
+	public int getSpecialParamStartFrom() {
+		return specialParamStartFrom;
+	}
+
+	public void setSpecialParamStartFrom(int specialParamStartFrom) {
+		this.specialParamStartFrom = specialParamStartFrom;
+	}
+
+	public int getSpecialParamGoTo() {
+		return specialParamGoTo;
+	}
+
+	public void setSpecialParamGoTo(int specialParamGoTo) {
+		this.specialParamGoTo = specialParamGoTo;
+	}
+
+	public boolean isUsingSpecialParam() {
+		return usingSpecialParam;
+	}
+
+	public Param getSpecialParam() {
+		return specialParam;
+	}
+
+	public List<String> getSpecialParamVals() {
+		return specialParamVals;
 	}	
 }

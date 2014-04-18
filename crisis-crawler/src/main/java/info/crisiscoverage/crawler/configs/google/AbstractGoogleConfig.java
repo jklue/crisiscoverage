@@ -51,7 +51,7 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 	public static final Map<String, String> mediaTypeMap = new HashMap<>();
 	static{
 		try {
-			List<String> siteLines = IOUtils.readLines(AbstractGoogleConfig.class.getResourceAsStream("media-sites.csv"));
+			List<String> siteLines = IOUtils.readLines(AbstractGoogleConfig.class.getResourceAsStream("media-sites.tsv"));
 
 			/* FOR ALL GOOGLE */
 			mediaLookup.add("");
@@ -88,7 +88,7 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 	public static final Map<String, String> crNameMap = new HashMap<>();
 	static{
 		try {
-			List<String> crLines = IOUtils.readLines(AbstractGoogleConfig.class.getResourceAsStream("cr_lookup.csv"));
+			List<String> crLines = IOUtils.readLines(AbstractGoogleConfig.class.getResourceAsStream("cr_lookup.tsv"));
 			boolean firstRow = true;
 			for (String line : crLines){
 				if (firstRow){
@@ -405,15 +405,15 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 
 			String dateName = dateNameFromUrl(url);
 
-			String filename = collectionName+"-"+tags+"_"+(customDocIdPortion == null? "" : customDocIdPortion+"-") + p +
-					(aStep > 0 ? "-"+aStep : "")+"_"+dateName+apiFolderExt;
+			String filename = collectionName+"-"+tags+"_"+(customDocIdPortion == null? "" : customDocIdPortion+"-") + StringUtils.leftPad(""+p, 3, "0") +
+					(aStep > 0 ? "-" + StringUtils.leftPad("" + aStep, 3, "0") : "")+"_"+dateName+apiFolderExt;
 			System.out.println("... now writing filename ["+filename+"]");
 
 			if (!dryRun){
 				Document doc = LinkUtils.readUrlPolitely(url,true);
 				IOUtils.write(Paths.get(apiLiveFolder, filename), doc.outerHtml());
 			} else {
-				System.err.println("--> THIS IS A DRYRUN ('dryRun=true', CHANGE SETTINGS TO GO LIVE <--");
+				System.err.println("--> THIS IS A DRYRUN ('dryRun=true'), CHANGE SETTINGS TO GO LIVE <--");
 			}
 
 			p += sv;
@@ -577,7 +577,7 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 			String v = entry.getValue();
 			q = k.appendToEscaped(q, v);
 
-			System.out.println("... now q --> "+q);
+//			System.out.println("... now q --> "+q);
 		}
 		runLiveSearch(template, q, minPageOrOffset, maxPageOrOffset, defaultNum, archive, false,customDocIdPortion);
 	}
