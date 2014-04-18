@@ -12,13 +12,13 @@
 		</div>
 
 		<!-- Graph controls -->
-		<form id="dataSourceSelect">
+<!-- 		<form id="dataSourceSelect">
 	  Source:
 	  	<select name="" id="">
 	  		<option name="google" value="google">Google</option>
 	  		<option name="bbc" value="bbc">BBC</option>
 	  	</select>
-	  </form>
+	  </form> -->
 
 		<!-- Google Timeline -->
 		<div id="timelineVis"></div>
@@ -30,7 +30,8 @@
 
 <!-- footer -->
 	<?php include 'includes/footer.html'; ?>
-	<script src="timeline.js"></script>
+	<script src="timeline-month.js"></script>
+	<!-- <script src="timeline.js"></script> -->
 	<!-- // <script src="BBCtimeline.js"></script> -->
 
 </body>

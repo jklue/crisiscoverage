@@ -398,6 +398,11 @@ footer {
     font-size: 1.5em;
     color: #cc1452;
     margin-bottom: 0.3em; }
+  #timeline span.sourceName {
+    font-weight: bold;
+    text-transform: uppercase;
+    font-style: italic;
+    color: #cc1452; }
   #timeline .storySource {
     display: block;
     text-align: right;
