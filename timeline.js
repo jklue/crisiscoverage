@@ -488,7 +488,7 @@
       allDates.length = 0;
     
     /* Get traditional media data */
-      d3.csv("data/2014-04-03-12.09.57_all_no_text-no2011.csv", function(data) {
+      d3.csv("data/archive/2014-04-03-12.09.57_all_no_text-no2011.csv", function(data) {
       
           // convert dates to js object and get list of all dates with duplicates
           data.forEach(function(d,i) {
@@ -528,7 +528,7 @@
 
   function blogData() {
 
-    d3.csv("data/2014-04-03-12.09.57_all_no_text-no2011-blog.csv", function(data) {
+    d3.csv("data/archive/2014-04-03-12.09.57_all_no_text-no2011-blog.csv", function(data) {
       // convert dates to js object and get list of all dates with duplicates
       data.forEach(function(d,i) {
         // convert each date to js date

@@ -5,10 +5,10 @@
 	<!-- Rotating Globe -->
 	<div id="rotatingGlobe"></div>
 
-	<nav>
-		<ul class="home">
-			<li><a href="/overview" class="left arrow"><img src="images/icons/leftarrow.png" alt="Left Arrow" title="Skip to Charts">Skip to Charts</a></li>
-			<li><a href="/overview" class="right arrow">Learn More<img src="images/icons/rightarrow.png" alt="Right Arrow" title="Learn More"></a></li>
+	<nav class="martini">
+		<ul>
+			<li><a href="/overview" class="left arrow"><img src="images/icons/leftarrow.png" alt="Left Arrow" title="Skip to Charts">Start Exploring</a></li>
+			<li><a href="/overviewmartini" class="right arrow">Learn More<img src="images/icons/rightarrow.png" alt="Right Arrow" title="Learn More"></a></li>
 		</ul>
 	</nav>
 
@@ -24,7 +24,7 @@
 	</header>
 
 	<?php include 'includes/footer.html'; ?>
-	<script src="index.js"></script>
+	// <script src="index.js"></script>
 
 </body>
 </html>
