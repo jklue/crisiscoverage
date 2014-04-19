@@ -3,7 +3,7 @@
 
 	var margin = {
 	    top: 50,
-	    right: 50,
+	    right: 160,
 	    bottom: 0,
 	    left: 100
 	};
@@ -145,48 +145,6 @@ console.log('sources: ',sources);
       return storypoints();
     });
   }
-
-/* Get blog media data */
-
-  // function blogData() {
-
-  //   d3.csv(blogSource, function(data) {
-
-  //   // convert date to js object
-  //     blogDates = data.map(function(d) {
-  //       // convert each date to js date
-  //       var date = parseDateQuery(d.date_query_start);
-  //         return { date: date, count: +d.result_count, type: "blog" };
-  //     });
-  //       // go get data from story point document
-  //       return mergeData();
-  //     });
-  // }
-
-/* Merge traditional and blog data */
-  // function mergeData() {
-
-  // // add blog data to master array
-  //   // wrapper array for blog data
-  //   var blogData = [];
-  //   // prepare blog date data for master array
-  //   blogData.values = blogDates.map(function(d){ return d; });
-  //   // set type
-  //   blogData.type = 'blog';
-  //   // send blog data to master array
-  //   allDates.push(blogData);
-  // // add traditional data to master array
-  //   // wrapper array for traditional data
-  //   var traditionalData = [];
-  //   // prepare traditional date data for master array
-  //   traditionalData.values = traditionalDates.map(function(d){ return d; });
-  //   // set type
-  //   traditionalData.type = 'traditional';
-  //   // send traditional data to master array
-  //   allDates.push(traditionalData);
-  //   // go get data from story point document
-  //   return storypoints();
-  // }
 
 /* Get storypoints */
   function storypoints() {
@@ -417,19 +375,24 @@ console.log('sources: ',sources);
       .data(sources)
     .enter().append("g")
       .attr("class", "legend")
-      .attr("transform", function(d, i) { return "translate(0," + i * 28 + ")"; })
+      .attr({
+        'transform': function(d, i) { return 'translate(180,' + ((i * 16) - margin.top/2) + ')'},
+        'fill':color
+      })
       .on('mouseout', function (d) {
         // Restore opacity to all rectangles on mouseout
         d3.selectAll('rect')
-          .attr('opacity','1');
+          .attr({
+            'opacity':1,
+          });
       });
 
   // make color box
-  legend.append("rect")
-      .attr("x", width - 18)
-      .attr("width", 18)
-      .attr("height", 18)
-      .style("fill", color);
+  // legend.append("rect")
+  //     .attr("x", width - 16)
+  //     .attr("width", 16)
+  //     .attr("height", 16)
+  //     .style("fill", color);
 
   // make name box
   legend.append("text")
