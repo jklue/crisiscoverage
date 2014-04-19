@@ -300,7 +300,8 @@ footer {
     footer .links img:hover {
       opacity: 1; }
   footer .credit {
-    float: right; }
+    float: right;
+    margin-top: 1em; }
     footer .credit p {
       margin: 0; }
 
@@ -373,10 +374,11 @@ footer {
   /* Southward tooltips */
   /* Westward tooltips */ }
   #timeline #crisisInfo {
-    width: 40%;
+    width: 45%;
     margin-left: 6em;
     padding: 0;
-    height: 8em; }
+    height: 8em;
+    float: right; }
   #timeline #crisisTitle {
     margin: 1em 0 0;
     color: #919191;
