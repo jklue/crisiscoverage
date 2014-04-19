@@ -115,7 +115,7 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 	}
 
 	public static enum Param{
-		hl,safe,q,key,cx,alt,site,num,start,dateRestrict,lr,cr,exactTerms,orTerms,excludeTerms;
+		hl,safe,q,key,cx,alt,site,num,start,dateRestrict,lr,cr,exactTerms,orTerms,excludeTerms,filter;
 
 		public String appendToEscaped(String q, String paramVal){
 			String r = q == null? "" : q;
@@ -152,6 +152,8 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 			case excludeTerms: r += excludeTermsParam + v;
 			break;
 			case orTerms: r += orTermsParam + v;
+			break;
+			case filter: r += filterParam + v;
 			break;
 			}
 
@@ -331,6 +333,7 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 	public static final String defaultCr = "countryUS";
 	public static final String defaultSafe = "high";
 	public static final String defaultAlt = "atom";
+	public static final String defaultFilter = "1";//exclude duplicates
 	public static final int defaultNum = 10;
 
 	public static final String hlParam = "hl=";
@@ -348,6 +351,7 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 	public static final String exactTermsParam = "exactTerms=";
 	public static final String excludeTermsParam = "excludeTerms=";
 	public static final String orTermsParam = "orTerms=";
+	public static final String filterParam = "filter=";
 
 	public static final ImmutableSet<String> ignoreUrlsStartingWith = ImmutableSet.of(
 			//Anything?
