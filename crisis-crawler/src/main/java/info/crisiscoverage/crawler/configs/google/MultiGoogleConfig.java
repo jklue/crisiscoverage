@@ -214,9 +214,9 @@ public class MultiGoogleConfig  extends AbstractGoogleConfig{
 	}
 	
 	@Override
-	protected ComparedResultObj createNewComparedResultObj(
+	protected AdditionalResultObj createAdditionalResultObj(
 			String qdId, DateRestrict p, List<Column> headers, List<String> resultHeaders) throws Exception{
-		 return new MultiComparedResultObj(qdId,p,headers,resultHeaders);
+		 return new MultiAdditionalResultObj(qdId,p,headers,resultHeaders);
 	}
 	
 	@Override

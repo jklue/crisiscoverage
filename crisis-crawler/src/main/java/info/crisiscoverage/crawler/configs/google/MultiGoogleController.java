@@ -64,7 +64,7 @@ public class MultiGoogleController implements CrawlerConstants{
 		//msq.setOnlyRunPadPeriods(true);
 //		msq.setApiKeyStartFrom(0);
 		
-		//msq.setCrawl(true);
+//		msq.setCrawl(true);
 //		msq.setMediaStartFrom(0);
 //		msq.setMediaGoTo(0);//USE '0', IF ONLY WANT TO USE GOOGLE ???
 		/** }} */
@@ -91,10 +91,10 @@ public class MultiGoogleController implements CrawlerConstants{
 //		if (multiType.equals(MultiType.media)) msq.getConfig().cleanText(true);		
 		
 /** STEP-5: GENERATE META CSV FILE VARIATIONS -- NOTE: FOR PRODUCTION, NOT NECESSARILY GENERATING THE TEXT VARIANTS */		
-		if (multiType.equals(MultiType.country)) 
-			msq.getConfig().metaToTable(MetaMode.query_stats_with_distinct, true, defaultValLimit, "stats", false);
-		else msq.getConfig().metaToTable(MetaMode.query_stats_with_distinct, true, defaultValLimit, "stats", true);
-		
+//		if (multiType.equals(MultiType.country)) 
+//			msq.getConfig().metaToTable(MetaMode.query_stats_with_distinct, true, defaultValLimit, "stats", false);
+//		else msq.getConfig().metaToTable(MetaMode.query_stats_with_distinct, true, defaultValLimit, "stats", true);
+//		
 //		if (multiType.equals(MultiType.media))
 //			msq.getConfig().metaToTable(MetaMode.entries_no_text, true, defaultValLimit, "results_subset", false);
 		
