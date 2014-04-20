@@ -64,6 +64,7 @@ public class MultiQueryObj {
 	        paramMap.put(Param.cx,  config.cxAll);
 	        paramMap.put(Param.alt, AbstractGoogleConfig.defaultAlt);	      
 	        paramMap.put(Param.q, config.getQueryVal());
+	        paramMap.put(Param.filter, config.defaultFilter);
 	        return paramMap;
 	}
 	

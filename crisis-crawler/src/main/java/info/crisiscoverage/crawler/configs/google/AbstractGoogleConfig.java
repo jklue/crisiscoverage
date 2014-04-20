@@ -115,7 +115,7 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 	}
 
 	public static enum Param{
-		hl,safe,q,key,cx,alt,site,num,start,dateRestrict,lr,cr,exactTerms,orTerms,excludeTerms;
+		hl,safe,q,key,cx,alt,site,num,start,dateRestrict,lr,cr,exactTerms,orTerms,excludeTerms,filter;
 
 		public String appendToEscaped(String q, String paramVal){
 			String r = q == null? "" : q;
@@ -152,6 +152,8 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 			case excludeTerms: r += excludeTermsParam + v;
 			break;
 			case orTerms: r += orTermsParam + v;
+			break;
+			case filter: r += filterParam + v;
 			break;
 			}
 
@@ -331,6 +333,7 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 	public static final String defaultCr = "countryUS";
 	public static final String defaultSafe = "high";
 	public static final String defaultAlt = "atom";
+	public static final String defaultFilter = "1";//exclude duplicates
 	public static final int defaultNum = 10;
 
 	public static final String hlParam = "hl=";
@@ -348,6 +351,7 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 	public static final String exactTermsParam = "exactTerms=";
 	public static final String excludeTermsParam = "excludeTerms=";
 	public static final String orTermsParam = "orTerms=";
+	public static final String filterParam = "filter=";
 
 	public static final ImmutableSet<String> ignoreUrlsStartingWith = ImmutableSet.of(
 			//Anything?
@@ -934,7 +938,7 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 				List<Column> headers = new ArrayList<>();
 				List<String> resultHeaders = getResultHeaders(metaMode);
 				/* key is the queryDistinct with dateRestrict stripped. */
-				Map<String, ComparedResultObj> comparedMap = new TreeMap<>();
+				Map<String, AdditionalResultObj> comparedMap = new TreeMap<>();
 
 				int lineNum = -1;
 				for (String line : siteLines){
@@ -972,7 +976,7 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 
 							String qdId = stripDateRestrictFromQueryDistinct(row.get(qdIdx));
 
-							ComparedResultObj cro = null;
+							AdditionalResultObj cro = null;
 							if(comparedMap.containsKey(qdId)){
 								cro = comparedMap.get(qdId);
 							} else {
@@ -987,7 +991,7 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 									}
 
 									if (p != null){
-										cro = createNewComparedResultObj(qdId,p,headers,resultHeaders);
+										cro = createAdditionalResultObj(qdId,p,headers,resultHeaders);
 										comparedMap.put(qdId,cro);
 									} else {
 										System.err.println("... skipping row #"+lineNum+", no detected dateRestrict within query_period cell.");
@@ -1013,8 +1017,8 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 				Path csvFile2 = Paths.get(csvFile.getParent().toString(),"(Additional)"+csvFile.getFileName().toString());
 				boolean firstRun = true;
 				
-				for (Map.Entry<String, ComparedResultObj> entry : comparedMap.entrySet()){
-					List<Map<String,String>> map = entry.getValue().populateCompareResult();
+				for (Map.Entry<String, AdditionalResultObj> entry : comparedMap.entrySet()){
+					List<Map<String,String>> map = entry.getValue().populateAdditionalResult();
 					
 					for (Map<String,String> row : map){
 						CsvOptions csvOptions = CsvOptions.append_data;
@@ -1047,9 +1051,9 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 	 * @return
 	 * @throws Exception
 	 */
-	protected ComparedResultObj createNewComparedResultObj(
+	protected AdditionalResultObj createAdditionalResultObj(
 			String qdId, DateRestrict p, List<Column> headers, List<String> resultHeaders) throws Exception{
-		 return new ComparedResultObj(qdId,p,headers,resultHeaders);
+		 return new AdditionalResultObj(qdId,p,headers,resultHeaders);
 	}
 	
 	/**
