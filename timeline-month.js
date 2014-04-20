@@ -1,5 +1,5 @@
 /* Setup */
-	var allDates, bbDetail, bbOverview, detailFrame, dateList, blogDates, color, storyPoints, duplicateAllDates, duplicateTraditonalDates, duplicateBlogDates, padding, parseYear, sources, svg, xDetailScale, xOverviewScale ;
+	var allDates, aggregateMediaStats, bbDetail, bbOverview, detailFrame, dateList, blogDates, color, storyPoints, duplicateAllDates, duplicateTraditonalDates, duplicateBlogDates, mediaTypes, originalData, padding, parseYear, sources, svg, xAxis, xScale, xOverviewScale, yAxis, yScale;
 
 	var margin = {
 	    top: 50,
@@ -41,6 +41,8 @@
 
   // array for all dates
   allDates = []; // master list for date, traditional media count, and blog media count
+  aggregateMediaStats = []; // master list for media by type
+  mediaTypes = ['Traditional','Independent','Blogs-Social'];
 
   dateList = [];
   
@@ -67,9 +69,8 @@
 
 /* Set initial data sources */
   // Traditional source
-    var mediaStats = 'productiondata/haiyan-meta/google-media_stats-no-m.csv';
+    var mediaStats = 'productiondata/haiyan-meta/google-media_stats-no-google.csv';
     // var mediaStats = 'productiondata/haiyan-meta/google-media_stats.csv';
-    // var traditionalSource = 'data/haiyan/2014-04-10 12.52.22_haiyan-google-news_query_stats.csv';
 
   // Blog source
     var blogSource = 'data/haiyan/2014-04-10 12.53.14_haiyan-google-blog_query_stats.csv';
@@ -82,13 +83,16 @@
 
     d3.csv(mediaStats, function(data) {
 // console.log('mediaStats: ',data);
- 
+      // make data useable in aggregate chart
+      originalData = data;
+
     /* Get news source titles */
       // iterate through .csv to find source names
       var sourceDuplicates = data.map(function(d){
         // get source name without month data
-        var cleanSourceName = d.query_distinct.substring(0, d.query_distinct.length-3);
-        return cleanSourceName;
+        // var cleanSourceName = d.query_distinct.substring(0, d.query_distinct.length-3);
+        return d.site_name;
+        // return cleanSourceName;
       });
       // define new array to hold unique source names
       sources = [];
@@ -101,8 +105,19 @@
         else if(sources.indexOf(d) == -1)
           sources.push(d)
       });
-console.log('sources: ',sources);
+// console.log('data: ',data);
+// console.log('sources: ',sources);
 
+    /* add type back in to unique list of sources */
+    sources.forEach(function(d){
+      // console.log(d);
+      // match name to original data to get source type info
+      data.forEach(function(e){
+        // if source name equals original data name, grab type
+        // if(d == e.site_name)
+          // console.log('match');
+      });
+    });
     /* convert dates to js objects and record for x domain */
     data.forEach(function(d){
       // change each date and reassign
@@ -126,11 +141,12 @@ console.log('sources: ',sources);
           // add values by looking through original data and finding relevant dates and counts
           data.forEach(function(e){
             // get clean source name from original data
-            var cleanSourceName = e.query_distinct.substring(0, e.query_distinct.length-3);
+            // var cleanSourceName = e.query_distinct.substring(0, e.query_distinct.length-3);
             // if source data equals entry in original data, wrangle it!
-            if(d == cleanSourceName){
+            if(d == e.site_name){
+            // if(d == cleanSourceName){
               // return object with pertinent data
-              currentSource.values.push({ date: e.date_query_end, count: +e.raw_result_count, name: d });
+              currentSource.values.push({ date: e.date_query_end, count: +e.raw_result_count, name: d, type: e.site_type });
             }
           });
           // add name to master array
@@ -141,9 +157,54 @@ console.log('sources: ',sources);
       color = d3.scale.category20();
       // color = d3.scale.ordinal().domain(sources).range(['#CC1452', '#14A6CC', 'red', 'blue','yellow','brown','green','amber','purple','tomato','sand','chocolate','coral','cyan','darkGray','cornsilk','DarkGreen','DarkCyan','Beige','Azure','AliceBlue','AntiqueWhite']);
 
-      // skip blog data and merge data
-      return storypoints();
+      // get aggregate data by media type
+      return aggregateData();
     });
+  }
+
+
+/* Aggregate data by media type */
+  function aggregateData() {
+
+    // get reported dates for indeces for aggregate chart
+      // define var to hold dates
+      var reportedDates = [];
+      // loop through data to collect all dates
+      allDates[0].values.forEach(function(d){
+        reportedDates.push(d.date);
+      });
+    // iterate through news types, if find match, tally
+    mediaTypes.forEach(function(d){
+      // initialize wrapper array to hold current media type
+      var currentMediaType = [];
+      // add media type
+      currentMediaType.name = d;
+      // initialize values array
+      currentMediaType.values = [];
+      // iterate through all sample dates
+      reportedDates.forEach(function(e){
+        // start tally
+        var count = 0;
+        // iterate through all media queries
+        originalData.forEach(function(f){
+          // if types and dates match, add to list
+          if(d == f.site_type && e.getTime() == f.date_query_end.getTime()){
+            // increment count
+            count = count + +f.raw_result_count;
+          }
+        });
+        // record count with date
+        currentMediaType.values.push({ date: e, count: count, name: d });
+      });
+      // add data to master list
+      aggregateMediaStats.push(currentMediaType);
+    });
+// console.log('aggregateMediaStats: ',aggregateMediaStats);
+// console.log('allDates: ',allDates);
+    // ruin all progress
+    // allDates = aggregateMediaStats;
+    // get aggregate data by media type
+      return storypoints();
   }
 
 /* Get storypoints */
@@ -169,40 +230,38 @@ console.log('sources: ',sources);
 /* Make detail */
 	function detailVis() {
 
-	// Reset
-		var xDetailAxis, yDetailAxis, yDetailScale;
-
 	// normal scale
-	  xDetailScale = d3.time.scale().domain(d3.extent(dateList, function(d) { return d; })).range([0, bbDetail.w]);  // define the right domain
+	  xScale = d3.time.scale().domain(d3.extent(dateList, function(d) { return d; })).range([0, bbDetail.w]);  // define the right domain
 	// example that translates to the bottom left of our vis space:
 	  var detailFrame = svg.append("g").attr({
 	      class: 'detailFrame',
         transform: "translate(" + bbDetail.x + "," + bbDetail.y +")",
 	  });
 	// use that minimum and maximum possible y values for domain in log scale
-    yDetailScale = d3.scale.linear().domain([0, d3.max(allDates, function(d) { return d3.max(d.values, function(v) { return v.count; }) })]).range([bbDetail.h, 0]);
+    yScale = d3.scale.linear().domain([0, d3.max(allDates, function(d) { return d3.max(d.values, function(v) { return v.count; }) })]).range([bbDetail.h, 0]);
+    // yScale = d3.scale.pow().exponent(0.3).domain([0, d3.max(allDates, function(d) { return d3.max(d.values, function(v) { return v.count; }) })]).range([bbDetail.h, 0]);
   // x axis
-    xDetailAxis = d3.svg.axis()
-                  .scale(xDetailScale)
+    xAxis = d3.svg.axis()
+                  .scale(xScale)
                   .orient('bottom')
                   .ticks(4)
                   .tickFormat(d3.time.format('%b'));
                   // .tickFormat(d3.time.format('%b %d'));
 
   // y axis for consolidated population line
-    yDetailAxis = d3.svg.axis()
-                  .scale(yDetailScale)
+    yAxis = d3.svg.axis()
+                  .scale(yScale)
                   .orient('left')
                   .ticks(6);
 
     var area = d3.svg.area()
-								     .x(function(d) { return xDetailScale(d.date); })
+								     .x(function(d) { return xScale(d.date); })
 								     .y0(bbDetail.h)
-								     .y1(function(d) { return yDetailScale(d.count); });
+								     .y1(function(d) { return yScale(d.count); });
 
     var areaLine = d3.svg.line()
-                     .x(function(d) { return xDetailScale(d.date); })
-                     .y(function(d) { return yDetailScale(d.count); })
+                     .x(function(d) { return xScale(d.date); })
+                     .y(function(d) { return yScale(d.count); })
                      .interpolate('linear');
 
     // could not figure out how to set static y0 and y1 values using d3 line generator
@@ -213,14 +272,14 @@ console.log('sources: ',sources);
               class: 'x axis',
               transform: 'translate(0,' + bbDetail.h +')'
             })
-            .call(xDetailAxis)
+            .call(xAxis)
 
   // add y axis to svg
     detailFrame.append('g')
             .attr({
               class: 'y axis',
             })
-            .call(yDetailAxis)
+            .call(yAxis)
           .append("text")
             .attr('x', -5)
             .attr("y", -45)
@@ -254,7 +313,7 @@ console.log('sources: ',sources);
     //             transform: 'translate(0,' + bbDetail.y + ')'                  
     //           })
     //           .style({
-    //             'fill': function(e) { return color(e.type); }
+    //             'fill': function(e) { return color(e.name); }
     //            });
 
   /* add dots for each line */
@@ -262,8 +321,8 @@ console.log('sources: ',sources);
       .enter().append('circle')
       .attr({
         class: 'dot',
-        cx: function(d) { return xDetailScale(d.date); },
-        cy: function(d) { return yDetailScale(d.count); },
+        cx: function(d) { return xScale(d.date); },
+        cy: function(d) { return yScale(d.count); },
         r: 4,
         transform: 'translate(0,' + bbDetail.y + ')'
       })
@@ -306,8 +365,8 @@ console.log('sources: ',sources);
             .enter().append('line')
                .attr({
                   class: 'storyline',
-                  x1: function(d) { return xDetailScale(d.date); },
-                  x2: function(d) { return xDetailScale(d.date); },
+                  x1: function(d) { return xScale(d.date); },
+                  x2: function(d) { return xScale(d.date); },
                   y1: -bbDetail.y, // make taller than chart
                   y2: bbDetail.h
                 });
@@ -318,7 +377,7 @@ console.log('sources: ',sources);
         .enter().append('path')
            .attr({
               class: 'storyTriangle',
-              transform: function(d){ return 'translate(' + xDetailScale(d.date) + ',' + -bbDetail.y + ')'; },
+              transform: function(d){ return 'translate(' + xScale(d.date) + ',' + -bbDetail.y + ')'; },
               d: d3.svg.symbol().type('triangle-down').size(256)
             })
            // add mouseover story details
@@ -360,7 +419,7 @@ console.log('sources: ',sources);
     // Initialize tooltip
     var tip = d3.tip()
             .html(function(d) { 
-              console.log('d3tip',d);
+              // console.log('d3tip',d);
               // if 1 article, use singular 'article'
                 return d.count + " articles on <span class='sourceName'>" + d.name + "</span> during<br>the 30 days prior to " + parseDateTips(d.date); 
             })
@@ -418,4 +477,45 @@ console.log('sources: ',sources);
       doBBC();
     else if(selectedSource == 'google')
       doGoogle();
+  }
+
+/* button click control */
+  d3.select("input[value=\"types\"]").on("click", function () { redraw('types'); });
+  d3.select("input[value=\"sources\"]").on("click", function () { redraw('sources'); });
+
+/* Redraw graph based on either types or sources of media */
+  function redraw(chart) {
+
+    // determine chart type
+    if(chart == 'types')
+      var chartData = aggregateMediaStats;
+    else
+      var chartData = allDates;
+console.log(chartData);
+      // recalculate range
+      yScale = d3.scale.linear().domain([0, d3.max(chartData, function(d) {return d3.max(d.values, function(v) { return v.count; }) })]);
+
+      // remove & add lines while animating transitions
+      // bind data
+      var dataTypes = svg.selectAll('.dataTypes')
+                         .data(chartData)
+                       .exit().remove();
+
+      // add line
+      // dataTypes.selectAll('path')
+      //          .attr({
+      //             class: 'traditionalMediaPath',
+      //             d: function(e){ console.log(e); return areaLine(e.values); },
+      //             transform: 'translate(0,' + bbDetail.y + ')'                  
+      //          })
+      //          .style({
+      //           'stroke': function(e) { return color(e.name); },
+      //           'fill': 'none',
+      //          });
+  
+      // redraw y axis
+      d3.select('.y.axis')
+        .call(yAxis);
+
+      console.log('no way');
   }

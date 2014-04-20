@@ -23,8 +23,11 @@
 		<!-- Google Timeline -->
 		<div id="timelineVis"></div>
 
-		<!-- BBC Timeline -->
-		<div id="BBCtimelineVis"></div>
+		<form class="chartData">
+      <legend>Show graph of...</legend>
+      <label><input type="radio" name="graph" value="types"> media types</label>
+      <label><input type="radio" name="graph" value="sources" checked> media sources</label>
+    </form>
 
 	</div>
 
