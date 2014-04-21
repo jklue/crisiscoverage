@@ -47,8 +47,10 @@ public class MultiGoogleController implements CrawlerConstants{
 //				"haiyan", 2013,11,7,"news OR article OR coverage OR Yolanda \"typhoon haiyan\"");
 //		MultiGoogleController crisis = new MultiGoogleController(
 //				"turkish-revolt", 2013,5,28,"news OR article OR coverage turkish revolt");
+//		MultiGoogleController crisis = new MultiGoogleController(
+//				"ukraine-protest", 2014,02,18,"news OR article OR coverage ukraine protest");
 		MultiGoogleController crisis = new MultiGoogleController(
-				"ukraine-protest", 2014,02,18,"news OR article OR coverage ukraine protest");
+				"pakistan-drought", 2014,01,01,"news OR article OR coverage pakistan drought");
 		/** }} */	
 		
 		/** CONFIG-2: CONSTRUCT MultiQueryObj {{ */
@@ -74,6 +76,8 @@ public class MultiGoogleController implements CrawlerConstants{
 //		msq.setApiKeyStartFrom(0);
 //		msq.setMediaStartFrom(0);
 //		msq.setMediaGoTo(0);//USE '0', IF ONLY WANT TO USE GOOGLE ???
+//		msq.setSpecialParamStartFrom(131);
+//		msq.setSpecialParamGoTo(131);
 //		msq.getConfig().runMultiQuery(msq); 
 
 /** STEP-2 VERIFY THAT LIVE FILES WERE PROPER XML (MANUAL SAVE ACTIONS OR INTERRUPTED DOWNLOADS CAN INTRODUCE ERROR)
@@ -82,20 +86,20 @@ public class MultiGoogleController implements CrawlerConstants{
 //		msq.getConfig().verifyLiveApiFiles(true);
 		
 /** STEP-3: BREAK OUT INDIVIDUAL RESULTS; (OPTIONALLY CRAWL) */		
-//		if (multiType.equals(MultiType.media)) msq.setCrawl(true);
-//		msq.getConfig().extractFromApiDir(msq.isArchive(), msq.isCrawl());
+		if (multiType.equals(MultiType.media)) msq.setCrawl(true);
+		msq.getConfig().extractFromApiDir(msq.isArchive(), msq.isCrawl());
 
 /** STEP-4: (OPTION): CLEAN TEXT IF CRAWLING WAS TURNED ON IN #2 */	
 //		if (multiType.equals(MultiType.media)) msq.getConfig().cleanText(true);		
 		
 /** STEP-5: GENERATE META CSV FILE VARIATIONS -- NOTE: FOR PRODUCTION, NOT NECESSARILY GENERATING THE TEXT VARIANTS */		
-		if (multiType.equals(MultiType.country)) 
-			msq.getConfig().metaToTable(MetaMode.query_stats_with_distinct, true, defaultValLimit, "stats", false);
-		else msq.getConfig().metaToTable(MetaMode.query_stats_with_distinct, true, defaultValLimit, "stats", true);
-		
-		if (multiType.equals(MultiType.media))
-			msq.getConfig().metaToTable(MetaMode.entries_no_text, true, defaultValLimit, "results_subset", true);
-		
-		if (AbstractGoogleConfig.dryRun) System.err.println("\n!!! THIS WAS A DRY RUN, TURN OFF 'AbstractGoogleConfig.dryRun' FOR ACTUAL !!!\n");
+//		if (multiType.equals(MultiType.country)) 
+//			msq.getConfig().metaToTable(MetaMode.query_stats_with_distinct, true, defaultValLimit, "stats", false);
+//		else msq.getConfig().metaToTable(MetaMode.query_stats_with_distinct, true, defaultValLimit, "stats", true);
+//		
+//		if (multiType.equals(MultiType.media))
+//			msq.getConfig().metaToTable(MetaMode.entries_no_text, true, defaultValLimit, "results_subset", true);
+//		
+//		if (AbstractGoogleConfig.dryRun) System.err.println("\n!!! THIS WAS A DRY RUN, TURN OFF 'AbstractGoogleConfig.dryRun' FOR ACTUAL !!!\n");
 	}
 }
