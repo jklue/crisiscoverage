@@ -419,6 +419,8 @@ footer {
     fill: #cccccc; }
   #timeline .hover-line {
     pointer-events: none; }
+  #timeline .checkbox {
+    float: right; }
   #timeline .storyline {
     stroke: #cccccc;
     stroke-dasharray: 15 25;

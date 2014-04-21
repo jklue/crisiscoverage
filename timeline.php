@@ -11,15 +11,6 @@
 			<div id="crisisStory"></div>
 		</div>
 
-		<!-- Graph controls -->
-<!-- 		<form id="dataSourceSelect">
-	  Source:
-	  	<select name="" id="">
-	  		<option name="google" value="google">Google</option>
-	  		<option name="bbc" value="bbc">BBC</option>
-	  	</select>
-	  </form> -->
-
 		<!-- Google Timeline -->
 		<div id="timelineVis"></div>
 
