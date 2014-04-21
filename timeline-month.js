@@ -69,7 +69,7 @@
 
 /* Set initial data sources */
   // Traditional source
-    var mediaStats = 'productiondata/haiyan-meta/google-media_stats.csv';
+    var mediaStats = 'productiondata/haiyan/google-media_stats.csv';
     // var mediaStats = 'productiondata/haiyan-meta/google-media_stats.csv';
 
   // Blog source
@@ -296,7 +296,8 @@
   // add line
     mediaSources.append('path')
                .attr({
-                  d: function(e){ return line(e.values); },
+                  id: function(d){ console.log(d); return d.name; },
+                  d: function(d){ return line(d.values); },
                   transform: 'translate(0,' + bbDetail.y + ')'                  
                })
                .style({
@@ -354,33 +355,39 @@
       });
 
   /* Add related legend - Functionality based on http://mpf.vis.ywng.cloudbees.net/*/
-    mediaSources.append('text')
-             .attr("x", width + 180)
-             .attr("y", function(d,i){ return (i * 16) - margin.top/2 })
-             .attr("dy", ".35em")
-             .attr('cursor','pointer')
-             .style("text-anchor", "end")
-             .attr('fill',function(d){ return color(d.name); })
-             .text(function(d) { console.log(d); return d.name; })
-             // change font color to show activation or not
-             .on('click',function(d){
-               // if active, make gray
-               if(d3.select(this).attr('fill') != '#ccc'){
-                 // change text color to gray
-                 d3.select(this)
-                   .attr('fill','#ccc');
-                 // remove line
-                 mediaSources.select('path').transition()
-                          .attr('d',function(e){ return null; })
-               } else{
-                 // change color back to color
-                 d3.select(this)
-                   .attr('fill', function(d){ return color(d.name); });
-                 // add line
-                 mediaSources.select('path').transition()
-                          .attr('d',function(e){ return line(e.values); })
-               }
-             });
+    mediaSources.append('text').attr({
+                  id: function(d){ return d.name; }, // store name for reference to path
+                  x: width + 180,
+                  y: function(d,i){ return (i * 16) - margin.top/2; },
+                  dy: '0.35em',
+                  cursor: 'pointer',
+                  fill: function(d){ return color(d.name); }
+                })
+                .style("text-anchor", "end")
+                .text(function(d) { return d.name; })
+                // change font color to show activation or not
+                .on('click',function(d){
+                  // store id hook for path hide
+                  var pathID = d3.select(this).attr('id');
+
+                  // if active, make gray
+                  if(d3.select(this).attr('fill') != '#ccc'){
+                    console.log('id: ',pathID);
+                    // change text color to gray
+                    d3.select(this)
+                      .attr('fill','#ccc');
+                    // remove line
+                    mediaSources.select("path[id='" + pathID + "'").transition()
+                             .attr('d',function(e){ return null; })
+                  } else{
+                    // change color back to color
+                    d3.select(this)
+                      .attr('fill', function(d){ return color(d.name); });
+                    // add line
+                    mediaSources.select('path').transition()
+                             .attr('d',function(e){ return line(e.values); })
+                  }
+                });
 
    /* Storypoints */
     // add intro title and summary
