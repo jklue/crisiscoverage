@@ -6,6 +6,8 @@ import info.crisiscoverage.crawler.configs.google.AbstractGoogleConfig.DateRestr
 
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.base.Strings;
 
 public class MultiAdditionalResultObj extends AdditionalResultObj {
@@ -13,19 +15,19 @@ public class MultiAdditionalResultObj extends AdditionalResultObj {
 	protected final String siteName;
 	protected final String siteType;
 	
-	public MultiAdditionalResultObj(
+	public MultiAdditionalResultObj(MetaMode metaMode,
 			String queryDistinctKey, DateRestrict dateRestrict, List<Column> rowHeaders,
 			List<String> resultHeaders) throws Exception {
-		super(queryDistinctKey, dateRestrict, rowHeaders, resultHeaders);
+		super(metaMode, queryDistinctKey, dateRestrict, rowHeaders, resultHeaders);
 		
 		siteName = getSiteNameFrom();
 		siteType = getSiteTypeFrom();
 	}
 	
-//	@Override
-//	public boolean isForMetaMode(MetaMode metaMode){
-//		return true;
-//	}
+	@Override
+	public boolean isForMetaMode(){
+		return true;
+	}
 	
 	@Override
 	protected String getCustomCellValueFor(String resultHeader, List<String> row){
@@ -43,9 +45,20 @@ public class MultiAdditionalResultObj extends AdditionalResultObj {
 	 * @return Site Name, defaults to Google
 	 */
 	protected String getSiteNameFrom(){
-		if (!Strings.isNullOrEmpty(queryDistinctKey)){
-			String n = AbstractGoogleConfig.mediaNameMap.get(queryDistinctKey);
-			if (!Strings.isNullOrEmpty(n)) return n;
+		if (isForMetaMode() && !Strings.isNullOrEmpty(queryDistinctKey)){
+			if (isUsingPeriodCompareResults()) {
+				String n = AbstractGoogleConfig.mediaNameMap.get(queryDistinctKey);
+				if (!Strings.isNullOrEmpty(n)) return n;
+			} else {
+				String tmp = siteNameAndTypeFromDocId();
+				for (String type : AbstractGoogleConfig.defaultSiteTypes){
+					if (tmp.startsWith(type)){
+						tmp = StringUtils.substringAfter(tmp,type);
+						if (tmp.startsWith("-"))
+							return StringUtils.substring(tmp,1);
+					}
+				}
+			}
 		}
 		return AbstractGoogleConfig.googleSiteName;
 	}
@@ -55,10 +68,37 @@ public class MultiAdditionalResultObj extends AdditionalResultObj {
 	 * @return Site Type, defaults to All
 	 */
 	protected String getSiteTypeFrom(){
-		if (!Strings.isNullOrEmpty(queryDistinctKey)){
-			String n = AbstractGoogleConfig.mediaTypeMap.get(queryDistinctKey);
-			if (!Strings.isNullOrEmpty(n)) return n;
+		if (isForMetaMode() && !Strings.isNullOrEmpty(queryDistinctKey)){
+			if (isUsingPeriodCompareResults()) {
+				String n = AbstractGoogleConfig.mediaTypeMap.get(queryDistinctKey);
+				if (!Strings.isNullOrEmpty(n)) return n;
+			} else {
+				String tmp = siteNameAndTypeFromDocId();
+				for (String type : AbstractGoogleConfig.defaultSiteTypes){
+					if (tmp.startsWith(type)) return type;
+				}
+			}
 		}
 		return AbstractGoogleConfig.defaultSiteTypeAll;
+	}
+	
+	/**
+	 * Site Name and Type from DocId (ie queryDistinctKey in non-stats mode).
+	 * @return
+	 */
+	protected String siteNameAndTypeFromDocId(){
+		String r = "";
+		if (isUsingPeriodCompareResults()) return r;
+		
+		if (queryDistinctKey.contains("_")) r = StringUtils.substringAfter(queryDistinctKey,"_");
+		
+		int d = StringUtils.indexOfAny(r, "0123456789");
+		if (d > -1) r = StringUtils.substring(r, 0, d); 
+		
+		r = StringUtils.normalizeSpace(r);
+		r = StringUtils.trim(r);
+		
+		if (r.endsWith("-")) r = StringUtils.substringBeforeLast(r, "-");
+		return r;
 	}
 }

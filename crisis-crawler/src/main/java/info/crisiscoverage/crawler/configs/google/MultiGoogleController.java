@@ -49,8 +49,8 @@ public class MultiGoogleController implements CrawlerConstants{
 		/** }} */	
 		
 		/** CONFIG-2: CONSTRUCT MultiQueryObj {{ */
-		MultiType multiType = MultiType.media_baseline;
-//		MultiType multiType = MultiType.media;
+//		MultiType multiType = MultiType.media_baseline;
+		MultiType multiType = MultiType.media;
 //		MultiType multiType = MultiType.country;
 		
 		boolean isPaidQuery = true;	
@@ -76,7 +76,7 @@ public class MultiGoogleController implements CrawlerConstants{
 /** STEP-2 VERIFY THAT LIVE FILES WERE PROPER XML (MANUAL SAVE ACTIONS OR INTERRUPTED DOWNLOADS CAN INTRODUCE ERROR)
  *  NOTICE ::: RECOMMENDED RUNNING THIS STEP PRIOR TO RUNNING SUBSEQUENT STEPS. 
  */
-		msq.getConfig().verifyLiveApiFiles(true);
+//		msq.getConfig().verifyLiveApiFiles(true);
 		
 /** STEP-3: BREAK OUT INDIVIDUAL RESULTS; (OPTIONALLY CRAWL) */		
 //		if (multiType.equals(MultiType.media)) msq.setCrawl(true);
@@ -86,12 +86,12 @@ public class MultiGoogleController implements CrawlerConstants{
 //		if (multiType.equals(MultiType.media)) msq.getConfig().cleanText(true);		
 		
 /** STEP-5: GENERATE META CSV FILE VARIATIONS -- NOTE: FOR PRODUCTION, NOT NECESSARILY GENERATING THE TEXT VARIANTS */		
-		if (multiType.equals(MultiType.country)) 
-			msq.getConfig().metaToTable(MetaMode.query_stats_with_distinct, true, defaultValLimit, "stats", false);
-		else msq.getConfig().metaToTable(MetaMode.query_stats_with_distinct, true, defaultValLimit, "stats", true);
+//		if (multiType.equals(MultiType.country)) 
+//			msq.getConfig().metaToTable(MetaMode.query_stats_with_distinct, true, defaultValLimit, "stats", false);
+//		else msq.getConfig().metaToTable(MetaMode.query_stats_with_distinct, true, defaultValLimit, "stats", true);
 //		
-//		if (multiType.equals(MultiType.media))
-//			msq.getConfig().metaToTable(MetaMode.entries_no_text, true, defaultValLimit, "results_subset", false);
+		if (multiType.equals(MultiType.media))
+			msq.getConfig().metaToTable(MetaMode.entries_no_text, true, defaultValLimit, "results_subset", true);
 		
 		if (AbstractGoogleConfig.dryRun) System.err.println("\n!!! THIS WAS A DRY RUN, TURN OFF 'AbstractGoogleConfig.dryRun' FOR ACTUAL !!!\n");
 	}

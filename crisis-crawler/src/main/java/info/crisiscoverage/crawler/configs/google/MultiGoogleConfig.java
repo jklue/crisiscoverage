@@ -1,12 +1,9 @@
 package info.crisiscoverage.crawler.configs.google;
 
 import info.crisiscoverage.crawler.IOUtils;
-import info.crisiscoverage.crawler.CrawlerConstants.Column;
-import info.crisiscoverage.crawler.configs.google.AbstractGoogleConfig.DateRestrict;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
@@ -215,8 +212,8 @@ public class MultiGoogleConfig  extends AbstractGoogleConfig{
 	
 	@Override
 	protected AdditionalResultObj createAdditionalResultObj(
-			String qdId, DateRestrict p, List<Column> headers, List<String> resultHeaders) throws Exception{
-		 return new MultiAdditionalResultObj(qdId,p,headers,resultHeaders);
+			MetaMode metaMode, String aId, DateRestrict p, List<Column> headers, List<String> resultHeaders) throws Exception{
+		 return new MultiAdditionalResultObj(metaMode, aId,p,headers,resultHeaders);
 	}
 	
 	@Override
