@@ -43,15 +43,17 @@ public class MultiGoogleController implements CrawlerConstants{
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
 		/** CONFIG-1: PICK CRISIS {{ */
+//		MultiGoogleController crisis = new MultiGoogleController(
+//				"haiyan", 2013,11,7,"news OR article OR coverage OR Yolanda \"typhoon haiyan\"");
 		MultiGoogleController crisis = new MultiGoogleController(
-				"haiyan", 2013,11,7,"news OR article OR coverage OR Yolanda \"typhoon haiyan\"");
+				"turkish-revolt", 2013,5,28,"news OR article OR coverage turkish revolt");
 		
 		/** }} */	
 		
 		/** CONFIG-2: CONSTRUCT MultiQueryObj {{ */
 //		MultiType multiType = MultiType.media_baseline;
-		MultiType multiType = MultiType.media;
-//		MultiType multiType = MultiType.country;
+//		MultiType multiType = MultiType.media;
+		MultiType multiType = MultiType.country;
 		
 		boolean isPaidQuery = true;	
 		MultiQueryObj msq = MultiQueryObjFactory.create(
@@ -86,12 +88,12 @@ public class MultiGoogleController implements CrawlerConstants{
 //		if (multiType.equals(MultiType.media)) msq.getConfig().cleanText(true);		
 		
 /** STEP-5: GENERATE META CSV FILE VARIATIONS -- NOTE: FOR PRODUCTION, NOT NECESSARILY GENERATING THE TEXT VARIANTS */		
-//		if (multiType.equals(MultiType.country)) 
-//			msq.getConfig().metaToTable(MetaMode.query_stats_with_distinct, true, defaultValLimit, "stats", false);
-//		else msq.getConfig().metaToTable(MetaMode.query_stats_with_distinct, true, defaultValLimit, "stats", true);
+		if (multiType.equals(MultiType.country)) 
+			msq.getConfig().metaToTable(MetaMode.query_stats_with_distinct, true, defaultValLimit, "stats", false);
+		else msq.getConfig().metaToTable(MetaMode.query_stats_with_distinct, true, defaultValLimit, "stats", true);
 //		
-		if (multiType.equals(MultiType.media))
-			msq.getConfig().metaToTable(MetaMode.entries_no_text, true, defaultValLimit, "results_subset", true);
+//		if (multiType.equals(MultiType.media))
+//			msq.getConfig().metaToTable(MetaMode.entries_no_text, true, defaultValLimit, "results_subset", true);
 		
 		if (AbstractGoogleConfig.dryRun) System.err.println("\n!!! THIS WAS A DRY RUN, TURN OFF 'AbstractGoogleConfig.dryRun' FOR ACTUAL !!!\n");
 	}

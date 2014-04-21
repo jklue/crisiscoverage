@@ -17,7 +17,7 @@ public class MultiQueryObj {
 
 	int padPeriods = 1;//Important to see the lead up!
 	boolean onlyRunPadPeriods;
-	int numberOfPeriods = 5;
+	int numberOfPeriods = 6;
 	int queriesPerPeriod = 1;
 	int jumpForwardNPeriods = 0;
 
