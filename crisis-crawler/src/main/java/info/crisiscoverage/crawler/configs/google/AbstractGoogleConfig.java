@@ -44,6 +44,10 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 	public static final String defaultSiteTypeIndependent = "Independent";
 	public static final String defaultSiteTypeBlogsSocial = "Blogs-Social";
 	
+	public static final String[] defaultSiteTypes = new String[]{
+		defaultSiteTypeAll, defaultSiteTypeTraditional, defaultSiteTypeIndependent, defaultSiteTypeBlogsSocial
+		};
+	
 	private int tmpCount = 0;
 
 	public static boolean dryRun = false;
@@ -928,9 +932,10 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 	protected Path additionalMetaToTable(
 			Path csvFile, MetaMode metaMode, boolean includeHeaders, int cellSizeLimit, String filenameAppend) throws Exception{
 
-		//ADD COMPARED_RESULTS
-		if (metaMode.isQueryStatsMode()){
-			System.out.println("\n### NOW ATTEMPTING TO APPEND COMPARED RESULTS ###\n");
+		if (metaMode.isQueryStatsMode() && !metaMode.isWithQuery()) return csvFile;//NO ACTION!
+		//ADD ADDITIONAL TO ALL OTHERS
+//		if (metaMode.isQueryStatsMode()){
+			System.out.println("\n### NOW ATTEMPTING TO APPEND ADDITIONAL RESULTS ###\n");
 			try {
 				List<String> siteLines = IOUtils.readLines(csvFile);
 
@@ -938,7 +943,7 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 				List<Column> headers = new ArrayList<>();
 				List<String> resultHeaders = getResultHeaders(metaMode);
 				/* key is the queryDistinct with dateRestrict stripped. */
-				Map<String, AdditionalResultObj> comparedMap = new TreeMap<>();
+				Map<String, AdditionalResultObj> additionalMap = new TreeMap<>();
 
 				int lineNum = -1;
 				for (String line : siteLines){
@@ -971,40 +976,54 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 							continue;
 						}
 
-						int qdIdx = headers.indexOf(Column.query_distinct);
-						if (qdIdx > -1){
+						int aIdx = -1;
+						if (metaMode.isWithQuery()) aIdx = headers.indexOf(Column.query_distinct);
+						else aIdx = headers.indexOf(Column.doc_id);
+						
+						if (aIdx > -1){
 
-							String qdId = stripDateRestrictFromQueryDistinct(row.get(qdIdx));
+							String aId = null;
+							if (metaMode.isQueryStatsMode()) aId = stripDateRestrictFromQueryDistinct(row.get(aIdx));
+							else aId = row.get(aIdx);
 
-							AdditionalResultObj cro = null;
-							if(comparedMap.containsKey(qdId)){
-								cro = comparedMap.get(qdId);
-							} else {
-								int pIdx = headers.indexOf(Column.query_period);
-								if (pIdx > -1){
-									String pStr = row.get(pIdx);
-									DateRestrict p = null;
-									try{
-										p = DateRestrict.valueOf(pStr);
-									} catch(Exception e){
-										e.printStackTrace();
-									}
-
-									if (p != null){
-										cro = createAdditionalResultObj(qdId,p,headers,resultHeaders);
-										comparedMap.put(qdId,cro);
-									} else {
-										System.err.println("... skipping row #"+lineNum+", no detected dateRestrict within query_period cell.");
-									}
+							AdditionalResultObj aro = null;
+								
+								if(additionalMap.containsKey(aId)){
+									aro = additionalMap.get(aId);
 								} else {
-									System.err.println("... skipping row #"+lineNum+", no query_period cell.");
+									if (metaMode.isWithQuery()){
+
+										int pIdx = headers.indexOf(Column.query_period);
+										if (pIdx > -1){
+											String pStr = row.get(pIdx);
+											DateRestrict p = null;
+											try{
+												p = DateRestrict.valueOf(pStr);
+											} catch(Exception e){
+												e.printStackTrace();
+											}
+
+											if (p != null){
+												aro = createAdditionalResultObj(metaMode,aId,p,headers,resultHeaders);
+												additionalMap.put(aId,aro);
+											} else {
+												System.err.println("... skipping row #"+lineNum+", no detected dateRestrict within query_period cell.");
+											}
+										} 
+									} else {
+										//Handle for non-distinct
+										aro = createAdditionalResultObj(metaMode,aId,null,headers,resultHeaders);
+										additionalMap.put(aId,aro);
+									}
 								}
+
+							if (aro == null){
+								System.err.println("... skipping row #"+lineNum+", no query_period cell.");
+								continue;
 							}
 
-							if (cro == null) continue;
-
 							//HAVE CRO, POPULATE
-							cro.addRowToPeriodValMap(row);
+							aro.addRowToPeriodValMap(row);
 
 						} else {
 							System.err.println("... skipping row #"+lineNum+", no query_distinct cell.");
@@ -1017,7 +1036,7 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 				Path csvFile2 = Paths.get(csvFile.getParent().toString(),"(Additional)"+csvFile.getFileName().toString());
 				boolean firstRun = true;
 				
-				for (Map.Entry<String, AdditionalResultObj> entry : comparedMap.entrySet()){
+				for (Map.Entry<String, AdditionalResultObj> entry : additionalMap.entrySet()){
 					List<Map<String,String>> map = entry.getValue().populateAdditionalResult();
 					
 					for (Map<String,String> row : map){
@@ -1038,22 +1057,22 @@ public abstract class AbstractGoogleConfig extends AbstractApiXmlDomCrawlerConfi
 				e.printStackTrace();
 			}
 
-		}
+//		}
 		return csvFile;
 	}
 	
 	/**
 	 * Sub-classes can override.
-	 * @param qdId
-	 * @param p
+	 * @param aId
+	 * @param dateRestrict
 	 * @param headers
 	 * @param resultHeaders
 	 * @return
 	 * @throws Exception
 	 */
 	protected AdditionalResultObj createAdditionalResultObj(
-			String qdId, DateRestrict p, List<Column> headers, List<String> resultHeaders) throws Exception{
-		 return new AdditionalResultObj(qdId,p,headers,resultHeaders);
+			MetaMode metaMode, String aId, DateRestrict dateRestrict, List<Column> headers, List<String> resultHeaders) throws Exception{
+		 return new AdditionalResultObj(metaMode, aId,dateRestrict,headers,resultHeaders);
 	}
 	
 	/**

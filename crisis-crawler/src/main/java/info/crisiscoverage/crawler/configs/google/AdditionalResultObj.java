@@ -6,13 +6,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import com.google.common.base.Strings;
-
 import info.crisiscoverage.crawler.CrawlerConstants.Column;
 import info.crisiscoverage.crawler.CrawlerConstants.MetaMode;
 import info.crisiscoverage.crawler.configs.google.AbstractGoogleConfig.DateRestrict;
 
 public class AdditionalResultObj {
+	
+	/** What is the MetaMode? */
+	final protected MetaMode metaMode;
 	
 	/** What are the row headers that are in play */
 	final protected List<Column> rowHeaders;
@@ -45,14 +46,16 @@ public class AdditionalResultObj {
 	
 	/**
 	 * Constructor.
+	 * @param metaMode
 	 * @param queryDistinctKey
 	 * @param dateRestrict
 	 * @param rowHeaders
 	 * @param resultHeaders
 	 * @throws Exception
 	 */
-	public AdditionalResultObj(
+	public AdditionalResultObj(MetaMode metaMode,
 			String queryDistinctKey, DateRestrict dateRestrict, List<Column> rowHeaders, List<String> resultHeaders) throws Exception{
+		this.metaMode = metaMode;
 		this.queryDistinctKey = queryDistinctKey;
 		this.dateRestrict = dateRestrict;
 		this.rowHeaders = rowHeaders;
@@ -71,7 +74,7 @@ public class AdditionalResultObj {
 	 * @param metaMode
 	 * @return
 	 */
-	public boolean isForMetaMode(MetaMode metaMode){
+	public boolean isForMetaMode(){
 		switch(metaMode){
 		case query_stats_with_distinct: return true;
 		default:
@@ -80,79 +83,87 @@ public class AdditionalResultObj {
 	}
 	
 	/**
-	 * Test for acceptance.
-	 * @param row
+	 * Test for which modes are using period compare results.
+	 * @param metaMode
 	 * @return
 	 */
-	public boolean isAcceptedByQueryDistinctKey(List<String> row){
-		String candidate = row.get(rowHeaders.indexOf(Column.query_distinct));
-		if (!Strings.isNullOrEmpty(candidate)){
-			
-			//For other than '' / ALL results
-			if (!Strings.isNullOrEmpty(queryDistinctKey)){
-				return candidate.startsWith(queryDistinctKey);
-			} else if (queryDistinctKey != null){
-				DateRestrict dr = DateRestrict.dateRestrictOf(candidate); 
-				int periodsBack = DateRestrict.periodsBackOf(candidate);
-				if (dr != null && dr.equals(dateRestrict) && periodsBack > -1) return true;
-			}
+	public boolean isUsingPeriodCompareResults(){
+		switch(metaMode){
+		case query_stats_with_distinct: return true;
+		default:
+			return false;
 		}
-		return false;
 	}
 	
 	/**
 	 * Add a row, assumes acceptance testing already done.
+	 * @param metaMode
 	 * @param row
 	 */
 	public void addRowToPeriodValMap(List<String> row){
-		String rawPeriod = row.get(periodsBackIdx.intValue());
+		if (!isForMetaMode()) return;
 		
+		if (isUsingPeriodCompareResults()){
+			String rawPeriod = row.get(periodsBackIdx.intValue());
+
 			try{
 				int p =Integer.parseInt(rawPeriod.trim());
-				
+
 				String rawResult = row.get(rawResultIdx.intValue()); 
 				int r =Integer.parseInt(rawResult.trim());
-				
+
 				rowPeriodValMap.put(p,row);
 				periodRawResultMap.put(p, r);
-				
+
 				if (minPeriod < 1 || p < minPeriod) minPeriod = p;
 				if (maxPeriod < 1 || p > maxPeriod) maxPeriod = p;
-				
+
 				System.out.println("... for '"+queryDistinctKey+"', adding row with period: "+p+", rawResult: "+r);
 				return;
 			} catch(Exception e){
 				e.printStackTrace();
 			}
-		
-		System.err.println("... unable to add row at #"+rowPeriodValMap.size()+", run acceptance test first -- isAcceptedByQueryDistinctKey().");
+
+			System.err.println("... unable to add row at #"+rowPeriodValMap.size()+", run acceptance test first -- isAcceptedByQueryDistinctKey().");
+		} else {
+			rowPeriodValMap.put(1,row);//Assumes distinct key
+		}
 	}
 	
 	/**
-	 * This is the heavy-lifting. Go through the rowPeriodValMap and determine the compared_result column and add it to the list.
+	 * This is the heavy-lifting. Go through the rowPeriodValMap and determine the additional column(s) and add it to the list.
 	 * @param headers
 	 * @return List<Map<Column,String>>
 	 */
 	public List<Map<String,String>> populateAdditionalResult(){
 		
 		List<Map<String,String>> rows = new ArrayList<>();
-		System.out.println("--> POPULATING COMPARE RESULT, minPeriod: "+minPeriod+", maxPeriod: "+maxPeriod);
-		if (minPeriod > 0 && maxPeriod > 0){
+		
+		if (!isForMetaMode()) return rows;
+		
+			System.out.println("--> Populating additional result for metaMode: "+metaMode+", minPeriod: "+minPeriod+", maxPeriod: "+maxPeriod);
 
-			//Figure out the compare values.
-			periodCompareResultMap.clear();
-			
-			for(int i = maxPeriod; i >= minPeriod; i--){
-				System.out.println("i: "+i);
-				int raw = periodRawResultMap.get(Integer.valueOf(i)); 
-				int r = raw;
-				if (i+1 <=maxPeriod){
+			if (isUsingPeriodCompareResults() && minPeriod > 0 && maxPeriod > 0){
+
+				//Figure out the compare values.
+				periodCompareResultMap.clear();
+
+				for(int i = maxPeriod; i >= minPeriod; i--){
+					System.out.println("i: "+i);
+					int raw = periodRawResultMap.get(Integer.valueOf(i)); 
+					int r = raw;
+					if (i+1 <=maxPeriod){
 						r = raw - periodRawResultMap.get(Integer.valueOf(i+1));
+					}
+					System.out.println("... for queryDistinctKey: "+queryDistinctKey+" at period: "+i+", compare_result_count: "+r+
+							", raw_result_count: '"+raw+"' ... dateRestrict: "+dateRestrict.name());
+
+					periodCompareResultMap.put(Integer.valueOf(i), Integer.valueOf(r));
 				}
-				System.out.println("... for queryDistinctKey: "+queryDistinctKey+" at period: "+i+", compare_result_count: "+r+
-						", raw_result_count: '"+raw+"' ... dateRestrict: "+dateRestrict.name());
-				
-				periodCompareResultMap.put(Integer.valueOf(i), Integer.valueOf(r));
+
+			} else if (isUsingPeriodCompareResults()) {
+				System.err.println("WARNING ::: invalid minPeriod and/or maxPeriod, skipping 'compared_result_count' population.");
+				return rows;
 			}
 			
 			//Add the columns
@@ -161,11 +172,8 @@ public class AdditionalResultObj {
 				List<String> row = entry.getValue();
 				rows.add(adjustToResultColumns(row,p));
 			}
-		} else {
-			System.err.println("WARNING ::: invalid minPeriod and/or maxPeriod, skipping 'compared_result_count' population.");
-		}
 
-		return rows;
+			return rows;
 	}
 	
 	/**
