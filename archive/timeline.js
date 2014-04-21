@@ -287,6 +287,14 @@
         tip.hide(d);
       });
 
+  /* Add related legend - Functionality based on http://mpf.vis.ywng.cloudbees.net/*/
+    // dataTypes.append('text')
+    //          .attr("x", width - 24)
+    //          .attr("y", 9)
+    //          .attr("dy", ".35em")
+    //          .style("text-anchor", "end")
+    //          .text(function(d) { console.log(d); return d; });
+
   // /* Storypoints */
     // add intro title and summary
     d3.select("#crisisTitle").html('<h3>Typhoon Haiyan</h3>');
@@ -449,12 +457,12 @@
       .style("fill", color);
 
   // make name box
-  legend.append("text")
-      .attr("x", width - 24)
-      .attr("y", 9)
-      .attr("dy", ".35em")
-      .style("text-anchor", "end")
-      .text(function(d) { return d; });
+  // legend.append("text")
+  //     .attr("x", width - 24)
+  //     .attr("y", 9)
+  //     .attr("dy", ".35em")
+  //     .style("text-anchor", "end")
+  //     .text(function(d) { return d; });
 
 /* button click control. From AmeliaBR on "putting the country on drop down list using d3 via csv file" on StackOverflow */
   // add event handler  

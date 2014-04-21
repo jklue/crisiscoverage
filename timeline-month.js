@@ -1,9 +1,9 @@
 /* Setup */
-	var allDates, aggregateMediaStats, bbDetail, bbOverview, detailFrame, dateList, blogDates, color, storyPoints, duplicateAllDates, duplicateTraditonalDates, duplicateBlogDates, mediaTypes, originalData, padding, parseYear, sources, svg, xAxis, xScale, xOverviewScale, yAxis, yScale;
+	var allDates, aggregateMediaStats, bbDetail, bbOverview, detailFrame, dateList, blogDates, color, storyPoints, duplicateAllDates, duplicateTraditonalDates, duplicateBlogDates, line, mediaTypes, originalData, padding, parseYear, sources, svg, xAxis, xScale, xOverviewScale, yAxis, yScale;
 
 	var margin = {
 	    top: 50,
-	    right: 160,
+	    right:200,
 	    bottom: 0,
 	    left: 100
 	};
@@ -69,7 +69,7 @@
 
 /* Set initial data sources */
   // Traditional source
-    var mediaStats = 'productiondata/haiyan-meta/google-media_stats-no-google.csv';
+    var mediaStats = 'productiondata/haiyan-meta/google-media_stats.csv';
     // var mediaStats = 'productiondata/haiyan-meta/google-media_stats.csv';
 
   // Blog source
@@ -254,12 +254,12 @@
                   .orient('left')
                   .ticks(6);
 
-    var area = d3.svg.area()
-								     .x(function(d) { return xScale(d.date); })
-								     .y0(bbDetail.h)
-								     .y1(function(d) { return yScale(d.count); });
+    // var area = d3.svg.area()
+				// 				     .x(function(d) { return xScale(d.date); })
+				// 				     .y0(bbDetail.h)
+				// 				     .y1(function(d) { return yScale(d.count); });
 
-    var areaLine = d3.svg.line()
+    var line = d3.svg.line()
                      .x(function(d) { return xScale(d.date); })
                      .y(function(d) { return yScale(d.count); })
                      .interpolate('linear');
@@ -288,16 +288,15 @@
             .text("Coverage")
 
   // bind data
-    var dataTypes = svg.selectAll('.dataTypes')
+    var mediaSources = svg.selectAll('.mediaSources')
                         .data(allDates)
                       .enter().append('g')
-                        .attr('class','dataTypes');
+                        .attr('class','mediaSources');
 
   // add line
-    dataTypes.append('path')
+    mediaSources.append('path')
                .attr({
-                  class: 'traditionalMediaPath',
-                  d: function(e){ return areaLine(e.values); },
+                  d: function(e){ return line(e.values); },
                   transform: 'translate(0,' + bbDetail.y + ')'                  
                })
                .style({
@@ -306,7 +305,7 @@
                });
 
   // add fill
-    // dataTypes.append("path")
+    // mediaSources.append("path")
     //           .attr({
     //             class: "traditionalMediaArea",
     //             d: function(e) { return area(e.values); },
@@ -317,7 +316,7 @@
     //            });
 
   /* add dots for each line */
-    dataTypes.selectAll('circle').data(function(d) { return d.values;})
+    mediaSources.selectAll('circle').data(function(d) { return d.values;})
       .enter().append('circle')
       .attr({
         class: 'dot',
@@ -353,6 +352,35 @@
           .attr('r',4)
         tip.hide(d);
       });
+
+  /* Add related legend - Functionality based on http://mpf.vis.ywng.cloudbees.net/*/
+    mediaSources.append('text')
+             .attr("x", width + 180)
+             .attr("y", function(d,i){ return (i * 16) - margin.top/2 })
+             .attr("dy", ".35em")
+             .attr('cursor','pointer')
+             .style("text-anchor", "end")
+             .attr('fill',function(d){ return color(d.name); })
+             .text(function(d) { console.log(d); return d.name; })
+             // change font color to show activation or not
+             .on('click',function(d){
+               // if active, make gray
+               if(d3.select(this).attr('fill') != '#ccc'){
+                 // change text color to gray
+                 d3.select(this)
+                   .attr('fill','#ccc');
+                 // remove line
+                 mediaSources.select('path').transition()
+                          .attr('d',function(e){ return null; })
+               } else{
+                 // change color back to color
+                 d3.select(this)
+                   .attr('fill', function(d){ return color(d.name); });
+                 // add line
+                 mediaSources.select('path').transition()
+                          .attr('d',function(e){ return line(e.values); })
+               }
+             });
 
    /* Storypoints */
     // add intro title and summary
@@ -452,14 +480,41 @@
   //     .attr("width", 16)
   //     .attr("height", 16)
   //     .style("fill", color);
+  
+  // add checkbox
+  // legend.append('foreignObject')
+  //       .attr('class','checkbox')
+  //       .attr('width',20)
+  //       .attr('height',20)
+  //       .attr("x", width - 16)
+  //       .attr("dy", ".35em")
+  //     .append('xhtml:input')
+  //       .attr('type','checkbox')
+  //       .attr('value',function(d){ return d })
+  //       .attr('checked',true);
 
   // make name box
-  legend.append("text")
-      .attr("x", width - 24)
-      .attr("y", 9)
-      .attr("dy", ".35em")
-      .style("text-anchor", "end")
-      .text(function(d) { return d; });
+  // legend.append("text")
+  //     .attr("x", width - 24)
+  //     .attr("y", 9)
+  //     .attr("dy", ".35em")
+  //     .attr('cursor','pointer')
+  //     .style("text-anchor", "end")
+  //     .text(function(d) { return d })
+  //     // change font color to show activation or not
+  //     .on('click',function(d){
+  //       // if active, make gray
+  //       if(d3.select(this.parentNode).attr('fill') != '#ccc'){
+  //         d3.select(this.parentNode)
+  //           .attr('fill','#ccc');
+  //       } else{
+  //         d3.select(this.parentNode)
+  //           .attr('fill',color);
+  //       }
+  //     });
+  
+
+  
   }
 
 /* button click control. From AmeliaBR on "putting the country on drop down list using d3 via csv file" on StackOverflow */
@@ -491,30 +546,31 @@
       var chartData = aggregateMediaStats;
     else
       var chartData = allDates;
-console.log(chartData);
+
       // recalculate range
       yScale = d3.scale.linear().domain([0, d3.max(chartData, function(d) {return d3.max(d.values, function(v) { return v.count; }) })]);
 
-      // remove & add lines while animating transitions
-      // bind data
-      var dataTypes = svg.selectAll('.dataTypes')
+      /* remove & add lines while animating transitions*/
+      // remove old data
+      var mediaSources = svg.selectAll('.mediaSources')
                          .data(chartData)
-                       .exit().remove();
+                       .exit().transition().remove();
+
+      // add any new data
+      mediaSources = svg.selectAll('.mediaSources')
+                     .data(chartData)
+                      .enter().append('g')
+                        .attr('class','mediaSources');
 
       // add line
-      // dataTypes.selectAll('path')
-      //          .attr({
-      //             class: 'traditionalMediaPath',
-      //             d: function(e){ console.log(e); return areaLine(e.values); },
-      //             transform: 'translate(0,' + bbDetail.y + ')'                  
-      //          })
-      //          .style({
-      //           'stroke': function(e) { return color(e.name); },
-      //           'fill': 'none',
-      //          });
+      mediaSources.selectAll('path')
+               .attr({
+                  d: function(e){ console.log(e); return line(e.values); },
+                  transform: 'translate(0,' + bbDetail.y + ')'                  
+               });
   
       // redraw y axis
-      d3.select('.y.axis')
+      d3.select(".y.axis")
         .call(yAxis);
 
       console.log('no way');
