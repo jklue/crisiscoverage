@@ -1,9 +1,9 @@
 <?php include 'includes/head.html'; ?>
 
 <body id="overview">
+	
 	<?php include 'includes/header.html'; ?>
-
-
+	
 	<!-- Overview Vis -->
 	<div id="overviewVis"></div>
 
