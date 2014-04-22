@@ -24,7 +24,7 @@
 
 <!-- footer -->
 	<?php include 'includes/footer.html'; ?>
-	<script src="timeline-month.js"></script>
+	<script src="timeline.js"></script>
 	<!-- <script src="timeline.js"></script> -->
 	<!-- // <script src="BBCtimeline.js"></script> -->
 

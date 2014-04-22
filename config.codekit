@@ -247,6 +247,17 @@
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 1
 		},
+	"\/archive\/timeline-month.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/archive\/timeline-month.js",
+		"outputAbbreviatedPath": "\/archive\/min\/timeline-month-ck.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
 	"\/archive\/timeline.js": {
 		"fileType": 64,
 		"ignore": 0,
@@ -4177,12 +4188,12 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/timeline-month.js": {
+	"\/timeline.js": {
 		"fileType": 64,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/timeline-month.js",
-		"outputAbbreviatedPath": "\/min\/timeline-month-ck.js",
+		"inputAbbreviatedPath": "\/timeline.js",
+		"outputAbbreviatedPath": "\/min\/timeline-ck.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1,
