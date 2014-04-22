@@ -107,7 +107,8 @@
       });
   // console.log('data: ',data);
   // console.log('sources: ',sources);
-
+//////////////////////////// remove first element in array to remove Google from chart data
+      sources.shift();
     /* add type back in to unique list of sources */
     sources.forEach(function(d){
       // console.log(d);
@@ -161,7 +162,6 @@
       return aggregateData();
     });
   }
-
 
 /* Aggregate data by media type */
   function aggregateData() {
@@ -362,62 +362,62 @@
                   x: width + 180,
                   y: function(d,i){ return (i * 16) - margin.top/2; },
                   dy: '0.35em',
-                  cursor: 'pointer',
+                  // cursor: 'pointer',
                   fill: function(d){ return color(d.name); }
                 })
                 .style("text-anchor", "end")
                 .text(function(d) { return d.name; })
                 // change font color to show activation or not
-                .on('click',function(d){
-                  // store class hook for path hide
-                  var pathClass = d3.select(this).attr('class');
-        console.log(pathClass);
-                  // if active, make gray
-                  if(d3.select(this).attr('fill') != '#ccc'){
-                    // change text color to gray
-                    d3.select(this)
-                      .attr('fill','#ccc');
+//                 .on('click',function(d){
+//                   // store class hook for path hide
+//                   var pathClass = d3.select(this).attr('class');
+//         console.log(pathClass);
+//                   // if active, make gray
+//                   if(d3.select(this).attr('fill') != '#ccc'){
+//                     // change text color to gray
+//                     d3.select(this)
+//                       .attr('fill','#ccc');
 
-                    // remove line from graph
-                    // mediaSources.selectAll("." + pathClass + "").exit().transition().duration(500).remove();
-                    // remove line from data
-                     // remove data from source
-                      // look through data array and remove current data
-                      allDates.forEach(function(e,j){
-                        // if data matches
-                        if(e.name == d.name){
-                          // console.log('found it @ ' + j);
-                          // remove data
-                          allDates.splice(j, 1);
-        console.log(allDates);
-                        }
-                      });
-                       // remove line from graph
-                    // mediaSources.exit().remove();
-                    // remove dots from graph
-                    mediaSources.selectAll("." + pathClass + ".dot").transition().remove();
+//                     // remove line from graph
+//                     // mediaSources.selectAll("." + pathClass + "").exit().transition().duration(500).remove();
+//                     // remove line from data
+//                      // remove data from source
+//                       // look through data array and remove current data
+//                       allDates.forEach(function(e,j){
+//                         // if data matches
+//                         if(e.name == d.name){
+//                           // console.log('found it @ ' + j);
+//                           // remove data
+//                           allDates.splice(j, 1);
+//         console.log(allDates);
+//                         }
+//                       });
+//                        // remove line from graph
+//                     // mediaSources.exit().remove();
+//                     // remove dots from graph
+//                     mediaSources.selectAll("." + pathClass + ".dot").transition().remove();
 
 
-                  } else{
-                    // change color back to color
-                    d3.select(this)
-                      .attr('fill', function(d){ return color(d.name); });
-                    // add line
-                    mediaSources.select('path').transition()
-                             .attr('d',function(e){ return line(e.values); })
-                  }
+//                   } else{
+//                     // change color back to color
+//                     d3.select(this)
+//                       .attr('fill', function(d){ return color(d.name); });
+//                     // add line
+//                     mediaSources.select('path').transition()
+//                              .attr('d',function(e){ return line(e.values); })
+//                   }
 
-                  // redo y scale
-                  yScale.domain([0, d3.max(allDates, function(d) { return d3.max(d.values, function(v) { return v.count; }) })]);
-console.log(yScale(45700))
-                  // redraw y axis
-                  d3.select(".y.axis").transition().duration(1500).ease('sin-in-out')
-                    .call(yAxis);
+//                   // redo y scale
+//                   yScale.domain([0, d3.max(allDates, function(d) { return d3.max(d.values, function(v) { return v.count; }) })]);
+// console.log(yScale(45700))
+//                   // redraw y axis
+//                   d3.select(".y.axis").transition().duration(1500).ease('sin-in-out')
+//                     .call(yAxis);
 
-                  // redraw other lines
-                  mediaSources.selectAll('path').transition()
-                             .attr('d',function(e){ console.log(e);return line(e.values); })
-                });
+//                   // redraw other lines
+//                   mediaSources.selectAll('path').transition()
+//                              .attr('d',function(e){ console.log(e);return line(e.values); })
+//                 });
 
   /* Storypoints */
     // add intro title and summary
