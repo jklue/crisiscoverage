@@ -2,8 +2,25 @@
 
 <body id="welcome">
 
+<!--TODO: STYLE FOR H1 FOR THIS PAGE, INCORPORATE INTO CSS ??? -->
+<style>
+
+    #crisis_name {
+        position: absolute;
+        top: 280px;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        text-align: center;
+        width: 320px;
+    }
+
+</style>
+
 	<!-- Rotating Globe -->
-	<div id="rotatingGlobe"></div>
+	<div id="rotatingGlobe">
+	  <!-- Crisis Name  -->
+    <h3 id="crisis_name"></h3>
+	</div>
 
 	<nav class="martini">
 		<ul>
