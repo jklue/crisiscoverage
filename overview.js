@@ -25,7 +25,7 @@ var svg = d3.select("#overviewVis").append("svg")
 /* lat and lon lines */
 
   // instantiate meridians and parallels with d3's help
-  graticule = d3.geo.graticule()
+  graticule = d3.geo.graticule();
 
   // add meridians and parallels to globe
   svg.append('path')
