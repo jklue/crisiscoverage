@@ -86,8 +86,8 @@ public class MultiGoogleController implements CrawlerConstants{
 //		msq.getConfig().verifyLiveApiFiles(true);
 		
 /** STEP-3: BREAK OUT INDIVIDUAL RESULTS; (OPTIONALLY CRAWL) */		
-		if (multiType.equals(MultiType.media)) msq.setCrawl(true);
-		msq.getConfig().extractFromApiDir(msq.isArchive(), msq.isCrawl());
+//		if (multiType.equals(MultiType.media)) msq.setCrawl(true);
+//		msq.getConfig().extractFromApiDir(msq.isArchive(), msq.isCrawl());
 
 /** STEP-4: (OPTION): CLEAN TEXT IF CRAWLING WAS TURNED ON IN #2 */	
 //		if (multiType.equals(MultiType.media)) msq.getConfig().cleanText(true);		
