@@ -137,6 +137,11 @@
           var currentSource = [];
           // add source name
           currentSource.name = d;
+          // set unique id
+            // remove spaces and periods
+            var sourceHandle = d.replace(/[\. ]+/g, "");
+            // set it
+            currentSource.id = sourceHandle;
           // initialize values array
           currentSource.values = [];
           // add values by looking through original data and finding relevant dates and counts
@@ -147,7 +152,7 @@
             if(d == e.site_name){
             // if(d == cleanSourceName){
               // return object with pertinent data
-              currentSource.values.push({ date: e.date_query_end, count: +e.raw_result_count, name: d, type: e.site_type });
+              currentSource.values.push({ date: e.date_query_end, count: +e.raw_result_count, name: d, type: e.site_type, id: sourceHandle });
             }
           });
           // add name to master array
@@ -297,7 +302,7 @@
   // add line
     mediaSources.append('path')
                .attr({
-                  class: function(d){ return d.name + ' path'; }, // store name for reference to path
+                  class: function(d){ return d.id + ' path'; }, // store name for reference to path
                   // id: function(d){ return d.name; },
                   d: function(d){ return line(d.values); },
                   transform: 'translate(0,' + bbDetail.y + ')'                  
@@ -322,7 +327,7 @@
     mediaSources.selectAll('circle').data(function(d) { return d.values;})
       .enter().append('circle')
       .attr({
-        class: function(d){ return d.name + " dot"; }, // store name for reference to path
+        class: function(d){ return d.id + " dot"; }, // store name for reference to path
         cx: function(d) { return xScale(d.date); },
         cy: function(d) { return yScale(d.count); },
         r: 4,
@@ -358,7 +363,7 @@
 
   /* Add related legend - Functionality based on http://mpf.vis.ywng.cloudbees.net/*/
     mediaSources.append('text').attr({
-                  class: function(d){ return d.name; }, // store name for reference to path
+                  class: function(d){ return d.id + 'legend'; }, // store name for reference to path
                   x: width + 180,
                   y: function(d,i){ return (i * 16) - margin.top/2; },
                   dy: '0.35em',
@@ -371,6 +376,8 @@
                 .on('click',function(d){
                   // store class hook for path hide
                   var pathClass = d3.select(this).attr('class');
+                  // remove legend text from class to protect legend text from dissapearing
+                  pathClass = pathClass.substring(0, pathClass.length - 6);
         console.log(pathClass);
                   // if active, make gray
                   if(d3.select(this).attr('fill') != '#ccc'){
@@ -409,14 +416,14 @@
 
                   // redo y scale
                   yScale.domain([0, d3.max(allDates, function(d) { return d3.max(d.values, function(v) { return v.count; }) })]);
-console.log(yScale(45700))
+// console.log(yScale(45700))
                   // redraw y axis
                   d3.select(".y.axis").transition().duration(1500).ease('sin-in-out')
                     .call(yAxis);
 
                   // redraw other lines
                   mediaSources.selectAll('path').transition()
-                             .attr('d',function(e){ console.log(e);return line(e.values); })
+                             .attr('d',function(e){ return line(e.values); })
                 });
 
   /* Storypoints */
@@ -602,7 +609,7 @@ console.log(yScale(45700))
       // add line
       mediaSources.selectAll('path')
                .attr({
-                  d: function(e){ console.log(e); return line(e.values); },
+                  d: function(e){ return line(e.values); },
                   transform: 'translate(0,' + bbDetail.y + ')'                  
                });
   
