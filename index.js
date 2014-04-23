@@ -102,4 +102,5 @@ function ready(error, world, names) {
             .transition()
             .each("end", transition);
     })();
+
 }
