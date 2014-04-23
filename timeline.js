@@ -108,7 +108,7 @@
   // console.log('data: ',data);
   // console.log('sources: ',sources);
 //////////////////////////// remove first element in array to remove Google from chart data
-      sources.shift();
+      // sources.shift();
     /* add type back in to unique list of sources */
     sources.forEach(function(d){
       // console.log(d);
@@ -362,6 +362,9 @@
       });
 
   /* Add related legend - Functionality based on http://mpf.vis.ywng.cloudbees.net/*/
+    // set array for dates currently shown in graph, from which we can remove data and check to draw new y scale
+    var visibleDates = allDates.slice();
+
     mediaSources.append('text').attr({
                   class: function(d){ return d.id + 'legend'; }, // store name for reference to path
                   x: width + 180,
@@ -385,26 +388,20 @@
                     d3.select(this)
                       .attr('fill','#ccc');
 
-                    // remove line from graph
+                    // remove line and dot from graph
                     svg.selectAll("." + pathClass + "").remove();
                     // remove line from data
-                     // remove data from source
                       // look through data array and remove current data
-        //               allDates.forEach(function(e,j){
-        //                 // if data matches
-        //                 if(e.name == d.name){
-        //                   // console.log('found it @ ' + j);
-        //                   // remove data
-        //                   allDates.splice(j, 1);
-        // console.log(allDates);
-        //                 }
-        //               });
-                       // remove line from graph
-                    // mediaSources.exit().remove();
-                    // remove dots from graph
-                    mediaSources.selectAll("." + pathClass + ".dot").transition().remove();
-
-
+                      visibleDates.forEach(function(e,j){
+                        // if data matches
+                        if(e.id == d.id){
+                          // console.log('found it @ ' + j);
+                          // remove data
+                          visibleDates.splice(j, 1);
+        // console.log('visibleDates', visibleDates);
+        // console.log('allDates', allDates);
+                        }
+                      });
                   } else{
                     // change color back to color
                     d3.select(this)
@@ -415,15 +412,21 @@
                   }
 
                   // redo y scale
-                  yScale.domain([0, d3.max(allDates, function(d) { return d3.max(d.values, function(v) { return v.count; }) })]);
-// console.log(yScale(45700))
+                  yScale.domain([0, d3.max(visibleDates, function(d) { return d3.max(d.values, function(v) { return v.count; }) })]);
                   // redraw y axis
                   d3.select(".y.axis").transition().duration(1500).ease('sin-in-out')
                     .call(yAxis);
 
                   // redraw other lines
-                  mediaSources.selectAll('path').transition()
+                  mediaSources.selectAll('path').transition().duration(500)
                              .attr('d',function(e){ return line(e.values); })
+
+                  // redraw dots
+                  mediaSources.selectAll('circle').transition().duration(500)
+                    .attr({
+                      cx: function(d) { return xScale(d.date); },
+                      cy: function(d) { return yScale(d.count); },
+                    })
                 });
 
   /* Storypoints */
