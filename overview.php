@@ -2,6 +2,8 @@
 
 <body id="overview">
 
+  <script src="libs/colorlegend.js"></script>
+
 <!--TODO: STYLE FOR d3 tip FOR THIS PAGE, INCORPORATE INTO CSS ??? -->
 <style>
    text{
@@ -43,12 +45,28 @@
     .d3-tip.none:after {
         opacity: 0;
     }
+
+    /* legend */
+      .legend {
+                background-color: #fff;
+                width: 350px;
+                height: 50px;
+               /* border: 1px solid #bbb; */
+                margin:0 auto;
+            }
+
+            #quantileLegend .colorlegend-labels {
+                font-size: 11px;
+                fill: black;
+            }
+
 </style>
 	
 	<?php include 'includes/header.html'; ?>
 	
-	<!-- Overview Vis -->
+	<!-- Overview Vis and Legend -->
 	<div id="overviewVis"></div>
+	<div id="legend_globe" class="legend"></div>
 
 <!-- footer -->
 	<?php include 'includes/footer.html'; ?>

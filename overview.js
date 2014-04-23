@@ -1,14 +1,16 @@
 /*
-    Base globe code from http://bl.ocks.org/mbostock/3795040 and James Lafa @ http://blog.james-lafa.fr/how-to-display-in-10-minutes-worldwide-data-on-a-globe-with-d3-js/
+    Base globe code from http://bl.ocks.org/mbostock/4183330
+    Legend code from https://github.com/jgoodall/d3-colorlegend
     Trackball code from http://bl.ocks.org/patricksurry/5721459
 */
-var width = 860,
+var
+    width = 960,
     height = 500;
 
 var margin = {
     top: 0,
-    right: 100,
-    bottom: 0,
+    right: 0,
+    bottom: 0,//legend is at the bottom outside svg.
     left: 0
 };
 
@@ -29,16 +31,12 @@ var svg = d3.select("#overviewVis").append("svg").attr({
         height: height
     }),
 
-    legend = svg.append("g").attr({
-        id: "legend",
-        width: margin.right,
-        height: height,
-        transform: "translate(" + width + ",0)"
-    }),
-
-    colorScale = d3.scale.pow().exponent(0.1)
-        .interpolate(d3.interpolateRgb)
-        .range(["#CCC", "#3D8699"]);
+    myColors = {
+        Grays: ["#f0f0f0","#d9d9d9"],
+        Blues: ["#deebf7","#c6dbef","#9ecae1","#6baed6","#4292c6"],
+        Greens: ["#74c476","#41ab5d","#238b45","#006d2c"]
+    },
+    colorScale =  myColors.Grays.concat(myColors.Blues).concat(myColors.Greens),
 
     tip = d3.tip()
         .attr('class', 'd3-tip none')
@@ -49,7 +47,7 @@ var svg = d3.select("#overviewVis").append("svg").attr({
 
             if (!d || !mediaData[d.properties.name] || isNaN(mediaData[d.properties.name].articles)) v = "(no data)";
             else {
-                myColor = colorScale(mediaData[d.properties.name].articles);
+                myColor = color(mediaData[d.properties.name].articles);
                 v = numberWithCommas(mediaData[d.properties.name].articles);
             }
             return  "<strong>Country: </strong><span style='color:"+myColor+";'><em>"+d.properties.name+"</em></span><span style='color:white;'>, </span><strong>Indicator Value: </strong><span style='color:"+myColor+";'><em>"+v+"</em></span>";
@@ -73,66 +71,78 @@ var projection = d3.geo.orthographic()
      .attr('class','graticule')
      .attr('d',path);
 
-/* Map and other data */
-  // Queue function from MBostock for multiple file loading
-  queue().defer(d3.json, "/productiondata/globe.json")
-         .defer(d3.csv, "/productiondata/haiyan/google-country_stats.csv")
-         .await(loadedDataCallBack);
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// GLOBE METHODS
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  // when all data is loaded
-  function loadedDataCallBack(error, world, media) {
-    // convert world map data to d3 topo
+queue()
+    .defer(d3.json, "productiondata/globe.json")//world
+    .defer(d3.csv, "/productiondata/haiyan/google-country_stats.csv")//media
+    .await(loadedDataCallBack);
+
+function loadedDataCallBack(error, world, media) {
+    console.log("--- START ::: loadedDataCallback ---");
+
     var world_data = topojson.feature(world, world.objects.countries).features;
-    /* convert media data to json object */
-      // initialize new js object to hold article by country data in format the rest of the script will understand
 
-      // iterate through each piece of original country/article data
-      media.forEach(function(d){
+    /* convert media data to json object */
+    media.forEach(function(d){
         // set country name as property value
         var name =  d.query_distinct.slice(d.query_distinct.indexOf("(") + 1, d.query_distinct.indexOf(")")),
             code = d.query_distinct.slice(0, d.query_distinct.indexOf("(") - 1);
 
         mediaData[name] = {
-          // set country name, code, and number of articles written
-          name: name,
-          code: code,
-          articles: +d.raw_result_count
+            // set country name, code, and number of articles written
+            name: name,
+            code: code,
+            articles: +d.raw_result_count
         };
-      });
-      console.log('mediaData: ',mediaData);
+    });
+    console.log('mediaData: ',mediaData);
 
     // set domain for coloring, grabbing 'articles' from json file using underscore.js
     var lifeExpectancyDomain = d3.extent(_.pluck(mediaData, 'articles'));
-    console.log('lifeExpectancyDomain: ',lifeExpectancyDomain);
 
-   colorScale.domain(lifeExpectancyDomain);
+    var resultCountData = _.pluck(mediaData, 'articles'),
+        min = d3.min(resultCountData),
+        mean = d3.sum(resultCountData) / resultCountData.length,
+        max = d3.max(resultCountData);
 
-      country = svg
-          .selectAll(".country")
-          .data(world_data);
+    // quantile scale
+    color = d3.scale.quantile()
+        .domain([min, mean, max])
+        .range(colorScale);
 
-      country.enter()
-          .append('path')
-          .attr('class','country')
-          .attr('d', path)
-          .attr('fill', function(d){
-              if(_.has(mediaData, d.properties.name)){
-                  console.log(mediaData[d.properties.name].articles);
-                  return colorScale(mediaData[d.properties.name].articles);
-              } else {
-                  return 'white';
-              }
-          })
-          .on('mouseover', tip.show)
-          .on("mousemove", function () {
-              return tip
-                  .style("top", (d3.event.pageY + 16) + "px")
-                  .style("left", (d3.event.pageX + 16) + "px");
-          })
-          .on('mouseout', tip.hide);
+    colorlegend("#legend_globe", color, "quantile", {title: "results by country", boxHeight: 15, boxWidth: 30, fill:false, linearBoxes:11});
 
-      country.call(tip);
-  }
+    country = svg
+        .selectAll(".country")
+        .data(world_data);
+
+    country.enter()
+        .append('path')
+        .attr('class','country')
+        .attr('d', path)
+        .attr('fill', function(d){
+            if(_.has(mediaData, d.properties.name)){
+                console.log(mediaData[d.properties.name].articles);
+                return color(mediaData[d.properties.name].articles);
+            } else {
+                return 'white';
+            }
+        })
+        .on('mouseover', tip.show)
+        .on("mousemove", function () {
+            return tip
+                .style("top", (d3.event.pageY + 16) + "px")
+                .style("left", (d3.event.pageX + 16) + "px");
+        })
+        .on('mouseout', tip.hide);
+
+    country.call(tip);
+
+    console.log("--- END ::: loadedDataCallback ---");
+}
 
 /**
  * Friendly print for numbers, considering decimals.
