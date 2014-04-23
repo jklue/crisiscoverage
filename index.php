@@ -2,7 +2,7 @@
 
 <body id="welcome">
 
-<!--TODO: STYLE FOR H1 FOR THIS PAGE, INCORPORATE INTO CSS ??? -->
+<!--TODO: STYLE FOR #crisis_name FOR THIS PAGE, INCORPORATE INTO CSS ??? -->
 <style>
 
     #crisis_name {

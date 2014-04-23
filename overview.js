@@ -1,23 +1,68 @@
-/* much code from http://bl.ocks.org/mbostock/3795040 and James Lafa @ http://blog.james-lafa.fr/how-to-display-in-10-minutes-worldwide-data-on-a-globe-with-d3-js/*/
-var width = 960,
+/*
+    Base globe code from http://bl.ocks.org/mbostock/3795040 and James Lafa @ http://blog.james-lafa.fr/how-to-display-in-10-minutes-worldwide-data-on-a-globe-with-d3-js/
+    Trackball code from http://bl.ocks.org/patricksurry/5721459
+*/
+var width = 860,
     height = 500;
 
+var margin = {
+    top: 0,
+    right: 100,
+    bottom: 0,
+    left: 0
+};
+
+var svg = d3.select("#overviewVis").append("svg").attr({
+        width: width+margin.left+margin.right,
+        height: height+margin.top+margin.bottom,
+        transform: "translate(" + margin.left + "," + margin.top + ")"
+    })
+    .on("mousedown", mousedown)
+    .on("mousemove", mousemove)
+    .on("mouseup", mouseup),
+
+    mediaData = {}, country, color, //<-- these must be defined after indicators available.
+
+    countries = svg.append("g").attr({
+        id: "countries",
+        width: width,
+        height: height
+    }),
+
+    legend = svg.append("g").attr({
+        id: "legend",
+        width: margin.right,
+        height: height,
+        transform: "translate(" + width + ",0)"
+    }),
+
+    colorScale = d3.scale.pow().exponent(0.1)
+        .interpolate(d3.interpolateRgb)
+        .range(["#CCC", "#3D8699"]);
+
+    tip = d3.tip()
+        .attr('class', 'd3-tip none')
+        .offset([-10, 0])
+        .html(function(d) {
+            var v;
+            var myColor = 'white';
+
+            if (!d || !mediaData[d.properties.name] || isNaN(mediaData[d.properties.name].articles)) v = "(no data)";
+            else {
+                myColor = colorScale(mediaData[d.properties.name].articles);
+                v = numberWithCommas(mediaData[d.properties.name].articles);
+            }
+            return  "<strong>Country: </strong><span style='color:"+myColor+";'><em>"+d.properties.name+"</em></span><span style='color:white;'>, </span><strong>Indicator Value: </strong><span style='color:"+myColor+";'><em>"+v+"</em></span>";
+        });
+
+/* lat and lon lines */
 var projection = d3.geo.orthographic()
     .scale(250)
     .translate([width / 2, height / 2])
-    .clipAngle(90);
+    .clipAngle(90),
 
-var path = d3.geo.path()
-    .projection(projection);
-
-var svg = d3.select("#overviewVis").append("svg")
-    .attr("width", width)
-    .attr("height", height)
-    .on("mousedown", mousedown)
-    .on("mousemove", mousemove)
-    .on("mouseup", mouseup);
-
-/* lat and lon lines */
+    path = d3.geo.path()
+    .projection(projection),
 
   // instantiate meridians and parallels with d3's help
   graticule = d3.geo.graticule();
@@ -37,10 +82,10 @@ var svg = d3.select("#overviewVis").append("svg")
   // when all data is loaded
   function loadedDataCallBack(error, world, media) {
     // convert world map data to d3 topo
-    var countries = topojson.feature(world, world.objects.countries).features;
+    var world_data = topojson.feature(world, world.objects.countries).features;
     /* convert media data to json object */
       // initialize new js object to hold article by country data in format the rest of the script will understand
-      var mediaData = {};
+
       // iterate through each piece of original country/article data
       media.forEach(function(d){
         // set country name as property value
@@ -56,64 +101,58 @@ var svg = d3.select("#overviewVis").append("svg")
       });
       console.log('mediaData: ',mediaData);
 
-    // set domain for coloring, grabbing 'age' from json file using underscore.js
+    // set domain for coloring, grabbing 'articles' from json file using underscore.js
     var lifeExpectancyDomain = d3.extent(_.pluck(mediaData, 'articles'));
     console.log('lifeExpectancyDomain: ',lifeExpectancyDomain);
 
-    // set color scale
-    colorScale = d3.scale.pow().exponent(0.1)
-    // colorScale = d3.scale.linear()
-        .domain(lifeExpectancyDomain)
-        .interpolate(d3.interpolateRgb)
-        .range(["#CCC", "#3D8699"]);
+   colorScale.domain(lifeExpectancyDomain);
 
-    // draw countries
-    return svg.selectAll('.land')
-       .data(countries)
-       .enter()
-         .append('path')
-         .attr('class','country')
-         .attr('d', path)
-         .attr('fill', function(d){
-          // if country code has an entry in life expectancy data
-          if(_.has(mediaData, d.properties.name)){
-          // if(_.has(lifeExpectancy, d.id)){
-            // fill country with appropriate life expectancy
-            console.log(mediaData[d.properties.name].articles);
-            return colorScale(mediaData[d.properties.name].articles);
-          // else color gray
-          } else {
-              return 'white';
-          }
-         });
+      country = svg
+          .selectAll(".country")
+          .data(world_data);
+
+      country.enter()
+          .append('path')
+          .attr('class','country')
+          .attr('d', path)
+          .attr('fill', function(d){
+              if(_.has(mediaData, d.properties.name)){
+                  console.log(mediaData[d.properties.name].articles);
+                  return colorScale(mediaData[d.properties.name].articles);
+              } else {
+                  return 'white';
+              }
+          })
+          .on('mouseover', tip.show)
+          .on("mousemove", function () {
+              return tip
+                  .style("top", (d3.event.pageY + 16) + "px")
+                  .style("left", (d3.event.pageX + 16) + "px");
+          })
+          .on('mouseout', tip.hide);
+
+      country.call(tip);
   }
 
-  // d3.json("/data/overview/orthograph.json", function(error, world) {
-  //   svg.append("path")
-  //       .datum(topojson.feature(world, world.objects.land))
-  //       .attr("class", "land")
-  //       .attr("d", path);
-  // });
+/**
+ * Friendly print for numbers, considering decimals.
+ * @param x
+ * @returns {string}
+ */
+function numberWithCommas(x) {
+    if (isNaN(x)) return x;
+    var parts = x.toString().split(".");
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return parts.join(".");
+}
 
-/* Only map data*/
-// d3.json("/data/overview/orthograph.json", function(error, world) {
-//   svg.append("path")
-//       .datum(topojson.feature(world, world.objects.land))
-//       .attr("class", "land")
-//       .attr("d", path);
-// });
-
-//
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// TRACKBALL METHODS
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function trackballAngles(pt) {
-    // based on http://www.opengl.org/wiki/Trackball
-    // given a click at (x,y) in canvas coords on the globe (trackball),
-    // calculate the spherical coordianates for the point as a rotation around
-    // the vertical and horizontal axes
-
     var r = projection.scale();
     var c = projection.translate();
     var x = pt[0] - c[0], y = - (pt[1] - c[1]), ss = x*x + y*y;
-
 
     var z = r*r > 2 * ss ? Math.sqrt(r*r - ss) : r*r / 2 / Math.sqrt(ss);
 
@@ -121,56 +160,6 @@ function trackballAngles(pt) {
     var phi = Math.atan2(y, z) * 180 / Math.PI
     return [lambda, phi];
 }
-
-/*
- This is the cartesian equivalent of the rotation matrix,
- which is the product of the following rotations (in numbered order):
- 1. longitude: λ around the y axis (which points up in the canvas)
- 2. latitude: -ϕ around the x axis (which points right in the canvas)
- 3. yaw:       γ around the z axis (which points out of the screen)
-
- NB.  If you measure rotations in a positive direction according to the right-hand rule
- (point your right thumb in the positive direction of the rotation axis, and rotate in the
- direction of your curled fingers), then the latitude rotation is negative.
-
- R(λ, ϕ, γ) =
- [[ sin(γ)sin(λ)sin(ϕ)+cos(γ)cos(λ), −sin(γ)cos(ϕ), −sin(γ)sin(ϕ)cos(λ)+sin(λ)cos(γ)],
- [ −sin(λ)sin(ϕ)cos(γ)+sin(γ)cos(λ), cos(γ)cos(ϕ), sin(ϕ)cos(γ)cos(λ)+sin(γ)sin(λ)],
- [ −sin(λ)cos(ϕ),                    −sin(ϕ),       cos(λ)cos(ϕ)]]
-
- If you then apply a "trackball rotation" of δλ around the y axis, and -δϕ around the
- x axis, you get this horrible composite matrix:
-
- R2(λ, ϕ, γ, δλ, δϕ) =
- [[−sin(δλ)sin(λ)cos(ϕ)+(sin(γ)sin(λ)sin(ϕ)+cos(γ)cos(λ))cos(δλ),
- −sin(γ)cos(δλ)cos(ϕ)−sin(δλ)sin(ϕ),
- sin(δλ)cos(λ)cos(ϕ)−(sin(γ)sin(ϕ)cos(λ)−sin(λ)cos(γ))cos(δλ)],
- [−sin(δϕ)sin(λ)cos(δλ)cos(ϕ)−(sin(γ)sin(λ)sin(ϕ)+cos(γ)cos(λ))sin(δλ)sin(δϕ)−(sin(λ)sin(ϕ)cos(γ)−sin(γ)cos(λ))cos(δϕ),
- sin(δλ)sin(δϕ)sin(γ)cos(ϕ)−sin(δϕ)sin(ϕ)cos(δλ)+cos(δϕ)cos(γ)cos(ϕ),
- sin(δϕ)cos(δλ)cos(λ)cos(ϕ)+(sin(γ)sin(ϕ)cos(λ)−sin(λ)cos(γ))sin(δλ)sin(δϕ)+(sin(ϕ)cos(γ)cos(λ)+sin(γ)sin(λ))cos(δϕ)],
- [−sin(λ)cos(δλ)cos(δϕ)cos(ϕ)−(sin(γ)sin(λ)sin(ϕ)+cos(γ)cos(λ))sin(δλ)cos(δϕ)+(sin(λ)sin(ϕ)cos(γ)−sin(γ)cos(λ))sin(δϕ),
- sin(δλ)sin(γ)cos(δϕ)cos(ϕ)−sin(δϕ)cos(γ)cos(ϕ)−sin(ϕ)cos(δλ)cos(δϕ),
- cos(δλ)cos(δϕ)cos(λ)cos(ϕ)+(sin(γ)sin(ϕ)cos(λ)−sin(λ)cos(γ))sin(δλ)cos(δϕ)−(sin(ϕ)cos(γ)cos(λ)+sin(γ)sin(λ))sin(δϕ)]]
-
- by equating components of the matrics
- (label them [[a00, a01, a02], [a10, a11, a12], [a20, a21, a22]])
- we can find an equivalent rotation R(λ', ϕ', γ') == RC(λ, ϕ, γ, δλ, δϕ) :
-
- if cos(ϕ') != 0:
- γ' = atan2(-RC01, RC11)
- ϕ' = atan2(-RC21, γ' == 0 ? RC11 / cos(γ') : - RC01 / sin(γ'))
- λ' = atan2(-RC20, RC22)
- else:
- // when cos(ϕ') == 0, RC21 == - sin(ϕ') == +/- 1
- // the solution is degenerate, requiring just that
- //    γ' - λ' = atan2(RC00, RC10) if RC21 == -1 (ϕ' = π/2)
- // or γ' + λ' = atan2(RC00, RC10) if RC21 == 1 (ϕ' = -π/2)
- // so choose:
- γ' = atan2(RC10, RC00) - RC21 * λ
- ϕ' = - RC21 * π/2
- λ' = λ
-
- */
 
 function composedRotation(λ, ϕ, γ, δλ, δϕ) {
     λ = Math.PI / 180 * λ;
@@ -219,37 +208,8 @@ function mousedown() {  // remember where the mouse was pressed, in canvas coord
 function mousemove() {
     if (m0) {  // if mousedown
         var m1 = trackballAngles(d3.mouse(svg[0][0]));
-        // we want to find rotate the current projection so that the point at m0 rotates to m1
-        // along the great circle arc between them.
-        // when the current projection is at rotation(0,0), with the north pole aligned
-        // to the vertical canvas axis, and the equator aligned to the horizontal canvas
-        // axis, this is easy to do, since D3's longitude rotation corresponds to trackball
-        // rotation around the vertical axis, and then the subsequent latitude rotation
-        // corresponds to the trackball rotation around the horizontal axis.
-        // But if the current projection is already rotated, it's harder.
-        // We need to find a new rotation equivalent to the composition of both
-
-        // Choose one of these three update schemes:
-
-        // Best behavior
         o1 = composedRotation(o0[0], o0[1], o0[2], m1[0] - m0[0], m1[1] - m0[1])
-
-        // Improved behavior over original example
-        //o1 = [o0[0] + (m1[0] - m0[0]), o0[1] + (m1[1] - m0[1])];
-
-        // Original example from http://mbostock.github.io/d3/talk/20111018/azimuthal.html
-        // o1 = [o0[0] - (m0[0] - m1[0]) / 8, o0[1] - (m1[1] - m0[1]) / 8];
-
-        // move to the updated rotation
         projection.rotate(o1);
-
-        // We can optionally update the "origin state" at each step.  This has the
-        // advantage that each 'trackball movement' is small, but the disadvantage of
-        // potentially accumulating many small drifts (you often see a twist creeping in
-        // if you keep rolling the globe around with the mouse button down)
-//    o0 = o1;
-//    m0 = m1;
-
         svg.selectAll("path").attr("d", path);
     }
 }
