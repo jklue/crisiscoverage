@@ -381,7 +381,6 @@
                   var pathClass = d3.select(this).attr('class');
                   // remove legend text from class to protect legend text from dissapearing
                   pathClass = pathClass.substring(0, pathClass.length - 6);
-        console.log(pathClass);
                   // if active, make gray
                   if(d3.select(this).attr('fill') != '#ccc'){
                     // change text color to gray
@@ -398,21 +397,75 @@
                           // console.log('found it @ ' + j);
                           // remove data
                           visibleDates.splice(j, 1);
-        // console.log('visibleDates', visibleDates);
-        // console.log('allDates', allDates);
                         }
                       });
+                    
+                    // redo y scale
+                    yScale.domain([0, d3.max(visibleDates, function(d) { return d3.max(d.values, function(v) { return v.count; }) })]);
+                  
                   } else{
                     // change color back to color
                     d3.select(this)
                       .attr('fill', function(d){ return color(d.name); });
-                    // add line
-                    mediaSources.select('path').transition()
-                             .attr('d',function(e){ return line(e.values); })
+                    // add line data back into visibleDates from allDates
+                      // get current id
+                      // go through all dates, if find match, add to visibleDates
+                      allDates.forEach(function(e){
+                        // look for match
+                        if(e.id == pathClass){
+                          // add array back to list
+                          visibleDates.push(e);
+                        }
+                      });
+
+                     // redo y scale
+                    yScale.domain([0, d3.max(visibleDates, function(e) { return d3.max(e.values, function(v) { return v.count; }) })]);
+                    
+                    // remove old paths
+                    // add new paths
+
+                    // get data for new line
+                    var newLineData = visibleDates[visibleDates.length-1];
+                    // draw new line
+                    var newLine = svg.select('.timeline').data(newLineData)
+                      .enter().append('g')
+                        .attr('class','mediaSources');
+
+                    newLine.append('path')
+                       .attr({
+                          class: function(e){ return e.id + ' path'; }, // store name for reference to path
+                          d: function(e){ console.log('e.values',e.values); return line(e.values); },
+                          transform: 'translate(0,' + bbDetail.y + ')'                  
+                       })
+                       .style({
+                        'stroke': function(e) { return color(e.name); },
+                        'fill': 'none',
+                       });
+                    // draw new circles
+
+               
+        console.log('d',d.values);
+                    // mediaSources.select('circle').data(function() { return d.values;})
+                    //   .append('circle')
+                    //   .attr({
+                    //     class: function(e){ return e.id + " dot"; }, // store name for reference to path
+                    //     cx: function(e) { console.log('xScale(e.date)',xScale(e.date)); return xScale(e.date); },
+                    //     cy: function(e) { console.log('e.count',e.count); return yScale(e.count); },
+                    //     r: 4,
+                    //     transform: 'translate(0,' + bbDetail.y + ')'
+                    //   })
+                    //   .style({
+                    //     fill: function(e) { 
+                    //       // get color of type (traditional or blog color)
+                    //       var typeColor = color(e.name);
+                    //       // darken color
+                    //       var d3color = d3.rgb(typeColor).darker();
+                    //       // return color
+                    //       return d3color; 
+                    //     }
+                    //   })
                   }
 
-                  // redo y scale
-                  yScale.domain([0, d3.max(visibleDates, function(d) { return d3.max(d.values, function(v) { return v.count; }) })]);
                   // redraw y axis
                   d3.select(".y.axis").transition().duration(1500).ease('sin-in-out')
                     .call(yAxis);
