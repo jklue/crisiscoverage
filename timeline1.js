@@ -1,5 +1,5 @@
 /* Setup */
-	var allDates, aggregateMediaStats, bbDetail, bbOverview, detailFrame, dateList, blogDates, color, storyPoints, duplicateAllDates, duplicateTraditonalDates, duplicateBlogDates, line, mediaTypes, originalData, padding, parseYear, sources, svg, xAxis, xScale, xOverviewScale, yAxis, yScale;
+	var allDates, aggregateMediaStats, bbDetail, bbOverview, detailFrame, dateList, color, storyPoints, line, mediaTypes, originalData, padding, sources, svg, xAxis, xScale, yAxis, yScale;
 
 	var margin = {
 	    top: 50,
@@ -46,43 +46,28 @@
 
   dateList = [];
   
-  duplicateTraditonalDates = [];
-
-  duplicateBlogDates = [];
-  blogDates = []; // temporarily hold blog data before add to 'dates' var
-
   // build svg and bounding box
-	svg = d3.select("#timelineVis").append("svg").attr({
+	svg = d3.select("#timelineVis")
+    .append("svg")
+    .attr({
       class: 'timeline',
 	    width: width + margin.left + margin.right,
 	    height: height + margin.top + margin.bottom
-	}).append("g").attr({
+    }).append("g")
+      .attr({
 	        transform: "translate(" + margin.left + "," + margin.top + ")"
 	    });
 
-  // add clipping path for brushing
-  svg.append("defs").append("clipPath")
-    .attr("id", "clip")
-  .append("rect")
-    .attr("width", width)
-    .attr("height", height);
-
-/* Set initial data sources */
-  // Traditional source
-    // var mediaStats = 'productiondata/pakistan-drought/google-media_stats.csv';
-    var mediaStats = 'productiondata/haiyan/google-media_stats.csv';
-
-  // Blog source
-    var blogSource = 'data/haiyan/2014-04-10 12.53.14_haiyan-google-blog_query_stats.csv';
+/* Set data source */
+  var mediaStats = 'productiondata/haiyan/google-media_stats.csv';
 
   // start it off!
   getData();
 
-/* Get traditional media data */
+/* Get media data */
   function getData(){
 
     d3.csv(mediaStats, function(data) {
-  // console.log('mediaStats: ',data);
       // make data useable in aggregate chart
       originalData = data;
 
@@ -90,9 +75,7 @@
       // iterate through .csv to find source names
       var sourceDuplicates = data.map(function(d){
         // get source name without month data
-        // var cleanSourceName = d.query_distinct.substring(0, d.query_distinct.length-3);
         return d.site_name;
-        // return cleanSourceName;
       });
       // define new array to hold unique source names
       sources = [];
@@ -204,12 +187,8 @@
       // add data to master list
       aggregateMediaStats.push(currentMediaType);
     });
-  // console.log('aggregateMediaStats: ',aggregateMediaStats);
-  // console.log('allDates: ',allDates);
-    // ruin all progress
-    // allDates = aggregateMediaStats;
     // get aggregate data by media type
-      return storypoints();
+    return storypoints();
   }
 
 /* Get storypoints */
@@ -260,11 +239,6 @@
                   .orient('left')
                   .ticks(6);
 
-    // var area = d3.svg.area()
-				// 				     .x(function(d) { return xScale(d.date); })
-				// 				     .y0(bbDetail.h)
-				// 				     .y1(function(d) { return yScale(d.count); });
-
     var line = d3.svg.line()
                      .x(function(d) { return xScale(d.date); })
                      .y(function(d) { return yScale(d.count); })
@@ -282,9 +256,7 @@
 
   // add y axis to svg
     detailFrame.append('g')
-            .attr({
-              class: 'y axis',
-            })
+            .attr('class', 'y axis')
             .call(yAxis)
           .append("text")
             .attr('x', -5)
@@ -293,77 +265,81 @@
             .style("text-anchor", "end")
             .text("Coverage")
 
-  // bind data
-    var mediaSources = svg.selectAll('.mediaSources')
-                        .data(allDates)
-                      .enter().append('g')
-                        .attr('class','mediaSources');
+    // deep copy array for dates currently shown in graph, from which we can remove data and check to draw new y scale
+    var visibleDates = allDates.map(function(d){
+      return {
+        id: d.id,
+        name: d.name,
+        values: d.values.map(function(f){
+          return {
+            count: f.count,
+            date: f.date,
+            id: f.id,
+            name: f.name,
+            type: f.type
+          }
+        })
+      }
+    });
 
-  // add line
-    mediaSources.append('path')
-               .attr({
-                  class: function(d){ return d.id + ' path'; }, // store name for reference to path
-                  // id: function(d){ return d.name; },
-                  d: function(d){ return line(d.values); },
-                  transform: 'translate(0,' + bbDetail.y + ')'                  
-               })
-               .style({
-                'stroke': function(e) { return color(e.name); },
-                'fill': 'none',
-               });
+      // bind data
+      var mediaSources = svg.selectAll('.mediaSources')
+                          .data(visibleDates)
+                        .enter().append('g')
+                          .attr('class','mediaSources');
+   
+      // add line
+        mediaSources.append('path')
+                   .attr({
+                      class: function(d){ return d.id + ' path'; }, // store name for reference to path
+                      // id: function(d){ return d.name; },
+                      d: function(d){ return line(d.values); },
+                      transform: 'translate(0,' + bbDetail.y + ')'                  
+                   })
+                   .style({
+                    'stroke': function(e) { return color(e.name); },
+                    'fill': 'none',
+                   });
 
-  // add fill
-    // mediaSources.append("path")
-    //           .attr({
-    //             class: "traditionalMediaArea",
-    //             d: function(e) { return area(e.values); },
-    //             transform: 'translate(0,' + bbDetail.y + ')'                  
-    //           })
-    //           .style({
-    //             'fill': function(e) { return color(e.name); }
-    //            });
+   /* add dots for each line */
+        mediaSources.selectAll('circle').data(function(d) { return d.values;})
+          .enter().append('circle')
+          .attr({
+            class: function(d){ return d.id + " dot"; }, // store name for reference to path
+            cx: function(d) { return xScale(d.date); },
+            cy: function(d) { return yScale(d.count); },
+            r: 4,
+            transform: 'translate(0,' + bbDetail.y + ')'
+          })
+          .style({
+            fill: function(d) { 
+              // get color of type (traditional or blog color)
+              var typeColor = color(d.name);
+              // darken color
+              var d3color = d3.rgb(typeColor).darker();
+              // return color
+              return d3color; 
+            }
+          })
 
-  /* add dots for each line */
-    mediaSources.selectAll('circle').data(function(d) { return d.values;})
-      .enter().append('circle')
-      .attr({
-        class: function(d){ return d.id + " dot"; }, // store name for reference to path
-        cx: function(d) { return xScale(d.date); },
-        cy: function(d) { return yScale(d.count); },
-        r: 4,
-        transform: 'translate(0,' + bbDetail.y + ')'
-      })
-      .style({
-        fill: function(d) { 
-          // get color of type (traditional or blog color)
-          var typeColor = color(d.name);
-          // darken color
-          var d3color = d3.rgb(typeColor).darker();
-          // return color
-          return d3color; 
-        }
-      })
+          // make dot bigger and show tip
+          .on('mouseover', function(d){
+            d3.select(this)
+              .transition()
+              .duration(25)
+              .attr('r',10);
+            tip.show(d);
+          })
+          // make dot smaller and hide tip
+          .on('mouseleave', function(d){
+            d3.select(this)
+              .transition()
+              .duration(25)
+              .attr('r',4)
+            tip.hide(d);
+          });
 
-      // make dot bigger and show tip
-      .on('mouseover', function(d){
-        d3.select(this)
-          .transition()
-          .duration(25)
-          .attr('r',10);
-        tip.show(d);
-      })
-      // make dot smaller and hide tip
-      .on('mouseleave', function(d){
-        d3.select(this)
-          .transition()
-          .duration(25)
-          .attr('r',4)
-        tip.hide(d);
-      });
-
-  /* Add related legend - Functionality based on http://mpf.vis.ywng.cloudbees.net/*/
-    // set array for dates currently shown in graph, from which we can remove data and check to draw new y scale
-    var visibleDates = allDates.slice();
+  /* Add related legend - Functionality inspired by http://mpf.vis.ywng.cloudbees.net/*/
 
     mediaSources.append('text').attr({
                   class: function(d){ return d.id + 'legend'; }, // store name for reference to path
@@ -387,66 +363,60 @@
                     d3.select(this)
                       .attr('fill','#ccc');
 
-                    // remove line and dot from graph
-                    svg.selectAll("." + pathClass + "").remove();
                     // remove line from data
-                      // look through data array and remove current data
+                      // look through data array and set selected media source's data to null
                       visibleDates.forEach(function(e,j){
                         // if data matches
                         if(e.id == d.id){
-                          // console.log('found it @ ' + j);
                           // remove data
-                          visibleDates.splice(j, 1);
+                          e.values.forEach(function(f){
+                            f.count = null;
+                          });
                         }
                       });
                     
                     // redo y scale
                     yScale.domain([0, d3.max(visibleDates, function(d) { return d3.max(d.values, function(v) { return v.count; }) })]);
-                  
+
+                    // redraw chart
+                    mediaSources.data(visibleDates)
+                      .attr('d', function(e){ return line(e.values); });
+
                   } else{
                     // change legend color back to original color
                     d3.select(this)
                       .attr('fill', function(d){ return color(d.name); });
-                    // add line data back into visibleDates from allDates
-                      // get current id
-                      // go through all dates, if find match, add to visibleDates
-                      allDates.forEach(function(e){
-                        // look for match
-                        if(e.id == pathClass){
-                          // add array back to list
-                          visibleDates.push(e);
+                    
+
+                    // add data back in
+                      // look through data array and set selected media source's data to original data
+                      visibleDates.forEach(function(e,j){
+                        // if data matches
+                        if(e.id == d.id){
+                          // go through original data and add it back in
+                          allDates.forEach(function(f){
+                            // look for match
+                            if(f.id == e.id){
+                              // add data back in
+                              e.values = f.values.map(function(f){
+                                return {
+                                  count: f.count,
+                                  date: f.date,
+                                  id: f.id,
+                                  name: f.name,
+                                  type: f.type
+                                }
+                              })
+                            }
+                          });
                         }
                       });
 
                      // redo y scale
                     yScale.domain([0, d3.max(visibleDates, function(e) { return d3.max(e.values, function(v) { return v.count; }) })]);
-                    
-                    // remove old paths
-                    // add new paths
-
-                    // // get data for new line
-                    // var newLineData = visibleDates[visibleDates.length-1];
-                    // // draw new line
-                    // var newLine = svg.selectAll('.mediaSources').data(visibleDates)
-                    //   .enter().append('g');
-
-                    mediaSources.data(visibleDates);
-
-console.log('visisbleDates',visibleDates);
-                    mediaSources.enter().append('path')
-                       .attr({
-                          class: function(e){ return e.id + ' path'; }, // store name for reference to path
-                          d: function(e){ console.log('e.values',e.values); return line(e.values); },
-                          transform: 'translate(0,' + bbDetail.y + ')'                  
-                       })
-                       .style({
-                        'stroke': function(e) { return color(e.name); },
-                        'fill': 'none',
-                       });
-                    // draw new circles
 
                
-        console.log('d',d.values);
+        // console.log('d',d.values);
                     // mediaSources.select('circle').data(function() { return d.values;})
                     //   .append('circle')
                     //   .attr({
@@ -466,10 +436,6 @@ console.log('visisbleDates',visibleDates);
                     //       return d3color; 
                     //     }
                     //   })
-
-                  // // remove old lines
-                  // d3.selectAll('path').remove();
-
                   }
 
                   // redraw y axis
@@ -483,7 +449,7 @@ console.log('visisbleDates',visibleDates);
                   // redraw dots
                   mediaSources.selectAll('circle').transition().duration(500)
                     .attr({
-                      cx: function(d) { return xScale(d.date); },
+                      cx: function(d) { console.log('hi'); return xScale(d.date); },
                       cy: function(d) { return yScale(d.count); },
                     })
                 });
@@ -505,7 +471,7 @@ console.log('visisbleDates',visibleDates);
                   y2: bbDetail.h
                 });
 
-    // add triangles
+  // add triangles
     detailFrame.selectAll('.storyTriangle')
            .data(storyPoints)
         .enter().append('path')
@@ -580,65 +546,46 @@ console.log('visisbleDates',visibleDates);
     //       });
     //   });
 
-  // make color box
-  // legend.append("rect")
-  //     .attr("x", width - 16)
-  //     .attr("width", 16)
-  //     .attr("height", 16)
-  //     .style("fill", color);
-  
-  // add checkbox
-  // legend.append('foreignObject')
-  //       .attr('class','checkbox')
-  //       .attr('width',20)
-  //       .attr('height',20)
-  //       .attr("x", width - 16)
-  //       .attr("dy", ".35em")
-  //     .append('xhtml:input')
-  //       .attr('type','checkbox')
-  //       .attr('value',function(d){ return d })
-  //       .attr('checked',true);
+    // make color box
+    // legend.append("rect")
+    //     .attr("x", width - 16)
+    //     .attr("width", 16)
+    //     .attr("height", 16)
+    //     .style("fill", color);
+    
+    // add checkbox
+    // legend.append('foreignObject')
+    //       .attr('class','checkbox')
+    //       .attr('width',20)
+    //       .attr('height',20)
+    //       .attr("x", width - 16)
+    //       .attr("dy", ".35em")
+    //     .append('xhtml:input')
+    //       .attr('type','checkbox')
+    //       .attr('value',function(d){ return d })
+    //       .attr('checked',true);
 
-  // make name box
-  // legend.append("text")
-  //     .attr("x", width - 24)
-  //     .attr("y", 9)
-  //     .attr("dy", ".35em")
-  //     .attr('cursor','pointer')
-  //     .style("text-anchor", "end")
-  //     .text(function(d) { return d })
-  //     // change font color to show activation or not
-  //     .on('click',function(d){
-  //       // if active, make gray
-  //       if(d3.select(this.parentNode).attr('fill') != '#ccc'){
-  //         d3.select(this.parentNode)
-  //           .attr('fill','#ccc');
-  //       } else{
-  //         d3.select(this.parentNode)
-  //           .attr('fill',color);
-  //       }
-  //     });
-  
-
+    // make name box
+    // legend.append("text")
+    //     .attr("x", width - 24)
+    //     .attr("y", 9)
+    //     .attr("dy", ".35em")
+    //     .attr('cursor','pointer')
+    //     .style("text-anchor", "end")
+    //     .text(function(d) { return d })
+    //     // change font color to show activation or not
+    //     .on('click',function(d){
+    //       // if active, make gray
+    //       if(d3.select(this.parentNode).attr('fill') != '#ccc'){
+    //         d3.select(this.parentNode)
+    //           .attr('fill','#ccc');
+    //       } else{
+    //         d3.select(this.parentNode)
+    //           .attr('fill',color);
+    //       }
+    //     });
   
   }
-
-/* button click control. From AmeliaBR on "putting the country on drop down list using d3 via csv file" on StackOverflow */
-  // add event handler  
-  // d3.select("#dataSourceSelect").on("change", sourceChanged);
-
-  // // define change function
-  // function sourceChanged() {
-
-  //   // get selected value
-  //   var selectedSource = d3.event.target.value;
-
-  //   // hide one viz or another
-  //   if(selectedSource == 'bbc')
-  //     doBBC();
-  //   else if(selectedSource == 'google')
-  //     doGoogle();
-  // }
 
 /* button click control */
   d3.select("input[value=\"types\"]").on("click", function () { redraw('types'); });
