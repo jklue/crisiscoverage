@@ -64,13 +64,14 @@
             }
     /* Tabs */
       #overview_content{
-        position:relative;
-        top: 50px;
-        left: 200px;
+        /*position:relative;*/
+        /*top: 100px;*/
         padding: 0px;
         width: 990px;
         height: 725px;
+        margin: 3em auto 1em;
       }
+      .tabs { float: right; }
       .tabs a{
                 cursor: pointer;
                 padding: 5px;
@@ -86,7 +87,7 @@
 
             .tabContent{
                 border: 1px solid #aaa;
-                margin: 4px 0;
+                margin: 1.4em 0;
                 padding: 5px;
             }
       /* Tip (for globe and bar user tips) */
@@ -127,8 +128,8 @@
 	
 	<?php include 'includes/header.html'; ?>
 
-  <div id="overview_content">
-	<div class="tabs">
+  <div id="overview_content" class="cf">
+	<div class="tabs cf">
       <a data-toggle="tab_1_globe">Globe</a>
       <a data-toggle="tab_2_bar">Bar Chart</a>
   </div>

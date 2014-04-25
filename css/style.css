@@ -147,6 +147,33 @@ table {
 td, th {
   padding: 0; }
 
+/* Clearfix */
+/**
+ * For modern browsers
+ * 1. The space content is one way to avoid an Opera bug when the
+ *    contenteditable attribute is included anywhere else in the document.
+ *    Otherwise it causes space to appear at the top and bottom of elements
+ *    that are clearfixed.
+ * 2. The use of `table` rather than `block` is only necessary if using
+ *    `:before` to contain the top-margins of child elements.
+ */
+.cf:before,
+.cf:after {
+  content: " ";
+  /* 1 */
+  display: table;
+  /* 2 */ }
+
+.cf:after {
+  clear: both; }
+
+/**
+ * For IE 6/7 only
+ * Include this rule to trigger hasLayout and contain floats.
+ */
+.cf {
+  *zoom: 1; }
+
 /* Setup */
 /* General */
 a {
@@ -288,7 +315,8 @@ footer {
   text-align: center;
   color: #cccccc;
   width: 900px;
-  margin: 3.5em auto 0;
+  margin: 0.5em auto 1em;
+  padding-bottom: 1em;
   clear: both; }
   footer .links {
     float: left;
@@ -377,8 +405,7 @@ footer {
     width: 45%;
     margin-left: 6em;
     padding: 0;
-    height: 8em;
-    float: right; }
+    height: 8em; }
   #timeline #crisisTitle {
     margin: 1em 0 0;
     color: #919191;
