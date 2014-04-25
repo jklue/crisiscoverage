@@ -75,18 +75,18 @@
       .tabs a{
                 cursor: pointer;
                 padding: 5px;
-                background: #fff;
-                color: #000;
-                border: 1px solid #666;
+                background: #3D8699;
+                color: #fff;
+                border: 1px solid #ccc;
                 border-bottom: 0;
             }
             .tabs a:hover, .tabs a.active{
-                background: #666;
-                color: #fff;
+                background: #fff;
+                color: #000;
             }
 
             .tabContent{
-                border: 1px solid #aaa;
+                border: 1px solid #ccc;
                 margin: 1.4em 0;
                 padding: 5px;
             }
@@ -129,28 +129,28 @@
 	<?php include 'includes/header.html'; ?>
 
   <div id="overview_content" class="cf">
-	<div class="tabs cf">
-      <a data-toggle="tab_1_globe">Globe</a>
-      <a data-toggle="tab_2_bar">Bar Chart</a>
-  </div>
+  	<div class="tabs cf">
+        <a data-toggle="tab_1_globe">Globe</a>
+        <a data-toggle="tab_2_bar">Bar Chart</a>
+    </div>
 
-  <div class="tabContent">
-  <!-- Overview Vis and Legend -->
-      <div id="tab_1_globe">
-          <div class="tip">click to manually rotate, double-click auto-rotate.</div>
-        	<section id="overviewVis"></section>
-        	<section id="legend_globe" class="legend"></section>
-      </div>
+    <div class="tabContent">
+    <!-- Overview Vis and Legend -->
+        <div id="tab_1_globe">
+            <div class="tip">click to manually rotate, double-click auto-rotate.</div>
+          	<section id="overviewVis"></section>
+          	<section id="legend_globe" class="legend"></section>
+        </div>
 
-      <div id="tab_2_bar">
-          <section id="country_bar_controls">
-             <label class="tip">sort by </label>
-             <label class="tip"><input type="radio" name="order" value="country">country</label>
-             <label class="tip"><input type="radio" name="order" value="result" checked>result</label>
-          </section>
-          <section id="country_bar_chart" class="scroll-pane"></section>
-      </div>
-  </div>
+        <div id="tab_2_bar">
+            <section id="country_bar_controls">
+               <label class="tip">sort by </label>
+               <label class="tip"><input type="radio" name="order" value="country">country</label>
+               <label class="tip"><input type="radio" name="order" value="result" checked>result</label>
+            </section>
+            <section id="country_bar_chart" class="scroll-pane"></section>
+        </div>
+    </div>
   </div>
 
 <script>
