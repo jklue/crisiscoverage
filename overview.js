@@ -2,6 +2,7 @@
  Base globe code from http://bl.ocks.org/mbostock/4183330
  Legend code from https://github.com/jgoodall/d3-colorlegend
  Globe manipulation from http://rveciana.github.io/geoexamples/?page=d3js/d3js_svgcanvas/rotatingSVG.html
+    Note: Anything beyond the clipAngle is assigned d="", which I believe should be a valid null value, but flags as an error. (http://stackoverflow.com/questions/17396650/d3-js-parsing-error-rotation-of-orthogonal-map-projection)
  Tabs code from http://code-tricks.com/create-a-simple-html5-tabs-using-jquery/
  Scrollpane from https://github.com/vitch/jScrollPane/blob/master/script/jquery.jscrollpane.min.js
  */
