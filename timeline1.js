@@ -10,7 +10,7 @@
 
 	var width = 960 - margin.left - margin.right;
 
-	var height = 400 - margin.bottom - margin.top;
+	var height = 450 - margin.bottom - margin.top;
 
 	bbOverview = {
 	    x: 0,
@@ -23,7 +23,7 @@
 	    x: 0,
 	    y: 25,
 	    w: width,
-	    h: 300
+	    h: 350
 	};
 
 	var padding = 30;
@@ -55,8 +55,19 @@
 	    height: height + margin.top + margin.bottom
     }).append("g")
       .attr({
-	        transform: "translate(" + margin.left + "," + margin.top + ")"
+	        transform: "translate(" + margin.left + "," + margin.top + ")",
 	    });
+
+  // build mask
+  svg.append('clipPath')
+      .attr('id', 'chart-area')
+      .append('rect')
+      .attr({
+        x: -padding,
+        y: -padding - 5,
+        width: bbDetail.w + padding * 12,
+        height: bbDetail.h + padding * 1.97
+      });
 
 /* Set data source */
   var mediaStats = 'productiondata/haiyan/google-media_stats.csv';
@@ -86,22 +97,8 @@
           sources.push(d);
         // if array does not already contain string, add it
         else if(sources.indexOf(d) == -1)
-          sources.push(d)
+          sources.push(d);
       });
-  // console.log('data: ',data);
-  // console.log('sources: ',sources);
-//////////////////////////// remove first element in array to remove Google from chart data
-      // sources.shift();
-    /* add type back in to unique list of sources */
-    sources.forEach(function(d){
-      // console.log(d);
-      // match name to original data to get source type info
-      data.forEach(function(e){
-        // if source name equals original data name, grab type
-        // if(d == e.site_name)
-          // console.log('match');
-      });
-    });
     /* convert dates to js objects and record for x domain */
     data.forEach(function(d){
       // change each date and reassign
@@ -125,6 +122,8 @@
             var sourceHandle = d.replace(/[\. ]+/g, "");
             // set it
             currentSource.id = sourceHandle;
+          // set if visible or not
+          currentSource.vis = 1;
           // initialize values array
           currentSource.values = [];
           // add values by looking through original data and finding relevant dates and counts
@@ -135,13 +134,12 @@
             if(d == e.site_name){
             // if(d == cleanSourceName){
               // return object with pertinent data
-              currentSource.values.push({ date: e.date_query_end, count: +e.raw_result_count, name: d, type: e.site_type, id: sourceHandle });
+              currentSource.values.push({ date: e.date_query_end, count: +e.raw_result_count, name: d, type: e.site_type, id: sourceHandle, vis: 1 });
             }
           });
           // add name to master array
           allDates.push(currentSource);
       });
-
       // define color
       color = d3.scale.category20();
       // color = d3.scale.ordinal().domain(sources).range(['#CC1452', '#14A6CC', 'red', 'blue','yellow','brown','green','amber','purple','tomato','sand','chocolate','coral','cyan','darkGray','cornsilk','DarkGreen','DarkCyan','Beige','Azure','AliceBlue','AntiqueWhite']);
@@ -250,7 +248,7 @@
     detailFrame.append('g')
             .attr({
               class: 'x axis',
-              transform: 'translate(0,' + bbDetail.h +')'
+              transform: 'translate(0,' + bbDetail.h  +')'
             })
             .call(xAxis)
 
@@ -276,14 +274,20 @@
             date: f.date,
             id: f.id,
             name: f.name,
-            type: f.type
+            type: f.type,
+            vis: f.vis
           }
-        })
+        }),
+        vis: d.vis
       }
     });
 
+    // make wrapper for lines and legend
+    var chartArea = svg.append('g')
+                        .attr('clip-path', 'url(#chart-area)');
+
       // bind data
-      var mediaSources = svg.selectAll('.mediaSources')
+      var mediaSources = chartArea.selectAll('.mediaSources')
                           .data(visibleDates)
                         .enter().append('g')
                           .attr('class','mediaSources');
@@ -294,7 +298,7 @@
                       class: function(d){ return d.id + ' path'; }, // store name for reference to path
                       // id: function(d){ return d.name; },
                       d: function(d){ return line(d.values); },
-                      transform: 'translate(0,' + bbDetail.y + ')'                  
+                      transform: 'translate(0,' + bbDetail.y + ')',
                    })
                    .style({
                     'stroke': function(e) { return color(e.name); },
@@ -353,40 +357,39 @@
                 .text(function(d) { return d.name; })
                 // change font color to show activation or not
                 .on('click',function(d){
-                  // store class hook for path hide
-                  var pathClass = d3.select(this).attr('class');
-                  // remove legend text from class to protect legend text from dissapearing
-                  pathClass = pathClass.substring(0, pathClass.length - 6);
                   // if active, make gray
                   if(d3.select(this).attr('fill') != '#ccc'){
                     // change text color to gray
                     d3.select(this)
                       .attr('fill','#ccc');
 
+        //             // remove line from svg
+        //             var pathClass = d3.select(this).attr('class');
+        //           // remove legend text from class to protect legend text from dissapearing
+        //           pathClass = pathClass.substring(0, pathClass.length - 6);
+        // console.log(pathClass);
+        //             // select line and remove it
+        //             d3.select('.' + pathClass).remove();
+
                     // remove line from data
                       // look through data array and set selected media source's data to null
                       visibleDates.forEach(function(e,j){
                         // if data matches
                         if(e.id == d.id){
+                          // make invisible
+                          e.vis = 0;
                           // remove data
                           e.values.forEach(function(f){
                             f.count = null;
+                            f.vis = 0;
                           });
                         }
                       });
                     
-                    // redo y scale
-                    yScale.domain([0, d3.max(visibleDates, function(d) { return d3.max(d.values, function(v) { return v.count; }) })]);
-
-                    // redraw chart
-                    mediaSources.data(visibleDates)
-                      .attr('d', function(e){ return line(e.values); });
-
                   } else{
                     // change legend color back to original color
                     d3.select(this)
                       .attr('fill', function(d){ return color(d.name); });
-                    
 
                     // add data back in
                       // look through data array and set selected media source's data to original data
@@ -397,6 +400,8 @@
                           allDates.forEach(function(f){
                             // look for match
                             if(f.id == e.id){
+                              // make visible
+                              e.vis = 1;
                               // add data back in
                               e.values = f.values.map(function(f){
                                 return {
@@ -412,46 +417,47 @@
                         }
                       });
 
-                     // redo y scale
-                    yScale.domain([0, d3.max(visibleDates, function(e) { return d3.max(e.values, function(v) { return v.count; }) })]);
-
-               
-        // console.log('d',d.values);
-                    // mediaSources.select('circle').data(function() { return d.values;})
-                    //   .append('circle')
-                    //   .attr({
-                    //     class: function(e){ return e.id + " dot"; }, // store name for reference to path
-                    //     cx: function(e) { console.log('xScale(e.date)',xScale(e.date)); return xScale(e.date); },
-                    //     cy: function(e) { console.log('e.count',e.count); return yScale(e.count); },
-                    //     r: 4,
-                    //     transform: 'translate(0,' + bbDetail.y + ')'
-                    //   })
-                    //   .style({
-                    //     fill: function(e) { 
-                    //       // get color of type (traditional or blog color)
-                    //       var typeColor = color(e.name);
-                    //       // darken color
-                    //       var d3color = d3.rgb(typeColor).darker();
-                    //       // return color
-                    //       return d3color; 
-                    //     }
-                    //   })
                   }
+                  // redo y scale
+                  yScale.domain([0, d3.max(visibleDates, function(e) { return d3.max(e.values, function(v) { return v.count; }) })]);
 
                   // redraw y axis
                   d3.select(".y.axis").transition().duration(1500).ease('sin-in-out')
                     .call(yAxis);
+console.log(visibleDates);
 
                   // redraw other lines
                   mediaSources.selectAll('path').transition().duration(500)
-                             .attr('d',function(e){ return line(e.values); })
+                    // only draw lines that are 'visible' Will cause an error, but best solution so far
+                    .attr('d',function(e){ return line(e.values); })
+                    // .attr('d',function(e){ if(e.vis==1) { return line(e.values); } else { return null; } });
 
                   // redraw dots
-                  mediaSources.selectAll('circle').transition().duration(500)
+                  mediaSources.selectAll('circle').data(function(d) { console.log('d.vis',d.vis); return d.values;})
+                    .transition().duration(500)
                     .attr({
-                      cx: function(d) { console.log('hi'); return xScale(d.date); },
-                      cy: function(d) { return yScale(d.count); },
+                      // cx: function(e) { if(d.vis==1) { return xScale(e.date); } else { return xScale(null); } },
+                      cx: function(e) { return xScale(e.date); },
+                      // cx: function(e) { if(d.vis==1) { return yScale(e.count); } else { return yScale(null); } },
+                      cy: function(e) { return yScale(e.count); },
                     })
+                    .style({
+                      fill: function(e) { 
+                        console.log(d);
+                        // if not shown
+                        if(e.vis == 0)
+                          return 'white';
+                        else {
+                          // get color of type (traditional or blog color)
+                          var typeColor = color(e.name);
+                          // darken color
+                          var d3color = d3.rgb(typeColor).darker();
+                          // return color
+                          return d3color; 
+                        }
+
+                      }
+          })
                 });
 
   /* Storypoints */
