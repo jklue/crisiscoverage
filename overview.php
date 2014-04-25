@@ -22,18 +22,28 @@
     <div class="tabContent">
     <!-- Overview Vis and Legend -->
         <div id="tab_1_globe" class="content-tab">
-            <div class="tip">click to manually rotate, double-click auto-rotate.</div>
-          	<section id="overviewVis"></section>
-          	<section id="legend_globe" class="legend"></section>
+          <section id="section_country_globe">
+            <header class="tab_header">
+               <span class="overview_title">Results by Country</span>
+               <span class="tip">click to manually rotate,double-click auto-rotate.</span>
+             </header>
+            <figure id="overviewVis"></figure>
+            <figure id="legend_globe" class="legend"></figure>
+        	</section>
         </div>
 
         <div id="tab_2_bar" class="content-tab">
-            <section id="country_bar_controls">
-               <label class="tip">sort by </label>
-               <label class="tip"><input type="radio" name="order" value="country">country</label>
-               <label class="tip"><input type="radio" name="order" value="result" checked>result</label>
-            </section>
-            <section id="country_bar_chart" class="scroll-pane"></section>
+          <section id="section_country_bar_chart">
+             <header class="tab_header">
+               <span class="overview_title">Results by Country</span>
+               <span class="tip">
+                 <label>sort by </label>
+                 <label><input type="radio" name="order" value="country">country</label>
+                 <label><input type="radio" name="order" value="result" checked>result</label>
+               </span>
+             </header>
+             <figure id="country_bar_chart" class="scroll-pane"></figure>
+          </section>
         </div>
     </div>
   </div>

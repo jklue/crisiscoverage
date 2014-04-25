@@ -229,7 +229,7 @@ footer {
         /*top: 100px;*/
         padding: 0px;
         width: 990px;
-        height: 725px;
+        height: 730px;
         margin: 3em auto 1em;
       }
       .tabs { float: right; }
@@ -256,6 +256,8 @@ footer {
         font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
         font-size: 9pt;
         text-align: right;
+        /* text-anchor: right;*/
+        float: right;
         color: #999;
         }
 
@@ -271,10 +273,13 @@ footer {
            font-size: 9px;
           }
 
-      .bar_title {
-          text-anchor: middle;
+      .overview_title {
+          /*text-anchor: middle;*/
           font-size: 16px;
           font-weight: bold;
+          color: #636363;
+          float: left;
+          text-align: left;
         }
 
        /* styles specific to scroll-pane */
@@ -284,3 +289,8 @@ footer {
             height: 650px;
             overflow: auto;
         }
+
+      /* tab header */
+      .tab_header {
+        width: 100%;
+      }
