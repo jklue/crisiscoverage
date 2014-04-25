@@ -5,10 +5,10 @@
 	    top: 50,
 	    right:200,
 	    bottom: 0,
-	    left: 100
+	    left: 70
 	};
 
-	var width = 960 - margin.left - margin.right;
+	var width = 990 - margin.left - margin.right;
 
 	var height = 450 - margin.bottom - margin.top;
 
@@ -47,7 +47,7 @@
   dateList = [];
   
   // build svg and bounding box
-	svg = d3.select("#timelineVis")
+	svg = d3.select("#timelineSourceVis")
     .append("svg")
     .attr({
       class: 'timeline',
@@ -70,8 +70,8 @@
       });
 
 /* Set data source */
-  var mediaStats = 'productiondata/pakistan-drought/google-media_stats.csv';
-  // var mediaStats = 'productiondata/haiyan/google-media_stats.csv';
+  // var mediaStats = 'productiondata/pakistan-drought/google-media_stats.csv';
+  var mediaStats = 'productiondata/haiyan/google-media_stats.csv';
 
   // start it off!
   getData();
@@ -366,14 +366,6 @@
                     // change text color to gray
                     d3.select(this)
                       .attr('fill','#ccc');
-
-        //             // remove line from svg
-        //             var pathClass = d3.select(this).attr('class');
-        //           // remove legend text from class to protect legend text from dissapearing
-        //           pathClass = pathClass.substring(0, pathClass.length - 6);
-        // console.log(pathClass);
-        //             // select line and remove it
-        //             d3.select('.' + pathClass).remove();
 
                     // remove line from data
                       // look through data array and set selected media source's data to null
