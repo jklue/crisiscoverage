@@ -21,13 +21,13 @@
 
     <div class="tabContent">
     <!-- Overview Vis and Legend -->
-        <div id="tab_1_globe">
+        <div id="tab_1_globe" class="content-tab">
             <div class="tip">click to manually rotate, double-click auto-rotate.</div>
           	<section id="overviewVis"></section>
           	<section id="legend_globe" class="legend"></section>
         </div>
 
-        <div id="tab_2_bar">
+        <div id="tab_2_bar" class="content-tab">
             <section id="country_bar_controls">
                <label class="tip">sort by </label>
                <label class="tip"><input type="radio" name="order" value="country">country</label>
