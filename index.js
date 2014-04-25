@@ -26,7 +26,7 @@ var title = d3.select("#crisis_name");
 
 queue()
     .defer(d3.json, "productiondata/world-110m.json")
-    .defer(d3.tsv, "productiondata/crisis-country-names.tsv")
+    .defer(d3.tsv, "productiondata/crisis-country-names-alt.tsv")
     .await(ready);
 
 function ready(error, world, names) {
@@ -58,9 +58,12 @@ function ready(error, world, names) {
                     projection.rotate(r(t));
                     c.clearRect(0, 0, width, height);
                     c.fillStyle = "#bbb", c.beginPath(), path(land), c.fill();
-                    c.fillStyle = "#f00", c.beginPath(), path(countries[i]), c.fill();
+                    // crisis country
+                    c.fillStyle = "#CC1452", c.beginPath(), path(countries[i]), c.fill();
+                    // country border
                     c.strokeStyle = "#fff", c.lineWidth = .5, c.beginPath(), path(borders), c.stroke();
-                    c.strokeStyle = "#000", c.lineWidth = 2, c.beginPath(), path(globe), c.stroke();
+                    // globe outline
+                    c.strokeStyle = "#ccc", c.lineWidth = 2, c.beginPath(), path(globe), c.stroke();
                 };
             })
             .transition()

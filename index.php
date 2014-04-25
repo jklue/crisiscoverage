@@ -6,12 +6,13 @@
 <style>
 
     #crisis_name {
-        position: absolute;
-        top: 280px;
+        position: relative;
+        top: 220px;
         font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
         font-size: 18px;
         text-align: center;
-        width: 320px;
+        width: 220px;
+        margin: 0 auto;
     }
 
 </style>

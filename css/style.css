@@ -352,6 +352,11 @@ footer {
   text-align: right;
   position: relative; }
 
+/* Rotating Globe */
+#crisis_name {
+  color: white;
+  background-color: #cc1452; }
+
 /* Animation */
 .fadeInOut {
   -webkit-animation-name: fader;
