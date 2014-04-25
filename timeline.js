@@ -1,32 +1,5 @@
 /* Setup */
-	var allDates, aggregateMediaStats, bbDetail, bbOverview, detailFrame, dateList, color, storyPoints, line, mediaTypes, originalData, padding, sources, svg, xAxis, xScale, yAxis, yScale;
-
-	var margin = {
-	    top: 50,
-	    right:200,
-	    bottom: 0,
-	    left: 70
-	};
-
-	var width = 990 - margin.left - margin.right;
-
-	var height = 450 - margin.bottom - margin.top;
-
-	bbOverview = {
-	    x: 0,
-	    y: 10,
-	    w: width,
-	    h: 50
-	};
-
-	bbDetail = {
-	    x: 0,
-	    y: 25,
-	    w: width,
-	    h: 350
-	};
-
-	var padding = 30;
+	var allDates, aggregateMediaStats, detailFrame, dateList, color, storyPoints, line, mediaTypes, originalData, padding, sources, svg, xAxis, xScale, yAxis, yScale;
 
 	// read in date format from csv, convert to js object to be read by d3
   var parseDate = d3.time.format("%Y-%m-%dT%H:%M:%S+00:00").parse;
@@ -192,6 +165,33 @@
 /* Make By Media Type vis */
   function typeVis() {
 
+    var margin = {
+        top: 50,
+        right:140,
+        bottom: 0,
+        left: 70
+    };
+
+    var width = 990 - margin.left - margin.right;
+
+    var height = 450 - margin.bottom - margin.top;
+
+    var bbOverview = {
+        x: 0,
+        y: 10,
+        w: width,
+        h: 50
+    };
+
+    var bbDetail = {
+        x: 0,
+        y: 25,
+        w: width,
+        h: 350
+    };
+
+    var padding = 30;
+
   // build svg and bounding box
   svg = d3.select("#timelineTypeVis")
     .append("svg")
@@ -223,7 +223,7 @@
         transform: "translate(" + bbDetail.x + "," + bbDetail.y +")",
     });
   // use that minimum and maximum possible y values for domain in log scale
-    yScale = d3.scale.linear().domain([0, d3.max(allDates, function(d) { return d3.max(d.values, function(v) { return v.count; }) })]).range([bbDetail.h, 0]);
+    yScale = d3.scale.linear().domain([0, d3.max(aggregateMediaStats, function(d) { return d3.max(d.values, function(v) { return v.count; }) })]).range([bbDetail.h, 0]);
   // x axis
     xAxis = d3.svg.axis()
                   .scale(xScale)
@@ -262,25 +262,11 @@
             .style("text-anchor", "end")
             .text("# articles")
 
-    // deep copy array for dates currently shown in graph, from which we can remove data and check to draw new y scale
-    var visibleDates = allDates.map(function(d){
-      return {
-        id: d.id,
-        name: d.name,
-        values: d.values.map(function(f){
-          return {
-            count: f.count,
-            date: f.date,
-            id: f.id,
-            name: f.name,
-            type: f.type,
-            vis: f.vis
-          }
-        }),
-        vis: d.vis
-      }
-    });
+    // set display var to reference data for this chart
+    var visibleDates = aggregateMediaStats;
 
+console.log('aggregateMediaStats',aggregateMediaStats);
+console.log('allDates',allDates);
     // make wrapper for lines and legend
     var chartArea = svg.append('g')
                         .attr('clip-path', 'url(#chart-area)');
@@ -295,7 +281,7 @@
         mediaSources.append('path')
                    .attr({
                       class: function(d){ return d.id + ' path'; }, // store name for reference to path
-                      // id: function(d){ return d.name; },
+                      id: function(d){ return d.name; },
                       d: function(d){ return line(d.values); },
                       transform: 'translate(0,' + bbDetail.y + ')',
                    })
@@ -346,110 +332,14 @@
 
     mediaSources.append('text').attr({
                   class: function(d){ return d.id + 'legend'; }, // store name for reference to path
-                  x: width + 180,
-                  y: function(d,i){ return (i * 16) + margin.top/2; },
+                  x: width + 120,
+                  y: function(d,i){ return (i * 16) + margin.top; },
                   dy: '0.35em',
-                  cursor: 'pointer',
+                  // cursor: 'pointer',
                   fill: function(d){ return color(d.name); }
                 })
                 .style("text-anchor", "end")
-                .text(function(d) { return d.name; })
-                // change font color to show activation or not
-                .on('click',function(d){
-                  // if active, make gray
-                  if(d3.select(this).attr('fill') != '#ccc'){
-                    // change text color to gray
-                    d3.select(this)
-                      .attr('fill','#ccc');
-
-                    // remove line from data
-                      // look through data array and set selected media source's data to null
-                      visibleDates.forEach(function(e,j){
-                        // if data matches
-                        if(e.id == d.id){
-                          // make invisible
-                          e.vis = 0;
-                          // remove data
-                          e.values.forEach(function(f){
-                            f.count = null;
-                            f.vis = 0;
-                          });
-                        }
-                      });
-                    
-                  } else{
-                    // change legend color back to original color
-                    d3.select(this)
-                      .attr('fill', function(d){ return color(d.name); });
-
-                    // add data back in
-                      // look through data array and set selected media source's data to original data
-                      visibleDates.forEach(function(e,j){
-                        // if data matches
-                        if(e.id == d.id){
-                          // go through original data and add it back in
-                          allDates.forEach(function(f){
-                            // look for match
-                            if(f.id == e.id){
-                              // make visible
-                              e.vis = 1;
-                              // add data back in
-                              e.values = f.values.map(function(f){
-                                return {
-                                  count: f.count,
-                                  date: f.date,
-                                  id: f.id,
-                                  name: f.name,
-                                  type: f.type
-                                }
-                              })
-                            }
-                          });
-                        }
-                      });
-
-                  }
-                  // redo y scale
-                  yScale.domain([0, d3.max(visibleDates, function(e) { return d3.max(e.values, function(v) { return v.count; }) })]);
-
-                  // redraw y axis
-                  d3.select(".y.axis").transition().duration(1500).ease('sin-in-out')
-                    .call(yAxis);
-console.log(visibleDates);
-
-                  // redraw other lines
-                  mediaSources.selectAll('path').transition().duration(500)
-                    // only draw lines that are 'visible' Will cause an error, but best solution so far
-                    .attr('d',function(e){ return line(e.values); })
-                    // .attr('d',function(e){ if(e.vis==1) { return line(e.values); } else { return null; } });
-
-                  // redraw dots
-                  mediaSources.selectAll('circle').data(function(d) { console.log('d.vis',d.vis); return d.values;})
-                    .transition().duration(500)
-                    .attr({
-                      // cx: function(e) { if(d.vis==1) { return xScale(e.date); } else { return xScale(null); } },
-                      cx: function(e) { return xScale(e.date); },
-                      // cx: function(e) { if(d.vis==1) { return yScale(e.count); } else { return yScale(null); } },
-                      cy: function(e) { return yScale(e.count); },
-                    })
-                    .style({
-                      fill: function(e) { 
-                        console.log(d);
-                        // if not shown
-                        if(e.vis == 0)
-                          return 'white';
-                        else {
-                          // get color of type (traditional or blog color)
-                          var typeColor = color(e.name);
-                          // darken color
-                          var d3color = d3.rgb(typeColor).darker();
-                          // return color
-                          return d3color; 
-                        }
-
-                      }
-          })
-                });
+                .text(function(d) { return d.name; });
 
   /* Storypoints */
     // add intro title and summary
@@ -516,9 +406,8 @@ console.log(visibleDates);
     // Initialize tooltip
     var tip = d3.tip()
             .html(function(d) { 
-              // console.log('d3tip',d);
               // if 1 article, use singular 'article'
-                return d.count + " articles on <span class='sourceName'>" + d.name + "</span> during<br>the 30 days prior to " + parseDateTips(d.date); 
+                return d.count + " <span class='sourceName'>" + d.name + "</span> articles on during<br>the 30 days prior to " + parseDateTips(d.date); 
             })
             .direction('e')
             .attr('class','d3-tip e');
@@ -589,6 +478,33 @@ console.log(visibleDates);
 
 /* Make By Source vis */
 	function sourceVis() {
+
+   var margin = {
+        top: 50,
+        right:200,
+        bottom: 0,
+        left: 70
+    };
+
+    var width = 990 - margin.left - margin.right;
+
+    var height = 450 - margin.bottom - margin.top;
+
+    var bbOverview = {
+        x: 0,
+        y: 10,
+        w: width,
+        h: 50
+    };
+
+    var bbDetail = {
+        x: 0,
+        y: 25,
+        w: width,
+        h: 350
+    };
+
+    var padding = 30;
 
   // build svg and bounding box
   svg = d3.select("#timelineSourceVis")
