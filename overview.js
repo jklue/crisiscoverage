@@ -33,45 +33,6 @@ var myColors = {
     },
     colorScale =  myColors.Grays.concat(myColors.Blues).concat(myColors.Greens);
 
-/**
- * Add a prototype method to String (careful to escape special chars used by regex)
- * @param find
- * @param replace
- * @returns {string}
- */
-String.prototype.replaceAll = function (find, replace) {
-    var str = this;
-    return str.replace(new RegExp(find.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), 'g'), replace);
-};
-
-/**
- * Be notified when a registered element has a class change.
- * @param elemId
- * @param callback
- */
-function addClassNameListener(elemId, callback) {
-    var elem = document.getElementById(elemId);
-    var lastClassName = elem.className;
-    window.setInterval( function() {
-        var className = elem.className;
-        if (className !== lastClassName) {
-            callback();
-            lastClassName = className;
-        }
-    },10);
-}
-
-/**
- * Friendly print for numbers, considering decimals.
- * @param x
- * @returns {string}
- */
-function numberWithCommas(x) {
-    if (isNaN(x)) return x;
-    var parts = x.toString().split(".");
-    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    return parts.join(".");
-}
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // GLOBE ONLY
@@ -134,11 +95,6 @@ var velocity = .02,
     then = Date.now(),
     lastClick = 0;
 
-queue()
-    .defer(d3.json, "productiondata/globe.json")//world
-    .defer(d3.csv, "/productiondata/haiyan/google-country_stats.csv")//media
-    .await(loadedDataCallBack);
-
 function loadedDataCallBack(error, world, media) {
     console.log("--- START ::: loadedDataCallback ---");
 
@@ -180,7 +136,8 @@ function loadedDataCallBack(error, world, media) {
         .domain([min, mean, max])
         .range(colorScale);
 
-    //Populate country 1x
+    //Populate country
+    $('#countries').empty();
     country = countries
         .selectAll(".country")
         .data(world_data);
@@ -201,32 +158,6 @@ function loadedDataCallBack(error, world, media) {
     renderBarChart();
     renderGlobe();
 
-    /* add chart reorder */
-    d3.selectAll("input")
-        .on("click", function () {
-            reorder(this.value);
-            return;
-    });
-
-    addClassNameListener("tab_1_globe", function(){
-        var className = document.getElementById("tab_1_globe").className;
-        if (className === "active"){
-//            alert("changed to globe tab, className: "+className);
-//            renderGlobe();
-        }
-    });
-    addClassNameListener("tab_2_bar", function(){
-        var className = document.getElementById("tab_2_bar").className;
-        if (className === "active"){
-//            alert("changed to bar tab, className: "+className);
-
-//            isCountrySortDescending = true;
-//            isResultSortDescending = false;
-//
-//            renderBarChart();
-        }
-    });
-
     console.log("--- END ::: loadedDataCallback ---");
 }
 
@@ -246,6 +177,7 @@ function renderGlobe() {
         });
 
     //Populate legend
+    $('#legend_globe').empty();
     colorlegend("#legend_globe", color, "quantile", {title: "results by country", boxHeight: 15, boxWidth: 30, fill: false, linearBoxes: 11});
     startAnimation();
 }
@@ -327,12 +259,7 @@ var bar_height = 15,
 var groups = null,
     bars = null;
 
-var svgBar = d3.select("#country_bar_chart").append("svg")
-        .attr("width", widthBar + marginBar.left + marginBar.right)
-        .attr("height", 3000),
-
-    gBar = svgBar.append("g")
-        .attr("transform", "translate("+marginBar.left+","+marginBar.top+")");
+var svgBar, gBar;
 
 /**
  * RENDER BAR CHART (AFTER ALL ELSE IS LOADED)
@@ -345,7 +272,13 @@ function renderBarChart() {
     xScale.domain([min, max]);
     yScale.domain(nameData);
 
-    if (groups) groups.remove();
+    $('#countryBarChart').empty();
+    svgBar = d3.select("#country_bar_chart").append("svg")
+        .attr("width", widthBar + marginBar.left + marginBar.right)
+        .attr("height", 3000);
+
+    gBar = svgBar.append("g")
+            .attr("transform", "translate("+marginBar.left+","+marginBar.top+")");
 
     groups = gBar.append("g")
         .selectAll("g")
@@ -505,3 +438,44 @@ function internalNumberSort(a,_a,b,_b,sortAscending){
         }
     }
 }
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// CRISIS SELECT CHANGES AND OTHER PAGE-SPECIFICS
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+addClassNameListener("crisis_select", function(){
+    var crisis = window.crisis_select.value;
+    console.log("### QUEUE NEW CRISIS ("+crisis+") AFTER CLASS CHANGE ###");
+    queue()
+        .defer(d3.json, "productiondata/globe.json")//world
+        .defer(d3.csv, "/productiondata/"+crisis+"/google-country_stats.csv")//media
+        .await(loadedDataCallBack);
+});
+
+/* add chart reorder */
+d3.selectAll("input")
+    .on("click", function () {
+        reorder(this.value);
+        return;
+    });
+
+addClassNameListener("tab_1_globe", function(){
+    var className = document.getElementById("tab_1_globe").className;
+    if (className === "active"){
+//            alert("changed to globe tab, className: "+className);
+//            renderGlobe();
+    }
+});
+addClassNameListener("tab_2_bar", function(){
+    var className = document.getElementById("tab_2_bar").className;
+    if (className === "active"){
+//            alert("changed to bar tab, className: "+className);
+
+//            isCountrySortDescending = true;
+//            isResultSortDescending = false;
+//
+//            renderBarChart();
+    }
+});
+
+

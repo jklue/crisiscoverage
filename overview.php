@@ -2,15 +2,6 @@
 
 <body id="overview">
 
-<!-- ADDITIONAL JS LIBS -->
-<script type="text/javascript" src="libs/jquery-1.10.1.js"></script>
-<script type="text/javascript" src="libs/html5jtabs.js"></script>
-<script type="text/javascript" src="libs/jquery.jscrollpane.min.js"></script>
-<script type="text/javascript" src="libs/jquery.mousewheel.js"></script>
-<script type="text/javascript" src="libs/colorlegend.js"></script>
-
-<link type="text/css" href="css/jquery.jscrollpane.css" rel="stylesheet" media="all" />
-	
 	<?php include 'includes/header.html'; ?>
 
   <div id="overview_content" class="cf">

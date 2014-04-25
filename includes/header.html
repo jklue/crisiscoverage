@@ -8,6 +8,31 @@
 			<img id="radio-dot" class="fadeInOut" src="images/radio2.3-dot.png" alt="Radio Dot">			
 		</div>
 	</div>
+
+    <!-- START ::: DRAFT CRISIS SELECTOR -->
+    <!--
+        (LUKE: I barely tried on this one to apply CSS, so muck it up !!! ;)
+    -->
+    <style>
+        #crisis_selector {
+            color: #636363;
+            margin-top: 5%;
+            float: right;
+        }
+    </style>
+    <div id="crisis_selector">
+        <form id="crisis_form">
+            <label id="indicator_year_label" for="crisis_select">Crisis</label>
+            <select id="crisis_select">
+                <option value="turkish-revolt" > A Revolt in Turkey
+                <option value="pakistan-drought" > Drought in Pakistan
+                <option value="ukraine-protest" > Protests in Ukraine
+                <option value="haiyan" > Typhoon Haiyan
+            </select>
+        </form>
+    </div>
+    <!-- END ::: DRAFT CRISIS SELECTOR -->
+
 	<nav>
 		<ul>
 			<li><a href="/overview" class="overviewLink">Overview</a></li>
@@ -15,4 +40,38 @@
 			<li><a href="/project-data" class="dataLink">Data</a></li>
 		</ul>
 	</nav>
+
+    <!-- START ::: CRISIS SELECTOR MANAGER -->
+    <script>
+        window.crisis_select = document.getElementById('crisis_select');
+        var firstTime = true;
+        setInterval(function() {
+
+                    var changed = false;
+                    //HANDLE INITIAL CONDITIONS {{
+                    if (!localStorage.getItem('current_crisis')){
+                        localStorage.setItem('current_crisis', 'haiyan');
+                    }
+                    if (!window.crisis_select.value || firstTime){
+                        console.log("--> updating new window.crisis_select variable to reflect localStorage: "+localStorage.getItem('current_crisis'));
+                        window.crisis_select.value= localStorage.getItem('current_crisis');
+                        firstTime = false;
+                        changed = true;
+                    }
+                    //}}
+
+                   else  if (localStorage.getItem('current_crisis') !== window.crisis_select.value){
+                        console.log("--> updating localStorage 'current_crisis' variable to reflect new selection: "+window.crisis_select.value);
+                        localStorage.setItem('current_crisis', window.crisis_select.value);
+                        changed = true;
+                    }
+
+                    if (changed){
+                        /*NOTICE: Changing class to allow a class listener to take action */
+                        window.crisis_select.className = window.crisis_select.value;
+                    }
+                }
+                ,1000);
+    </script>
+    <!-- END ::: CRISIS SELECTOR MANAGER -->
 </header>
