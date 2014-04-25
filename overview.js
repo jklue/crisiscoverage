@@ -308,7 +308,7 @@ var marginBar = {
         top: 50,
         bottom: 0,
         left: 0,
-        right: 10
+        right: 50
     },
     widthBar = maxWidth - marginBar.left - marginBar.right,
     heightBar = maxHeight - marginBar.top - marginBar.bottom,

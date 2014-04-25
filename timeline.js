@@ -45,29 +45,6 @@
   mediaTypes = ['Traditional','Independent','Blogs-Social'];
 
   dateList = [];
-  
-  // build svg and bounding box
-	svg = d3.select("#timelineSourceVis")
-    .append("svg")
-    .attr({
-      class: 'timeline',
-	    width: width + margin.left + margin.right,
-	    height: height + margin.top + margin.bottom
-    }).append("g")
-      .attr({
-	        transform: "translate(" + margin.left + "," + margin.top + ")",
-	    });
-
-  // build mask
-  svg.append('clipPath')
-      .attr('id', 'chart-area')
-      .append('rect')
-      .attr({
-        x: -padding,
-        y: -padding - 5,
-        width: bbDetail.w + padding * 12,
-        height: bbDetail.h + padding * 1.97
-      });
 
 /* Set data source */
   // var mediaStats = 'productiondata/pakistan-drought/google-media_stats.csv';
@@ -207,13 +184,434 @@
         d.date = parseStorypoint(d.date);
       });
 
-    // create vis
-      return detailVis();
+    // create Type vis
+      return typeVis();
     });
   }
 
-/* Make detail */
-	function detailVis() {
+/* Make By Media Type vis */
+  function typeVis() {
+
+  // build svg and bounding box
+  svg = d3.select("#timelineTypeVis")
+    .append("svg")
+    .attr({
+      class: 'timeline',
+      width: width + margin.left + margin.right,
+      height: height + margin.top + margin.bottom
+    }).append("g")
+      .attr({
+          transform: "translate(" + margin.left + "," + margin.top + ")",
+      });
+
+  // build mask
+  svg.append('clipPath')
+      .attr('id', 'type-chart-area')
+      .append('rect')
+      .attr({
+        x: -padding,
+        y: -padding - 5,
+        width: bbDetail.w + padding * 12,
+        height: bbDetail.h + padding * 1.97
+      });
+
+  // normal scale
+    xScale = d3.time.scale().domain(d3.extent(dateList, function(d) { return d; })).range([0, bbDetail.w]);  // define the right domain
+  // example that translates to the bottom left of our vis space:
+    var typeFrame = svg.append("g").attr({
+        class: 'typeFrame',
+        transform: "translate(" + bbDetail.x + "," + bbDetail.y +")",
+    });
+  // use that minimum and maximum possible y values for domain in log scale
+    yScale = d3.scale.linear().domain([0, d3.max(allDates, function(d) { return d3.max(d.values, function(v) { return v.count; }) })]).range([bbDetail.h, 0]);
+  // x axis
+    xAxis = d3.svg.axis()
+                  .scale(xScale)
+                  .orient('bottom')
+                  .ticks(4)
+                  .tickFormat(d3.time.format('%b'));
+                  // .tickFormat(d3.time.format('%b %d'));
+  // y axis for consolidated population line
+    yAxis = d3.svg.axis()
+                  .scale(yScale)
+                  .orient('left')
+                  .ticks(6);
+
+    var line = d3.svg.line()
+                     .x(function(d) { return xScale(d.date); })
+                     .y(function(d) { return yScale(d.count); })
+                     .interpolate('linear');
+
+    // could not figure out how to set static y0 and y1 values using d3 line generator
+  // add x axis to svg
+    typeFrame.append('g')
+            .attr({
+              class: 'x axis',
+              transform: 'translate(0,' + bbDetail.h  +')'
+            })
+            .call(xAxis)
+
+  // add y axis to svg
+    typeFrame.append('g')
+            .attr('class', 'y axis')
+            .call(yAxis)
+          .append("text")
+            .attr('x', -5)
+            .attr("y", -45)
+            .attr("dy", "30px")
+            .style("text-anchor", "end")
+            .text("# articles")
+
+    // deep copy array for dates currently shown in graph, from which we can remove data and check to draw new y scale
+    var visibleDates = allDates.map(function(d){
+      return {
+        id: d.id,
+        name: d.name,
+        values: d.values.map(function(f){
+          return {
+            count: f.count,
+            date: f.date,
+            id: f.id,
+            name: f.name,
+            type: f.type,
+            vis: f.vis
+          }
+        }),
+        vis: d.vis
+      }
+    });
+
+    // make wrapper for lines and legend
+    var chartArea = svg.append('g')
+                        .attr('clip-path', 'url(#chart-area)');
+
+      // bind data
+      var mediaSources = chartArea.selectAll('.mediaSources')
+                          .data(visibleDates)
+                        .enter().append('g')
+                          .attr('class','mediaSources');
+   
+      // add line
+        mediaSources.append('path')
+                   .attr({
+                      class: function(d){ return d.id + ' path'; }, // store name for reference to path
+                      // id: function(d){ return d.name; },
+                      d: function(d){ return line(d.values); },
+                      transform: 'translate(0,' + bbDetail.y + ')',
+                   })
+                   .style({
+                    'stroke': function(e) { return color(e.name); },
+                    'fill': 'none',
+                   });
+
+   /* add dots for each line */
+        mediaSources.selectAll('circle').data(function(d) { return d.values;})
+          .enter().append('circle')
+          .attr({
+            class: function(d){ return d.id + " dot"; }, // store name for reference to path
+            cx: function(d) { return xScale(d.date); },
+            cy: function(d) { return yScale(d.count); },
+            r: 4,
+            transform: 'translate(0,' + bbDetail.y + ')'
+          })
+          .style({
+            fill: function(d) { 
+              // get color of type (traditional or blog color)
+              var typeColor = color(d.name);
+              // darken color
+              var d3color = d3.rgb(typeColor).darker();
+              // return color
+              return d3color; 
+            }
+          })
+
+          // make dot bigger and show tip
+          .on('mouseover', function(d){
+            d3.select(this)
+              .transition()
+              .duration(25)
+              .attr('r',10);
+            tip.show(d);
+          })
+          // make dot smaller and hide tip
+          .on('mouseleave', function(d){
+            d3.select(this)
+              .transition()
+              .duration(25)
+              .attr('r',4)
+            tip.hide(d);
+          });
+
+  /* Add related legend - Functionality inspired by http://mpf.vis.ywng.cloudbees.net/*/
+
+    mediaSources.append('text').attr({
+                  class: function(d){ return d.id + 'legend'; }, // store name for reference to path
+                  x: width + 180,
+                  y: function(d,i){ return (i * 16) + margin.top/2; },
+                  dy: '0.35em',
+                  cursor: 'pointer',
+                  fill: function(d){ return color(d.name); }
+                })
+                .style("text-anchor", "end")
+                .text(function(d) { return d.name; })
+                // change font color to show activation or not
+                .on('click',function(d){
+                  // if active, make gray
+                  if(d3.select(this).attr('fill') != '#ccc'){
+                    // change text color to gray
+                    d3.select(this)
+                      .attr('fill','#ccc');
+
+                    // remove line from data
+                      // look through data array and set selected media source's data to null
+                      visibleDates.forEach(function(e,j){
+                        // if data matches
+                        if(e.id == d.id){
+                          // make invisible
+                          e.vis = 0;
+                          // remove data
+                          e.values.forEach(function(f){
+                            f.count = null;
+                            f.vis = 0;
+                          });
+                        }
+                      });
+                    
+                  } else{
+                    // change legend color back to original color
+                    d3.select(this)
+                      .attr('fill', function(d){ return color(d.name); });
+
+                    // add data back in
+                      // look through data array and set selected media source's data to original data
+                      visibleDates.forEach(function(e,j){
+                        // if data matches
+                        if(e.id == d.id){
+                          // go through original data and add it back in
+                          allDates.forEach(function(f){
+                            // look for match
+                            if(f.id == e.id){
+                              // make visible
+                              e.vis = 1;
+                              // add data back in
+                              e.values = f.values.map(function(f){
+                                return {
+                                  count: f.count,
+                                  date: f.date,
+                                  id: f.id,
+                                  name: f.name,
+                                  type: f.type
+                                }
+                              })
+                            }
+                          });
+                        }
+                      });
+
+                  }
+                  // redo y scale
+                  yScale.domain([0, d3.max(visibleDates, function(e) { return d3.max(e.values, function(v) { return v.count; }) })]);
+
+                  // redraw y axis
+                  d3.select(".y.axis").transition().duration(1500).ease('sin-in-out')
+                    .call(yAxis);
+console.log(visibleDates);
+
+                  // redraw other lines
+                  mediaSources.selectAll('path').transition().duration(500)
+                    // only draw lines that are 'visible' Will cause an error, but best solution so far
+                    .attr('d',function(e){ return line(e.values); })
+                    // .attr('d',function(e){ if(e.vis==1) { return line(e.values); } else { return null; } });
+
+                  // redraw dots
+                  mediaSources.selectAll('circle').data(function(d) { console.log('d.vis',d.vis); return d.values;})
+                    .transition().duration(500)
+                    .attr({
+                      // cx: function(e) { if(d.vis==1) { return xScale(e.date); } else { return xScale(null); } },
+                      cx: function(e) { return xScale(e.date); },
+                      // cx: function(e) { if(d.vis==1) { return yScale(e.count); } else { return yScale(null); } },
+                      cy: function(e) { return yScale(e.count); },
+                    })
+                    .style({
+                      fill: function(e) { 
+                        console.log(d);
+                        // if not shown
+                        if(e.vis == 0)
+                          return 'white';
+                        else {
+                          // get color of type (traditional or blog color)
+                          var typeColor = color(e.name);
+                          // darken color
+                          var d3color = d3.rgb(typeColor).darker();
+                          // return color
+                          return d3color; 
+                        }
+
+                      }
+          })
+                });
+
+  /* Storypoints */
+    // add intro title and summary
+    d3.select("#crisisTitle").html('<h3>Typhoon Haiyan</h3>');
+    d3.select('#crisisStory').html('Typhoon Haiyan, known as Typhoon Yolanda in the Philippines, was a powerful tropical cyclone that devastated portions of Southeast Asia, particularly the Philippines, on November 8, 2013. <a href="http://en.wikipedia.org/wiki/Typhoon_Haiyan" class="storySource">&mdash; Wikipedia</a>');
+
+    // add dotted lines
+    typeFrame.selectAll('.line')
+               .data(storyPoints)
+            .enter().append('line')
+               .attr({
+                  class: 'storyline',
+                  x1: function(d) { return xScale(d.date); },
+                  x2: function(d) { return xScale(d.date); },
+                  y1: -bbDetail.y, // make taller than chart
+                  y2: bbDetail.h
+                });
+
+  // add triangles
+    typeFrame.selectAll('.storyTriangle')
+           .data(storyPoints)
+        .enter().append('path')
+           .attr({
+              class: 'storyTriangle',
+              transform: function(d){ return 'translate(' + xScale(d.date) + ',' + -bbDetail.y + ')'; },
+              d: d3.svg.symbol().type('triangle-down').size(256)
+            })
+           // add mouseover story details
+           .on('mouseover',function(d){
+              // convert story date to readable
+              var storyDate = parseDateTips(d.date);
+              /* Dates */
+                // remove any previously shown dates
+                d3.select('.crisisDate')
+                  .remove();
+                // show new date
+                d3.select('#crisisTitle')
+                  .append('span')
+                  .html(storyDate)
+                  .attr('class','crisisDate');    
+
+              // add new content to div
+              d3.select('#crisisStory').html(d.title);
+              /* color and size handling */
+
+                /* Lines */
+
+
+                /* Triangles */
+                // revert to original color on other triangles and shrink
+                d3.selectAll('.storyTriangle')
+                  .transition()
+                  .style('fill','#919191')
+                  .attr('d',d3.svg.symbol().type('triangle-down').size(256));
+                // change color of current triangle and enlarge
+                d3.select(this)
+                  .transition()
+                  .style('fill','#3D8699')
+                  .attr('d',d3.svg.symbol().type('triangle-down').size(512));
+
+           });
+
+  /* Tool tips */
+    // Initialize tooltip
+    var tip = d3.tip()
+            .html(function(d) { 
+              // console.log('d3tip',d);
+              // if 1 article, use singular 'article'
+                return d.count + " articles on <span class='sourceName'>" + d.name + "</span> during<br>the 30 days prior to " + parseDateTips(d.date); 
+            })
+            .direction('e')
+            .attr('class','d3-tip e');
+
+    // Invoke the tip in the context of your visualization
+    typeFrame.call(tip)
+  
+  /* Make legend */
+    // var legend = svg.selectAll(".legend")
+    //   .data(sources)
+    // .enter().append("g")
+    //   .attr("class", "legend")
+    //   .attr({
+    //     'transform': function(d, i) { return 'translate(180,' + ((i * 16) - margin.top/2) + ')'},
+    //     'fill':color
+    //   })
+    //   .on('mouseout', function (d) {
+    //     // Restore opacity to all rectangles on mouseout
+    //     d3.selectAll('rect')
+    //       .attr({
+    //         'opacity':1,
+    //       });
+    //   });
+
+    // make color box
+    // legend.append("rect")
+    //     .attr("x", width - 16)
+    //     .attr("width", 16)
+    //     .attr("height", 16)
+    //     .style("fill", color);
+    
+    // add checkbox
+    // legend.append('foreignObject')
+    //       .attr('class','checkbox')
+    //       .attr('width',20)
+    //       .attr('height',20)
+    //       .attr("x", width - 16)
+    //       .attr("dy", ".35em")
+    //     .append('xhtml:input')
+    //       .attr('type','checkbox')
+    //       .attr('value',function(d){ return d })
+    //       .attr('checked',true);
+
+    // make name box
+    // legend.append("text")
+    //     .attr("x", width - 24)
+    //     .attr("y", 9)
+    //     .attr("dy", ".35em")
+    //     .attr('cursor','pointer')
+    //     .style("text-anchor", "end")
+    //     .text(function(d) { return d })
+    //     // change font color to show activation or not
+    //     .on('click',function(d){
+    //       // if active, make gray
+    //       if(d3.select(this.parentNode).attr('fill') != '#ccc'){
+    //         d3.select(this.parentNode)
+    //           .attr('fill','#ccc');
+    //       } else{
+    //         d3.select(this.parentNode)
+    //           .attr('fill',color);
+    //       }
+    //     });
+
+    // Draw second vis
+    sourceVis();
+  
+  }
+
+/* Make By Source vis */
+	function sourceVis() {
+
+  // build svg and bounding box
+  svg = d3.select("#timelineSourceVis")
+    .append("svg")
+    .attr({
+      class: 'timeline',
+      width: width + margin.left + margin.right,
+      height: height + margin.top + margin.bottom
+    }).append("g")
+      .attr({
+          transform: "translate(" + margin.left + "," + margin.top + ")",
+      });
+
+  // build mask
+  svg.append('clipPath')
+      .attr('id', 'chart-area')
+      .append('rect')
+      .attr({
+        x: -padding,
+        y: -padding - 5,
+        width: bbDetail.w + padding * 12,
+        height: bbDetail.h + padding * 1.97
+      });
 
   // make copy of data so can remove lines in chart without changing original data
   var allDatesOriginal = allDates;
@@ -587,44 +985,4 @@ console.log(visibleDates);
     //       }
     //     });
   
-  }
-
-/* button click control */
-  d3.select("input[value=\"types\"]").on("click", function () { redraw('types'); });
-  d3.select("input[value=\"sources\"]").on("click", function () { redraw('sources'); });
-
-/* Redraw graph based on either types or sources of media */
-  function redraw(chart) {
-
-    // determine chart type
-    if(chart == 'types')
-      var chartData = aggregateMediaStats;
-    else
-      var chartData = allDates;
-
-      // recalculate range
-      yScale = d3.scale.linear().domain([0, d3.max(chartData, function(d) {return d3.max(d.values, function(v) { return v.count; }) })]);
-
-      /* remove & add lines while animating transitions*/
-      // remove old data
-      var mediaSources = svg.selectAll('.mediaSources')
-                         .data(chartData)
-                       .exit().transition().remove();
-
-      // add any new data
-      mediaSources = svg.selectAll('.mediaSources')
-                     .data(chartData)
-                      .enter().append('g')
-                        .attr('class','mediaSources');
-
-      // add line
-      mediaSources.selectAll('path')
-               .attr({
-                  d: function(e){ return line(e.values); },
-                  transform: 'translate(0,' + bbDetail.y + ')'                  
-               });
-  
-      // redraw y axis
-      d3.select(".y.axis")
-        .call(yAxis);
   }

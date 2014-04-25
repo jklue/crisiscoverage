@@ -340,7 +340,6 @@ footer {
   /*top: 100px;*/
   padding: 0px;
   width: 990px;
-  height: 725px;
   margin: 3em auto 1em; }
 
 .tabs {
@@ -368,6 +367,8 @@ footer {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 9pt;
   text-align: right;
+  /* text-anchor: right;*/
+  float: right;
   color: #999; }
 
 /* Country Bar Chart */
@@ -380,16 +381,23 @@ footer {
   text-anchor: end;
   font-size: 9px; }
 
-.bar_title {
-  text-anchor: middle;
+.overview_title {
+  /*text-anchor: middle;*/
   font-size: 16px;
-  font-weight: bold; }
+  font-weight: bold;
+  color: #636363;
+  float: left;
+  text-align: left; }
 
 /* styles specific to scroll-pane */
 .scroll-pane {
   width: 100%;
   height: 650px;
   overflow: auto; }
+
+/* tab header */
+.tab_header {
+  width: 100%; }
 
 /* Setup */
 /* General */

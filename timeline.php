@@ -20,7 +20,7 @@
     <div class="tabContent">
         <!-- Timeline by source -->
         <div id="tab_1_type" class="content-tab">
-          <div class="tip">Click on source name below to remove or add to chart.</div>
+          <div class="tip"></div>
           <div id="timelineTypeVis"></div>
         </div>
 
