@@ -11,7 +11,7 @@
             obj.click(function(evt){
 
                 toggler = "#" + obj.attr("data-toggle");
-                togglerRest = $(toggler).parent().find("div");
+                togglerRest = $(toggler).parent().find("div.content-tab");
 
                 togglerRest.hide().removeClass("active");
                 $(toggler).show().addClass("active");
