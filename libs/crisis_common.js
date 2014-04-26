@@ -29,6 +29,13 @@ function addClassNameListener(elemId, callback) {
 }
 
 /**
+ * Useful for pages where crisis selector should be hidden.
+ */
+function hideCrisisSelector(){
+    $("#crisis_selector").hide();
+}
+
+/**
  * Friendly print for numbers, considering decimals.
  * @param x
  * @returns {string}
