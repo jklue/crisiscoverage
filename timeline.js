@@ -122,14 +122,23 @@
             height: sourceDetail.h + sourcePadding * 1.97
           });
 
-
 /* Get media data */
-  function getData(error, data){
+  function getData(error, storypoints, data){
 
     /* Clear out old data that may remain if previous crisis */
     allDates = []; // master list for date, traditional media count, and blog media count
     aggregateMediaStats = []; // master list for media by type
     dateList = [];
+    d3.selectAll('.mediaSources').remove(); // clear both charts
+
+    // make storypoints global for use in later function
+    storyPoints = storypoints;
+
+    // convert storypoint dates to js objects
+    storyPoints.forEach(function(d){
+      // change date out with object
+      d.date = parseStorypoint(d.date);
+    });
 
     // make data useable in aggregate chart
     originalData = data;
@@ -238,27 +247,8 @@
       // add data to master list
       aggregateMediaStats.push(currentMediaType);
     });
-    // get aggregate data by media type
-    return storypoints();
-  }
-
-/* Get storypoints */
-  function storypoints() {
-
-    /* Add storypoints */
-    d3.csv("data/haiyan/storypoints.csv", function(data) {
-      // make data accessible by d3 later on
-      storyPoints = data;
-
-      // convert storypoint dates to js objects
-      storyPoints.forEach(function(d){
-        // change date out with object
-        d.date = parseStorypoint(d.date);
-      });
-
-    // create Type vis
-      return typeVis();
-    });
+    // draw charts
+    return typeVis();
   }
 
 /* Make By Media Type vis */
@@ -392,7 +382,7 @@
     // add intro title and summary
     d3.select("#crisisTitle").html('<h3>Typhoon Haiyan</h3>');
     d3.select('#crisisStory').html('Typhoon Haiyan, known as Typhoon Yolanda in the Philippines, was a powerful tropical cyclone that devastated portions of Southeast Asia, particularly the Philippines, on November 8, 2013. <a href="http://en.wikipedia.org/wiki/Typhoon_Haiyan" class="storySource">&mdash; Wikipedia</a>');
-
+console.log('storyPoints',storyPoints);
     // add dotted lines
     typeFrame.selectAll('.line')
                .data(storyPoints)
@@ -779,6 +769,7 @@ addClassNameListener("crisis_select", function(){
     var crisis = window.crisis_select.value;
     console.log("### QUEUE NEW CRISIS ("+crisis+") AFTER CLASS CHANGE ###");
     queue()
+        .defer(d3.csv, "/productiondata/"+crisis+"/storypoints.csv")//storypoints
         .defer(d3.csv, "/productiondata/"+crisis+"/google-media_stats.csv")//media
         .await(getData);
 });
