@@ -29,8 +29,8 @@
                <span class="overview_title">Results by Country</span>
                <span class="tip">
                  <label>sort by </label>
-                 <label><input type="radio" name="order" value="country">country</label>
-                 <label><input type="radio" name="order" value="result" checked>result</label>
+                 <label><input type="radio" name="order" value="country" title="click again to reverse order">country</label>
+                 <label><input type="radio" name="order" value="result" title="click again to reverse order" checked>result</label>
                </span>
              </header>
              <figure id="country_bar_chart" class="scroll-pane"></figure>

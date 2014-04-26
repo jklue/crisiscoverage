@@ -89,7 +89,8 @@ svg.append("g").append('path')
 
 var m0,
     o0,
-    done;
+    done,
+    shouldResume;
 
 var velocity = .02,
     then = Date.now(),
@@ -98,6 +99,8 @@ var velocity = .02,
 function loadedDataCallBack(error, world, media) {
     console.log("--- START ::: loadedDataCallback ---");
 
+    mediaData = {};
+    mediaBarData = [];
     world_data = topojson.feature(world, world.objects.countries).features;
 
     /* convert media data to json object */
@@ -179,7 +182,7 @@ function renderGlobe() {
     //Populate legend
     $('#legend_globe').empty();
     colorlegend("#legend_globe", color, "quantile", {title: "results by country", boxHeight: 15, boxWidth: 30, fill: false, linearBoxes: 11});
-    startAnimation();
+    if (!done) startAnimation();
 }
 
 function stopAnimation() {
@@ -265,14 +268,15 @@ var svgBar, gBar;
  * RENDER BAR CHART (AFTER ALL ELSE IS LOADED)
  */
 function renderBarChart() {
-    stopAnimation();
+    isCountrySortDescending = true;
+    isResultSortDescending = false;
 
     var nameData = _.pluck(mediaBarData, 'name');
 
     xScale.domain([min, max]);
     yScale.domain(nameData);
 
-    $('#countryBarChart').empty();
+    $('#country_bar_chart').empty();
     svgBar = d3.select("#country_bar_chart").append("svg")
         .attr("width", widthBar + marginBar.left + marginBar.right)
         .attr("height", 3000);
@@ -462,19 +466,17 @@ d3.selectAll("input")
 addClassNameListener("tab_1_globe", function(){
     var className = document.getElementById("tab_1_globe").className;
     if (className === "active"){
-//            alert("changed to globe tab, className: "+className);
-//            renderGlobe();
+        if (shouldResume) startAnimation();
     }
 });
+
 addClassNameListener("tab_2_bar", function(){
     var className = document.getElementById("tab_2_bar").className;
     if (className === "active"){
-//            alert("changed to bar tab, className: "+className);
-
-//            isCountrySortDescending = true;
-//            isResultSortDescending = false;
-//
-//            renderBarChart();
+              if (!done){
+                  stopAnimation();
+                  shouldResume = true;
+              } else shouldResume = false;
     }
 });
 
