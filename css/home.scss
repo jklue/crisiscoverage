@@ -25,6 +25,30 @@
 	}
 }
 
+/* Navigation */
+#welcome nav.martini {
+        position: relative;
+        margin: 0em auto;
+        width: 900px;
+        ul {
+            position: absolute;
+            top: -240px;
+            left: 70px;
+            width: 690px;   
+        }
+        .left.arrow {
+            position: absolute;
+            left: 0;
+        }
+        .right.arrow {
+            position: absolute;
+            right: 0;
+            text-transform: uppercase;
+        }
+    }
+    .view{float: left;}
+    .skip{float: right;}
+
 /* Rotating Globe */
 	#crisis_name {
 		color: white;
