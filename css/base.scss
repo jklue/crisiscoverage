@@ -49,6 +49,7 @@
 
 /* Header */
     header {
+        position: relative; // to hold abs pos crisis selector
         width: 900px;
         margin: 1.5em auto 0;
         .title {
@@ -294,3 +295,10 @@ footer {
       .tab_header {
         width: 100%;
       }
+
+/* Crisis Selector */
+    #crisis_selector {
+        position: absolute;
+        top: 85px;
+        right: 173px;
+    }

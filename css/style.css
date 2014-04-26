@@ -185,6 +185,7 @@ a:hover {
 
 /* Header */
 header {
+  position: relative;
   width: 900px;
   margin: 1.5em auto 0; }
   header .title {
@@ -398,6 +399,12 @@ footer {
 /* tab header */
 .tab_header {
   width: 100%; }
+
+/* Crisis Selector */
+#crisis_selector {
+  position: absolute;
+  top: 85px;
+  right: 173px; }
 
 /* Setup */
 /* General */

@@ -1,5 +1,8 @@
-/* Setup */
-	var allDates, aggregateMediaStats, detailFrame, dateList, color, storyPoints, line, mediaTypes, originalData, padding, sources, svg, xAxis, xScale, yAxis, yScale;
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// SETUP
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	var allDates, aggregateMediaStats, sourceFrame, typeFrame, dateList, color, storyPoints, line, mediaTypes, originalData, padding, sources, svg, xAxis, xScale, yAxis, yScale;
 
   // read in date from date_query column
   var parseDateQuery = d3.time.format("%Y-%m-%d").parse;
@@ -52,7 +55,9 @@
 
     var sourcePadding = 30;
 
-  // Common svg parameters
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// COMMON
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
    // x axis
     xAxis = d3.svg.axis()
@@ -122,6 +127,7 @@
             height: sourceDetail.h + sourcePadding * 1.97
           });
 
+
 /* Get media data */
   function getData(error, storypoints, data){
 
@@ -130,6 +136,11 @@
     aggregateMediaStats = []; // master list for media by type
     dateList = [];
     d3.selectAll('.mediaSources').remove(); // clear both charts
+    d3.selectAll('.x.axis').remove();
+    d3.selectAll('.y.axis').remove();
+    d3.selectAll('.storyline').remove();
+    d3.selectAll('.storyTriangle').remove();
+
 
     // make storypoints global for use in later function
     storyPoints = storypoints;
@@ -207,13 +218,6 @@
       // define color
       color = d3.scale.category20();
 
-      // get aggregate data by media type
-      aggregateData();
-  }
-
-/* Aggregate data by media type */
-  function aggregateData() {
-
     // get reported dates for indeces for aggregate chart
       // define var to hold dates
       var reportedDates = [];
@@ -247,23 +251,28 @@
       // add data to master list
       aggregateMediaStats.push(currentMediaType);
     });
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// COMMON ELEMENTS: AXES
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // normal scale
+    xScale = d3.time.scale().domain(d3.extent(dateList, function(d) { return d; })).range([0, typeDetail.w]);  // define the right domain
+   
     // draw charts
     return typeVis();
   }
-
 /* Make By Media Type vis */
   function typeVis() {
-
-  // normal scale
-    xScale = d3.time.scale().domain(d3.extent(dateList, function(d) { return d; })).range([0, typeDetail.w]);  // define the right domain
-  // example that translates to the bottom left of our vis space:
+  // use that minimum and maximum possible y values for domain in log scale
+    yScale = d3.scale.linear().domain([0, d3.max(aggregateMediaStats, function(d) { return d3.max(d.values, function(v) { return v.count; }) })]).range([typeDetail.h, 0]);
+ 
+ // example that translates to the bottom left of our vis space:
     var typeFrame = typeSVG.append("g").attr({
         class: 'typeFrame',
         transform: "translate(" + typeDetail.x + "," + typeDetail.y +")",
     });
-  // use that minimum and maximum possible y values for domain in log scale
-    yScale = d3.scale.linear().domain([0, d3.max(aggregateMediaStats, function(d) { return d3.max(d.values, function(v) { return v.count; }) })]).range([typeDetail.h, 0]);
-  // x axis
+ // x axis
     xAxis = d3.svg.axis()
                   .scale(xScale)
                   .orient('bottom')
@@ -382,7 +391,6 @@
     // add intro title and summary
     d3.select("#crisisTitle").html('<h3>Typhoon Haiyan</h3>');
     d3.select('#crisisStory').html('Typhoon Haiyan, known as Typhoon Yolanda in the Philippines, was a powerful tropical cyclone that devastated portions of Southeast Asia, particularly the Philippines, on November 8, 2013. <a href="http://en.wikipedia.org/wiki/Typhoon_Haiyan" class="storySource">&mdash; Wikipedia</a>');
-console.log('storyPoints',storyPoints);
     // add dotted lines
     typeFrame.selectAll('.line')
                .data(storyPoints)
@@ -459,22 +467,19 @@ console.log('storyPoints',storyPoints);
 
 /* Make By Source vis */
 	function sourceVis() {
-
-	// normal scale
-	  xScale = d3.time.scale().domain(d3.extent(dateList, function(d) { return d; })).range([0, sourceDetail.w]);  // define the right domain
-	// example that translates to the bottom left of our vis space:
-	  var detailFrame = sourceSVG.append("g").attr({
-	      class: 'detailFrame',
+  // use that minimum and maximum possible y values for domain in log scale
+    yScale = d3.scale.linear().domain([0, d3.max(allDates, function(d) { return d3.max(d.values, function(v) { return v.count; }) })]).range([typeDetail.h, 0]);
+ 
+ 	// example that translates to the bottom left of our vis space:
+	  var sourceFrame = sourceSVG.append("g").attr({
+	      class: 'sourceFrame',
         transform: "translate(" + sourceDetail.x + "," + sourceDetail.y +")",
 	  });
-	// use that minimum and maximum possible y values for domain in log scale
-    yScale = d3.scale.linear().domain([0, d3.max(allDates, function(d) { return d3.max(d.values, function(v) { return v.count; }) })]).range([sourceDetail.h, 0]);
-    // yScale = d3.scale.pow().exponent(0.3).domain([0, d3.max(allDates, function(d) { return d3.max(d.values, function(v) { return v.count; }) })]).range([sourceDetail.h, 0]);
 
     // could not figure out how to set static y0 and y1 values using d3 line generator
     // var storypointLine = d3.sourceSVG.line();
   // add x axis to sourceSVG
-    detailFrame.append('g')
+    sourceFrame.append('g')
             .attr({
               class: 'x axis',
               transform: 'translate(0,' + sourceDetail.h  +')'
@@ -482,7 +487,7 @@ console.log('storyPoints',storyPoints);
             .call(xAxis)
 
   // add y axis to sourceSVG
-    detailFrame.append('g')
+    sourceFrame.append('g')
             .attr('class', 'y axis')
             .call(yAxis)
           .append("text")
@@ -686,7 +691,7 @@ console.log('storyPoints',storyPoints);
     d3.select('#crisisStory').html('Typhoon Haiyan, known as Typhoon Yolanda in the Philippines, was a powerful tropical cyclone that devastated portions of Southeast Asia, particularly the Philippines, on November 8, 2013. <a href="http://en.wikipedia.org/wiki/Typhoon_Haiyan" class="storySource">&mdash; Wikipedia</a>');
 
     // add dotted lines
-    detailFrame.selectAll('.line')
+    sourceFrame.selectAll('.line')
                .data(storyPoints)
             .enter().append('line')
                .attr({
@@ -698,7 +703,7 @@ console.log('storyPoints',storyPoints);
                 });
 
   // add triangles
-    detailFrame.selectAll('.storyTriangle')
+    sourceFrame.selectAll('.storyTriangle')
            .data(storyPoints)
         .enter().append('path')
            .attr({
@@ -750,7 +755,7 @@ console.log('storyPoints',storyPoints);
             .attr('class','d3-tip e');
 
     // Invoke the tip in the context of your visualization
-    detailFrame.call(tip)
+    sourceFrame.call(tip)
   
     // call Google vis
     googleVis();
