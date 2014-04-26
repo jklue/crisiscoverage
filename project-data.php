@@ -10,8 +10,7 @@
   </style>
 
 	<div id="project_data_content" class="content">
-    <!-- Current Data Table -->
-    <table id="project_data_table"></table>
+    <!-- Current Data Table will be added here. -->
 	</div>
 
 <!-- footer -->

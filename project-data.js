@@ -1,41 +1,90 @@
-//hideCrisisSelector();
+var tableSelect;
+
+var tableNames = [];
+    tableNames['country_stats'] = "google-country_stats.csv";
+    tableNames['baseline_stats'] = "google-media-baseline_stats.csv";
+    tableNames['crisis_stats'] = "google-media_stats.csv";
+    tableNames['crisis_sample'] = "google-media_results_subset.csv";
+
+/**
+ * Loaded Data Callback.
+ * @param error
+ * @param media
+ */
+function loadedDataCallBack(error, media){
+    console.log(media);
+
+    var aaData = [];
+    var aoColumns = [];
+    var firstRun = true;
+
+    media.forEach(function (d) {
+        if (firstRun){
+            firstRun = false;
+            _.keys(d).forEach(function(c){
+                aoColumns.push({ "sTitle": c});
+            });
+        }
+        aaData.push(_.values(d));
+    });
+
+    console.log(aoColumns);
+    console.log(aaData);
+
+    $('#project_data_table').dataTable( {
+        "aaData": aaData,
+        "aoColumns": aoColumns
+    } );
+}
+
+/**
+ * Load current table for crisis.
+ * @param tableName
+ */
+function loadTable(tableName){
+
+    var crisisName = window.crisis_select.value;
+    console.log("--> now loading table for tableName: "+ tableName + " (" + crisisName + ")");
+
+    $('#project_data_content').empty();
+    $('#project_data_content').append(
+        "<table id='project_data_table'></table>");
+
+    queue()
+        .defer(d3.csv, "/productiondata/"+crisisName+"/"+tableNames[tableName])
+        .await(loadedDataCallBack);
+}
 
 $(document).ready(function() {
 
     /* Append table selector to the crisis form */
     $('#crisis_form').append('<label for="data_select">Show Table: </label>\
         <select id="data_select">\
-            <option value="country-stats" > Country Stats\
-                <option value="baseline-stats" > Baseline Coverage Stats\
-                    <option value="crisis-stats" > Crisis Coverage Stats\
-                        <option value="crisis-sample" > Crisis Sample Results\
+            <option value="country_stats" >Country Stats</option>\
+                <option value="baseline_stats" >Baseline Coverage Stats</option>\
+                    <option value="crisis_stats" >Crisis Coverage Stats</option>\
+                        <option value="crisis_sample" >Crisis Sample Results</option>\
                         </select>\
                         <br>');
 
+    if (!tableSelect) tableSelect = document.getElementById('data_select');
+    d3.timer(
+        function(){
+            loadTable(tableSelect.value);
+            return true;//run 1x after delay
+        }, 2000
+    );
 
-    /* Example for loading data. */
-    $('#project_data_table').dataTable( {
-        "aaData": [
-            /* Reduced data set */
-            [ "Trident", "Internet Explorer 4.0", "Win 95+", 4, "X" ],
-            [ "Trident", "Internet Explorer 5.0", "Win 95+", 5, "C" ],
-            [ "Trident", "Internet Explorer 5.5", "Win 95+", 5.5, "A" ],
-            [ "Trident", "Internet Explorer 6.0", "Win 98+", 6, "A" ],
-            [ "Trident", "Internet Explorer 7.0", "Win XP SP2+", 7, "A" ],
-            [ "Gecko", "Firefox 1.5", "Win 98+ / OSX.2+", 1.8, "A" ],
-            [ "Gecko", "Firefox 2", "Win 98+ / OSX.2+", 1.8, "A" ],
-            [ "Gecko", "Firefox 3", "Win 2k+ / OSX.3+", 1.9, "A" ],
-            [ "Webkit", "Safari 1.2", "OSX.3", 125.5, "A" ],
-            [ "Webkit", "Safari 1.3", "OSX.3", 312.8, "A" ],
-            [ "Webkit", "Safari 2.0", "OSX.4+", 419.3, "A" ],
-            [ "Webkit", "Safari 3.0", "OSX.4+", 522.1, "A" ]
-        ],
-        "aoColumns": [
-            { "sTitle": "Engine" },
-            { "sTitle": "Browser" },
-            { "sTitle": "Platform" },
-            { "sTitle": "Version", "sClass": "center" },
-            { "sTitle": "Grade", "sClass": "center" }
-        ]
-    } );
+    tableSelect.onchange = function(){
+        loadTable(this.value);
+    };
 } );
+
+addClassNameListener("crisis_select", function(){
+    if (!tableSelect) tableSelect = document.getElementById('data_select');
+    var crisis = window.crisis_select.value;
+    console.log("### SETTING TABLE (" + tableSelect.value + ") AFTER NEW CRISIS ("+crisis+") AFTER CLASS CHANGE ###");
+    loadTable(tableSelect.value);
+});
+
+
