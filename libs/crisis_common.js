@@ -1,3 +1,33 @@
+/**
+ * Current Crisis Evaluator (runs on a timer from header.html).
+ */
+var firstTime = true;
+function currentCrisisEvaluator(){
+//            console.log("... running again");
+    var changed = false;
+    //HANDLE INITIAL CONDITIONS {{
+    if (!localStorage.getItem('current_crisis')){
+        localStorage.setItem('current_crisis', 'haiyan');
+    }
+    if (!window.crisis_select.value || firstTime){
+        console.log("--> updating new window.crisis_select variable to reflect localStorage: "+localStorage.getItem('current_crisis'));
+        window.crisis_select.value= localStorage.getItem('current_crisis');
+        firstTime = false;
+        changed = true;
+    }
+    //}}
+
+    else  if (localStorage.getItem('current_crisis') !== window.crisis_select.value){
+        console.log("--> updating localStorage 'current_crisis' variable to reflect new selection: "+window.crisis_select.value);
+        localStorage.setItem('current_crisis', window.crisis_select.value);
+        changed = true;
+    }
+
+    if (changed){
+        /*NOTICE: Changing class to allow a class listener to take action */
+        window.crisis_select.className = window.crisis_select.value;
+    }
+}
 
 /**
  * Add a prototype method to String (careful to escape special chars used by regex)
@@ -26,13 +56,6 @@ function addClassNameListener(elemId, callback) {
             lastClassName = className;
         }
     },10);
-}
-
-/**
- * Useful for pages where crisis selector should be hidden.
- */
-function hideCrisisSelector(){
-    $("#crisis_selector").hide();
 }
 
 /**

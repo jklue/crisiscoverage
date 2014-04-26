@@ -17,8 +17,13 @@
 
 <!-- Custom js -->
 <script>
+
 $(function() {
   $(".tabs a").html5jTabs();
 });
+
+window.crisis_select = document.getElementById('crisis_select');
+setInterval(currentCrisisEvaluator,100);
+
 </script>
 
