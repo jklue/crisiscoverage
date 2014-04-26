@@ -113,7 +113,7 @@ function transition() {
                             // country border
                             c.strokeStyle = "#fff", c.lineWidth = .5, c.beginPath(), path(borders), c.stroke();
                             // globe outline
-                            c.strokeStyle = "#ccc", c.lineWidth = 2, c.beginPath(), path(globe), c.stroke();
+                            c.strokeStyle = "#ccc", c.lineWidth = 1, c.beginPath(), path(globe), c.stroke();
                         };
                     })
                     .transition()
