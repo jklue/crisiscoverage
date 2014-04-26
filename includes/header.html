@@ -47,7 +47,7 @@
         var firstTime = true;
 
         function currentCrisis(){
-            console.log("... running again");
+//            console.log("... running again");
             var changed = false;
             //HANDLE INITIAL CONDITIONS {{
             if (!localStorage.getItem('current_crisis')){
@@ -73,8 +73,7 @@
             }
         }
 
-        currentCrisis();
-        setInterval(currentCrisis,1000);
+        setInterval(currentCrisis,100);
 
     </script>
     <!-- END ::: CRISIS SELECTOR MANAGER -->
