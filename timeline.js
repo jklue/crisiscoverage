@@ -1,37 +1,138 @@
 /* Setup */
 	var allDates, aggregateMediaStats, detailFrame, dateList, color, storyPoints, line, mediaTypes, originalData, padding, sources, svg, xAxis, xScale, yAxis, yScale;
 
-	// read in date format from csv, convert to js object to be read by d3
-  var parseDate = d3.time.format("%Y-%m-%dT%H:%M:%S+00:00").parse;
   // read in date from date_query column
   var parseDateQuery = d3.time.format("%Y-%m-%d").parse;
-  // remove hour from date so can aggregate articles by date w/out regard to hour
-  var parseDateSimple = d3.time.format("%b %d %Y");
   // format date for tooltip
   var parseDateTips = d3.time.format("%b %d, %Y");
   // convert storypoints date to js object for graphing on x axis
   var parseStorypoint = d3.time.format("%Y-%m-%d").parse;
 
-  // array for all dates
-  allDates = []; // master list for date, traditional media count, and blog media count
-  aggregateMediaStats = []; // master list for media by type
   mediaTypes = ['Traditional','Independent','Blogs-Social'];
 
-  dateList = [];
+  // By Media Type svg setup
+    var typeMargin = {
+        top: 50,
+        right:140,
+        bottom: 0,
+        left: 70
+    };
 
-/* Set data source */
-  // var mediaStats = 'productiondata/pakistan-drought/google-media_stats.csv';
-  var mediaStats = 'productiondata/haiyan/google-media_stats.csv';
+    var typeWidth = 990 - typeMargin.left - typeMargin.right;
 
-  // start it off!
-  getData();
+    var typeHeight = 450 - typeMargin.bottom - typeMargin.top;
+
+    var typeDetail = {
+        x: 0,
+        y: 25,
+        w: typeWidth,
+        h: 350
+    };
+
+    var typePadding = 30;
+
+  // By Source svg setup
+    var sourceMargin = {
+      top: 50,
+      right:200,
+      bottom: 0,
+      left: 70
+    };
+
+    var sourceWidth = 990 - sourceMargin.left - sourceMargin.right;
+
+    var sourceHeight = 450 - sourceMargin.bottom - sourceMargin.top;
+
+    var sourceDetail = {
+      x: 0,
+      y: 25,
+      w: sourceWidth,
+      h: 350
+    };
+
+    var sourcePadding = 30;
+
+  // Common svg parameters
+
+   // x axis
+    xAxis = d3.svg.axis()
+                  .scale(xScale)
+                  .orient('bottom')
+                  .ticks(4)
+                  .tickFormat(d3.time.format('%b'));
+                  // .tickFormat(d3.time.format('%b %d'));
+  // y axis for consolidated population line
+    yAxis = d3.svg.axis()
+                  .scale(yScale)
+                  .orient('left')
+                  .ticks(6);
+
+    line = d3.svg.line()
+                     .x(function(d) { return xScale(d.date); })
+                     .y(function(d) { return yScale(d.count); })
+                     .interpolate('linear');
+
+  // Begin By Media Type build
+
+    // build svg and bounding box
+    typeSVG = d3.select("#timelineTypeVis")
+      .append("svg")
+      .attr({
+        class: 'timeline',
+        width: typeWidth + typeMargin.left + typeMargin.right,
+        height: typeHeight + typeMargin.top + typeMargin.bottom
+      }).append("g")
+        .attr({
+            transform: "translate(" + typeMargin.left + "," + typeMargin.top + ")",
+        });
+
+    // build mask
+    typeSVG.append('clipPath')
+        .attr('id', 'type-chart-area')
+        .append('rect')
+        .attr({
+          x: -typePadding,
+          y: -typePadding - 5,
+          width: typeDetail.w + typePadding * 12,
+          height: typeDetail.h + typePadding * 1.97
+        });
+
+  // Begin By Source build
+
+    // build svg and bounding box
+      sourceSVG = d3.select("#timelineSourceVis")
+        .append("svg")
+        .attr({
+          class: 'timeline',
+          width: sourceWidth + sourceMargin.left + sourceMargin.right,
+          height: sourceHeight + sourceMargin.top + sourceMargin.bottom
+        }).append("g")
+          .attr({
+              transform: "translate(" + sourceMargin.left + "," + sourceMargin.top + ")",
+          });
+
+      // build mask
+      sourceSVG.append('clipPath')
+          .attr('id', 'chart-area')
+          .append('rect')
+          .attr({
+            x: -sourcePadding,
+            y: -sourcePadding - 5,
+            width: sourceDetail.w + sourcePadding * 12,
+            height: sourceDetail.h + sourcePadding * 1.97
+          });
+
 
 /* Get media data */
-  function getData(){
+  function getData(error, data){
 
-    d3.csv(mediaStats, function(data) {
-      // make data useable in aggregate chart
-      originalData = data;
+    /* Clear out old data that may remain if previous crisis */
+    allDates = []; // master list for date, traditional media count, and blog media count
+    aggregateMediaStats = []; // master list for media by type
+    dateList = [];
+
+    // make data useable in aggregate chart
+    originalData = data;
 
     /* Get news source titles */
       // iterate through .csv to find source names
@@ -96,11 +197,9 @@
       });
       // define color
       color = d3.scale.category20();
-      // color = d3.scale.ordinal().domain(sources).range(['#CC1452', '#14A6CC', 'red', 'blue','yellow','brown','green','amber','purple','tomato','sand','chocolate','coral','cyan','darkGray','cornsilk','DarkGreen','DarkCyan','Beige','Azure','AliceBlue','AntiqueWhite']);
 
       // get aggregate data by media type
-      return aggregateData();
-    });
+      aggregateData();
   }
 
 /* Aggregate data by media type */
@@ -165,65 +264,15 @@
 /* Make By Media Type vis */
   function typeVis() {
 
-    var margin = {
-        top: 50,
-        right:140,
-        bottom: 0,
-        left: 70
-    };
-
-    var width = 990 - margin.left - margin.right;
-
-    var height = 450 - margin.bottom - margin.top;
-
-    var bbOverview = {
-        x: 0,
-        y: 10,
-        w: width,
-        h: 50
-    };
-
-    var bbDetail = {
-        x: 0,
-        y: 25,
-        w: width,
-        h: 350
-    };
-
-    var padding = 30;
-
-  // build svg and bounding box
-  svg = d3.select("#timelineTypeVis")
-    .append("svg")
-    .attr({
-      class: 'timeline',
-      width: width + margin.left + margin.right,
-      height: height + margin.top + margin.bottom
-    }).append("g")
-      .attr({
-          transform: "translate(" + margin.left + "," + margin.top + ")",
-      });
-
-  // build mask
-  svg.append('clipPath')
-      .attr('id', 'type-chart-area')
-      .append('rect')
-      .attr({
-        x: -padding,
-        y: -padding - 5,
-        width: bbDetail.w + padding * 12,
-        height: bbDetail.h + padding * 1.97
-      });
-
   // normal scale
-    xScale = d3.time.scale().domain(d3.extent(dateList, function(d) { return d; })).range([0, bbDetail.w]);  // define the right domain
+    xScale = d3.time.scale().domain(d3.extent(dateList, function(d) { return d; })).range([0, typeDetail.w]);  // define the right domain
   // example that translates to the bottom left of our vis space:
-    var typeFrame = svg.append("g").attr({
+    var typeFrame = typeSVG.append("g").attr({
         class: 'typeFrame',
-        transform: "translate(" + bbDetail.x + "," + bbDetail.y +")",
+        transform: "translate(" + typeDetail.x + "," + typeDetail.y +")",
     });
   // use that minimum and maximum possible y values for domain in log scale
-    yScale = d3.scale.linear().domain([0, d3.max(aggregateMediaStats, function(d) { return d3.max(d.values, function(v) { return v.count; }) })]).range([bbDetail.h, 0]);
+    yScale = d3.scale.linear().domain([0, d3.max(aggregateMediaStats, function(d) { return d3.max(d.values, function(v) { return v.count; }) })]).range([typeDetail.h, 0]);
   // x axis
     xAxis = d3.svg.axis()
                   .scale(xScale)
@@ -247,7 +296,7 @@
     typeFrame.append('g')
             .attr({
               class: 'x axis',
-              transform: 'translate(0,' + bbDetail.h  +')'
+              transform: 'translate(0,' + typeDetail.h  +')'
             })
             .call(xAxis)
 
@@ -265,10 +314,8 @@
     // set display var to reference data for this chart
     var visibleDates = aggregateMediaStats;
 
-console.log('aggregateMediaStats',aggregateMediaStats);
-console.log('allDates',allDates);
     // make wrapper for lines and legend
-    var chartArea = svg.append('g')
+    var chartArea = typeSVG.append('g')
                         .attr('clip-path', 'url(#chart-area)');
 
       // bind data
@@ -283,7 +330,7 @@ console.log('allDates',allDates);
                       class: function(d){ return d.id + ' path'; }, // store name for reference to path
                       id: function(d){ return d.name; },
                       d: function(d){ return line(d.values); },
-                      transform: 'translate(0,' + bbDetail.y + ')',
+                      transform: 'translate(0,' + typeDetail.y + ')',
                    })
                    .style({
                     'stroke': function(e) { return color(e.name); },
@@ -298,7 +345,7 @@ console.log('allDates',allDates);
             cx: function(d) { return xScale(d.date); },
             cy: function(d) { return yScale(d.count); },
             r: 4,
-            transform: 'translate(0,' + bbDetail.y + ')'
+            transform: 'translate(0,' + typeDetail.y + ')'
           })
           .style({
             fill: function(d) { 
@@ -332,8 +379,8 @@ console.log('allDates',allDates);
 
     mediaSources.append('text').attr({
                   class: function(d){ return d.id + 'legend'; }, // store name for reference to path
-                  x: width + 120,
-                  y: function(d,i){ return (i * 16) + margin.top; },
+                  x: typeWidth + 120,
+                  y: function(d,i){ return (i * 16) + typeMargin.top; },
                   dy: '0.35em',
                   // cursor: 'pointer',
                   fill: function(d){ return color(d.name); }
@@ -354,8 +401,8 @@ console.log('allDates',allDates);
                   class: 'storyline',
                   x1: function(d) { return xScale(d.date); },
                   x2: function(d) { return xScale(d.date); },
-                  y1: -bbDetail.y, // make taller than chart
-                  y2: bbDetail.h
+                  y1: -typeDetail.y, // make taller than chart
+                  y2: typeDetail.h
                 });
 
   // add triangles
@@ -364,7 +411,7 @@ console.log('allDates',allDates);
         .enter().append('path')
            .attr({
               class: 'storyTriangle',
-              transform: function(d){ return 'translate(' + xScale(d.date) + ',' + -bbDetail.y + ')'; },
+              transform: function(d){ return 'translate(' + xScale(d.date) + ',' + -typeDetail.y + ')'; },
               d: d3.svg.symbol().type('triangle-down').size(256)
             })
            // add mouseover story details
@@ -413,63 +460,7 @@ console.log('allDates',allDates);
             .attr('class','d3-tip e');
 
     // Invoke the tip in the context of your visualization
-    typeFrame.call(tip)
-  
-  /* Make legend */
-    // var legend = svg.selectAll(".legend")
-    //   .data(sources)
-    // .enter().append("g")
-    //   .attr("class", "legend")
-    //   .attr({
-    //     'transform': function(d, i) { return 'translate(180,' + ((i * 16) - margin.top/2) + ')'},
-    //     'fill':color
-    //   })
-    //   .on('mouseout', function (d) {
-    //     // Restore opacity to all rectangles on mouseout
-    //     d3.selectAll('rect')
-    //       .attr({
-    //         'opacity':1,
-    //       });
-    //   });
-
-    // make color box
-    // legend.append("rect")
-    //     .attr("x", width - 16)
-    //     .attr("width", 16)
-    //     .attr("height", 16)
-    //     .style("fill", color);
-    
-    // add checkbox
-    // legend.append('foreignObject')
-    //       .attr('class','checkbox')
-    //       .attr('width',20)
-    //       .attr('height',20)
-    //       .attr("x", width - 16)
-    //       .attr("dy", ".35em")
-    //     .append('xhtml:input')
-    //       .attr('type','checkbox')
-    //       .attr('value',function(d){ return d })
-    //       .attr('checked',true);
-
-    // make name box
-    // legend.append("text")
-    //     .attr("x", width - 24)
-    //     .attr("y", 9)
-    //     .attr("dy", ".35em")
-    //     .attr('cursor','pointer')
-    //     .style("text-anchor", "end")
-    //     .text(function(d) { return d })
-    //     // change font color to show activation or not
-    //     .on('click',function(d){
-    //       // if active, make gray
-    //       if(d3.select(this.parentNode).attr('fill') != '#ccc'){
-    //         d3.select(this.parentNode)
-    //           .attr('fill','#ccc');
-    //       } else{
-    //         d3.select(this.parentNode)
-    //           .attr('fill',color);
-    //       }
-    //     });
+    typeFrame.call(tip);
 
     // Draw second vis
     sourceVis();
@@ -479,98 +470,28 @@ console.log('allDates',allDates);
 /* Make By Source vis */
 	function sourceVis() {
 
-   var margin = {
-        top: 50,
-        right:200,
-        bottom: 0,
-        left: 70
-    };
-
-    var width = 990 - margin.left - margin.right;
-
-    var height = 450 - margin.bottom - margin.top;
-
-    var bbOverview = {
-        x: 0,
-        y: 10,
-        w: width,
-        h: 50
-    };
-
-    var bbDetail = {
-        x: 0,
-        y: 25,
-        w: width,
-        h: 350
-    };
-
-    var padding = 30;
-
-  // build svg and bounding box
-  svg = d3.select("#timelineSourceVis")
-    .append("svg")
-    .attr({
-      class: 'timeline',
-      width: width + margin.left + margin.right,
-      height: height + margin.top + margin.bottom
-    }).append("g")
-      .attr({
-          transform: "translate(" + margin.left + "," + margin.top + ")",
-      });
-
-  // build mask
-  svg.append('clipPath')
-      .attr('id', 'chart-area')
-      .append('rect')
-      .attr({
-        x: -padding,
-        y: -padding - 5,
-        width: bbDetail.w + padding * 12,
-        height: bbDetail.h + padding * 1.97
-      });
-
-  // make copy of data so can remove lines in chart without changing original data
-  var allDatesOriginal = allDates;
-
 	// normal scale
-	  xScale = d3.time.scale().domain(d3.extent(dateList, function(d) { return d; })).range([0, bbDetail.w]);  // define the right domain
+	  xScale = d3.time.scale().domain(d3.extent(dateList, function(d) { return d; })).range([0, sourceDetail.w]);  // define the right domain
 	// example that translates to the bottom left of our vis space:
-	  var detailFrame = svg.append("g").attr({
+	  var detailFrame = sourceSVG.append("g").attr({
 	      class: 'detailFrame',
-        transform: "translate(" + bbDetail.x + "," + bbDetail.y +")",
+        transform: "translate(" + sourceDetail.x + "," + sourceDetail.y +")",
 	  });
 	// use that minimum and maximum possible y values for domain in log scale
-    yScale = d3.scale.linear().domain([0, d3.max(allDates, function(d) { return d3.max(d.values, function(v) { return v.count; }) })]).range([bbDetail.h, 0]);
-    // yScale = d3.scale.pow().exponent(0.3).domain([0, d3.max(allDates, function(d) { return d3.max(d.values, function(v) { return v.count; }) })]).range([bbDetail.h, 0]);
-  // x axis
-    xAxis = d3.svg.axis()
-                  .scale(xScale)
-                  .orient('bottom')
-                  .ticks(4)
-                  .tickFormat(d3.time.format('%b'));
-                  // .tickFormat(d3.time.format('%b %d'));
-  // y axis for consolidated population line
-    yAxis = d3.svg.axis()
-                  .scale(yScale)
-                  .orient('left')
-                  .ticks(6);
-
-    var line = d3.svg.line()
-                     .x(function(d) { return xScale(d.date); })
-                     .y(function(d) { return yScale(d.count); })
-                     .interpolate('linear');
+    yScale = d3.scale.linear().domain([0, d3.max(allDates, function(d) { return d3.max(d.values, function(v) { return v.count; }) })]).range([sourceDetail.h, 0]);
+    // yScale = d3.scale.pow().exponent(0.3).domain([0, d3.max(allDates, function(d) { return d3.max(d.values, function(v) { return v.count; }) })]).range([sourceDetail.h, 0]);
 
     // could not figure out how to set static y0 and y1 values using d3 line generator
-    // var storypointLine = d3.svg.line();
-  // add x axis to svg
+    // var storypointLine = d3.sourceSVG.line();
+  // add x axis to sourceSVG
     detailFrame.append('g')
             .attr({
               class: 'x axis',
-              transform: 'translate(0,' + bbDetail.h  +')'
+              transform: 'translate(0,' + sourceDetail.h  +')'
             })
             .call(xAxis)
 
-  // add y axis to svg
+  // add y axis to sourceSVG
     detailFrame.append('g')
             .attr('class', 'y axis')
             .call(yAxis)
@@ -601,7 +522,7 @@ console.log('allDates',allDates);
     });
 
     // make wrapper for lines and legend
-    var chartArea = svg.append('g')
+    var chartArea = sourceSVG.append('g')
                         .attr('clip-path', 'url(#chart-area)');
 
       // bind data
@@ -616,7 +537,7 @@ console.log('allDates',allDates);
                       class: function(d){ return d.id + ' path'; }, // store name for reference to path
                       // id: function(d){ return d.name; },
                       d: function(d){ return line(d.values); },
-                      transform: 'translate(0,' + bbDetail.y + ')',
+                      transform: 'translate(0,' + sourceDetail.y + ')',
                    })
                    .style({
                     'stroke': function(e) { return color(e.name); },
@@ -631,7 +552,7 @@ console.log('allDates',allDates);
             cx: function(d) { return xScale(d.date); },
             cy: function(d) { return yScale(d.count); },
             r: 4,
-            transform: 'translate(0,' + bbDetail.y + ')'
+            transform: 'translate(0,' + sourceDetail.y + ')'
           })
           .style({
             fill: function(d) { 
@@ -665,8 +586,8 @@ console.log('allDates',allDates);
 
     mediaSources.append('text').attr({
                   class: function(d){ return d.id + 'legend'; }, // store name for reference to path
-                  x: width + 180,
-                  y: function(d,i){ return (i * 16) + margin.top/2; },
+                  x: sourceWidth + 180,
+                  y: function(d,i){ return (i * 16) + sourceMargin.top/2; },
                   dy: '0.35em',
                   cursor: 'pointer',
                   fill: function(d){ return color(d.name); }
@@ -734,7 +655,6 @@ console.log('allDates',allDates);
                   // redraw y axis
                   d3.select(".y.axis").transition().duration(1500).ease('sin-in-out')
                     .call(yAxis);
-console.log(visibleDates);
 
                   // redraw other lines
                   mediaSources.selectAll('path').transition().duration(500)
@@ -767,7 +687,7 @@ console.log(visibleDates);
                         }
 
                       }
-          })
+                   })
                 });
 
   /* Storypoints */
@@ -783,8 +703,8 @@ console.log(visibleDates);
                   class: 'storyline',
                   x1: function(d) { return xScale(d.date); },
                   x2: function(d) { return xScale(d.date); },
-                  y1: -bbDetail.y, // make taller than chart
-                  y2: bbDetail.h
+                  y1: -sourceDetail.y, // make taller than chart
+                  y2: sourceDetail.h
                 });
 
   // add triangles
@@ -793,7 +713,7 @@ console.log(visibleDates);
         .enter().append('path')
            .attr({
               class: 'storyTriangle',
-              transform: function(d){ return 'translate(' + xScale(d.date) + ',' + -bbDetail.y + ')'; },
+              transform: function(d){ return 'translate(' + xScale(d.date) + ',' + -sourceDetail.y + ')'; },
               d: d3.svg.symbol().type('triangle-down').size(256)
             })
            // add mouseover story details
@@ -813,9 +733,6 @@ console.log(visibleDates);
               // add new content to div
               d3.select('#crisisStory').html(d.title);
               /* color and size handling */
-
-                /* Lines */
-
 
                 /* Triangles */
                 // revert to original color on other triangles and shrink
@@ -845,60 +762,23 @@ console.log(visibleDates);
     // Invoke the tip in the context of your visualization
     detailFrame.call(tip)
   
-  /* Make legend */
-    // var legend = svg.selectAll(".legend")
-    //   .data(sources)
-    // .enter().append("g")
-    //   .attr("class", "legend")
-    //   .attr({
-    //     'transform': function(d, i) { return 'translate(180,' + ((i * 16) - margin.top/2) + ')'},
-    //     'fill':color
-    //   })
-    //   .on('mouseout', function (d) {
-    //     // Restore opacity to all rectangles on mouseout
-    //     d3.selectAll('rect')
-    //       .attr({
-    //         'opacity':1,
-    //       });
-    //   });
-
-    // make color box
-    // legend.append("rect")
-    //     .attr("x", width - 16)
-    //     .attr("width", 16)
-    //     .attr("height", 16)
-    //     .style("fill", color);
-    
-    // add checkbox
-    // legend.append('foreignObject')
-    //       .attr('class','checkbox')
-    //       .attr('width',20)
-    //       .attr('height',20)
-    //       .attr("x", width - 16)
-    //       .attr("dy", ".35em")
-    //     .append('xhtml:input')
-    //       .attr('type','checkbox')
-    //       .attr('value',function(d){ return d })
-    //       .attr('checked',true);
-
-    // make name box
-    // legend.append("text")
-    //     .attr("x", width - 24)
-    //     .attr("y", 9)
-    //     .attr("dy", ".35em")
-    //     .attr('cursor','pointer')
-    //     .style("text-anchor", "end")
-    //     .text(function(d) { return d })
-    //     // change font color to show activation or not
-    //     .on('click',function(d){
-    //       // if active, make gray
-    //       if(d3.select(this.parentNode).attr('fill') != '#ccc'){
-    //         d3.select(this.parentNode)
-    //           .attr('fill','#ccc');
-    //       } else{
-    //         d3.select(this.parentNode)
-    //           .attr('fill',color);
-    //       }
-    //     });
-  
+    // call Google vis
+    googleVis();
   }
+
+  /* Make Google bar chart vis */
+  function googleVis() {
+
+  }
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// CRISIS SELECT CHANGES AND OTHER PAGE-SPECIFICS
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+addClassNameListener("crisis_select", function(){
+    var crisis = window.crisis_select.value;
+    console.log("### QUEUE NEW CRISIS ("+crisis+") AFTER CLASS CHANGE ###");
+    queue()
+        .defer(d3.csv, "/productiondata/"+crisis+"/google-media_stats.csv")//media
+        .await(getData);
+});
