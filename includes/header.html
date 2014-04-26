@@ -45,33 +45,37 @@
     <script>
         window.crisis_select = document.getElementById('crisis_select');
         var firstTime = true;
-        setInterval(function() {
 
-                    var changed = false;
-                    //HANDLE INITIAL CONDITIONS {{
-                    if (!localStorage.getItem('current_crisis')){
-                        localStorage.setItem('current_crisis', 'haiyan');
-                    }
-                    if (!window.crisis_select.value || firstTime){
-                        console.log("--> updating new window.crisis_select variable to reflect localStorage: "+localStorage.getItem('current_crisis'));
-                        window.crisis_select.value= localStorage.getItem('current_crisis');
-                        firstTime = false;
-                        changed = true;
-                    }
-                    //}}
+        function currentCrisis(){
+            console.log("... running again");
+            var changed = false;
+            //HANDLE INITIAL CONDITIONS {{
+            if (!localStorage.getItem('current_crisis')){
+                localStorage.setItem('current_crisis', 'haiyan');
+            }
+            if (!window.crisis_select.value || firstTime){
+                console.log("--> updating new window.crisis_select variable to reflect localStorage: "+localStorage.getItem('current_crisis'));
+                window.crisis_select.value= localStorage.getItem('current_crisis');
+                firstTime = false;
+                changed = true;
+            }
+            //}}
 
-                   else  if (localStorage.getItem('current_crisis') !== window.crisis_select.value){
-                        console.log("--> updating localStorage 'current_crisis' variable to reflect new selection: "+window.crisis_select.value);
-                        localStorage.setItem('current_crisis', window.crisis_select.value);
-                        changed = true;
-                    }
+            else  if (localStorage.getItem('current_crisis') !== window.crisis_select.value){
+                console.log("--> updating localStorage 'current_crisis' variable to reflect new selection: "+window.crisis_select.value);
+                localStorage.setItem('current_crisis', window.crisis_select.value);
+                changed = true;
+            }
 
-                    if (changed){
-                        /*NOTICE: Changing class to allow a class listener to take action */
-                        window.crisis_select.className = window.crisis_select.value;
-                    }
-                }
-                ,1000);
+            if (changed){
+                /*NOTICE: Changing class to allow a class listener to take action */
+                window.crisis_select.className = window.crisis_select.value;
+            }
+        }
+
+        currentCrisis();
+        setInterval(currentCrisis,1000);
+
     </script>
     <!-- END ::: CRISIS SELECTOR MANAGER -->
 </header>
