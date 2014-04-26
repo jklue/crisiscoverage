@@ -83,7 +83,7 @@
 /* Nav */
     nav {
         position: relative;
-        top: 2em;
+        top: 1em;
         ul {        
             text-decoration: none;
             float: right;
@@ -231,7 +231,7 @@ footer {
         padding: 0px;
         width: 990px;
         // height: 730px;
-        margin: 3em auto 1em;
+        margin: 5em auto 1em;
       }
       .tabs { float: right; }
       .tabs a{
@@ -300,5 +300,5 @@ footer {
     #crisis_selector {
         position: absolute;
         top: 85px;
-        right: 173px;
+        right: -41px;
     }

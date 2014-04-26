@@ -20,7 +20,7 @@
     <div class="tabContent">
         <!-- Timeline by source -->
         <div id="tab_1_type" class="content-tab">
-          <div class="tip"></div>
+          <div class="tip">Lorem ipsum...</div>
           <div id="timelineTypeVis"></div>
         </div>
 

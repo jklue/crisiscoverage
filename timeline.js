@@ -56,26 +56,8 @@
     var sourcePadding = 30;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// COMMON
+// ONE TIME
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-   // x axis
-    xAxis = d3.svg.axis()
-                  .scale(xScale)
-                  .orient('bottom')
-                  .ticks(4)
-                  .tickFormat(d3.time.format('%b'));
-                  // .tickFormat(d3.time.format('%b %d'));
-  // y axis for consolidated population line
-    yAxis = d3.svg.axis()
-                  .scale(yScale)
-                  .orient('left')
-                  .ticks(6);
-
-    line = d3.svg.line()
-                     .x(function(d) { return xScale(d.date); })
-                     .y(function(d) { return yScale(d.count); })
-                     .interpolate('linear');
 
   // Begin By Media Type build
 
@@ -127,8 +109,10 @@
             height: sourceDetail.h + sourcePadding * 1.97
           });
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// GET DATA
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-/* Get media data */
   function getData(error, storypoints, data){
 
     /* Clear out old data that may remain if previous crisis */
@@ -138,6 +122,8 @@
     d3.selectAll('.mediaSources').remove(); // clear both charts
     d3.selectAll('.x.axis').remove();
     d3.selectAll('.y.axis').remove();
+    d3.selectAll('.x.axis2').remove();
+    d3.selectAll('.y.axis2').remove();
     d3.selectAll('.storyline').remove();
     d3.selectAll('.storyTriangle').remove();
 
@@ -184,7 +170,7 @@
 
     /* wrangle data into nice form for graph */
       // define array to hold master data for graph
-        var mediaStatsData= [];
+      var mediaStatsData= [];
       // use all source names to get dates and add to master list
       sources.forEach(function(d,i){
         // look for source data in original list and add appropriate dates and counts
@@ -218,13 +204,13 @@
       // define color
       color = d3.scale.category20();
 
-    // get reported dates for indeces for aggregate chart
-      // define var to hold dates
-      var reportedDates = [];
-      // loop through data to collect all dates
-      allDates[0].values.forEach(function(d){
-        reportedDates.push(d.date);
-      });
+  // get reported dates for indeces for aggregate chart
+    // define var to hold dates
+    var reportedDates = [];
+    // loop through data to collect all dates
+    allDates[0].values.forEach(function(d){
+      reportedDates.push(d.date);
+    });
     // iterate through news types, if find match, tally
     mediaTypes.forEach(function(d){
       // initialize wrapper array to hold current media type
@@ -252,21 +238,18 @@
       aggregateMediaStats.push(currentMediaType);
     });
 
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// COMMON ELEMENTS: AXES
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  // normal scale
-    xScale = d3.time.scale().domain(d3.extent(dateList, function(d) { return d; })).range([0, typeDetail.w]);  // define the right domain
-   
     // draw charts
     return typeVis();
   }
-/* Make By Media Type vis */
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// BY MEDIA TYPE
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
   function typeVis() {
-  // use that minimum and maximum possible y values for domain in log scale
+    xScale = d3.time.scale().domain(d3.extent(dateList, function(d) { return d; })).range([0, typeDetail.w]);  // define the right domain
     yScale = d3.scale.linear().domain([0, d3.max(aggregateMediaStats, function(d) { return d3.max(d.values, function(v) { return v.count; }) })]).range([typeDetail.h, 0]);
- 
+
  // example that translates to the bottom left of our vis space:
     var typeFrame = typeSVG.append("g").attr({
         class: 'typeFrame',
@@ -279,6 +262,7 @@
                   .ticks(4)
                   .tickFormat(d3.time.format('%b'));
                   // .tickFormat(d3.time.format('%b %d'));
+
   // y axis for consolidated population line
     yAxis = d3.svg.axis()
                   .scale(yScale)
@@ -462,40 +446,60 @@
 
     // Draw second vis
     sourceVis();
-  
   }
 
-/* Make By Source vis */
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// BY SOURCE
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 	function sourceVis() {
-  // use that minimum and maximum possible y values for domain in log scale
-    yScale = d3.scale.linear().domain([0, d3.max(allDates, function(d) { return d3.max(d.values, function(v) { return v.count; }) })]).range([typeDetail.h, 0]);
- 
+    var xScale2 = d3.time.scale().domain(d3.extent(dateList, function(d) { return d; })).range([0, sourceDetail.w]);  // define the right domain
+    var yScale2 = d3.scale.linear().domain([0, d3.max(allDates, function(d) { return d3.max(d.values, function(v) { return v.count; }) })]).range([sourceDetail.h, 0]);
+
  	// example that translates to the bottom left of our vis space:
 	  var sourceFrame = sourceSVG.append("g").attr({
 	      class: 'sourceFrame',
         transform: "translate(" + sourceDetail.x + "," + sourceDetail.y +")",
 	  });
 
-    // could not figure out how to set static y0 and y1 values using d3 line generator
-    // var storypointLine = d3.sourceSVG.line();
+ // x axis
+    var xAxis2 = d3.svg.axis()
+                  .scale(xScale2)
+                  .orient('bottom')
+                  .ticks(4)
+                  .tickFormat(d3.time.format('%b'));
+
+  // y axis for consolidated population line
+    var yAxis2 = d3.svg.axis()
+                  .scale(yScale2)
+                  .orient('left')
+                  .ticks(6);
+
+    line = d3.svg.line()
+                     .x(function(d) { return xScale2(d.date); })
+                     .y(function(d) { return yScale2(d.count); })
+                     .interpolate('linear');
+
   // add x axis to sourceSVG
     sourceFrame.append('g')
             .attr({
-              class: 'x axis',
+              class: 'x axis2',
               transform: 'translate(0,' + sourceDetail.h  +')'
             })
-            .call(xAxis)
+            .call(xAxis2)
 
   // add y axis to sourceSVG
     sourceFrame.append('g')
-            .attr('class', 'y axis')
-            .call(yAxis)
+            .attr('class', 'y axis2')
+            .call(yAxis2)
           .append("text")
             .attr('x', -5)
             .attr("y", -45)
             .attr("dy", "30px")
             .style("text-anchor", "end")
             .text("# articles")
+
+  // use that minimum and maximum possible y values for domain in log scale
 
     // deep copy array for dates currently shown in graph, from which we can remove data and check to draw new y scale
     var visibleDates = allDates.map(function(d){
@@ -544,8 +548,8 @@
           .enter().append('circle')
           .attr({
             class: function(d){ return d.id + " dot"; }, // store name for reference to path
-            cx: function(d) { return xScale(d.date); },
-            cy: function(d) { return yScale(d.count); },
+            cx: function(d) { return xScale2(d.date); },
+            cy: function(d) { return yScale2(d.count); },
             r: 4,
             transform: 'translate(0,' + sourceDetail.y + ')'
           })
@@ -581,8 +585,8 @@
 
     mediaSources.append('text').attr({
                   class: function(d){ return d.id + 'legend'; }, // store name for reference to path
-                  x: sourceWidth + 180,
-                  y: function(d,i){ return (i * 16) + sourceMargin.top/2; },
+                  x: sourceWidth + 170,
+                  y: function(d,i){ return (i * 16) + sourceMargin.top; },
                   dy: '0.35em',
                   cursor: 'pointer',
                   fill: function(d){ return color(d.name); }
@@ -645,11 +649,11 @@
 
                   }
                   // redo y scale
-                  yScale.domain([0, d3.max(visibleDates, function(e) { return d3.max(e.values, function(v) { return v.count; }) })]);
+                  yScale2.domain([0, d3.max(visibleDates, function(e) { return d3.max(e.values, function(v) { console.log(v.count); return v.count; }) })]);
 
                   // redraw y axis
-                  d3.select(".y.axis").transition().duration(1500).ease('sin-in-out')
-                    .call(yAxis);
+                  d3.select(".y.axis2").transition().duration(1500).ease('sin-in-out')
+                    .call(yAxis2);
 
                   // redraw other lines
                   mediaSources.selectAll('path').transition().duration(500)
@@ -662,9 +666,9 @@
                     .transition().duration(500)
                     .attr({
                       // cx: function(e) { if(d.vis==1) { return xScale(e.date); } else { return xScale(null); } },
-                      cx: function(e) { return xScale(e.date); },
+                      cx: function(e) { return xScale2(e.date); },
                       // cx: function(e) { if(d.vis==1) { return yScale(e.count); } else { return yScale(null); } },
-                      cy: function(e) { return yScale(e.count); },
+                      cy: function(e) { return yScale2(e.count); },
                     })
                     .style({
                       fill: function(e) { 
@@ -696,8 +700,8 @@
             .enter().append('line')
                .attr({
                   class: 'storyline',
-                  x1: function(d) { return xScale(d.date); },
-                  x2: function(d) { return xScale(d.date); },
+                  x1: function(d) { return xScale2(d.date); },
+                  x2: function(d) { return xScale2(d.date); },
                   y1: -sourceDetail.y, // make taller than chart
                   y2: sourceDetail.h
                 });
@@ -708,7 +712,7 @@
         .enter().append('path')
            .attr({
               class: 'storyTriangle',
-              transform: function(d){ return 'translate(' + xScale(d.date) + ',' + -sourceDetail.y + ')'; },
+              transform: function(d){ return 'translate(' + xScale2(d.date) + ',' + -sourceDetail.y + ')'; },
               d: d3.svg.symbol().type('triangle-down').size(256)
             })
            // add mouseover story details
@@ -767,14 +771,14 @@
   }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// CRISIS SELECT CHANGES AND OTHER PAGE-SPECIFICS
+// CRISIS SELECT
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-addClassNameListener("crisis_select", function(){
-    var crisis = window.crisis_select.value;
-    console.log("### QUEUE NEW CRISIS ("+crisis+") AFTER CLASS CHANGE ###");
-    queue()
-        .defer(d3.csv, "/productiondata/"+crisis+"/storypoints.csv")//storypoints
-        .defer(d3.csv, "/productiondata/"+crisis+"/google-media_stats.csv")//media
-        .await(getData);
-});
+  addClassNameListener("crisis_select", function(){
+      var crisis = window.crisis_select.value;
+      console.log("### QUEUE NEW CRISIS ("+crisis+") AFTER CLASS CHANGE ###");
+      queue()
+          .defer(d3.csv, "/productiondata/"+crisis+"/storypoints.csv")//storypoints
+          .defer(d3.csv, "/productiondata/"+crisis+"/google-media_stats.csv")//media
+          .await(getData);
+  });
