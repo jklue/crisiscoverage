@@ -212,7 +212,7 @@ header {
 /* Nav */
 nav {
   position: relative;
-  top: 2em; }
+  top: 1em; }
   nav ul {
     text-decoration: none;
     float: right; }
@@ -338,7 +338,7 @@ footer {
   /*top: 100px;*/
   padding: 0px;
   width: 990px;
-  margin: 3em auto 1em; }
+  margin: 5em auto 1em; }
 
 .tabs {
   float: right; }
@@ -401,7 +401,7 @@ footer {
 #crisis_selector {
   position: absolute;
   top: 85px;
-  right: 173px; }
+  right: -41px; }
 
 /* Setup */
 /* General */
@@ -598,7 +598,7 @@ footer {
     color: #919191; }
   #timeline .traditionalMediaPath {
     stroke: #cc1452; }
-  #timeline .x.axis, #timeline .y.axis {
+  #timeline .x.axis, #timeline .y.axis, #timeline .x.axis2, #timeline .y.axis2 {
     fill: #cccccc; }
   #timeline .hover-line {
     pointer-events: none; }
@@ -657,7 +657,7 @@ footer {
 
 .tutorial {
   position: absolute;
-  top: 100px;
+  top: 0px;
   left: -300px;
   width: 307px;
   height: 600px;
