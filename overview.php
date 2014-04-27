@@ -5,7 +5,7 @@
 	<?php include 'includes/header.html'; ?>
 
 	<style>
-	 svg{
+	 #overviewGlobe svg, #overviewMap svg{
           background: #eeeeee;
           /*background: #d9d9d9;*/
       }
