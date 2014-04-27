@@ -4,6 +4,13 @@
 
 	<?php include 'includes/header.html'; ?>
 
+	<style>
+	 svg{
+          background: #eeeeee;
+          /*background: #d9d9d9;*/
+      }
+	</style>
+
   <div id="overview_content" class="cf">
   	<div class="tabs cf">
         <a data-toggle="tab_1_globe">Globe</a>
