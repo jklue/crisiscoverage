@@ -11,10 +11,25 @@
 // COMMON
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 var color, min, mean, max; //<-- common required at top
-var mediaData = {};//<-- globe required at top
+var mediaData = {},  world_data,//<-- globe & map required at top
+    tip = d3.tip()
+        .attr('class', 'd3-tip none')
+        .offset([-10, 0])
+        .html(function(d) {
+            var v;
+            var myColor = 'white';
+
+            if (!d || !mediaData[d.properties.name] || isNaN(mediaData[d.properties.name].articles)) v = "(no data)";
+            else {
+                myColor = color(mediaData[d.properties.name].articles);
+                v = numberWithCommas(mediaData[d.properties.name].articles);
+            }
+            return  "<strong>Country: </strong><span style='color:"+myColor+";'><em>"+d.properties.name+"</em></span><span style='color:white;'>, </span><strong>Indicator Value: </strong><span style='color:"+myColor+";'><em>"+v+"</em></span>";
+        });
+
 var mediaBarData = [], isCountrySortDescending = true, isResultSortDescending = false;//<-- bar required at top
 
-var maxWidth = 960,
+var maxWidth = 940,
     maxHeight = 650,
     width = maxWidth,
     height = maxHeight-150;
@@ -33,13 +48,12 @@ var myColors = {
     },
     colorScale =  myColors.Grays.concat(myColors.Blues).concat(myColors.Greens);
 
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // GLOBE ONLY
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-var country, world_data;//<-- these must be defined after indicators available.
+var country;//<-- these must be defined after indicators available.
 
-var svg = d3.select("#overviewVis").append("svg").attr({
+var svg = d3.select("#overviewGlobe").append("svg").attr({
         width: width+margin.left+margin.right,
         height: height+margin.top+margin.bottom,
         transform: "translate(" + margin.left + "," + margin.top + ")"
@@ -52,22 +66,7 @@ var svg = d3.select("#overviewVis").append("svg").attr({
         id: "countries",
         width: width,
         height: height
-    }),
-
-    tip = d3.tip()
-        .attr('class', 'd3-tip none')
-        .offset([-10, 0])
-        .html(function(d) {
-            var v;
-            var myColor = 'white';
-
-            if (!d || !mediaData[d.properties.name] || isNaN(mediaData[d.properties.name].articles)) v = "(no data)";
-            else {
-                myColor = color(mediaData[d.properties.name].articles);
-                v = numberWithCommas(mediaData[d.properties.name].articles);
-            }
-            return  "<strong>Country: </strong><span style='color:"+myColor+";'><em>"+d.properties.name+"</em></span><span style='color:white;'>, </span><strong>Indicator Value: </strong><span style='color:"+myColor+";'><em>"+v+"</em></span>";
-        });
+    });
 
 /* lat and lon lines */
 var projection = d3.geo.orthographic()
@@ -95,74 +94,6 @@ var m0,
 var velocity = .02,
     then = Date.now(),
     lastClick = 0;
-
-function loadedDataCallBack(error, world, media) {
-    console.log("--- START ::: loadedDataCallback ---");
-
-    mediaData = {};
-    mediaBarData = [];
-    world_data = topojson.feature(world, world.objects.countries).features;
-
-    /* convert media data to json object */
-    media.forEach(function (d) {
-        // set country name as property value
-        var name = d.query_distinct.slice(d.query_distinct.indexOf("(") + 1, d.query_distinct.lastIndexOf(")")),
-            code = d.query_distinct.slice(0, d.query_distinct.indexOf("(") - 1),
-            articles = code === "CS" ? 1 : +d.raw_result_count; //serbian results are consistently odd in API
-
-        //Globe Data needs name to map directly to the world_data countries names !!!
-        mediaData[name] = {
-            // set country name, code, and number of articles written
-            name: name,
-            code: code,
-            articles: articles
-        };
-
-        //Bar Data needs an Array and needs &quot; removed !!!
-        mediaBarData.push({
-            // set country name, code, and number of articles written
-            name: name.replaceAll('&quot;', ''),
-            code: code,
-            articles: articles
-        });
-    });
-    console.log('mediaData: ', mediaData);
-
-    // quantile scale
-    var resultCountData = _.pluck(mediaData, 'articles');
-
-    min = d3.min(resultCountData),
-        mean = d3.sum(resultCountData) / resultCountData.length,
-        max = d3.max(resultCountData);
-
-    color = d3.scale.quantile()
-        .domain([min, mean, max])
-        .range(colorScale);
-
-    //Populate country
-    $('#countries').empty();
-    country = countries
-        .selectAll(".country")
-        .data(world_data);
-
-    country.enter()
-        .append('path')
-        .attr('class', 'country')
-        .attr('d', path)
-        .on('mouseover', tip.show)
-        .on("mousemove", function () {
-            return tip
-                .style("top", (d3.event.pageY + 16) + "px")
-                .style("left", (d3.event.pageX + 16) + "px");
-        })
-        .on('mouseout', tip.hide);
-        country.call(tip);
-
-    renderBarChart();
-    renderGlobe();
-
-    console.log("--- END ::: loadedDataCallback ---");
-}
 
 /**
  * RENDER GLOBE (AFTER ALL ELSE IS LOADED)
@@ -230,6 +161,76 @@ function mouseup() {
         m0 = null;
     }
 }
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// MAP ONLY
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+var lastColorClicked,
+    country_map;
+
+var svgMap = d3.select("#overviewMap").append("svg").attr({
+        width: width+margin.left+margin.right,
+        height: height+margin.top+margin.bottom,
+        transform: "translate(" + margin.left + "," + margin.top + ")"
+    }),
+
+    countries_map = svgMap.append("g").attr({
+        id: "countries_map",
+        width: width,
+        height: height
+    }),
+
+    pathMap = d3.geo.path().projection(d3.geo.mercator().translate([width / 2, height / 2]));
+
+
+/**
+ * Multifunctional color method, will handle regular fill and fancy based on clicked color.
+ * @param dimOthers {boolean} if false, regular fill.
+ * @param colorToPass {String} if dimOthers is true, this color drives selector.
+ */
+function colorCountry(dimOthers,colorToPass){
+    if (dimOthers && colorToPass){
+
+        country_map
+            .attr("opacity", function(d) {
+                if (lastColorClicked && lastColorClicked === colorToPass) return 1;
+                else {
+                    var co = color(0);
+                    if (d && _.has(mediaData, d.properties.name)) {
+                        var c = mediaData[d.properties.name].articles;
+                        if (c && !isNaN(c) && c > 0) co = color(c);
+                    }
+
+//                console.log("co: "+co+", colorToPass: "+colorToPass+", equal? "+(co === colorToPass));
+                    if (co === colorToPass) return 1;
+                    else return .3;
+                }
+            });
+        lastColorClicked = colorToPass;
+    } else lastColorClicked = undefined;
+
+    country_map.transition()
+        .duration(250)
+        .style("fill", function(d) {
+            if (d && _.has(mediaData, d.properties.name)) {
+                var c = mediaData[d.properties.name].articles;
+                if (c && !isNaN(c) && c > 0) return color(c);
+            } else return color(0);
+        });
+}
+
+/**
+ * RENDER MAP (AFTER ALL ELSE IS LOADED)
+ */
+function renderMap() {
+
+    colorCountry(false,null);
+
+    //Populate legend
+    $('#legend_map').empty();
+    colorlegend("#legend_map", color, "quantile", {title: "results by country", boxHeight: 15, boxWidth: 30, fill: false, linearBoxes: 11});
+}
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // COUNTRY BAR CHART
@@ -447,6 +448,102 @@ function internalNumberSort(a,_a,b,_b,sortAscending){
 // CRISIS SELECT CHANGES AND OTHER PAGE-SPECIFICS
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+function loadedDataCallBack(error, world, media) {
+    console.log("--- START ::: loadedDataCallback ---");
+
+    mediaData = {};
+    mediaBarData = [];
+    world_data = topojson.feature(world, world.objects.countries).features;
+
+    /* convert media data to json object */
+    media.forEach(function (d) {
+        // set country name as property value
+        var name = d.query_distinct.slice(d.query_distinct.indexOf("(") + 1, d.query_distinct.lastIndexOf(")")),
+            code = d.query_distinct.slice(0, d.query_distinct.indexOf("(") - 1),
+            articles = code === "CS" ? 1 : +d.raw_result_count; //serbian results are consistently odd in API
+
+        //Globe Data needs name to map directly to the world_data countries names !!!
+        mediaData[name] = {
+            // set country name, code, and number of articles written
+            name: name,
+            code: code,
+            articles: articles
+        };
+
+        //Bar Data needs an Array and needs &quot; removed !!!
+        mediaBarData.push({
+            // set country name, code, and number of articles written
+            name: name.replaceAll('&quot;', ''),
+            code: code,
+            articles: articles
+        });
+    });
+    console.log('mediaData: ', mediaData);
+
+    // quantile scale
+    var resultCountData = _.pluck(mediaData, 'articles');
+
+    min = d3.min(resultCountData),
+        mean = d3.sum(resultCountData) / resultCountData.length,
+        max = d3.max(resultCountData);
+
+    color = d3.scale.quantile()
+        .domain([min, mean, max])
+        .range(colorScale);
+
+    //Populate country for globe
+    $('#countries').empty();
+    country = countries
+        .selectAll(".country")
+        .data(world_data);
+
+    country.enter()
+        .append('path')
+        .attr('class', 'country')
+        .attr('d', path)
+        .on('mouseover', tip.show)
+        .on("mousemove", function () {
+            return tip
+                .style("top", (d3.event.pageY + 16) + "px")
+                .style("left", (d3.event.pageX + 16) + "px");
+        })
+        .on('mouseout', tip.hide);
+    country.call(tip);
+
+    //Populate country for map
+    $('#countries_map').empty();
+    country_map = countries_map
+        .selectAll(".country")
+        .data(world_data);
+
+    country_map.enter()
+        .append('path')
+        .attr('class', 'country')
+        .attr('d', pathMap)
+        .on('mouseover', tip.show)
+        .on("mousemove", function () {
+            return tip
+                .style("top", (d3.event.pageY + 16) + "px")
+                .style("left", (d3.event.pageX + 16) + "px");
+        })
+        .on('mouseout', tip.hide)
+        .on('click',function(d){
+            console.log(d);
+            var rc = mediaData[d.properties.name].articles;
+            if (!isNaN(rc)){
+                var co = color(rc);
+                colorCountry(true,co);
+            }
+        });
+    country_map.call(tip);
+
+    renderGlobe();
+    renderMap();
+    renderBarChart();
+
+    console.log("--- END ::: loadedDataCallback ---");
+}
+
 addClassNameListener("crisis_select", function(){
     var crisis = window.crisis_select.value;
     console.log("### QUEUE NEW CRISIS ("+crisis+") AFTER CLASS CHANGE ###");
@@ -463,21 +560,39 @@ d3.selectAll("input")
         return;
     });
 
-addClassNameListener("tab_1_globe", function(){
-    var className = document.getElementById("tab_1_globe").className;
-    if (className === "active"){
-        if (shouldResume) startAnimation();
-    }
-});
+$(document).ready(function() {
 
-addClassNameListener("tab_2_bar", function(){
-    var className = document.getElementById("tab_2_bar").className;
-    if (className === "active"){
-              if (!done){
-                  stopAnimation();
-                  shouldResume = true;
-              } else shouldResume = false;
-    }
-});
+    addClassNameListener("tab_1_globe", function () {
+        var className = document.getElementById("tab_1_globe").className;
+        if (className === "content-tab active") {
+            console.log("... tab change to tab_1_globe.");
+            if (shouldResume) startAnimation();
+        }
+    });
 
+    addClassNameListener("tab_2_map", function () {
+        var className = document.getElementById("tab_2_map").className;
+        if (className === "content-tab active") {
+            console.log("... tab change to tab_2_map.");
+            if (!done) {
+                stopAnimation();
+                shouldResume = true;
+            } else shouldResume = false;
 
+            //Populate legend
+            $('#legend_map').empty();
+            colorlegend("#legend_map", color, "quantile", {title: "results by country", boxHeight: 15, boxWidth: 30, fill: false, linearBoxes: 11});
+        }
+    });
+
+    addClassNameListener("tab_3_bar", function () {
+        var className = document.getElementById("tab_3_bar").className;
+        if (className === "content-tab active") {
+            console.log("... tab change to tab_3_bar.");
+            if (!done) {
+                stopAnimation();
+                shouldResume = true;
+            } else shouldResume = false;
+        }
+    });
+} );

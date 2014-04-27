@@ -7,7 +7,8 @@
   <div id="overview_content" class="cf">
   	<div class="tabs cf">
         <a data-toggle="tab_1_globe">Globe</a>
-        <a data-toggle="tab_2_bar">Bar Chart</a>
+        <a data-toggle="tab_2_map">Map</a>
+        <a data-toggle="tab_3_bar">Bar Chart</a>
     </div>
 
     <div class="tabContent">
@@ -18,12 +19,23 @@
                <span class="overview_title">Results by Country</span>
                <span class="tip">click to manually rotate,double-click auto-rotate.</span>
              </header>
-            <figure id="overviewVis"></figure>
+            <figure id="overviewGlobe"></figure>
             <figure id="legend_globe" class="legend"></figure>
         	</section>
         </div>
 
-        <div id="tab_2_bar" class="content-tab">
+         <div id="tab_2_map" class="content-tab">
+                  <section id="section_country_map">
+                    <header class="tab_header">
+                       <span class="overview_title">Results by Country</span>
+                       <span class="tip">click to isolate other countries with similar results. </span>
+                     </header>
+                    <figure id="overviewMap"></figure>
+                    <figure id="legend_map" class="legend"></figure>
+                	</section>
+         </div>
+
+        <div id="tab_3_bar" class="content-tab">
           <section id="section_country_bar_chart">
              <header class="tab_header">
                <span class="overview_title">Results by Country</span>
@@ -36,8 +48,9 @@
              <figure id="country_bar_chart" class="scroll-pane"></figure>
           </section>
         </div>
+
     </div>
-  </div>
+</div>
 
 <!-- footer -->
 	<?php include 'includes/footer.html'; ?>

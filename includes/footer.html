@@ -16,14 +16,16 @@
 <script type="text/javascript" src="libs/colorlegend.js"></script>
 
 <!-- Custom js -->
+
 <script>
 
-$(function() {
-  $(".tabs a").html5jTabs();
-});
+    $(document).ready(function() {
+        $(function () {
+            $(".tabs a").html5jTabs();
+        });
 
-window.crisis_select = document.getElementById('crisis_select');
-setInterval(currentCrisisEvaluator,100);
-
+        window.crisis_select = document.getElementById('crisis_select');
+        setInterval(currentCrisisEvaluator, 100);
+    });
 </script>
 
