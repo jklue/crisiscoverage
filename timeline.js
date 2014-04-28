@@ -6,7 +6,7 @@
   /*jslint devel: true*/
   /*global d3:false */
 
-	var allDates, aggregateMediaStats, dateList, color, mediaSources, storyPoints, line, mediaTypes, sources, visibleDates, xAxis, xScale, yAxis, yScale, xScale2, yAxis2, yScale2;
+	var allDates, aggregateMediaStats, crisis, dateList, color, mediaSources, storyPoints, line, mediaTypes, sources, summary, visibleDates, xAxis, xScale, yAxis, yScale, xScale2, yAxis2, yScale2;
 
   // read in date from date_query column
   var parseDateQuery = d3.time.format("%Y-%m-%d").parse;
@@ -117,7 +117,7 @@
 // GET DATA
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  function getData(error, storypoints, data){
+  function getData(error, crisisSummary, storypoints, data){
 
     /* Clear out old data that may remain if previous crisis */
     allDates = []; // master list for date, traditional media count, and blog media count
@@ -130,6 +130,9 @@
     d3.selectAll('.y.axis2').remove();
     d3.selectAll('.storyline').remove();
     d3.selectAll('.storyTriangle').remove();
+
+    // make summary global for use in later function
+    summary = crisisSummary;
 
     // make storypoints global for use in later function
     storyPoints = storypoints;
@@ -422,7 +425,7 @@
 
   /* Storypoints */
     // add intro title and summary
-    d3.select("#crisisTitle").html('<h3>Typhoon Haiyan</h3>');
+    d3.select("#crisisTitle").html('<h3>' + crisis + '</h3>');
     d3.select('#crisisStory').html('Typhoon Haiyan, known as Typhoon Yolanda in the Philippines, was a powerful tropical cyclone that devastated portions of Southeast Asia, particularly the Philippines, on November 8, 2013. <a href="http://en.wikipedia.org/wiki/Typhoon_Haiyan" class="storySource">&mdash; Wikipedia</a>');
 
     // add dotted lines
@@ -547,7 +550,7 @@
         x1: 40,
         x2: 0,
         y1: 3,
-        y2: 3 
+        y2: 3
       })
       .style({
         stroke: '#ccc',
@@ -778,8 +781,15 @@
 
   /* Storypoints */
     // add intro title and summary
-    d3.select("#crisisTitle").html('<h3>Typhoon Haiyan</h3>');
-    d3.select('#crisisStory').html('Typhoon Haiyan, known as Typhoon Yolanda in the Philippines, was a powerful tropical cyclone that devastated portions of Southeast Asia, particularly the Philippines, on November 8, 2013. <a href="http://en.wikipedia.org/wiki/Typhoon_Haiyan" class="storySource">&mdash; Wikipedia</a>');
+    // d3.select('#crisisStory').html('Typhoon Haiyan, known as Typhoon Yolanda in the Philippines, was a powerful tropical cyclone that devastated portions of Southeast Asia, particularly the Philippines, on November 8, 2013. <a href="http://en.wikipedia.org/wiki/Typhoon_Haiyan" class="storySource">&mdash; Wikipedia</a>');
+
+    // add title
+    d3.select('#crisisTitle').data(summary)
+      .html(function(d){ return '<h3>' + d.title + '</h3>'; });
+
+    // add summary
+    d3.select('#crisisStory').data(summary)
+      .html(function(d){ return d.content; });
 
     // add dotted lines
     sourceFrame.selectAll('.line')
@@ -875,7 +885,6 @@
       visibleDates.forEach(function(e,j){
         // if data matches
         if(e.id == currentData.id){
-          console.log('matches!');
           // make invisible
           e.vis = 0;
           // remove data
@@ -972,9 +981,10 @@ $(document).ready(function() {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   addClassNameListener("crisis_select", function(){
-      var crisis = window.crisis_select.value;
+      crisis = window.crisis_select.value;
       console.log("### QUEUE NEW CRISIS ("+crisis+") AFTER CLASS CHANGE ###");
       queue()
+          .defer(d3.csv, "/productiondata/"+crisis+"/summary.csv")//storypoints
           .defer(d3.csv, "/productiondata/"+crisis+"/storypoints.csv")//storypoints
           .defer(d3.csv, "/productiondata/"+crisis+"/google-media_stats.csv")//media
           .await(getData);
