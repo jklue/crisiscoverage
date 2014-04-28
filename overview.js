@@ -43,8 +43,10 @@ var margin = {
 
 var myColors = {
 //        Grays: ["#f0f0f0","#d9d9d9"],
-        Blues: ["#deebf7","#c6dbef","#9ecae1","#6baed6","#4292c6"],
-        Greens: ["#74c476","#41ab5d","#238b45","#006d2c"]
+//        Blues: ["#deebf7","#c6dbef","#9ecae1","#6baed6","#4292c6"],
+//        Greens: ["#74c476","#41ab5d","#238b45","#006d2c"]
+        Blues: ["#deebf7", "#4292c6"],
+        Greens: ["#74c476", "#41ab5d", "#238b45"]
     },
     colorScale =  myColors.Blues.concat(myColors.Greens);
 
@@ -112,7 +114,7 @@ function renderGlobe() {
 
     //Populate legend
     $('#legend_globe').empty();
-    colorlegend("#legend_globe", color, "quantile", {title: "results by country", boxHeight: 15, boxWidth: 30, fill: false, linearBoxes: 9});
+    colorlegend("#legend_globe", color, "quantile", {title: "results by country", boxHeight: 15, boxWidth: 30, fill: false, linearBoxes: 5});
     if (!done) startAnimation();
 }
 
@@ -228,7 +230,7 @@ function renderMap() {
 
     //Populate legend
     $('#legend_map').empty();
-    colorlegend("#legend_map", color, "quantile", {title: "results by country", boxHeight: 15, boxWidth: 30, fill: false, linearBoxes: 9});
+    colorlegend("#legend_map", color, "quantile", {title: "results by country", boxHeight: 15, boxWidth: 30, fill: false, linearBoxes: 5});
 }
 
 
@@ -345,8 +347,9 @@ function renderBarChart() {
         .attr("dy", y_em)
         .style("fill", function (d) {
             var c = color(d.articles);
-            if (c === myColors.Greens[3]) return lightBarTextColor;//need to contrast dark green.
-            else return defaultBarTextColor;
+            if (c === myColors.Greens[2]) return lightBarTextColor;//need to contrast dark green.
+            else
+            return defaultBarTextColor;
         })
         .text(function (d) {
             var n = xScale(d.articles) - x_pad;
@@ -568,6 +571,11 @@ $(document).ready(function() {
             console.log("... tab change to tab_1_globe.");
             if (shouldResume) startAnimation();
         }
+
+        //Populate legend
+        $('#legend_globe').empty();
+        colorlegend("#legend_globe", color, "quantile", {title: "results by country", boxHeight: 15, boxWidth: 30, fill: false, linearBoxes: 5});
+        if (!done) startAnimation();
     });
 
     addClassNameListener("tab_2_map", function () {
@@ -581,7 +589,7 @@ $(document).ready(function() {
 
             //Populate legend
             $('#legend_map').empty();
-            colorlegend("#legend_map", color, "quantile", {title: "results by country", boxHeight: 15, boxWidth: 30, fill: false, linearBoxes: 9});
+            colorlegend("#legend_map", color, "quantile", {title: "results by country", boxHeight: 15, boxWidth: 30, fill: false, linearBoxes: 5});
         }
     });
 
