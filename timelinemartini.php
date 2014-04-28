@@ -20,8 +20,8 @@
 			</div>
 		</div>
 
-		<!-- Google Timeline -->
-		<div id="timelineVisGIF"></div>
+		<!-- GIF Tutorial -->
+		<div id="timelineVisGIF" class="tut-gif"></div>
 
 	</div>
 

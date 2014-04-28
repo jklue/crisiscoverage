@@ -19,7 +19,9 @@
 			</div>
 		</div>
 
-		Data goes here.
+		<!-- GIF Tutorial -->
+		<div id="timelineVisGIF" class="tut-gif"></div>
+
 	</div>
 
 <!-- footer -->
