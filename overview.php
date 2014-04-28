@@ -23,8 +23,8 @@
         <div id="tab_1_globe" class="content-tab">
           <section id="section_country_globe">
             <header class="tab_header">
-               <span class="overview_title">Results by Country</span>
-               <span class="tip">click to manually rotate,double-click auto-rotate.</span>
+               <div class="overview_title">Results by Country</div>
+               <div class="tip">click to manually rotate,double-click auto-rotate.</div>
              </header>
             <figure id="overviewGlobe"></figure>
             <figure id="legend_globe" class="legend"></figure>
@@ -34,8 +34,8 @@
          <div id="tab_2_map" class="content-tab">
                   <section id="section_country_map">
                     <header class="tab_header">
-                       <span class="overview_title">Results by Country</span>
-                       <span class="tip">click to isolate other countries with similar results. </span>
+                       <div class="overview_title">Results by Country</div>
+                       <div class="tip">click to isolate other countries with similar results. </div>
                      </header>
                     <figure id="overviewMap"></figure>
                     <figure id="legend_map" class="legend"></figure>
@@ -45,12 +45,12 @@
         <div id="tab_3_bar" class="content-tab">
           <section id="section_country_bar_chart">
              <header class="tab_header">
-               <span class="overview_title">Results by Country</span>
-               <span class="tip">
+               <div class="overview_title">Results by Country</div>
+               <div class="tip">
                  <label>sort by </label>
                  <label><input type="radio" name="order" value="country" title="click again to reverse order">country</label>
                  <label><input type="radio" name="order" value="result" title="click again to reverse order" checked>result</label>
-               </span>
+               </div>
              </header>
              <figure id="country_bar_chart" class="scroll-pane"></figure>
           </section>
