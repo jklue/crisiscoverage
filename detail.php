@@ -1,6 +1,6 @@
 <?php include 'includes/head.html'; ?>
 
-<body id="data">
+<body id="detail">
 	<?php include 'includes/header.html'; ?>
 
 

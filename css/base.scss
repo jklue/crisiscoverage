@@ -94,7 +94,7 @@
         }
     }
     // current page highlights
-    #overview .overviewLink, #timeline .timelineLink, #data .dataLink {color: $active}
+    #overview .overviewLink, #timeline .timelineLink, #detail .detailLink, #data .dataLink {color: $active}
 
 /* Text */
 
@@ -141,27 +141,6 @@
             float: none;
         }
     }
-    #welcome nav.martini {
-        position: relative;
-        margin: 0em auto;
-        width: 900px;
-        ul {
-            position: absolute;
-            top: -240px;
-            left: 70px;
-            width: 690px;   
-        }
-        .left.arrow {
-            position: absolute;
-            left: 0;
-        }
-        .right.arrow {
-            position: absolute;
-            right: 0;
-        }
-    }
-    .view{float: left;}
-    .skip{float: right;}
 
 /* Content */
 
@@ -282,4 +261,5 @@ footer {
         position: absolute;
         top: 85px;
         right: -41px;
+        z-index: 10;
     }

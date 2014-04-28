@@ -220,7 +220,7 @@ nav {
       display: inline;
       padding: 1em; }
 
-#overview .overviewLink, #timeline .timelineLink, #data .dataLink {
+#overview .overviewLink, #timeline .timelineLink, #detail .detailLink, #data .dataLink {
   color: #cc1452; }
 
 /* Text */
@@ -259,28 +259,6 @@ nav.martini {
   color: #cccccc; }
   nav.martini ul {
     float: none; }
-
-#welcome nav.martini {
-  position: relative;
-  margin: 0em auto;
-  width: 900px; }
-  #welcome nav.martini ul {
-    position: absolute;
-    top: -240px;
-    left: 70px;
-    width: 690px; }
-  #welcome nav.martini .left.arrow {
-    position: absolute;
-    left: 0; }
-  #welcome nav.martini .right.arrow {
-    position: absolute;
-    right: 0; }
-
-.view {
-  float: left; }
-
-.skip {
-  float: right; }
 
 /* Content */
 .content {
@@ -383,7 +361,8 @@ footer {
 #crisis_selector {
   position: absolute;
   top: 85px;
-  right: -41px; }
+  right: -41px;
+  z-index: 10; }
 
 /* Setup */
 /* General */
@@ -411,9 +390,9 @@ footer {
   width: 900px; }
   #welcome nav.martini ul {
     position: absolute;
-    top: -240px;
-    left: 70px;
-    width: 690px; }
+    top: -220px;
+    left: 42px;
+    width: 730px; }
   #welcome nav.martini .left.arrow {
     position: absolute;
     left: 0; }
@@ -655,7 +634,7 @@ footer {
 .arrow img {
   vertical-align: middle; }
 
-.right.arrow {
+.left.arrow, .right.arrow {
   text-transform: uppercase; }
 
 #rotatingGlobe {

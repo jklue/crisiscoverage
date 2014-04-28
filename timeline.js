@@ -2,7 +2,11 @@
 // SETUP
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	var allDates, aggregateMediaStats, sourceFrame, typeFrame, dateList, color, storyPoints, line, mediaTypes, originalData, padding, sources, svg, xAxis, xScale, yAxis, yScale;
+  // for jslint
+  /*jslint devel: true*/
+  /*global d3:false */
+
+	var allDates, aggregateMediaStats, dateList, color, mediaSources, storyPoints, line, mediaTypes, sources, visibleDates, xAxis, xScale, yAxis, yScale, xScale2, yAxis2, yScale2;
 
   // read in date from date_query column
   var parseDateQuery = d3.time.format("%Y-%m-%d").parse;
@@ -62,7 +66,7 @@
   // Begin By Media Type build
 
     // build svg and bounding box
-    typeSVG = d3.select("#timelineTypeVis")
+    var typeSVG = d3.select("#timelineTypeVis")
       .append("svg")
       .attr({
         class: 'timeline',
@@ -87,7 +91,7 @@
   // Begin By Source build
 
     // build svg and bounding box
-      sourceSVG = d3.select("#timelineSourceVis")
+      var sourceSVG = d3.select("#timelineSourceVis")
         .append("svg")
         .attr({
           class: 'timeline',
@@ -127,7 +131,6 @@
     d3.selectAll('.storyline').remove();
     d3.selectAll('.storyTriangle').remove();
 
-
     // make storypoints global for use in later function
     storyPoints = storypoints;
 
@@ -137,28 +140,55 @@
       d.date = parseStorypoint(d.date);
     });
 
-    // make data useable in aggregate chart
-    originalData = data;
+    // // sort data by highest articles down to lowest, based on first reported data
+    // console.log(data);
+
+    // data.sort(function(a,b){
+    //   // return raw result count
+    //   // console.log(a);
+
+    //   return d3.descending(a.raw_result_count, b.raw_result_count);
+    // });
+
+    // console.log(data);
 
     /* Get news source titles */
       // iterate through .csv to find source names
       var sourceDuplicates = data.map(function(d){
         // get source name without month data
+        // return ({ name: d.site_name, value: d.raw_result_count });
         return d.site_name;
       });
       // define new array to hold unique source names
       sources = [];
+      // sources = {};
       // reduce source list to unique names
       sourceDuplicates.forEach(function(d,i){
         // if first in array, can't use indexOf, so just add it
-        if(i == 0)
+        if(i === 0) {
           sources.push(d);
+          // sources.push({
+            // name: d.name,
+            // sampleValue: d.value });
+        }
         // if array does not already contain string, add it
-        else if(sources.indexOf(d) == -1)
+        // else {
+        //   // look for current name already in sources object
+        //   sources.forEach(function(e){
+        //     console.log(e.name);
+        //   });
+        //   if(sources.indexOf(d) == -1) {
+        //     sources.push({
+        //       name: d.name,
+        //       sampleValue: d.value });
+        //   }
+        // }
+        else if(sources.indexOf(d) == -1 ) {
           sources.push(d);
+        }
       });
     /* Remove Google source from data */
-    sources.shift();
+    // sources.shift();
 
     /* convert dates to js objects and record for x domain */
     data.forEach(function(d){
@@ -178,9 +208,11 @@
           var currentSource = [];
           // add source name
           currentSource.name = d;
+          // currentSource.name = d.name;
           // set unique id
             // remove spaces and periods
             var sourceHandle = d.replace(/[\. ]+/g, "");
+            // var sourceHandle = d.name.replace(/[\. ]+/g, "");
             // set it
             currentSource.id = sourceHandle;
           // set if visible or not
@@ -193,9 +225,10 @@
             // var cleanSourceName = e.query_distinct.substring(0, e.query_distinct.length-3);
             // if source data equals entry in original data, wrangle it!
             if(d == e.site_name){
-            // if(d == cleanSourceName){
+            // if(d.name == e.site_name){
               // return object with pertinent data
               currentSource.values.push({ date: e.date_query_end, count: +e.raw_result_count, name: d, type: e.site_type, id: sourceHandle, vis: 1 });
+              // currentSource.values.push({ date: e.date_query_end, count: +e.raw_result_count, name: d.name, type: e.site_type, id: sourceHandle, vis: 1 });
             }
           });
           // add name to master array
@@ -224,7 +257,7 @@
         // start tally
         var count = 0;
         // iterate through all media queries
-        originalData.forEach(function(f){
+        data.forEach(function(f){
           // if types and dates match, add to list
           if(d == f.site_type && e.getTime() == f.date_query_end.getTime()){
             // increment count
@@ -311,7 +344,7 @@
             .text("# articles")
 
     // set display var to reference data for this chart
-    var visibleDates = aggregateMediaStats;
+    var typeDates = aggregateMediaStats;
 
     // make wrapper for lines and legend
     var chartArea = typeSVG.append('g')
@@ -319,7 +352,7 @@
 
       // bind data
       var mediaSources = chartArea.selectAll('.mediaSources')
-                          .data(visibleDates)
+                          .data(typeDates)
                         .enter().append('g')
                           .attr('class','mediaSources');
    
@@ -472,8 +505,8 @@
 	function sourceVis() {
     //define offset so initial storypoint will be included in graph
     var offset = 35;
-    var xScale2 = d3.time.scale().domain(d3.extent(dateList, function(d) { return d; })).range([offset, sourceDetail.w]);  // define the right domain
-    var yScale2 = d3.scale.linear().domain([0, d3.max(allDates, function(d) { return d3.max(d.values, function(v) { return v.count; }) })]).range([sourceDetail.h, 0]);
+    xScale2 = d3.time.scale().domain(d3.extent(dateList, function(d) { return d; })).range([offset, sourceDetail.w]);  // define the right domain
+    yScale2 = d3.scale.linear().domain([0, d3.max(allDates, function(d) { return d3.max(d.values, function(v) { return v.count; }) })]).range([sourceDetail.h, 0]);
 
  	// example that translates to the bottom left of our vis space:
 	  var sourceFrame = sourceSVG.append("g").attr({
@@ -489,7 +522,7 @@
                   .tickFormat(d3.time.format('%b'));
 
   // y axis for consolidated population line
-    var yAxis2 = d3.svg.axis()
+    yAxis2 = d3.svg.axis()
                   .scale(yScale2)
                   .orient('left')
                   .ticks(6);
@@ -535,7 +568,7 @@
   // use that minimum and maximum possible y values for domain in log scale
 
     // deep copy array for dates currently shown in graph, from which we can remove data and check to draw new y scale
-    var visibleDates = allDates.map(function(d){
+    visibleDates = allDates.map(function(d){
       return {
         id: d.id,
         name: d.name,
@@ -558,7 +591,7 @@
                         .attr('clip-path', 'url(#chart-area)');
 
       // bind data
-      var mediaSources = chartArea.selectAll('.mediaSources')
+      mediaSources = chartArea.selectAll('.mediaSources')
                           .data(visibleDates)
                         .enter().append('g')
                           .attr('class','mediaSources');
@@ -618,8 +651,9 @@
 
     mediaSources.append('text').attr({
                   class: function(d){ return d.id + 'legend'; }, // store name for reference to path
-                  x: sourceWidth + 170,
-                  y: function(d,i){ return (i * 16) + sourceMargin.top; },
+                  // class: 'label',
+                  x: sourceWidth + 160,
+                  y: function(d,i){ return (i * 16) + 8; },
                   dy: '0.35em',
                   cursor: 'pointer',
                   fill: function(d){ return color(d.name); }
@@ -682,7 +716,7 @@
 
                   }
                   // redo y scale
-                  yScale2.domain([0, d3.max(visibleDates, function(e) { return d3.max(e.values, function(v) { console.log(v.count); return v.count; }) })]);
+                  yScale2.domain([0, d3.max(visibleDates, function(e) { return d3.max(e.values, function(v) { return v.count; }) })]);
 
                   // redraw y axis
                   d3.select(".y.axis2").transition().duration(1500).ease('sin-in-out')
@@ -695,7 +729,7 @@
                     // .attr('d',function(e){ if(e.vis==1) { return line(e.values); } else { return null; } });
 
                   // redraw dots
-                  mediaSources.selectAll('circle').data(function(d) { console.log('d.vis',d.vis); return d.values;})
+                  mediaSources.selectAll('circle').data(function(d) { return d.values;})
                     .transition().duration(500)
                     .attr({
                       // cx: function(e) { if(d.vis==1) { return xScale(e.date); } else { return xScale(null); } },
@@ -705,7 +739,6 @@
                     })
                     .style({
                       fill: function(e) { 
-                        console.log(d);
                         // if not shown
                         if(e.vis == 0)
                           return 'white';
@@ -721,6 +754,27 @@
                       }
                    })
                 });
+
+    // add checkbox
+      mediaSources.append('foreignObject')
+            .attr({
+              width: 20,
+              height: 20,
+              x: sourceWidth + 170,
+              y: function(d,i){ return (i * 16); },
+              // dy: '.35em'
+            })
+          .append('xhtml:input')
+            .attr({
+              id: function(d){ return d.id; },
+              type: 'checkbox',
+              value: function(d){ return d },
+              checked: true
+            })
+            .on('click',function(d){
+              var clicked = d3.select(this);
+              labelClick(clicked);
+            });
 
   /* Storypoints */
     // add intro title and summary
@@ -784,7 +838,6 @@
     // Initialize tooltip
     var tip = d3.tip()
             .html(function(d) { 
-              // console.log('d3tip',d);
               // if 1 article, use singular 'article'
                 return d.count + " articles on <span class='sourceName'>" + d.name + "</span> during<br>the 30 days prior to " + parseDateTips(d.date); 
             })
@@ -793,14 +846,117 @@
 
     // Invoke the tip in the context of your visualization
     sourceFrame.call(tip)
-  
-    // call Google vis
-    googleVis();
+
+
+  /* Uncheck Google initially */
+    // get google checkbox
+    var google = d3.select('#Google');
+    // uncheck google checkbox
+    google[0][0].checked = false;
+
+    // send it to function that removes line from chart
+    labelClick(google);
+
   }
 
-  /* Make Google bar chart vis */
-  function googleVis() {
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Checkboxes
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+  function labelClick(clicked) {
+    // console.log(clicked.data()[0].id);
+    // get value of checkbox
+    var isChecked = clicked[0][0].checked;
+    // get current data
+    var currentData = clicked.data()[0];
+    // remove line
+    if(isChecked == false){
+      // look through data array and set selected media source's data to null
+      visibleDates.forEach(function(e,j){
+        // if data matches
+        if(e.id == currentData.id){
+          console.log('matches!');
+          // make invisible
+          e.vis = 0;
+          // remove data
+          e.values.forEach(function(f){
+            f.count = null;
+            // f.vis = 0;
+          });
+        }
+      });
+      
+    } else{
+      // change legend color back to original color
+      // d3.select(this)
+        // .attr('fill', function(d){ return color(d.name); });
+
+      // add data back in
+        // look through data array and set selected media source's data to original data
+        visibleDates.forEach(function(e,j){
+          // if data matches
+          if(e.id == currentData.id){
+            // go through original data and add it back in
+            allDates.forEach(function(f){
+              // look for match
+              if(f.id == e.id){
+                // make visible
+                e.vis = 1;
+                // add data back in
+                e.values = f.values.map(function(f){
+                  return {
+                    count: f.count,
+                    date: f.date,
+                    id: f.id,
+                    name: f.name,
+                    type: f.type
+                  };
+                });
+              }
+            });
+          }
+        });
+
+    }
+    // redo y scale
+    yScale2.domain([0, d3.max(visibleDates, function(e) { return d3.max(e.values, function(v) { return v.count; }) })]);
+
+    // redraw y axis
+    d3.select(".y.axis2").transition().duration(1500).ease('sin-in-out')
+      .call(yAxis2);
+
+    // redraw other lines
+    mediaSources.selectAll('path').transition().duration(500)
+      // only draw lines that are 'visible' Will cause an error, but best solution so far
+      .attr('d',function(e){ return line(e.values); })
+      // .attr('d',function(e){ if(e.vis==1) { return line(e.values); } else { return null; } });
+
+    // redraw dots
+    mediaSources.selectAll('circle').data(function(d) { return d.values;})
+      .transition().duration(500)
+      .attr({
+        // cx: function(e) { if(d.vis==1) { return xScale(e.date); } else { return xScale(null); } },
+        cx: function(e) { return xScale2(e.date); },
+        // cx: function(e) { if(d.vis==1) { return yScale(e.count); } else { return yScale(null); } },
+        cy: function(e) { return yScale2(e.count); },
+      })
+      .style({
+        fill: function(e) {
+          // if not shown
+          if(e.vis === 0) {
+            return 'white';
+          }
+          else {
+            // get color of type (traditional or blog color)
+            var typeColor = color(e.name);
+            // darken color
+            var d3color = d3.rgb(typeColor).darker();
+            // return color
+            return d3color;
+          }
+
+        }
+      });
   }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
