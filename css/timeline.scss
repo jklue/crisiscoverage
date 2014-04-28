@@ -21,7 +21,7 @@
 			margin:0.5em 0;
 		}
 		position: absolute;
-		top: 6px;
+		top: 7px;
 		right: 20px;
 	}
 	#crisisStory{
@@ -43,7 +43,7 @@
 	.storySource{
 		display: block;
 		text-align:right;
-		margin-top:0.3em;
+		margin:-0.5em 1.5em 0 0 ;
 	}
 	.storyTriangle{
 		fill: $darkGray;
@@ -80,6 +80,13 @@
 		float:right;
 	}
 
+// Tabs
+	.tabs {
+		margin-top: 2em;
+	}
+	.tabContent {
+		margin-top: 3.4em;
+	}
 // Story Points
 	.storyline{
 		stroke: $gray;

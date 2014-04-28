@@ -533,7 +533,7 @@ footer {
     margin: 0em 0 0;
     color: #3d8699;
     position: absolute;
-    top: 6px;
+    top: 7px;
     right: 20px; }
     #timeline .crisisDate h4 {
       margin: 0.5em 0; }
@@ -551,7 +551,7 @@ footer {
   #timeline .storySource {
     display: block;
     text-align: right;
-    margin-top: 0.3em; }
+    margin: -0.5em 1.5em 0 0; }
   #timeline .storyTriangle {
     fill: #919191; }
   #timeline #dataSourceSelect {
@@ -565,6 +565,10 @@ footer {
     pointer-events: none; }
   #timeline .checkbox {
     float: right; }
+  #timeline .tabs {
+    margin-top: 2em; }
+  #timeline .tabContent {
+    margin-top: 3.4em; }
   #timeline .storyline {
     stroke: #cccccc;
     stroke-dasharray: 15 25;

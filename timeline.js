@@ -14,6 +14,8 @@
   var parseDateTips = d3.time.format("%b %d, %Y");
   // convert storypoints date to js object for graphing on x axis
   var parseStorypoint = d3.time.format("%Y-%m-%d").parse;
+  // format date for storypoints
+  var parseDateStory = d3.time.format("%b %Y");
 
   mediaTypes = ['Traditional','Independent','Blogs-Social'];
 
@@ -284,7 +286,7 @@
 
   function typeVis() {
     //define offset so initial storypoint will be included in graph
-    var offset = 35;
+    var offset = 75;
     xScale = d3.time.scale().domain(d3.extent(dateList, function(d) { return d; })).range([offset, typeDetail.w]);  // define the right domain
     yScale = d3.scale.linear().domain([0, d3.max(aggregateMediaStats, function(d) { return d3.max(d.values, function(v) { return v.count; }) })]).range([typeDetail.h, 0]);
 
@@ -325,7 +327,7 @@
     d3.select('.x.axis')
       .append('line')
       .attr({
-        x1: 40,
+        x1: 100,
         x2: 0,
         y1: 3,
         y2: 3 
@@ -507,7 +509,7 @@
 
 	function sourceVis() {
     //define offset so initial storypoint will be included in graph
-    var offset = 35;
+    var offset = 75;
     xScale2 = d3.time.scale().domain(d3.extent(dateList, function(d) { return d; })).range([offset, sourceDetail.w]);  // define the right domain
     yScale2 = d3.scale.linear().domain([0, d3.max(allDates, function(d) { return d3.max(d.values, function(v) { return v.count; }) })]).range([sourceDetail.h, 0]);
 
@@ -547,7 +549,7 @@
     d3.select('.x.axis2')
       .append('line')
       .attr({
-        x1: 40,
+        x1: 100,
         x2: 0,
         y1: 3,
         y2: 3
@@ -780,8 +782,6 @@
             });
 
   /* Storypoints */
-    // add intro title and summary
-    // d3.select('#crisisStory').html('Typhoon Haiyan, known as Typhoon Yolanda in the Philippines, was a powerful tropical cyclone that devastated portions of Southeast Asia, particularly the Philippines, on November 8, 2013. <a href="http://en.wikipedia.org/wiki/Typhoon_Haiyan" class="storySource">&mdash; Wikipedia</a>');
 
     // add title
     d3.select('#crisisTitle').data(summary)
@@ -789,7 +789,7 @@
 
     // add summary
     d3.select('#crisisStory').data(summary)
-      .html(function(d){ return d.content; });
+      .html(function(d){ return '<p>' + d.content + '</p>'; });
 
     // add dotted lines
     sourceFrame.selectAll('.line')
@@ -815,7 +815,7 @@
            // add mouseover story details
            .on('mouseover',function(d){
               // convert story date to readable
-              var storyDate = parseDateTips(d.date);
+              var storyDate = parseDateStory(d.date);
               /* Dates */
                 // remove any previously shown dates
                 d3.select('.crisisDate')

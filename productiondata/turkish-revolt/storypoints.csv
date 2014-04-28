@@ -1,12 +1,8 @@
 story_id,date,title,content
-"1","2013-05-28","<strong>Gezi Park sit-in violently evicted.</strong> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nisi ut aliquip ex ea commodo
-consequat."
-"2","2013-05-29","<strong>Protests erupt around the country.</strong> Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-"3","2013-06-01","<strong>Police withdraw and occupation of Gezi park ensues.</strong> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat."
+"1","2013-05-28","<strong>Gezi Park sit-in violently evicted.</strong>"
+"2","2013-06-01","<strong>Police withdraw and occupation of Gezi park ensues.</strong> Subsequently, a medical center, library, food distribution, and media efforts are established."
+"3","2013-06-05","<strong>Mass anti-government protests spread to several cities"
+"4","2013-06-15","<strong>Gezi park cleared by riot police.</strong> Protesters meet in other parks around the country and organize public forums to discuss the best way to move forward."
+"5","2013-08-01","<strong>Protests descrease in frequency and size.</strong> Human chains are organized. Steps are painted in rainbow colors."
+"6","2013-09-01","<strong>Protests re-ignite.</strong> An attempt to construct a road through the Middle Eastern Technical University's forest inspires another occupation similar to Gezi park."
+"7","2013-09-01","<strong>3017 trees planted.</strong> Students of the Middle Eastern Technical University plant trees to replace those cut down to clear the way for an unlawful road through the University's forest."
