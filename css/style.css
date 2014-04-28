@@ -287,7 +287,8 @@ nav.martini {
   max-width: 990px;
   margin: 0 auto;
   padding: 2em 0;
-  clear: both; }
+  clear: both;
+  position: relative; }
 
 /* GIFs */
 #overviewVisGIF {
@@ -542,7 +543,7 @@ footer {
     opacity: 0; }
   #overview .legend {
     background-color: #fff;
-    width: 350px;
+    width: 120px;
     height: 50px;
     /* border: 1px solid #bbb; */
     margin: 0 auto; }
@@ -656,7 +657,7 @@ footer {
   width: 300px; }
 
 .tutorial {
-  position: absolute;
+  position: relative;
   top: 0px;
   left: -280px;
   width: 237px;
@@ -693,8 +694,9 @@ nav.martini {
   width: 616px;
   height: 542px;
   margin: 0 auto;
-  position: relative;
+  position: absolute;
   top: 80px;
+  left: 350px;
   z-index: -1; }
 
 #timelineVisGIF {
@@ -702,6 +704,6 @@ nav.martini {
   width: 892px;
   height: 548px;
   margin: 0 auto;
-  position: relative;
+  position: absolute;
   top: 0px;
   z-index: -1; }

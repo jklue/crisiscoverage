@@ -247,7 +247,9 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   function typeVis() {
-    xScale = d3.time.scale().domain(d3.extent(dateList, function(d) { return d; })).range([35, typeDetail.w]);  // define the right domain
+    //define offset so initial storypoint will be included in graph
+    var offset = 35;
+    xScale = d3.time.scale().domain(d3.extent(dateList, function(d) { return d; })).range([offset, typeDetail.w]);  // define the right domain
     yScale = d3.scale.linear().domain([0, d3.max(aggregateMediaStats, function(d) { return d3.max(d.values, function(v) { return v.count; }) })]).range([typeDetail.h, 0]);
 
  // example that translates to the bottom left of our vis space:
@@ -468,7 +470,9 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	function sourceVis() {
-    var xScale2 = d3.time.scale().domain(d3.extent(dateList, function(d) { return d; })).range([0, sourceDetail.w]);  // define the right domain
+    //define offset so initial storypoint will be included in graph
+    var offset = 35;
+    var xScale2 = d3.time.scale().domain(d3.extent(dateList, function(d) { return d; })).range([offset, sourceDetail.w]);  // define the right domain
     var yScale2 = d3.scale.linear().domain([0, d3.max(allDates, function(d) { return d3.max(d.values, function(v) { return v.count; }) })]).range([sourceDetail.h, 0]);
 
  	// example that translates to the bottom left of our vis space:
@@ -502,6 +506,20 @@
               transform: 'translate(0,' + sourceDetail.h  +')'
             })
             .call(xAxis2)
+
+  // add x axis extender to allow storypoints to be in graph
+    d3.select('.x.axis2')
+      .append('line')
+      .attr({
+        x1: 40,
+        x2: 0,
+        y1: 3,
+        y2: 3 
+      })
+      .style({
+        stroke: '#ccc',
+        'stroke-width': 6
+      })
 
   // add y axis to sourceSVG
     sourceFrame.append('g')
