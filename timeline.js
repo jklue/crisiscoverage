@@ -269,9 +269,6 @@
                   .orient('left')
                   .ticks(6);
 
-  // define offset for storypoints to stay in chart area
-    var offset = 35;
-
     var line = d3.svg.line()
                      .x(function(d) { return xScale(d.date); })
                      .y(function(d) { return yScale(d.count); })
