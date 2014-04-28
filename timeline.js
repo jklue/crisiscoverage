@@ -247,7 +247,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   function typeVis() {
-    xScale = d3.time.scale().domain(d3.extent(dateList, function(d) { return d; })).range([0, typeDetail.w]);  // define the right domain
+    xScale = d3.time.scale().domain(d3.extent(dateList, function(d) { return d; })).range([35, typeDetail.w]);  // define the right domain
     yScale = d3.scale.linear().domain([0, d3.max(aggregateMediaStats, function(d) { return d3.max(d.values, function(v) { return v.count; }) })]).range([typeDetail.h, 0]);
 
  // example that translates to the bottom left of our vis space:
@@ -269,6 +269,9 @@
                   .orient('left')
                   .ticks(6);
 
+  // define offset for storypoints to stay in chart area
+    var offset = 35;
+
     var line = d3.svg.line()
                      .x(function(d) { return xScale(d.date); })
                      .y(function(d) { return yScale(d.count); })
@@ -282,6 +285,20 @@
               transform: 'translate(0,' + typeDetail.h  +')'
             })
             .call(xAxis)
+
+  // add x axis extender to allow storypoints to be in graph
+    d3.select('.x.axis')
+      .append('line')
+      .attr({
+        x1: 40,
+        x2: 0,
+        y1: 3,
+        y2: 3 
+      })
+      .style({
+        stroke: '#ccc',
+        'stroke-width': 6
+      })
 
   // add y axis to svg
     typeFrame.append('g')
@@ -325,7 +342,7 @@
           .enter().append('circle')
           .attr({
             class: function(d){ return d.id + " dot"; }, // store name for reference to path
-            cx: function(d) { return xScale(d.date); },
+            cx: function(d) { return xScale(d.date)},
             cy: function(d) { return yScale(d.count); },
             r: 4,
             transform: 'translate(0,' + typeDetail.y + ')'
@@ -375,6 +392,7 @@
     // add intro title and summary
     d3.select("#crisisTitle").html('<h3>Typhoon Haiyan</h3>');
     d3.select('#crisisStory').html('Typhoon Haiyan, known as Typhoon Yolanda in the Philippines, was a powerful tropical cyclone that devastated portions of Southeast Asia, particularly the Philippines, on November 8, 2013. <a href="http://en.wikipedia.org/wiki/Typhoon_Haiyan" class="storySource">&mdash; Wikipedia</a>');
+
     // add dotted lines
     typeFrame.selectAll('.line')
                .data(storyPoints)

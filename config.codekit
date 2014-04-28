@@ -46,7 +46,7 @@
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/archive\/jameslafa\/app\/scripts\/globe.coffee",
-		"minifyOutput": 0,
+		"minifyOutput": 1,
 		"outputAbbreviatedPath": "\/archive\/jameslafa\/app\/scripts\/globe.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
@@ -167,7 +167,7 @@
 		},
 	"\/archive\/min\/BBCtimeline-ck.js": {
 		"fileType": 64,
-		"ignore": 1,
+		"ignore": 0,
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/archive\/min\/BBCtimeline-ck.js",
 		"outputAbbreviatedPath": "\/archive\/min\/min\/BBCtimeline-ck-ck.js",
@@ -609,7 +609,7 @@
 		"decimalPrecision": 5,
 		"fileType": 4,
 		"ignore": 0,
-		"ignoreWasSetByUser": 0,
+		"ignoreWasSetByUser": 1,
 		"inputAbbreviatedPath": "\/css\/style.scss",
 		"outputAbbreviatedPath": "\/css\/style.css",
 		"outputPathIsOutsideProject": 0,
@@ -3972,7 +3972,7 @@
 		"fileType": 32768,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"initialSize": 3753,
+		"initialSize": 2226,
 		"inputAbbreviatedPath": "\/images\/icons\/github.png",
 		"outputAbbreviatedPath": "\/images\/icons\/github.png",
 		"outputPathIsOutsideProject": 0,
@@ -3994,7 +3994,7 @@
 		"fileType": 32768,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"initialSize": 1814,
+		"initialSize": 3614,
 		"inputAbbreviatedPath": "\/images\/icons\/processbook.png",
 		"outputAbbreviatedPath": "\/images\/icons\/processbook.png",
 		"outputPathIsOutsideProject": 0,
@@ -4180,6 +4180,15 @@
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/includes\/head.html",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
+	"\/includes\/header.html": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/includes\/header.html",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
@@ -4413,7 +4422,7 @@
 		},
 	"\/min\/timeline-month-ck.js": {
 		"fileType": 64,
-		"ignore": 1,
+		"ignore": 0,
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/min\/timeline-month-ck.js",
 		"outputAbbreviatedPath": "\/min\/min\/timeline-month-ck-ck.js",
@@ -4424,7 +4433,7 @@
 		},
 	"\/min\/timeline1-ck.js": {
 		"fileType": 64,
-		"ignore": 1,
+		"ignore": 0,
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/min\/timeline1-ck.js",
 		"outputAbbreviatedPath": "\/min\/min\/timeline1-ck-ck.js",
@@ -4483,6 +4492,26 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
+	"\/project-data.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/project-data.js",
+		"outputAbbreviatedPath": "\/min\/project-data-ck.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/project-data.php": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/project-data.php",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
 	"\/README.md": {
 		"enableFootnoteSupport": 0,
 		"enableSmartyPants": 1,
@@ -4533,7 +4562,7 @@
 "projectAttributes": {
 	"bowerAbbreviatedPath": "",
 	"displayValue": "crisiscoverage.info",
-	"displayValueWasSetByUser": 0,
+	"displayValueWasSetByUser": 1,
 	"iconImageName": "harddrive_yellow"
 	},
 "projectSettings": {

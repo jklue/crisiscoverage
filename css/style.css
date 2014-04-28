@@ -658,8 +658,8 @@ footer {
 .tutorial {
   position: absolute;
   top: 0px;
-  left: -300px;
-  width: 607px;
+  left: -280px;
+  width: 237px;
   height: 600px;
   background-color: rgba(10, 10, 10, 0.7);
   padding: 1.5em;
