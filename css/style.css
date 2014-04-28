@@ -540,6 +540,8 @@ footer {
   #timeline #crisisStory {
     margin: 0em 0 0;
     color: #919191; }
+  #timeline ul {
+    margin: 0.5em; }
   #timeline h3 {
     font-size: 1.5em;
     color: #cc1452;
@@ -551,7 +553,7 @@ footer {
   #timeline .storySource {
     display: block;
     text-align: right;
-    margin: -0.5em 1.5em 0 0; }
+    margin: 0em 1.5em 0 0; }
   #timeline .storyTriangle {
     fill: #919191; }
   #timeline #dataSourceSelect {
