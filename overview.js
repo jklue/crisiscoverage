@@ -448,15 +448,115 @@ function internalNumberSort(a,_a,b,_b,sortAscending){
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// CRISES COMPARED
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function renderCrisesCompared(){
+    var margin = {top: 1, right: 1, bottom: 6, left: 1},
+        width = 940 - margin.left - margin.right,
+        height = 550 - margin.top - margin.bottom;
+
+    var format = function(d) {
+        var f;
+        if (d === 0) f = "Rank > 10";
+        else  f = "Rank: " + d;
+        console.log(f);
+        return f;
+    },
+        color = d3.scale.category20();
+
+    var svg = d3.select("#countrySankeyVis").append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    var sankey = d3.sankey()
+        .nodeWidth(15)
+        .nodePadding(10)
+        .size([width, height]);
+
+    var path = sankey.link();
+
+    d3.json("/productiondata/compared_overview.json", function(data) {
+
+        sankey
+            .nodes(data.nodes)
+            .links(data.links)
+            .layout(32);
+
+        var link = svg.append("g").selectAll(".link")
+            .data(data.links)
+            .enter().append("path")
+            .attr("class", "link")
+            .attr("d", path)
+            .style("stroke-width", function(d) { return Math.max(0, d.dy); })//changed from 1,d.dy
+            .sort(function(a, b) { return b.dy - a.dy; });
+
+        link.append("title")
+            .text(function(d) { return d.source.name + " → " + d.target.name + "\n" + format(d.rank); });
+
+        var node = svg.append("g").selectAll(".node")
+            .data(data.nodes)
+            .enter().append("g")
+            .attr("class", "node")
+            .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
+            .call(d3.behavior.drag()
+                .origin(function(d) { return d; })
+                .on("dragstart", function() { this.parentNode.appendChild(this); })
+                .on("drag", dragmove));
+
+        node.append("rect")
+            .attr("height", function(d) { return d.dy; })
+            .attr("width", sankey.nodeWidth())
+            .style("fill", function(d) { return d.color = color(d.name.replace(/ .*/, "")); })
+            .style("stroke", function(d) { return d3.rgb(d.color).darker(2); })
+            .append("title")
+            .text(function(d) { return d.name + "\n" + format(d.rank); });
+
+        node.append("text")
+            .attr("x", -6)
+            .attr("y", function(d) { return d.dy / 2; })
+            .attr("dy", ".35em")
+            .attr("text-anchor", "end")
+            .attr("transform", null)
+            .text(function(d) { return d.name; })
+            .filter(function(d) { return d.x < width / 2; })
+            .attr("x", 6 + sankey.nodeWidth())
+            .attr("text-anchor", "start");
+
+        function dragmove(d) {
+            d3.select(this).attr("transform", "translate(" + d.x + "," + (d.y = Math.max(0, Math.min(height - d.dy, d3.event.y))) + ")");
+            sankey.relayout();
+            link.attr("d", path);
+        }
+    });
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // CRISIS SELECT CHANGES AND OTHER PAGE-SPECIFICS
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function resetSummary(){
+
+    // add title
+    d3.select('#crisisTitle').data(summary)
+        .html(function (d) {
+            return '<h3>' + d.title + '</h3>';
+        });
+
+    // add summary
+    d3.select('#crisisStory').data(summary)
+        .html(function (d) {
+            return '<p>' + d.content + '</p>';
+        });
+}
+
 
 function loadedDataCallBack(error, world, media, summary) {
     console.log("--- START ::: loadedDataCallback ---");
 
     /* update crisis info section */
-
-
 
     mediaData = {};
     mediaBarData = [];
@@ -570,11 +670,21 @@ d3.selectAll("input")
 
 $(document).ready(function() {
 
-    document.getElementById("tab_1_globe").className = "content-tab active";
-    addClassNameListener("tab_1_globe", function () {
-        var className = document.getElementById("tab_1_globe").className;
+    document.getElementById("tab_1_compared").className = "content-tab active";
+    addClassNameListener("tab_1_compared", function () {
+        var className = document.getElementById("tab_1_compared").className;
         if (className === "content-tab active") {
-            console.log("... tab change to tab_1_globe.");
+            console.log("... tab change to tab_1_compared.");
+            if (!done) {
+                stopAnimation();
+                shouldResume = true;
+            } else shouldResume = false;
+        }
+    });
+    addClassNameListener("tab_2_globe", function () {
+        var className = document.getElementById("tab_2_globe").className;
+        if (className === "content-tab active") {
+            console.log("... tab change to tab_2_globe.");
             if (shouldResume) startAnimation();
         }
 
@@ -584,10 +694,10 @@ $(document).ready(function() {
         if (!done) startAnimation();
     });
 
-    addClassNameListener("tab_2_map", function () {
-        var className = document.getElementById("tab_2_map").className;
+    addClassNameListener("tab_3_map", function () {
+        var className = document.getElementById("tab_3_map").className;
         if (className === "content-tab active") {
-            console.log("... tab change to tab_2_map.");
+            console.log("... tab change to tab_3_map.");
             if (!done) {
                 stopAnimation();
                 shouldResume = true;
@@ -599,33 +709,17 @@ $(document).ready(function() {
         }
     });
 
-    addClassNameListener("tab_3_bar", function () {
-        var className = document.getElementById("tab_3_bar").className;
+    addClassNameListener("tab_4_bar", function () {
+        var className = document.getElementById("tab_4_bar").className;
         if (className === "content-tab active") {
-            console.log("... tab change to tab_3_bar.");
+            console.log("... tab change to tab_4_bar.");
             if (!done) {
                 stopAnimation();
                 shouldResume = true;
             } else shouldResume = false;
         }
     });
+
+    //ALWAYS START WITH THIS
+    renderCrisesCompared();
 } );
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// CHANGE CRISIS SUMMARY
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-function resetSummary(){
-
-    // add title
-    d3.select('#crisisTitle').data(summary)
-        .html(function (d) {
-            return '<h3>' + d.title + '</h3>';
-        });
-
-    // add summary
-    d3.select('#crisisStory').data(summary)
-        .html(function (d) {
-            return '<p>' + d.content + '</p>';
-        });
-}

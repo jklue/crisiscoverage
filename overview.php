@@ -11,16 +11,56 @@
       }
 	</style>
 
+	<!-- FOR SANKEY -->
+	<style>
+      #chart {
+          height: 500px;
+      }
+
+      .node rect {
+          cursor: move;
+          fill-opacity: .9;
+          shape-rendering: crispEdges;
+      }
+
+      .node text {
+          pointer-events: none;
+          text-shadow: 0 1px 0 #fff;
+      }
+
+      .link {
+          fill: none;
+          stroke: #000;
+          stroke-opacity: .2;
+      }
+
+      .link:hover {
+          stroke-opacity: .5;
+      }
+
+  </style>
+
   <div id="overview_content" class="cf">
   	<div class="tabs cf">
-        <a data-toggle="tab_1_globe">Globe</a>
-        <a data-toggle="tab_2_map">Map</a>
-        <a data-toggle="tab_3_bar">Bar Chart</a>
+  	    <a data-toggle="tab_1_compared">Crises Compared</a>
+        <a data-toggle="tab_2_globe">Globe</a>
+        <a data-toggle="tab_3_map">Map</a>
+        <a data-toggle="tab_4_bar">Bar Chart</a>
     </div>
 
     <div class="tabContent">
     <!-- Overview Vis and Legend -->
-        <div id="tab_1_globe" class="content-tab">
+     <div id="tab_1_compared" class="content-tab">
+              <section id="section_country_globe">
+                <header class="tab_header">
+                   <div class="overview_title">Crises Compared</div>
+                   <div class="tip">Results for countries providing top-ten results. Drag to rearrange nodes.</div>
+                 </header>
+                <figure id="countrySankeyVis"></figure>
+            	</section>
+            </div>
+
+        <div id="tab_2_globe" class="content-tab">
           <section id="section_country_globe">
             <header class="tab_header">
                <div class="overview_title">Results by Country</div>
@@ -31,7 +71,7 @@
         	</section>
         </div>
 
-         <div id="tab_2_map" class="content-tab">
+         <div id="tab_3_map" class="content-tab">
                   <section id="section_country_map">
                     <header class="tab_header">
                        <div class="overview_title">Results by Country</div>
@@ -42,7 +82,7 @@
                 	</section>
          </div>
 
-        <div id="tab_3_bar" class="content-tab">
+        <div id="tab_4_bar" class="content-tab">
           <section id="section_country_bar_chart">
              <header class="tab_header">
                <div class="overview_title">Results by Country</div>
@@ -61,6 +101,9 @@
 
 <!-- footer -->
 	<?php include 'includes/footer.html'; ?>
+
+	  <script src="libs/d3.sankey.js"></script>
+
 	<script src="overview.js"></script>
 </body>
 </html>
