@@ -627,7 +627,7 @@ footer {
   top: 0px;
   left: -280px;
   width: 237px;
-  height: 600px;
+  height: 500px;
   background-color: rgba(10, 10, 10, 0.7);
   padding: 1.5em;
   color: white; }
@@ -656,7 +656,10 @@ footer {
 nav.martini {
   display: block;
   text-align: center;
-  color: #cccccc; }
+  color: #cccccc;
+  position: absolute;
+  bottom: 0;
+  top: auto; }
   nav.martini ul {
     float: none; }
 

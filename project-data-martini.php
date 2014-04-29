@@ -13,7 +13,7 @@
 				<nav class="martini">
 					<ul>
 						<!-- <li><a href="/overview" class="left arrow"><img src="images/icons/leftarrow.png" alt="Left Arrow" title="Skip to Charts">Skip to Charts</a></li> -->
-						<li><a href="/overview" class="right arrow">Start Exploring<img src="images/icons/rightarrow.png" alt="Right Arrow" title="Learn More"></a></li>
+						<li><a href="/overview" class="right arrow">Explore<img src="images/icons/rightarrow.png" alt="Right Arrow" title="Learn More"></a></li>
 					</ul>
 				</nav>
 			</div>

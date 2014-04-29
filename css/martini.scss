@@ -10,7 +10,7 @@
         top: 0px;
         left: -280px;
         width: 237px;
-        height: 600px;
+        height: 500px;
         background-color: rgba(10,10,10,0.7);
         padding: 1.5em;
         color: white;
@@ -43,6 +43,9 @@
         display: block;
         text-align: center;
         color: $gray;
+        position: absolute;
+        bottom: 0;
+        top: auto;
         ul {
             float: none;
         }
