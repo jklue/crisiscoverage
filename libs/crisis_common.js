@@ -75,17 +75,44 @@ function numberWithCommas(x) {
  */
 function resetSummary(summary){
 
-    console.log('summary called');
+    /* Triangles */
+    // revert to original color on other triangles and shrink
+    d3.selectAll('.storyTriangle')
+        .transition()
+        .style('fill','#919191')
+        .attr('d',d3.svg.symbol().type('triangle-down').size(256));
 
-    // add title
-    d3.select('#crisisTitle').data(summary)
-        .html(function (d) {
-            return '<h3>' + d.title + '</h3>';
-        });
+    /* Get content correct */
 
-    // add summary
-    d3.select('#crisisStory').data(summary)
-        .html(function (d) {
-            return '<p>' + d.content + '</p>';
-        });
+    // overview page
+    if ((document.getElementById("tab_1_compared").className === "content-tab active") && (document.getElementById("overview") != undefined)) {
+        d3.select("#crisisTitle").html('<h3>Who does what...</h3>');
+        d3.select('#crisisStory').html('Lorem ipsum dolor set...');
+        // hide selector
+        $('#crisis_selector').hide();
+
+    // timeline page
+    } else if ((document.getElementById("tab_1_compared").className === "content-tab active") && (document.getElementById("timeline") != undefined)) {
+        d3.select("#crisisTitle").html('<h3>Relative Interest In Crises</h3>');
+        d3.select('#crisisStory').html('Percentage of change in crisis coverage can be compared from month to month to determine increased, same, or decreased media attention aggregated across all Google results.');
+        // hide selector
+        $('#crisis_selector').hide();
+
+    } else {
+        console.log('no way!!!!!!');
+        // show selector
+        $('#crisis_selector').show();
+
+        // add title
+        d3.select('#crisisTitle').data(summary)
+            .html(function (d) {
+                return '<h3>' + d.title + '</h3>';
+            });
+
+        // add summary
+        d3.select('#crisisStory').data(summary)
+            .html(function (d) {
+                return '<p>' + d.content + '</p>';
+            });
+    }
 }

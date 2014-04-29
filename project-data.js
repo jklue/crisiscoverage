@@ -37,7 +37,7 @@ function loadedDataCallBack(error, media, summary){
     } );
 
     //reset Summary
-    resetSummary(summary);
+    // resetSummary(summary);
 }
 
 /**

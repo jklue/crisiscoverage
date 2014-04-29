@@ -534,10 +534,17 @@ function renderCrisesCompared(){
 }
 
 
-function loadedDataCallBack(error, world, media, summary) {
+function loadedDataCallBack(error, world, media, crisisSummary) {
     console.log("--- START ::: loadedDataCallback ---");
 
-    /* update crisis info section */
+    /* Crisis summary */
+        // make summary global for use in tab changes
+        summary = crisisSummary;
+
+        // update crisis info section
+        resetSummary(summary);
+
+    console.log('yess');
 
     mediaData = {};
     mediaBarData = [];
@@ -629,8 +636,6 @@ function loadedDataCallBack(error, world, media, summary) {
     renderMap();
     renderBarChart();
 
-    resetSummary(summary);
-
     console.log("--- END ::: loadedDataCallback ---");
 }
 
@@ -662,6 +667,10 @@ $(document).ready(function() {
                 stopAnimation();
                 shouldResume = true;
             } else shouldResume = false;
+        
+            // change summary data
+            resetSummary(summary); 
+
         }
     });
     addClassNameListener("tab_2_globe", function () {
@@ -669,6 +678,10 @@ $(document).ready(function() {
         if (className === "content-tab active") {
             console.log("... tab change to tab_2_globe.");
             if (shouldResume) startAnimation();
+       
+            // change summary data
+            resetSummary(summary); 
+        
         }
 
         //Populate legend
@@ -689,6 +702,9 @@ $(document).ready(function() {
             //Populate legend
             $('#legend_map').empty();
             colorlegend("#legend_map", color, "quantile", {title: "results by country", boxHeight: 15, boxWidth: 30, fill: false, linearBoxes: 5});
+
+            // change summary data
+            resetSummary(summary); 
         }
     });
 
@@ -700,6 +716,9 @@ $(document).ready(function() {
                 stopAnimation();
                 shouldResume = true;
             } else shouldResume = false;
+            
+            // change summary data
+            resetSummary(summary); 
         }
     });
 
