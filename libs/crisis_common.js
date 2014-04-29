@@ -99,7 +99,6 @@ function resetSummary(summary){
         $('#crisis_selector').hide();
 
     } else {
-        console.log('no way!!!!!!');
         // show selector
         $('#crisis_selector').show();
 
