@@ -1,0 +1,122 @@
+[
+    {
+        "name": "haiyan",
+        "values": [
+           {
+                "name": "haiyan",
+                "coverage_month": 1,
+                "percent_change": 0
+            },
+            {
+                "name": "haiyan",
+                "coverage_month": 2,
+                "percent_change": -30
+            },
+            {
+                "name": "haiyan",
+                "coverage_month": 3,
+                "percent_change": 19
+            },
+            {
+                "name": "haiyan",
+                "coverage_month": 4,
+                "percent_change": -77
+            },
+            {
+                "name": "haiyan",
+                "coverage_month": 5,
+                "percent_change": -26
+            },
+            {
+                "name": "haiyan",
+                "coverage_month": 6,
+                "percent_change": -35
+            }
+    ]
+    },
+    {
+        "name": "pakistan-drought",
+        "values":[
+            {
+                "name": "pakistan-drought",
+                "coverage_month": 1,
+                "percent_change": 0
+            },
+            {
+                "name": "pakistan-drought",
+                "coverage_month": 2,
+                "percent_change": -10
+            },
+            {
+                "name": "pakistan-drought",
+                "coverage_month": 3,
+                "percent_change": -26
+            },
+            {
+                "name": "pakistan-drought",
+                "coverage_month": 4,
+                "percent_change": -27
+            }
+    ]
+    },
+    {
+        "name": "turkish-revolt",
+        "values": [
+            {
+                "name": "turkish-revolt",
+                "coverage_month": 1,
+                "percent_change": 0
+            },
+            {
+                "name": "turkish-revolt",
+                "coverage_month": 2,
+                "percent_change": -11
+            },
+            {
+                "name": "turkish-revolt",
+                "coverage_month": 3,
+                "percent_change": -12
+            },
+            {
+                "name": "turkish-revolt",
+                "coverage_month": 4,
+                "percent_change": 0
+            },
+            {
+                "name": "turkish-revolt",
+                "coverage_month": 5,
+                "percent_change": -10
+            },
+            {
+                "name": "turkish-revolt",
+                "coverage_month": 6,
+                "percent_change": -11
+            },
+            {
+                "name": "turkish-revolt",
+                "coverage_month": 7,
+                "percent_change": -12
+            }
+        ]
+    },
+    {
+        "name": "ukraine-protest",
+        "values": [
+            {
+                "name": "ukraine-protest",
+                "coverage_month": 1,
+                "percent_change": 0
+            },
+            {
+                "name": "ukraine-protest",
+                "coverage_month": 2,
+                "percent_change": -50
+            },
+            {
+                "name": "ukraine-protest",
+                "coverage_month": 3,
+                "percent_change": -54
+            }
+    ]
+    }
+]

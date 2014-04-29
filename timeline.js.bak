@@ -306,7 +306,7 @@
                           .data(visibleDates)
                         .enter().append('g')
                           .attr('class','mediaSources');
-   
+
       // add line
         mediaSources.append('path')
                    .attr({
@@ -331,13 +331,13 @@
             transform: 'translate(0,' + typeDetail.y + ')'
           })
           .style({
-            fill: function(d) { 
+            fill: function(d) {
               // get color of type (traditional or blog color)
               var typeColor = color(d.name);
               // darken color
               var d3color = d3.rgb(typeColor).darker();
               // return color
-              return d3color; 
+              return d3color;
             }
           })
 
@@ -408,7 +408,7 @@
                 d3.select('#crisisTitle')
                   .append('span')
                   .html(storyDate)
-                  .attr('class','crisisDate');    
+                  .attr('class','crisisDate');
 
               // add new content to div
               d3.select('#crisisStory').html(d.title);
@@ -434,9 +434,9 @@
   /* Tool tips */
     // Initialize tooltip
     var tip = d3.tip()
-            .html(function(d) { 
+            .html(function(d) {
               // if 1 article, use singular 'article'
-                return d.count + " <span class='sourceName'>" + d.name + "</span> articles on during<br>the 30 days prior to " + parseDateTips(d.date); 
+                return d.count + " <span class='sourceName'>" + d.name + "</span> articles on during<br>the 30 days prior to " + parseDateTips(d.date);
             })
             .direction('e')
             .attr('class','d3-tip e');
@@ -529,7 +529,7 @@
                           .data(visibleDates)
                         .enter().append('g')
                           .attr('class','mediaSources');
-   
+
       // add line
         mediaSources.append('path')
                    .attr({
@@ -554,13 +554,13 @@
             transform: 'translate(0,' + sourceDetail.y + ')'
           })
           .style({
-            fill: function(d) { 
+            fill: function(d) {
               // get color of type (traditional or blog color)
               var typeColor = color(d.name);
               // darken color
               var d3color = d3.rgb(typeColor).darker();
               // return color
-              return d3color; 
+              return d3color;
             }
           })
 
@@ -615,7 +615,7 @@
                           });
                         }
                       });
-                    
+
                   } else{
                     // change legend color back to original color
                     d3.select(this)
@@ -671,7 +671,7 @@
                       cy: function(e) { return yScale2(e.count); },
                     })
                     .style({
-                      fill: function(e) { 
+                      fill: function(e) {
                         console.log(d);
                         // if not shown
                         if(e.vis == 0)
@@ -682,7 +682,7 @@
                           // darken color
                           var d3color = d3.rgb(typeColor).darker();
                           // return color
-                          return d3color; 
+                          return d3color;
                         }
 
                       }
@@ -727,7 +727,7 @@
                 d3.select('#crisisTitle')
                   .append('span')
                   .html(storyDate)
-                  .attr('class','crisisDate');    
+                  .attr('class','crisisDate');
 
               // add new content to div
               d3.select('#crisisStory').html(d.title);
@@ -750,17 +750,17 @@
   /* Tool tips */
     // Initialize tooltip
     var tip = d3.tip()
-            .html(function(d) { 
+            .html(function(d) {
               // console.log('d3tip',d);
               // if 1 article, use singular 'article'
-                return d.count + " articles on <span class='sourceName'>" + d.name + "</span> during<br>the 30 days prior to " + parseDateTips(d.date); 
+                return d.count + " articles on <span class='sourceName'>" + d.name + "</span> during<br>the 30 days prior to " + parseDateTips(d.date);
             })
             .direction('e')
             .attr('class','d3-tip e');
 
     // Invoke the tip in the context of your visualization
     sourceFrame.call(tip)
-  
+
     // call Google vis
     googleVis();
   }
