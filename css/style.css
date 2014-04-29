@@ -394,6 +394,20 @@ footer {
   right: -41px;
   z-index: 10; }
 
+/* Crisis Summary */
+#crisisInfo h3 {
+  font-size: 1.5em;
+  color: #cc1452;
+  margin-bottom: 0.3em; }
+#crisisInfo span.sourceName {
+  font-weight: bold;
+  font-style: italic;
+  color: #cc1452; }
+#crisisInfo .storySource {
+  display: block;
+  text-align: right;
+  margin: 0em 1.5em 0 0; }
+
 /* Setup */
 /* General */
 #welcome header {
@@ -593,7 +607,7 @@ nav.martini {
     opacity: 0; }
   #overview .legend {
     background-color: #fff;
-    width: 120px;
+    width: 130px;
     height: 50px;
     /* border: 1px solid #bbb; */
     margin: 0 auto; }
@@ -608,18 +622,8 @@ nav.martini {
   /* Eastward tooltips */
   /* Southward tooltips */
   /* Westward tooltips */ }
-  #timeline h3 {
-    font-size: 1.5em;
-    color: #cc1452;
-    margin-bottom: 0.3em; }
-  #timeline span.sourceName {
-    font-weight: bold;
-    font-style: italic;
-    color: #cc1452; }
-  #timeline .storySource {
-    display: block;
-    text-align: right;
-    margin: 0em 1.5em 0 0; }
+  #timeline #crisis_selector {
+    display: none; }
   #timeline .storyTriangle {
     fill: #919191; }
   #timeline #dataSourceSelect {
@@ -684,3 +688,6 @@ nav.martini {
 
 .data-content {
   padding: 2em; }
+
+#project_data_content {
+  margin-top: 130px; }

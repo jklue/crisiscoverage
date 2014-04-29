@@ -305,3 +305,23 @@ footer {
         right: -41px;
         z-index: 10;
     }
+
+/* Crisis Summary */
+    #crisisInfo {
+        h3 {
+            font-size: 1.5em;
+            color: $red;
+            margin-bottom: 0.3em;
+        }
+        span.sourceName{
+            font-weight: bold;
+            // text-transform: uppercase;
+            font-style: italic;
+            color: $red;
+        }
+        .storySource{
+            display: block;
+            text-align:right;
+            margin:0em 1.5em 0 0 ;
+        }
+    }

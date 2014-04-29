@@ -11,7 +11,7 @@ var tableNames = [];
  * @param error
  * @param media
  */
-function loadedDataCallBack(error, media){
+function loadedDataCallBack(error, media, summary){
     console.log(media);
 
     var aaData = [];
@@ -35,6 +35,9 @@ function loadedDataCallBack(error, media){
         "aaData": aaData,
         "aoColumns": aoColumns
     } );
+
+    //reset Summary
+    resetSummary(summary);
 }
 
 /**
@@ -52,6 +55,7 @@ function loadTable(tableName){
 
     queue()
         .defer(d3.csv, "/productiondata/"+crisisName+"/"+tableNames[tableName])
+        .defer(d3.csv, "/productiondata/"+crisisName+"/summary.csv") // summary
         .await(loadedDataCallBack);
 }
 
@@ -86,5 +90,3 @@ addClassNameListener("crisis_select", function(){
     console.log("### SETTING TABLE (" + tableSelect.value + ") AFTER NEW CRISIS ("+crisis+") AFTER CLASS CHANGE ###");
     loadTable(tableSelect.value);
 });
-
-

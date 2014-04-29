@@ -1,20 +1,7 @@
 #timeline {
 // headings
-	h3 {
-		font-size: 1.5em;
-		color: $red;
-		margin-bottom: 0.3em;
-	}
-	span.sourceName{
-		font-weight: bold;
-		// text-transform: uppercase;
-		font-style: italic;
-		color: $red;
-	}
-	.storySource{
-		display: block;
-		text-align:right;
-		margin:0em 1.5em 0 0 ;
+	#crisis_selector {
+		display: none; // originally hid to prevent flash on first timeline page
 	}
 	.storyTriangle{
 		fill: $darkGray;
@@ -27,14 +14,6 @@
 	.traditionalMediaPath {
 		stroke: $red;
 	}
-// // dot
-// 	.traditionalMediaDot {
-// 		fill: darken($red, 12%);
-// 	}
-// // detail area
-// 	.traditionalMediaArea {
-// 		fill: $red;
-// 	}
 // y axis
 	.x.axis, .y.axis, .x.axis2, .y.axis2 {
 		fill: $gray;

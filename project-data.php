@@ -3,12 +3,6 @@
 <body id="data">
 	<?php include 'includes/header.html'; ?>
 
-  <style>
-    #project_data_content{
-      margin-top: 50px;
-    }
-  </style>
-
 	<div id="project_data_content" class="data-content">
     <!-- Current Data Table will be added here. -->
 	</div>

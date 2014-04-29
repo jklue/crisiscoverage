@@ -244,7 +244,7 @@
     return typeVis();
   }
 
-function resetSummary(){
+function resetSummaryTimeline(){
 
     /* Triangles */
     // revert to original color on other triangles and shrink
@@ -257,7 +257,12 @@ function resetSummary(){
     if (document.getElementById("tab_1_compared").className === "content-tab active") {
         d3.select("#crisisTitle").html('<h3>Relative Interest In Crises</h3>');
         d3.select('#crisisStory').html('Percentage of change in crisis coverage can be compared from month to month to determine increased, same, or decreased media attention aggregated across all Google results.');
+        // hide selector
+        $('#crisis_selector').hide();
     } else {
+
+        // show selector
+        $('#crisis_selector').show();
 
         // add title
         d3.select('#crisisTitle').data(summary)
@@ -849,7 +854,7 @@ function resetSummary(){
     labelClick(google);
 
    //reset Summary
-   resetSummary();
+   resetSummaryTimeline();
   }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1158,7 +1163,7 @@ $(document).ready(function() {
         if (className === "content-tab active") {
             console.log("... tab change to tab_1_compared.");
             // add intro title and summary
-            resetSummary();
+            resetSummaryTimeline();
         }
     });
 
@@ -1166,7 +1171,7 @@ $(document).ready(function() {
         var className = document.getElementById("tab_2_type").className;
         if (className === "content-tab active") {
             console.log("... tab change to tab_2_type.");
-            resetSummary();
+            resetSummaryTimeline();
         }
     });
 
@@ -1174,7 +1179,7 @@ $(document).ready(function() {
         var className = document.getElementById("tab_3_source").className;
         if (className === "content-tab active") {
             console.log("... tab change to tab_3_source.");
-            resetSummary();
+            resetSummaryTimeline();
         }
     });
 } );

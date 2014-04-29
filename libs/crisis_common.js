@@ -70,3 +70,22 @@ function numberWithCommas(x) {
     return parts.join(".");
 }
 
+/**
+ * Crisis summary changer
+ */
+function resetSummary(summary){
+
+    console.log('summary called');
+
+    // add title
+    d3.select('#crisisTitle').data(summary)
+        .html(function (d) {
+            return '<h3>' + d.title + '</h3>';
+        });
+
+    // add summary
+    d3.select('#crisisStory').data(summary)
+        .html(function (d) {
+            return '<p>' + d.content + '</p>';
+        });
+}
