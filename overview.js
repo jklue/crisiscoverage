@@ -533,25 +533,6 @@ function renderCrisesCompared(){
     });
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// CRISIS SELECT CHANGES AND OTHER PAGE-SPECIFICS
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-function resetSummary(){
-
-    // add title
-    d3.select('#crisisTitle').data(summary)
-        .html(function (d) {
-            return '<h3>' + d.title + '</h3>';
-        });
-
-    // add summary
-    d3.select('#crisisStory').data(summary)
-        .html(function (d) {
-            return '<p>' + d.content + '</p>';
-        });
-}
-
 
 function loadedDataCallBack(error, world, media, summary) {
     console.log("--- START ::: loadedDataCallback ---");
@@ -647,6 +628,8 @@ function loadedDataCallBack(error, world, media, summary) {
     renderGlobe();
     renderMap();
     renderBarChart();
+
+    resetSummary(summary);
 
     console.log("--- END ::: loadedDataCallback ---");
 }

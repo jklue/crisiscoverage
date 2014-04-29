@@ -324,11 +324,9 @@ footer {
 /* Tabs */
 /* Tabs */
 #overview_content {
-  /*position:relative;*/
-  /*top: 100px;*/
   padding: 0px;
   width: 990px;
-  margin: 5em auto 1em; }
+  margin: 11em auto 1em; }
 
 .tabs {
   float: right; }
