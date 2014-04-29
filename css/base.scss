@@ -189,10 +189,13 @@
 
     .content {
         max-width: 990px;
-        margin: 160px auto 0;
+        margin: 10em auto 0;
         // padding: 2em 0;
         clear: both;
         position: relative;
+    }
+    #screencast .content {
+        margin-top: 5em;
     }
 
 /* Footer */

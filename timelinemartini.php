@@ -1,6 +1,6 @@
 <?php include 'includes/head.html'; ?>
 
-<body id="timeline">
+<body id="timeline" class="martini">
 	<?php include 'includes/martini-header.html'; ?>
 
 	<div class="content">

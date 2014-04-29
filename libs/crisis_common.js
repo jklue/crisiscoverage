@@ -115,3 +115,10 @@ function resetSummary(summary){
             });
     }
 }
+
+/**
+ * Show crisis selector on non-auto pages
+ */
+function showSelector(){
+    $('#crisis_selector').show();
+}

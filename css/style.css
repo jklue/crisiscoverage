@@ -295,9 +295,12 @@ nav.martini {
 /* Content */
 .content {
   max-width: 990px;
-  margin: 160px auto 0;
+  margin: 10em auto 0;
   clear: both;
   position: relative; }
+
+#screencast .content {
+  margin-top: 5em; }
 
 /* Footer */
 footer {
@@ -549,6 +552,10 @@ nav.martini {
   top: auto; }
   nav.martini ul {
     float: none; }
+
+/* Tutorial page specific */
+.martini footer {
+  margin-top: 5em; }
 
 /* GIFs */
 #overviewVisGIF {

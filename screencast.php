@@ -14,6 +14,9 @@
 
   <!-- footer -->
   <?php include 'includes/footer.html'; ?>
+  
+  <!-- show crisis selector -->
+  showSelector();
 
 </body>
 </html>
