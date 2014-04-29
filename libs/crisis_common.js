@@ -86,8 +86,8 @@ function resetSummary(summary){
 
     // overview page
     if ((document.getElementById("tab_1_compared").className === "content-tab active") && (document.getElementById("overview") != undefined)) {
-        d3.select("#crisisTitle").html('<h3>Who does what...</h3>');
-        d3.select('#crisisStory').html('Lorem ipsum dolor set...');
+        d3.select("#crisisTitle").html('<h3>Country Interest In Crises</h3>');
+        d3.select('#crisisStory').html("Countries providing top-ten results for each of the crises can be compared. Consistently interested countries include the US, UK, India, and Canada. Single crisis countries include Philippines, Ukraine, Malaysia, South Africa, and Kenya. Prominent countries like Australia, France and Italy are consistently interested, even when outside the top-ten.");
         // hide selector
         $('#crisis_selector').hide();
 

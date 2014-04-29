@@ -4,7 +4,7 @@ var tableNames = [];
     tableNames['country_stats'] = "google-country_stats.csv";
     tableNames['baseline_stats'] = "google-media-baseline_stats.csv";
     tableNames['crisis_stats'] = "google-media_stats.csv";
-    tableNames['crisis_sample'] = "google-media_results_subset.csv";
+    tableNames['crisis_sample'] = "display_google-media_results_subset.csv";
 
 /**
  * Loaded Data Callback.
