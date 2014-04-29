@@ -9,17 +9,17 @@
 		</div>
 	</div>
 
-<!-- TODO: MOVE TO CSS -->
-    <style>
-        #crisis_selector {
-            color: #636363;
-            width: 100%;
-        }
-        #crisis_form {
-            float: right;//LUKE: THIS SHOULD FULLY PIN ON THE RIGHT BUT IT DOES NOT
-        }
-    </style>
+    <!-- Main nav -->
+	<nav>
+		<ul>
+			<li><a href="/overview" class="overviewLink">Overview</a></li>
+			<li><a href="/timeline" class="timelineLink">Timeline</a></li>
+            <li><a href="/detail" class="detailLink">Detail</a></li>
+			<li><a href="/project-data" class="dataLink">Data</a></li>
+		</ul>
+	</nav>
 
+    <!-- Crisis Selection -->
     <div id="crisis_selector">
         <form id="crisis_form">
             <label for="crisis_select">Crisis: </label>
@@ -32,13 +32,12 @@
         </form>
     </div>
 
-	<nav>
-		<ul>
-			<li><a href="/overview" class="overviewLink">Overview</a></li>
-			<li><a href="/timeline" class="timelineLink">Timeline</a></li>
-            <li><a href="/detail" class="detailLink">Detail</a></li>
-			<li><a href="/project-data" class="dataLink">Data</a></li>
-		</ul>
-	</nav>
+    <!-- Crisis Info -->
+    <div id="crisisInfo">
+      <div id="crisisCompared"></div>
+      <div id="crisisTitle"></div>
+      <div id="crisisStory"></div>
+    </div>
+
 </header>
 <hr>

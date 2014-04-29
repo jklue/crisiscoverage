@@ -9,7 +9,7 @@
     }
   </style>
 
-	<div id="project_data_content" class="content">
+	<div id="project_data_content" class="data-content">
     <!-- Current Data Table will be added here. -->
 	</div>
 

@@ -78,6 +78,48 @@
                 }
             }
         }
+
+        #crisis_selector {
+            color: #636363;
+            width: 100%;
+        }
+        #crisis_form {
+            float: right;
+        }
+
+        #crisisInfo{
+            position: absolute;
+            top: 70px;
+            width: 45%;     
+            margin-left: 6em;
+            padding: 0;
+            height: 8em;
+            // float:right;
+            ul {
+                margin: 0.5em;
+            }
+        }
+        #crisisTitle{
+            margin: 1em 0 0;
+            color: $darkGray;
+            padding: 0;
+            width:100%;
+            position: relative;
+        }
+        .crisisDate{
+            margin: 0em 0 0;
+            color: $darkBlue;
+            h4{
+                margin:0.5em 0;
+            }
+            position: absolute;
+            top: 7px;
+            right: 20px;
+        }
+        #crisisStory{
+            margin: 0em 0 0;
+            color: $darkGray;
+        }
     }
 
 /* Nav */
@@ -146,8 +188,8 @@
 
     .content {
         max-width: 990px;
-        margin: 0 auto;
-        padding: 2em 0;
+        margin: 160px auto 0;
+        // padding: 2em 0;
         clear: both;
         position: relative;
     }

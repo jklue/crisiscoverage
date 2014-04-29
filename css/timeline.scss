@@ -1,36 +1,4 @@
 #timeline {
-// general
-	#crisisInfo{
-		width: 45%;		
-		margin-left: 6em;
-		padding: 0;
-		height: 8em;
-		// float:right;
-	}
-	#crisisTitle{
-		margin: 1em 0 0;
-		color: $darkGray;
-		padding: 0;
-		width:100%;
-		position: relative;
-	}
-	.crisisDate{
-		margin: 0em 0 0;
-		color: $darkBlue;
-		h4{
-			margin:0.5em 0;
-		}
-		position: absolute;
-		top: 7px;
-		right: 20px;
-	}
-	#crisisStory{
-		margin: 0em 0 0;
-		color: $darkGray;
-	}
-	ul {
-		margin: 0.5em;
-	}
 // headings
 	h3 {
 		font-size: 1.5em;

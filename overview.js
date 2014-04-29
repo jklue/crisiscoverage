@@ -451,7 +451,7 @@ function internalNumberSort(a,_a,b,_b,sortAscending){
 // CRISIS SELECT CHANGES AND OTHER PAGE-SPECIFICS
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-function loadedDataCallBack(error, world, media) {
+function loadedDataCallBack(error, world, media, summary) {
     console.log("--- START ::: loadedDataCallback ---");
 
     mediaData = {};
@@ -553,6 +553,7 @@ addClassNameListener("crisis_select", function(){
     queue()
         .defer(d3.json, "productiondata/globe.json")//world
         .defer(d3.csv, "/productiondata/"+crisis+"/google-country_stats.csv")//media
+        .defer(d3.csv, "/productiondata/"+crisis+"/summary.csv")//storypoints
         .await(loadedDataCallBack);
 });
 

@@ -348,7 +348,7 @@
             .style("text-anchor", "end")
             .text("# articles")
 
-    // set display var to reference data for this chart
+    // set f var to reference data for this chart
     var typeDates = aggregateMediaStats;
 
     // make wrapper for lines and legend
@@ -980,8 +980,8 @@
 function loadedComparedTimelineCallback(error,data){
     console.log("---- START ::: CRISES COMPARED ---");
 
-    $('#crisisTitle').hide();
-    $('#crisisStory').hide();
+    // $('#crisisTitle').hide();
+    // $('#crisisStory').hide();
 
     var mediaData = data;
     console.log("mediaData length: "+mediaData.length);
@@ -1173,32 +1173,6 @@ $(document).ready(function() {
         .defer(d3.json,"/productiondata/compared_timeline.json")
         .await(loadedComparedTimelineCallback);
 
-    addClassNameListener("tab_1_compared", function () {
-        var className = document.getElementById("tab_1_compared").className;
-        if (className === "content-tab active") {
-            console.log("... tab change to tab_1_compared.");
-            $('#crisisTitle').hide();
-            $('#crisisStory').hide();
-        }
-    });
-
-    addClassNameListener("tab_2_type", function () {
-        var className = document.getElementById("tab_2_type").className;
-        if (className === "content-tab active") {
-            console.log("... tab change to tab_2_type.");
-            $('#crisisTitle').show();
-            $('#crisisStory').show();
-        }
-    });
-
-    addClassNameListener("tab_3_source", function () {
-        var className = document.getElementById("tab_3_source").className;
-        if (className === "content-tab active") {
-            console.log("... tab change to tab_3_source.");
-            $('#crisisTitle').show();
-            $('#crisisStory').show();
-        }
-    });
 } );
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
