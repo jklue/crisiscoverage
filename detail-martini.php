@@ -4,10 +4,10 @@
 	<?php include 'includes/martini-header.html'; ?>
 
 
-	<div class="content">
+	<div class="content cf">
 
 		<!-- Tutorial -->
-		<div class="tutorial-wrapper">
+		<div class="tutorial-wrapper cf">
 			<div class="tutorial">
 				<p>So this is how you use this graph...</p>
 				<nav class="martini">
@@ -19,7 +19,9 @@
 			</div>
 		</div>
 
-		Data goes here.
+		<!-- GIF Tutorial -->
+		<div id="timelineVisGIF" class="tut-gif"></div>
+
 	</div>
 
 <!-- footer -->

@@ -6,11 +6,11 @@
     }
 
     .tutorial {
-        position: absolute;
+        position: relative;
         top: 0px;
-        left: -300px;
-        width: 607px;
-        height: 600px;
+        left: -280px;
+        width: 237px;
+        height: 500px;
         background-color: rgba(10,10,10,0.7);
         padding: 1.5em;
         color: white;
@@ -24,12 +24,18 @@
     .arrow img {
         vertical-align: middle;
     }
-    .right.arrow {
+    .left.arrow, .right.arrow {
         text-transform: uppercase;
     }
     #rotatingGlobe {
         width: 320px;
         margin: 100px auto 0;
+    }
+    .tut-gif {
+        position: absolute;
+        top: 80px;
+        left: 350px;
+        z-index: -1;
     }
 
     // Navigation
@@ -37,6 +43,9 @@
         display: block;
         text-align: center;
         color: $gray;
+        position: absolute;
+        bottom: 0;
+        top: auto;
         ul {
             float: none;
         }
@@ -48,16 +57,10 @@
     width:616px;
     height:542px;
     margin:0 auto;
-    position: relative;
-    top: 80px;
-    z-index: -1;
 }
 #timelineVisGIF {
     background: url('../images/gif/timeline1.gif');
-    width:892px;
-    height:548px;
+    width:692px;
+    height:448px;
     margin:0 auto;
-    position: relative;
-    top: 0px;
-    z-index: -1;
 }

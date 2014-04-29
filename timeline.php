@@ -38,7 +38,7 @@
         <!-- Timeline by media type -->
         <div id="tab_3_source" class="content-tab">
           <div class="overview_title">Results by Tracked Sources</div>
-          <div class="tip">Click on source name below to remove or add to chart.</div>
+          <div class="tip">Click on a checkbox below to remove or add to chart.</div>
           <div id="timelineSourceVis"></div>
         </div>
       </div>

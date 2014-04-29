@@ -94,7 +94,7 @@
         }
     }
     // current page highlights
-    #overview .overviewLink, #timeline .timelineLink, #data .dataLink {color: $active}
+    #overview .overviewLink, #timeline .timelineLink, #detail .detailLink, #data .dataLink {color: $active}
 
 /* Text */
 
@@ -141,27 +141,6 @@
             float: none;
         }
     }
-    #welcome nav.martini {
-        position: relative;
-        margin: 0em auto;
-        width: 900px;
-        ul {
-            position: absolute;
-            top: -240px;
-            left: 70px;
-            width: 690px;   
-        }
-        .left.arrow {
-            position: absolute;
-            left: 0;
-        }
-        .right.arrow {
-            position: absolute;
-            right: 0;
-        }
-    }
-    .view{float: left;}
-    .skip{float: right;}
 
 /* Content */
 
@@ -170,27 +149,8 @@
         margin: 0 auto;
         padding: 2em 0;
         clear: both;
+        position: relative;
     }
-
-/* GIFs */
-#overviewVisGIF {
-    background: url('../images/gif/overview-faded.gif');
-    width:616px;
-    height:542px;
-    margin:0 auto;
-    position: relative;
-    top: 80px;
-    z-index: -1;
-}
-#timelineVisGIF {
-    background: url('../images/gif/timeline1.gif');
-    width:892px;
-    height:548px;
-    margin:0 auto;
-    position: relative;
-    top: 0px;
-    z-index: -1;
-}
 
 /* Footer */
 footer {
@@ -301,4 +261,5 @@ footer {
         position: absolute;
         top: 85px;
         right: -41px;
+        z-index: 10;
     }

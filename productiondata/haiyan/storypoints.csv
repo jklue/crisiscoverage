@@ -1,12 +1,5 @@
 story_id,date,title,content
-"1","2013-11-9","<strong>Haiyan's day of destruction.</strong> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nisi ut aliquip ex ea commodo
-consequat."
-"2","2013-12-18","<strong>US Secretary of State John Kerry visits Philippines.</strong> Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-"3","2014-1-30","<strong>Something important happened here...</strong> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat."
+"1","2013-11-9","<strong>Haiyan reaches the Philippeans.</strong> This typhoon was the strongest storm recorded at landfall. 748,572 people evacuated. 4.3 million people affected.<span class= 'storySource'><a href='http://en.wikipedia.org/wiki/Typhoon_Haiyan'>&mdash; Wikipedia</a> and <a href='http://blogs.wsj.com/searealtime/2013/11/21/timeline-following-the-path-of-typhoon-haiyan-and-beyond/'>Wall Street Journal</a></span>"
+"2","2013-11-19","<strong>85% of phone networks restored in the three worst-affected regions of the Philippeans.</strong> 13 million people affected by the typhoon. Nearly 4,000 dead and 648,000 damaged houses. <a href='http://blogs.wsj.com/searealtime/2013/11/21/timeline-following-the-path-of-typhoon-haiyan-and-beyond/' class='storySource'>&mdash; Wall Street Journal</a>"
+"3","2013-12-01","<strong>Cash for work program.</strong> The 'Buddhist Tzu Chi Foundation' from Taiwan organizes the most comprehensive disaster response in a program that involved up to 31,000 people per day cleaning thousands of tons of debris. This program also injected cash into the economy.<a href='http://en.wikipedia.org/wiki/Typhoon_Haiyan' class='storySource'>&mdash; Wikipedia</a>"
+"4","2014-01-20","<strong>New totals from OCHA:</strong> <ul><li>over 14 million people affected</li><li>over 4 million people displaced</li><li>over 1 million damaged houses</li><li>6,201 reported deaths</li><li>1,785 people missing</li></ul><a href='http://www.csmonitor.com/World/Asia-Pacific/2014/0209/Typhoon-Haiyan-Can-Philippines-build-back-better' class='storySource'>&mdash; The Christian Science Monitor</a>"

@@ -220,7 +220,7 @@ nav {
       display: inline;
       padding: 1em; }
 
-#overview .overviewLink, #timeline .timelineLink, #data .dataLink {
+#overview .overviewLink, #timeline .timelineLink, #detail .detailLink, #data .dataLink {
   color: #cc1452; }
 
 /* Text */
@@ -260,53 +260,13 @@ nav.martini {
   nav.martini ul {
     float: none; }
 
-#welcome nav.martini {
-  position: relative;
-  margin: 0em auto;
-  width: 900px; }
-  #welcome nav.martini ul {
-    position: absolute;
-    top: -240px;
-    left: 70px;
-    width: 690px; }
-  #welcome nav.martini .left.arrow {
-    position: absolute;
-    left: 0; }
-  #welcome nav.martini .right.arrow {
-    position: absolute;
-    right: 0; }
-
-.view {
-  float: left; }
-
-.skip {
-  float: right; }
-
 /* Content */
 .content {
   max-width: 990px;
   margin: 0 auto;
   padding: 2em 0;
-  clear: both; }
-
-/* GIFs */
-#overviewVisGIF {
-  background: url("../images/gif/overview-faded.gif");
-  width: 616px;
-  height: 542px;
-  margin: 0 auto;
-  position: relative;
-  top: 80px;
-  z-index: -1; }
-
-#timelineVisGIF {
-  background: url("../images/gif/timeline1.gif");
-  width: 892px;
-  height: 548px;
-  margin: 0 auto;
-  position: relative;
-  top: 0px;
-  z-index: -1; }
+  clear: both;
+  position: relative; }
 
 /* Footer */
 footer {
@@ -401,7 +361,8 @@ footer {
 #crisis_selector {
   position: absolute;
   top: 85px;
-  right: -41px; }
+  right: -41px;
+  z-index: 10; }
 
 /* Setup */
 /* General */
@@ -429,9 +390,9 @@ footer {
   width: 900px; }
   #welcome nav.martini ul {
     position: absolute;
-    top: -240px;
-    left: 70px;
-    width: 690px; }
+    top: -220px;
+    left: 42px;
+    width: 730px; }
   #welcome nav.martini .left.arrow {
     position: absolute;
     left: 0; }
@@ -542,7 +503,7 @@ footer {
     opacity: 0; }
   #overview .legend {
     background-color: #fff;
-    width: 350px;
+    width: 120px;
     height: 50px;
     /* border: 1px solid #bbb; */
     margin: 0 auto; }
@@ -572,13 +533,15 @@ footer {
     margin: 0em 0 0;
     color: #3d8699;
     position: absolute;
-    top: 6px;
+    top: 7px;
     right: 20px; }
     #timeline .crisisDate h4 {
       margin: 0.5em 0; }
   #timeline #crisisStory {
     margin: 0em 0 0;
     color: #919191; }
+  #timeline ul {
+    margin: 0.5em; }
   #timeline h3 {
     font-size: 1.5em;
     color: #cc1452;
@@ -590,7 +553,7 @@ footer {
   #timeline .storySource {
     display: block;
     text-align: right;
-    margin-top: 0.3em; }
+    margin: 0em 1.5em 0 0; }
   #timeline .storyTriangle {
     fill: #919191; }
   #timeline #dataSourceSelect {
@@ -604,6 +567,10 @@ footer {
     pointer-events: none; }
   #timeline .checkbox {
     float: right; }
+  #timeline .tabs {
+    margin-top: 2em; }
+  #timeline .tabContent {
+    margin-top: 3.4em; }
   #timeline .storyline {
     stroke: #cccccc;
     stroke-dasharray: 15 25;
@@ -656,11 +623,11 @@ footer {
   width: 300px; }
 
 .tutorial {
-  position: absolute;
+  position: relative;
   top: 0px;
-  left: -300px;
-  width: 607px;
-  height: 600px;
+  left: -280px;
+  width: 237px;
+  height: 500px;
   background-color: rgba(10, 10, 10, 0.7);
   padding: 1.5em;
   color: white; }
@@ -673,17 +640,26 @@ footer {
 .arrow img {
   vertical-align: middle; }
 
-.right.arrow {
+.left.arrow, .right.arrow {
   text-transform: uppercase; }
 
 #rotatingGlobe {
   width: 320px;
   margin: 100px auto 0; }
 
+.tut-gif {
+  position: absolute;
+  top: 80px;
+  left: 350px;
+  z-index: -1; }
+
 nav.martini {
   display: block;
   text-align: center;
-  color: #cccccc; }
+  color: #cccccc;
+  position: absolute;
+  bottom: 0;
+  top: auto; }
   nav.martini ul {
     float: none; }
 
@@ -692,16 +668,10 @@ nav.martini {
   background: url("../images/gif/overview-faded.gif");
   width: 616px;
   height: 542px;
-  margin: 0 auto;
-  position: relative;
-  top: 80px;
-  z-index: -1; }
+  margin: 0 auto; }
 
 #timelineVisGIF {
   background: url("../images/gif/timeline1.gif");
-  width: 892px;
-  height: 548px;
-  margin: 0 auto;
-  position: relative;
-  top: 0px;
-  z-index: -1; }
+  width: 692px;
+  height: 448px;
+  margin: 0 auto; }

@@ -21,7 +21,7 @@
 		</div>
 
 		<!-- Overview Vis -->
-		<div id="overviewVisGIF" class="cf"></div>
+		<div id="overviewVisGIF" class="tut-gif"></div>
 
 	</div>
 	<!-- footer -->
