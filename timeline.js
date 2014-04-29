@@ -172,28 +172,11 @@
         // if first in array, can't use indexOf, so just add it
         if(i === 0) {
           sources.push(d);
-          // sources.push({
-            // name: d.name,
-            // sampleValue: d.value });
         }
-        // if array does not already contain string, add it
-        // else {
-        //   // look for current name already in sources object
-        //   sources.forEach(function(e){
-        //     console.log(e.name);
-        //   });
-        //   if(sources.indexOf(d) == -1) {
-        //     sources.push({
-        //       name: d.name,
-        //       sampleValue: d.value });
-        //   }
-        // }
         else if(sources.indexOf(d) == -1 ) {
           sources.push(d);
         }
       });
-    /* Remove Google source from data */
-    // sources.shift();
 
     /* convert dates to js objects and record for x domain */
     data.forEach(function(d){
@@ -227,13 +210,10 @@
           // add values by looking through original data and finding relevant dates and counts
           data.forEach(function(e){
             // get clean source name from original data
-            // var cleanSourceName = e.query_distinct.substring(0, e.query_distinct.length-3);
             // if source data equals entry in original data, wrangle it!
             if(d == e.site_name){
-            // if(d.name == e.site_name){
               // return object with pertinent data
               currentSource.values.push({ date: e.date_query_end, count: +e.raw_result_count, name: d, type: e.site_type, id: sourceHandle, vis: 1 });
-              // currentSource.values.push({ date: e.date_query_end, count: +e.raw_result_count, name: d.name, type: e.site_type, id: sourceHandle, vis: 1 });
             }
           });
           // add name to master array
@@ -279,6 +259,35 @@
     // draw charts
     return typeVis();
   }
+
+function resetSummary(){
+
+    /* Triangles */
+    // revert to original color on other triangles and shrink
+    d3.selectAll('.storyTriangle')
+        .transition()
+        .style('fill','#919191')
+        .attr('d',d3.svg.symbol().type('triangle-down').size(256));
+
+    //Get content correct.
+    if (document.getElementById("tab_1_compared").className === "content-tab active") {
+        d3.select("#crisisTitle").html('<h3>Relative Interest In Crises</h3>');
+        d3.select('#crisisStory').html('Percentage of change in crisis coverage can be compared from month to month to determine increased, same, or decreased media attention aggregated across all Google results.');
+    } else {
+
+        // add title
+        d3.select('#crisisTitle').data(summary)
+            .html(function (d) {
+                return '<h3>' + d.title + '</h3>';
+            });
+
+        // add summary
+        d3.select('#crisisStory').data(summary)
+            .html(function (d) {
+                return '<p>' + d.content + '</p>';
+            });
+    }
+}
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // BY MEDIA TYPE
@@ -426,10 +435,6 @@
                 .text(function(d) { return d.name; });
 
   /* Storypoints */
-    // add intro title and summary
-    d3.select("#crisisTitle").html('<h3>' + crisis + '</h3>');
-    d3.select('#crisisStory').html('Typhoon Haiyan, known as Typhoon Yolanda in the Philippines, was a powerful tropical cyclone that devastated portions of Southeast Asia, particularly the Philippines, on November 8, 2013. <a href="http://en.wikipedia.org/wiki/Typhoon_Haiyan" class="storySource">&mdash; Wikipedia</a>');
-
     // add dotted lines
     typeFrame.selectAll('.line')
                .data(storyPoints)
@@ -783,14 +788,6 @@
 
   /* Storypoints */
 
-    // add title
-    d3.select('#crisisTitle').data(summary)
-      .html(function(d){ return '<h3>' + d.title + '</h3>'; });
-
-    // add summary
-    d3.select('#crisisStory').data(summary)
-      .html(function(d){ return '<p>' + d.content + '</p>'; });
-
     // add dotted lines
     sourceFrame.selectAll('.line')
                .data(storyPoints)
@@ -867,6 +864,8 @@
     // send it to function that removes line from chart
     labelClick(google);
 
+   //reset Summary
+   resetSummary();
   }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -896,10 +895,6 @@
       });
       
     } else{
-      // change legend color back to original color
-      // d3.select(this)
-        // .attr('fill', function(d){ return color(d.name); });
-
       // add data back in
         // look through data array and set selected media source's data to original data
         visibleDates.forEach(function(e,j){
@@ -980,9 +975,6 @@
 function loadedComparedTimelineCallback(error,data){
     console.log("---- START ::: CRISES COMPARED ---");
 
-    // $('#crisisTitle').hide();
-    // $('#crisisStory').hide();
-
     var mediaData = data;
     console.log("mediaData length: "+mediaData.length);
     console.log(mediaData);
@@ -1056,7 +1048,7 @@ function loadedComparedTimelineCallback(error,data){
         .call(xAxis)
         .append("text")
 //            .attr("transform", "rotate(-90)")
-            .attr("x",detail.w+1)
+            .attr("x",detail.w+2)
             .attr("y", -13)
             .attr("dy", ".71em")
             .style("text-anchor", "end")
@@ -1144,40 +1136,64 @@ function loadedComparedTimelineCallback(error,data){
         var tip = d3.tip()
             .html(function(d) {
                 var month = d.coverage_month;
+                var c = color(d.name);
                 var stayedSame = false;
                 if (month > 1) {
                     var changeText = "stayed the same";
                     var changeVal = d.percent_change;
                     if (d.percent_change > 0){
-                        changeText = "increased ";
+                        changeText = "increased by ";
                     } else if (d.percent_change < 0){
-                        changeText = "dropped ";
+                        changeText = "decreased by ";
                         changeVal = Math.abs(d.percent_change);
                     } else stayedSame = true;
-                    return  "<span class='sourceName'  style='color:"+color(d.name)+";'>" + d.name + ": </span>from month " + (month - 1) + " to " + month + "<br>coverage "+changeText +(stayedSame? "" : changeVal+"%")+".";
+                    return  "<span class='sourceName'  style='color:" + c + ";'>" + d.name + ": </span>from month " + (month - 1) + " to " + month + "<br>coverage "+changeText +(stayedSame? "" : changeVal+"%")+".";
                 } else
-                return  "<span class='sourceName'  style='color:"+color(d.name)+";'>" + d.name + ": </span>at first month of crisis coverage.";
+                return  "<span class='sourceName'  style='color:" + c + ";'>" + d.name + ": </span>at first month of crisis coverage.";
             })
             .direction('e')
             .attr('class','d3-tip e');
 
         // Invoke the tip in the context of your visualization
         series.call(tip);
-
     console.log("---- END ::: CRISES COMPARED ---");
 }
-
-$(document).ready(function() {
-
-    queue()
-        .defer(d3.json,"/productiondata/compared_timeline.json")
-        .await(loadedComparedTimelineCallback);
-
-} );
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // CRISIS SELECT
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+$(document).ready(function() {
+    queue()
+        .defer(d3.json,"/productiondata/compared_timeline.json")
+        .await(loadedComparedTimelineCallback);
+
+    document.getElementById("tab_1_compared").className = "content-tab active";
+    addClassNameListener("tab_1_compared", function () {
+        var className = document.getElementById("tab_1_compared").className;
+        if (className === "content-tab active") {
+            console.log("... tab change to tab_1_compared.");
+            // add intro title and summary
+            resetSummary();
+        }
+    });
+
+    addClassNameListener("tab_2_type", function () {
+        var className = document.getElementById("tab_2_type").className;
+        if (className === "content-tab active") {
+            console.log("... tab change to tab_2_type.");
+            resetSummary();
+        }
+    });
+
+    addClassNameListener("tab_3_source", function () {
+        var className = document.getElementById("tab_3_source").className;
+        if (className === "content-tab active") {
+            console.log("... tab change to tab_3_source.");
+            resetSummary();
+        }
+    });
+} );
 
   addClassNameListener("crisis_select", function(){
       crisis = window.crisis_select.value;
