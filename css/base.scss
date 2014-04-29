@@ -82,6 +82,7 @@
         #crisis_selector {
             color: #636363;
             width: 100%;
+            display: none; // originally hid to prevent flash on first timeline page
         }
         #crisis_form {
             float: right;
@@ -188,10 +189,13 @@
 
     .content {
         max-width: 990px;
-        margin: 160px auto 0;
+        margin: 10em auto 0;
         // padding: 2em 0;
         clear: both;
         position: relative;
+    }
+    #screencast .content {
+        margin-top: 5em;
     }
 
 /* Footer */
@@ -210,6 +214,7 @@ footer {
             vertical-align: middle;
             opacity: 0.5;
             transition: opacity 0.5s ease;
+            padding: 0.2em;
         }
         img:hover{
             opacity: 1;
@@ -322,3 +327,10 @@ footer {
             margin:0em 1.5em 0 0 ;
         }
     }
+
+/* Screencast */
+
+#screencast .embed {
+    width: 500px;
+    margin: 0 auto 4em;
+}

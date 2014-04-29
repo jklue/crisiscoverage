@@ -36,8 +36,6 @@ function loadedDataCallBack(error, media, summary){
         "aoColumns": aoColumns
     } );
 
-    //reset Summary
-    // resetSummary(summary);
 }
 
 /**
@@ -90,3 +88,6 @@ addClassNameListener("crisis_select", function(){
     console.log("### SETTING TABLE (" + tableSelect.value + ") AFTER NEW CRISIS ("+crisis+") AFTER CLASS CHANGE ###");
     loadTable(tableSelect.value);
 });
+
+// show crisis selector
+showSelector();

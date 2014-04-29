@@ -99,7 +99,6 @@ function resetSummary(summary){
         $('#crisis_selector').hide();
 
     } else {
-        console.log('no way!!!!!!');
         // show selector
         $('#crisis_selector').show();
 
@@ -115,4 +114,11 @@ function resetSummary(summary){
                 return '<p>' + d.content + '</p>';
             });
     }
+}
+
+/**
+ * Show crisis selector on non-auto pages
+ */
+function showSelector(){
+    $('#crisis_selector').show();
 }
