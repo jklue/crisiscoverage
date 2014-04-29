@@ -979,6 +979,10 @@
  */
 function loadedComparedTimelineCallback(error,data){
     console.log("---- START ::: CRISES COMPARED ---");
+
+    $('#crisisTitle').hide();
+    $('#crisisStory').hide();
+
     var mediaData = data;
     console.log("mediaData length: "+mediaData.length);
     console.log(mediaData);
@@ -1028,6 +1032,51 @@ function loadedComparedTimelineCallback(error,data){
                 return yScale(d.percent_change);
             })
             .interpolate('linear');
+
+    /* Create axes */
+    var xAxis = d3.svg.axis()
+        .scale(xScale)
+        .orient('top')
+        .ticks(maxMonth)
+        .tickSize(6, 0, 0)
+        .tickFormat(function(d){
+            if (d === 1 || d === 7) return "";
+            else return d;
+        });
+
+
+    var yAxis = d3.svg.axis()
+        .scale(yScale)
+        .orient('left')
+        .ticks(6);
+
+    d3.select('#timeline-compared').select("g").append("g")
+        .attr("class", "axis")
+        .attr("transform", "translate(0," + ((detail.h)/2) + ")")
+        .call(xAxis)
+        .append("text")
+//            .attr("transform", "rotate(-90)")
+            .attr("x",detail.w+1)
+            .attr("y", -13)
+            .attr("dy", ".71em")
+            .style("text-anchor", "end")
+            .text("crisis month");
+
+    d3.select('#timeline-compared').select("g").append("g")
+        .attr("class", "axis")
+        .call(yAxis)
+        .append("text")
+             .attr("transform", "rotate(-90)")
+             .attr("y", 6)
+             .attr("dy", ".71em")
+             .style("text-anchor", "end")
+             .text("% change");
+
+    comparedSVG.selectAll('.axis line, .axis path')
+        .style({'stroke': '#CCC', 'fill': '#CCC', 'stroke-width': '1px'});
+
+    comparedSVG.selectAll('.axis text')
+        .style({'fill': '#CCC'});
 
     var series = comparedSVG.selectAll(".series")
         .data(mediaData)
@@ -1097,7 +1146,7 @@ function loadedComparedTimelineCallback(error,data){
                 var month = d.coverage_month;
                 var stayedSame = false;
                 if (month > 1) {
-                    var changeText = "stayed same ";
+                    var changeText = "stayed the same";
                     var changeVal = d.percent_change;
                     if (d.percent_change > 0){
                         changeText = "increased ";
@@ -1115,43 +1164,41 @@ function loadedComparedTimelineCallback(error,data){
         // Invoke the tip in the context of your visualization
         series.call(tip);
 
-    // x axis
-    var xAxis = d3.svg.axis()
-        .scale(xScale)
-        .orient('bottom')
-        .ticks(maxMonth)
-        .tickSize(6, 0, 0);
-
-    // y axis for consolidated population line
-    var yAxis = d3.svg.axis()
-        .scale(yScale)
-        .orient('left')
-        .ticks(6);
-
-    //Create X axis
-    d3.select('#timeline-compared').append("g")
-        .attr("class", "axis")
-        .attr("transform", "translate("+margin.left+"," + ((detail.h+margin.top+margin.bottom)/2) + ")")
-        .call(xAxis);
-
-    d3.select('#timeline-compared').select("g").append("g")
-        .attr("class", "axis")
-        .call(yAxis)
-        .append("text")
-        .attr("transform", "rotate(-90)")
-        .attr("y", 6)
-        .attr("dy", ".71em")
-        .style("text-anchor", "end")
-        .text("% change");
-
     console.log("---- END ::: CRISES COMPARED ---");
 }
 
 $(document).ready(function() {
-//   $('#timelineComparedVis').append("<br> [CHART HERE] <br>");
+
     queue()
         .defer(d3.json,"/productiondata/compared_timeline.json")
         .await(loadedComparedTimelineCallback);
+
+    addClassNameListener("tab_1_compared", function () {
+        var className = document.getElementById("tab_1_compared").className;
+        if (className === "content-tab active") {
+            console.log("... tab change to tab_1_compared.");
+            $('#crisisTitle').hide();
+            $('#crisisStory').hide();
+        }
+    });
+
+    addClassNameListener("tab_2_type", function () {
+        var className = document.getElementById("tab_2_type").className;
+        if (className === "content-tab active") {
+            console.log("... tab change to tab_2_type.");
+            $('#crisisTitle').show();
+            $('#crisisStory').show();
+        }
+    });
+
+    addClassNameListener("tab_3_source", function () {
+        var className = document.getElementById("tab_3_source").className;
+        if (className === "content-tab active") {
+            console.log("... tab change to tab_3_source.");
+            $('#crisisTitle').show();
+            $('#crisisStory').show();
+        }
+    });
 } );
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
