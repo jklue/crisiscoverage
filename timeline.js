@@ -145,28 +145,14 @@
       d.date = parseStorypoint(d.date);
     });
 
-    // // sort data by highest articles down to lowest, based on first reported data
-    // console.log(data);
-
-    // data.sort(function(a,b){
-    //   // return raw result count
-    //   // console.log(a);
-
-    //   return d3.descending(a.raw_result_count, b.raw_result_count);
-    // });
-
-    // console.log(data);
-
     /* Get news source titles */
       // iterate through .csv to find source names
       var sourceDuplicates = data.map(function(d){
         // get source name without month data
-        // return ({ name: d.site_name, value: d.raw_result_count });
         return d.site_name;
       });
       // define new array to hold unique source names
       sources = [];
-      // sources = {};
       // reduce source list to unique names
       sourceDuplicates.forEach(function(d,i){
         // if first in array, can't use indexOf, so just add it
@@ -196,11 +182,9 @@
           var currentSource = [];
           // add source name
           currentSource.name = d;
-          // currentSource.name = d.name;
           // set unique id
             // remove spaces and periods
             var sourceHandle = d.replace(/[\. ]+/g, "");
-            // var sourceHandle = d.name.replace(/[\. ]+/g, "");
             // set it
             currentSource.id = sourceHandle;
           // set if visible or not

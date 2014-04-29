@@ -5,13 +5,6 @@
 
   <div class="content cf">
 
-    <!-- Crisis Info -->
-    <div id="crisisInfo">
-      <div id="crisisCompared"></div>
-      <div id="crisisTitle"></div>
-      <div id="crisisStory"></div>
-    </div>
-
     <!-- Graphs -->
     <div class="tabs cf">
         <a data-toggle="tab_1_compared">Crises Compared</a>

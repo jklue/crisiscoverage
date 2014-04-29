@@ -454,6 +454,10 @@ function internalNumberSort(a,_a,b,_b,sortAscending){
 function loadedDataCallBack(error, world, media, summary) {
     console.log("--- START ::: loadedDataCallback ---");
 
+    /* update crisis info section */
+
+
+
     mediaData = {};
     mediaBarData = [];
     world_data = topojson.feature(world, world.objects.countries).features;
@@ -606,3 +610,22 @@ $(document).ready(function() {
         }
     });
 } );
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// CHANGE CRISIS SUMMARY
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function resetSummary(){
+
+    // add title
+    d3.select('#crisisTitle').data(summary)
+        .html(function (d) {
+            return '<h3>' + d.title + '</h3>';
+        });
+
+    // add summary
+    d3.select('#crisisStory').data(summary)
+        .html(function (d) {
+            return '<p>' + d.content + '</p>';
+        });
+}
