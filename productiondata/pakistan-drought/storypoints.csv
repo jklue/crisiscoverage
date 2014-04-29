@@ -1,9 +1,6 @@
 story_id,date,title,content
-"1","2014-01-15","<strong>Crisis begins.</strong> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nisi ut aliquip ex ea commodo
-consequat."
-"2","2014-03-07","<strong>Story breaks in the press.</strong> A Dawn.com story was first (Aljazeera)
+"1","2014-01-15","<strong>A crisis begins.</strong> Nearly 140 children have died from starvation.<a href='http://www.bbc.com/news/world-asia-26609858' class='storySource'>&mdash; BBC</a>"
+"2","2014-03-07","<strong>Story breaks in the press.</strong> A Dawn.com story brought the crisis to light in the national press, and the region begins to get aid from the government. <a href='http://www.aljazeera.com/indepth/features/2014/03/pakistan-thar-residents-living-edge-2014315121120904102.html' class='storySource'>&mdash; Aljazeera</a>
 "3","2014-1-30","<strong>Something important happened here...</strong> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 tempor magna aliqua. Ut enim ad minim veniam,
 quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
