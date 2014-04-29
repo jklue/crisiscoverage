@@ -565,6 +565,7 @@ d3.selectAll("input")
 
 $(document).ready(function() {
 
+    document.getElementById("tab_1_globe").className = "content-tab active";
     addClassNameListener("tab_1_globe", function () {
         var className = document.getElementById("tab_1_globe").className;
         if (className === "content-tab active") {
