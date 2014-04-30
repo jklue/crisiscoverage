@@ -10,12 +10,10 @@
 			<div class="tutorial">
 				<h1>World</h1>
 				<p><strong>Compared Crises Tab:</strong> Countries providing top-ten results for all of the crises can be
-				compared in a
-				single sankey diagram, reference other Tabs for full evaluation of response to a given crisis.</p>
+				compared in a	single sankey diagram, reference other Tabs for full evaluation of response to a given crisis.</p>
 
 				<p><strong>Map Tab:</strong> Results by country, colored on a choropleth map according to level of response.
-				Useful to
-				general responses to a single crisis at a glance.</p>
+				Useful to gauge	general responses to a single crisis at a glance.</p>
 
 				<p><strong>Bar Chart Tab:</strong> Results by country provided as a horizontal bar chart according to level of
 				 response.
