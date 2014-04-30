@@ -9,7 +9,16 @@
 		<!-- Tutorial -->
 		<div class="tutorial-wrapper">
 			<div class="tutorial">
-				<p>So this is how you use this graph...</p>
+				<h1>Project Data</h1>
+				<p><em>Offers the primary tables that drive this site, derived from using Google Custom Search API.</em></p>
+				<p><strong>Country Stats:</strong> Count of results from each country for a given crisis.</p>
+				<p><strong>Baseline Coverage Stats:</strong> Count of all results (not just crisis) available for each of our
+				specially	tracked sites + all Google.</p>
+				<p><strong>Crisis Coverage Stats:</strong> Count of crisis results from our specially tracked sites + all Google
+				.</p>
+				<p><strong>Crisis Sample Results:</strong> For each crisis, a sampling of results from each of our specially
+				tracked	sites + all	Google.</p>
+
 				<nav class="martini">
 					<ul>
 						<!-- <li><a href="/overview" class="left arrow"><img src="images/icons/leftarrow.png" alt="Left Arrow" title="Skip to Charts">Skip to Charts</a></li> -->

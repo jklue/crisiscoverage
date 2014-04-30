@@ -8,9 +8,16 @@
 		<!-- Tutorial -->
 		<div class="tutorial-wrapper">
 			<div class="tutorial">
-				<h1>The Timeline</h1>
-				<p>So this is how you use this graph...</p>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+				<h1>Timeline</h1>
+			  <p><strong>Compared Crises Tab:</strong> Percentage of change in crisis coverage can be compared from month to month to determine increased, same, or decreased media attention aggregated across all Google results.</p>
+
+        <p><strong>Type Tab:</strong> Results from our specially tracked sites aggregated by media types
+        'Traditional', 'Independent',
+         and 'Blogs-Social', per crisis using the monthly data from Google API.</p>
+
+ 				<p><strong>Source Tab:</strong> Results from our specially tracked sites, per crisis using the monthly data
+ 				from Google API.</p>
+
 				<nav class="martini">
 					<ul>
 						<!-- <li><a href="/overview" class="left arrow"><img src="images/icons/leftarrow.png" alt="Left Arrow" title="Skip to Charts">Skip to Charts</a></li> -->

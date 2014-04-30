@@ -9,7 +9,8 @@
 		<!-- Tutorial -->
 		<div class="tutorial-wrapper cf">
 			<div class="tutorial">
-				<p>So this is how you use this graph...</p>
+			<h1>Details</h1>
+				<p>Details info here...</p>
 				<nav class="martini">
 					<ul>
 						<!-- <li><a href="/overview" class="left arrow"><img src="images/icons/leftarrow.png" alt="Left Arrow" title="Skip to Charts">Skip to Charts</a></li> -->

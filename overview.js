@@ -47,125 +47,125 @@ var myColors = colorbrewer.Greens[6].slice(1),
     colorScale = myColors;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// GLOBE ONLY
+// GLOBE ONLY (COMMENTING OUT AS IT DOESN'T REALLY ADD TO THE VIS)
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-var country;//<-- these must be defined after indicators available.
-
-var svg = d3.select("#overviewGlobe").append("svg").attr({
-        width: width+margin.left+margin.right,
-        height: height+margin.top+margin.bottom,
-        transform: "translate(" + margin.left + "," + margin.top + ")"
-    })
-        .on("mousedown", mousedown)
-        .on("mousemove", mousemove)
-        .on("mouseup", mouseup),
-
-    // add water
-    water = svg.append("path")
-        .datum({type: "Sphere"})
-        .attr("class", "water")
-        .attr("d", path),
-
-    countries = svg.append("g").attr({
-        id: "countries",
-        width: width,
-        height: height
-    });
-
-/* lat and lon lines */
-var projection = d3.geo.orthographic()
-        .scale(250)
-        .translate([width / 2, height / 2])
-        .clipAngle(90),
-
-    path = d3.geo.path()
-        .projection(projection),
-
-// instantiate meridians and parallels with d3's help
-    graticule = d3.geo.graticule();
-
-// add meridians and parallels to globe
-svg.append("g").append('path')
-    .datum(graticule)
-    .attr('class','graticule')
-    .attr('d',path);
-
-var m0,
-    o0,
-    done,
-    shouldResume;
-
-var velocity = .02,
-    then = Date.now(),
-    lastClick = 0;
-
-/**
- * RENDER GLOBE (AFTER ALL ELSE IS LOADED)
- */
-function renderGlobe() {
-    //Fill according to latest results.
-    country
-        .attr('fill', function (d) {
-            if (_.has(mediaData, d.properties.name) && mediaData[d.properties.name].articles > 0) {
-//                console.log(mediaData[d.properties.name].articles);
-                return color(mediaData[d.properties.name].articles);
-            } else {
-                return emptyColor;
-            }
-        });
-
-    //Populate legend
-    $('#legend_globe').empty();
-    colorlegend("#legend_globe", color, "quantile", {title: "results by country", boxHeight: 15, boxWidth: 30, fill: false, linearBoxes: 5});
-    if (!done) startAnimation();
-
-}
-
-function stopAnimation() {
-    done = true;
-}
-
-function startAnimation() {
-    done = false;
-    then = Date.now();
-
-    d3.timer(function() {
-        var angle = velocity * (Date.now() - then);
-        projection.rotate([angle,0,0]);
-        svg.selectAll("path")
-            .attr("d", path.projection(projection));
-        return done;
-    });
-}
-
-function mousedown() {
-    if (!done) stopAnimation();
-    else if (Date.now()-lastClick < 500) {
-        startAnimation();
-    }
-    lastClick = Date.now();
-
-    m0 = [d3.event.pageX, d3.event.pageY];
-    o0 = projection.rotate();
-    d3.event.preventDefault();
-}
-
-function mousemove() {
-    if (m0) {
-        var m1 = [d3.event.pageX, d3.event.pageY],
-//            o1 = [o0[0] + (m0[0] - m1[0]) / 8, o0[1] + (m1[1] - m0[1]) / 8];
-            o1 = [o0[0] + (m1[0]- m0[0]) / 8,0];//no y and rotate with mouse
-        projection.rotate(o1);
-        svg.selectAll("path").attr("d", path);
-    }
-}
-
-function mouseup() {
-    if (m0) {
-        mousemove();
-        m0 = null;
-    }
-}
+//var country;//<-- these must be defined after indicators available.
+//
+//var svg = d3.select("#overviewGlobe").append("svg").attr({
+//        width: width+margin.left+margin.right,
+//        height: height+margin.top+margin.bottom,
+//        transform: "translate(" + margin.left + "," + margin.top + ")"
+//    })
+//        .on("mousedown", mousedown)
+//        .on("mousemove", mousemove)
+//        .on("mouseup", mouseup),
+//
+//    // add water
+//    water = svg.append("path")
+//        .datum({type: "Sphere"})
+//        .attr("class", "water")
+//        .attr("d", path),
+//
+//    countries = svg.append("g").attr({
+//        id: "countries",
+//        width: width,
+//        height: height
+//    });
+//
+///* lat and lon lines */
+//var projection = d3.geo.orthographic()
+//        .scale(250)
+//        .translate([width / 2, height / 2])
+//        .clipAngle(90),
+//
+//    path = d3.geo.path()
+//        .projection(projection),
+//
+//// instantiate meridians and parallels with d3's help
+//    graticule = d3.geo.graticule();
+//
+//// add meridians and parallels to globe
+//svg.append("g").append('path')
+//    .datum(graticule)
+//    .attr('class','graticule')
+//    .attr('d',path);
+//
+//var m0,
+//    o0,
+//    done,
+//    shouldResume;
+//
+//var velocity = .02,
+//    then = Date.now(),
+//    lastClick = 0;
+//
+///**
+// * RENDER GLOBE (AFTER ALL ELSE IS LOADED)
+// */
+//function renderGlobe() {
+//    //Fill according to latest results.
+//    country
+//        .attr('fill', function (d) {
+//            if (_.has(mediaData, d.properties.name) && mediaData[d.properties.name].articles > 0) {
+////                console.log(mediaData[d.properties.name].articles);
+//                return color(mediaData[d.properties.name].articles);
+//            } else {
+//                return emptyColor;
+//            }
+//        });
+//
+//    //Populate legend
+//    $('#legend_globe').empty();
+//    colorlegend("#legend_globe", color, "quantile", {title: "results by country", boxHeight: 15, boxWidth: 30, fill: false, linearBoxes: 5});
+//    if (!done) startAnimation();
+//
+//}
+//
+//function stopAnimation() {
+//    done = true;
+//}
+//
+//function startAnimation() {
+//    done = false;
+//    then = Date.now();
+//
+//    d3.timer(function() {
+//        var angle = velocity * (Date.now() - then);
+//        projection.rotate([angle,0,0]);
+//        svg.selectAll("path")
+//            .attr("d", path.projection(projection));
+//        return done;
+//    });
+//}
+//
+//function mousedown() {
+//    if (!done) stopAnimation();
+//    else if (Date.now()-lastClick < 500) {
+//        startAnimation();
+//    }
+//    lastClick = Date.now();
+//
+//    m0 = [d3.event.pageX, d3.event.pageY];
+//    o0 = projection.rotate();
+//    d3.event.preventDefault();
+//}
+//
+//function mousemove() {
+//    if (m0) {
+//        var m1 = [d3.event.pageX, d3.event.pageY],
+////            o1 = [o0[0] + (m0[0] - m1[0]) / 8, o0[1] + (m1[1] - m0[1]) / 8];
+//            o1 = [o0[0] + (m1[0]- m0[0]) / 8,0];//no y and rotate with mouse
+//        projection.rotate(o1);
+//        svg.selectAll("path").attr("d", path);
+//    }
+//}
+//
+//function mouseup() {
+//    if (m0) {
+//        mousemove();
+//        m0 = null;
+//    }
+//}
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // MAP ONLY
@@ -184,7 +184,7 @@ var svgMap = d3.select("#overviewMap").append("svg").attr({
         .attr("class", "water")
         .attr({
             width: '940px',
-            height: '500px',
+            height: '500px'
         }),
 
     countries_map = svgMap.append("g").attr({
@@ -471,7 +471,6 @@ function renderCrisesCompared(){
         var f;
         if (d === 0) f = "Rank > 10";
         else  f = "Rank: " + d;
-//        console.log(f);
         return f;
     },
         color = d3.scale.category20();
@@ -501,7 +500,7 @@ function renderCrisesCompared(){
             .enter().append("path")
             .attr("class", "link")
             .attr("d", path)
-            .style("stroke-width", function(d) { return Math.max(0, d.dy); })//changed from 1,d.dy
+            .style("stroke-width", function(d) { return Math.max(0, d.dy); })
             .sort(function(a, b) { return b.dy - a.dy; });
 
         link.append("title")
@@ -520,7 +519,7 @@ function renderCrisesCompared(){
         node.append("rect")
             .attr("height", function(d) { return d.dy; })
             .attr("width", sankey.nodeWidth())
-            .style("fill", function(d) { return d.color = color(d.name.replace(/ .*/, "")); })
+            .style("fill", function(d) { return d.color = color(d.name); })
             .style("stroke", function(d) { return d3.rgb(d.color).darker(2); })
             .append("title")
             .text(function(d) { return d.name + "\n" + format(d.rank); });
@@ -597,24 +596,24 @@ function loadedDataCallBack(error, world, media, crisisSummary) {
         .domain([min, mean, max])
         .range(colorScale);
 
-    //Populate country for globe
-    $('#countries').empty();
-    country = countries
-        .selectAll(".country")
-        .data(world_data);
-
-    country.enter()
-        .append('path')
-        .attr('class', 'country')
-        .attr('d', path)
-        .on('mouseover', tip.show)
-        .on("mousemove", function () {
-            return tip
-                .style("top", (d3.event.pageY + 16) + "px")
-                .style("left", (d3.event.pageX + 16) + "px");
-        })
-        .on('mouseout', tip.hide);
-    country.call(tip);
+//    //Populate country for globe
+//    $('#countries').empty();
+//    country = countries
+//        .selectAll(".country")
+//        .data(world_data);
+//
+//    country.enter()
+//        .append('path')
+//        .attr('class', 'country')
+//        .attr('d', path)
+//        .on('mouseover', tip.show)
+//        .on("mousemove", function () {
+//            return tip
+//                .style("top", (d3.event.pageY + 16) + "px")
+//                .style("left", (d3.event.pageX + 16) + "px");
+//        })
+//        .on('mouseout', tip.hide);
+//    country.call(tip);
 
     //Populate country for map
     $('#countries_map').empty();
@@ -643,7 +642,7 @@ function loadedDataCallBack(error, world, media, crisisSummary) {
         });
     country_map.call(tip);
 
-    renderGlobe();
+//    renderGlobe();
     renderMap();
     renderBarChart();
 
@@ -674,41 +673,43 @@ $(document).ready(function() {
         var className = document.getElementById("tab_1_compared").className;
         if (className === "content-tab active") {
             console.log("... tab change to tab_1_compared.");
-            if (!done) {
-                stopAnimation();
-                shouldResume = true;
-            } else shouldResume = false;
+//            if (!done) {
+//                stopAnimation();
+//                shouldResume = true;
+//            } else shouldResume = false;
         
             // change summary data
             resetSummary(summary); 
 
         }
     });
-    addClassNameListener("tab_2_globe", function () {
-        var className = document.getElementById("tab_2_globe").className;
-        if (className === "content-tab active") {
-            console.log("... tab change to tab_2_globe.");
-            if (shouldResume) startAnimation();
-       
-            // change summary data
-            resetSummary(summary); 
-        
-        }
 
-        //Populate legend
-        $('#legend_globe').empty();
-        colorlegend("#legend_globe", color, "quantile", {title: "results by country", boxHeight: 15, boxWidth: 30, fill: false, linearBoxes: 5});
-        if (!done) startAnimation();
-    });
+// COMMENTING OUT GLOBE AS IT DOESN'T REALLY ADD TO THE VIS
+//    addClassNameListener("tab_2_globe", function () {
+//        var className = document.getElementById("tab_2_globe").className;
+//        if (className === "content-tab active") {
+//            console.log("... tab change to tab_2_globe.");
+//            if (shouldResume) startAnimation();
+//
+//            // change summary data
+//            resetSummary(summary);
+//
+//        }
+//
+//        //Populate legend
+//        $('#legend_globe').empty();
+//        colorlegend("#legend_globe", color, "quantile", {title: "results by country", boxHeight: 15, boxWidth: 30, fill: false, linearBoxes: 5});
+//        if (!done) startAnimation();
+//    });
 
     addClassNameListener("tab_3_map", function () {
         var className = document.getElementById("tab_3_map").className;
         if (className === "content-tab active") {
             console.log("... tab change to tab_3_map.");
-            if (!done) {
-                stopAnimation();
-                shouldResume = true;
-            } else shouldResume = false;
+//            if (!done) {
+//                stopAnimation();
+//                shouldResume = true;
+//            } else shouldResume = false;
 
             //Populate legend
             $('#legend_map').empty();
@@ -723,10 +724,10 @@ $(document).ready(function() {
         var className = document.getElementById("tab_4_bar").className;
         if (className === "content-tab active") {
             console.log("... tab change to tab_4_bar.");
-            if (!done) {
-                stopAnimation();
-                shouldResume = true;
-            } else shouldResume = false;
+//            if (!done) {
+//                stopAnimation();
+//                shouldResume = true;
+//            } else shouldResume = false;
             
             // change summary data
             resetSummary(summary); 
