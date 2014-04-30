@@ -55,7 +55,8 @@ function transition() {
                 c.clearRect(0, 0, width, height);
                 c.fillStyle = "#bbb", c.beginPath(), path(land), c.fill();
                 // crisis country
-                c.fillStyle = "#CC1452", c.beginPath(), path(countries[i]), c.fill();
+                c.fillStyle = "#af6e7b", c.beginPath(), path(countries[i]), c.fill();
+                // c.fillStyle = "#CC1452", c.beginPath(), path(countries[i]), c.fill();
                 // country border
                 c.strokeStyle = "#fff", c.lineWidth = .5, c.beginPath(), path(borders), c.stroke();
                 // globe outline
@@ -109,7 +110,8 @@ function transition() {
                             c.clearRect(0, 0, width, height);
                             c.fillStyle = "#bbb", c.beginPath(), path(land), c.fill();
                             // crisis country
-                            c.fillStyle = "#CC1452", c.beginPath(), path(countries[i]), c.fill();
+                            c.fillStyle = "#af6e7b", c.beginPath(), path(countries[i]), c.fill();
+                            // c.fillStyle = "#CC1452", c.beginPath(), path(countries[i]), c.fill();
                             // country border
                             c.strokeStyle = "#fff", c.lineWidth = .5, c.beginPath(), path(borders), c.stroke();
                             // globe outline

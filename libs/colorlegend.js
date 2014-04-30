@@ -78,7 +78,7 @@ var colorlegend = function (target, scale, type, options) {
         .attr('height', h)
         .append('g')
         .attr('class', 'colorlegend')
-        .attr('transform', 'translate(' + padding[3] + ',' + padding[0] + ')')
+        .attr('transform', 'translate(' + padding[3] + ',' + padding[3] + ')')
         .style('font-size', '11px')
         .style('fill', '#666');
 

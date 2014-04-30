@@ -181,7 +181,7 @@ a {
   color: #cccccc; }
 
 a:hover {
-  color: #cc1452; }
+  color: #af6e7b; }
 
 /* Header */
 header {
@@ -253,7 +253,7 @@ nav {
       padding: 1em; }
 
 #overview .overviewLink, #timeline .timelineLink, #detail .detailLink, #data .dataLink {
-  color: #cc1452; }
+  color: #af6e7b; }
 
 /* Text */
 h1 {
@@ -400,12 +400,12 @@ footer {
 /* Crisis Summary */
 #crisisInfo h3 {
   font-size: 1.5em;
-  color: #cc1452;
+  color: #af6e7b;
   margin-bottom: 0.3em; }
 #crisisInfo span.sourceName {
   font-weight: bold;
   font-style: italic;
-  color: #cc1452; }
+  color: #af6e7b; }
 #crisisInfo .storySource {
   display: block;
   text-align: right;
@@ -415,6 +415,10 @@ footer {
 #screencast .embed {
   width: 500px;
   margin: 0 auto 4em; }
+
+/* Data page */
+table.dataTable tr.odd, table.dataTable tr.odd td.sorting_1 {
+  background-color: rgba(61, 134, 153, 0.4) !important; }
 
 /* Setup */
 /* General */
@@ -462,7 +466,7 @@ footer {
 /* Rotating Globe */
 #crisis_name {
   color: white;
-  background-color: #cc1452; }
+  background-color: #af6e7b; }
 
 /* Animation */
 .fadeInOut {
@@ -574,7 +578,7 @@ nav.martini {
   /* Tooltips */
   /* Legend */ }
   #overview .water {
-    fill: #4292c6; }
+    fill: rgba(66, 146, 198, 0.7); }
   #overview #overviewVis {
     width: 940px;
     margin: 0 auto 7em;
@@ -644,7 +648,7 @@ nav.martini {
     float: right;
     color: #919191; }
   #timeline .traditionalMediaPath {
-    stroke: #cc1452; }
+    stroke: #af6e7b; }
   #timeline .x.axis, #timeline .y.axis, #timeline .x.axis2, #timeline .y.axis2 {
     fill: #cccccc; }
   #timeline .hover-line {

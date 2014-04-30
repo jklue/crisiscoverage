@@ -31,7 +31,8 @@
 /* Setup */
 
     // colors
-    $red: #CC1452;
+    $red: #af6e7b;
+    // $red: #CC1452;
     $orange: #FF4940;
     $green: #00FFA8;
     $darkBlue: #3D8699;
@@ -333,4 +334,9 @@ footer {
 #screencast .embed {
     width: 500px;
     margin: 0 auto 4em;
+}
+
+/* Data page */
+table.dataTable tr.odd, table.dataTable tr.odd td.sorting_1  {
+    background-color: rgba(61,134,153,0.4) !important;
 }

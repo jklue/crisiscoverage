@@ -43,12 +43,16 @@ var margin = {
 
 var myColors = {
 //        Grays: ["#f0f0f0","#d9d9d9"],
-//        Blues: ["#deebf7","#c6dbef","#9ecae1","#6baed6","#4292c6"],
+//        Blues: ["#deebf7","#c6dbef","#9ecae1","#6baed6","#3692c6"],
 //        Greens: ["#74c476","#41ab5d","#238b45","#006d2c"]
         Blues: ["#deebf7", "#4292c6"],
-        Greens: ["#74c476", "#41ab5d", "#238b45"]
+        Greens: ["#74c476", "#41ab5d", "#238b45"],
+        Reds: ['rgba(255,41,42,0.2)','rgba(255,41,42,0.4)','rgba(255,41,42,0.6)','rgba(255,41,42,0.8)','rgba(255,41,42,1)'],
+        Yellows: ['rgba(255,215,36,0.2)','rgba(255,215,36,0.4)','rgba(255,215,36,0.6)','rgba(255,215,36,0.8)','rgba(255,215,36,1)'],
     },
-    colorScale =  myColors.Blues.concat(myColors.Greens);
+    // colorScale =  myColors.Reds;
+    colorScale =  myColors.Yellows;
+    // colorScale =  myColors.Blues.concat(myColors.Greens);
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // GLOBE ONLY
