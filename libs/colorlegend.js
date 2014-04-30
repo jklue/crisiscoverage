@@ -110,7 +110,7 @@ var colorlegend = function (target, scale, type, options) {
                 if (i === 0)
                     return domain[0];
                 if (i === colors.length - 1)
-                    return domain[domain.length - 1];
+                    return d3.format(',')(domain[domain.length - 1]);
             }
         });
 

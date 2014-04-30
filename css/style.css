@@ -349,9 +349,9 @@ footer {
   color: #000; }
 
 .tabContent {
-  border: 1px solid #ccc;
+  border-top: 1px solid #ccc;
   margin: 1.4em 0;
-  padding: 5px; }
+  padding: 5px 0 0 1.5em; }
 
 /* Tip (for globe and bar user tips) */
 .tip {
@@ -573,8 +573,10 @@ nav.martini {
 #overview {
   /* Tooltips */
   /* Legend */ }
+  #overview .water {
+    fill: #4292c6; }
   #overview #overviewVis {
-    width: 960px;
+    width: 940px;
     margin: 0 auto 7em;
     position: relative;
     top: 5em; }
@@ -619,13 +621,15 @@ nav.martini {
     opacity: 0; }
   #overview .legend {
     background-color: #fff;
-    width: 130px;
+    width: 170px;
     height: 50px;
     /* border: 1px solid #bbb; */
     margin: 0 auto; }
   #overview #quantileLegend .colorlegend-labels {
     font-size: 11px;
     fill: black; }
+  #overview figure {
+    margin: 0 auto; }
 
 #timeline {
   /* Tooltips */

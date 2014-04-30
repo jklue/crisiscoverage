@@ -6,7 +6,7 @@
 
 	<style>
 	 #overviewGlobe svg, #overviewMap svg{
-          background: #eeeeee;
+          /*background: #eeeeee;*/
           /*background: #d9d9d9;*/
       }
 	</style>

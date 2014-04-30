@@ -64,6 +64,12 @@ var svg = d3.select("#overviewGlobe").append("svg").attr({
         .on("mousemove", mousemove)
         .on("mouseup", mouseup),
 
+    // add water
+    water = svg.append("path")
+        .datum({type: "Sphere"})
+        .attr("class", "water")
+        .attr("d", path),
+
     countries = svg.append("g").attr({
         id: "countries",
         width: width,
@@ -108,7 +114,7 @@ function renderGlobe() {
 //                console.log(mediaData[d.properties.name].articles);
                 return color(mediaData[d.properties.name].articles);
             } else {
-                return 'white';
+                return '#ccc';
             }
         });
 
@@ -116,6 +122,7 @@ function renderGlobe() {
     $('#legend_globe').empty();
     colorlegend("#legend_globe", color, "quantile", {title: "results by country", boxHeight: 15, boxWidth: 30, fill: false, linearBoxes: 5});
     if (!done) startAnimation();
+
 }
 
 function stopAnimation() {
@@ -176,6 +183,14 @@ var svgMap = d3.select("#overviewMap").append("svg").attr({
         transform: "translate(" + margin.left + "," + margin.top + ")"
     }),
 
+    // add water
+    water = svgMap.append("rect")
+        .attr("class", "water")
+        .attr({
+            width: '940px',
+            height: '500px',
+        }),
+
     countries_map = svgMap.append("g").attr({
         id: "countries_map",
         width: width,
@@ -217,7 +232,7 @@ function colorCountry(dimOthers,colorToPass){
             if (d && _.has(mediaData, d.properties.name)) {
                 var c = mediaData[d.properties.name].articles;
                 if (c && !isNaN(c) && c > 0) return color(c);
-            } else return "white";
+            } else return "#ccc";
         });
 }
 
