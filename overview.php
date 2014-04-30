@@ -4,13 +4,6 @@
 
 	<?php include 'includes/header.html'; ?>
 
-	<style>
-	 #overviewGlobe svg, #overviewMap svg{
-          /*background: #eeeeee;*/
-          /*background: #d9d9d9;*/
-      }
-	</style>
-
 	<!-- FOR SANKEY -->
 	<style>
       #chart {
@@ -103,6 +96,7 @@
 	<?php include 'includes/footer.html'; ?>
 
 	  <script src="libs/d3.sankey.js"></script>
+	  <script src="libs/colorbrewer.js"></script>
 
 	<script src="overview.js"></script>
 </body>

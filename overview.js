@@ -41,18 +41,10 @@ var margin = {
     left: 0
 };
 
-var myColors = {
-//        Grays: ["#f0f0f0","#d9d9d9"],
-//        Blues: ["#deebf7","#c6dbef","#9ecae1","#6baed6","#3692c6"],
-//        Greens: ["#74c476","#41ab5d","#238b45","#006d2c"]
-        Blues: ["#deebf7", "#4292c6"],
-        Greens: ["#74c476", "#41ab5d", "#238b45"],
-        Reds: ['rgba(255,41,42,0.2)','rgba(255,41,42,0.4)','rgba(255,41,42,0.6)','rgba(255,41,42,0.8)','rgba(255,41,42,1)'],
-        Yellows: ['rgba(255,215,36,0.2)','rgba(255,215,36,0.4)','rgba(255,215,36,0.6)','rgba(255,215,36,0.8)','rgba(255,215,36,1)'],
-    },
-    // colorScale =  myColors.Reds;
-    colorScale =  myColors.Yellows;
-    // colorScale =  myColors.Blues.concat(myColors.Greens);
+//Luke: I lean toward the chosen color brewer option but feel free to experiment.
+var myColors = colorbrewer.Greens[6].slice(1),
+    emptyColor = 'white',
+    colorScale = myColors;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // GLOBE ONLY
@@ -118,7 +110,7 @@ function renderGlobe() {
 //                console.log(mediaData[d.properties.name].articles);
                 return color(mediaData[d.properties.name].articles);
             } else {
-                return '#ccc';
+                return emptyColor;
             }
         });
 
@@ -236,7 +228,7 @@ function colorCountry(dimOthers,colorToPass){
             if (d && _.has(mediaData, d.properties.name)) {
                 var c = mediaData[d.properties.name].articles;
                 if (c && !isNaN(c) && c > 0) return color(c);
-            } else return "#ccc";
+            } else return emptyColor;
         });
 }
 
@@ -366,7 +358,7 @@ function renderBarChart() {
         .attr("dy", y_em)
         .style("fill", function (d) {
             var c = color(d.articles);
-            if (c === myColors.Greens[2]) return lightBarTextColor;//need to contrast dark green.
+            if (c === myColors[4]) return lightBarTextColor;//need to contrast dark green.
             else
             return defaultBarTextColor;
         })
@@ -479,7 +471,7 @@ function renderCrisesCompared(){
         var f;
         if (d === 0) f = "Rank > 10";
         else  f = "Rank: " + d;
-        console.log(f);
+//        console.log(f);
         return f;
     },
         color = d3.scale.category20();

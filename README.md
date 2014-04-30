@@ -2,13 +2,24 @@
 
 ### Overview and Motivation: Provide an overview of the  project goals and the motivation for it. Consider that this will be read by people who did not see your project proposal.
 #### From our initial proposal:  
->__This project will explore the extent and effects of media coverage on a crisis__, distinguishing between traditional and social media providers and further, to the extent data is available, between stakeholders and non-stakeholders. For anyone interested in the effectiveness of humanitarian or disaster engagement / response, our visual products will facilitate user understanding of which events garner media attention; in turn, a user can use our product to identify strategies how to achieve better results. A crisis for our purposes is a destructive event in human history inspiring extraordinary social and/or media attention. We hypothesize that media coverage is correlated to successful crisis resolution such that intensive coverage results in and from more stakeholder energy being exerted to efficiently manage a crisis. Also, we hypothesize that there are detectable indicators throughout the lifespan of a crisis, from onset to resolution, and we further hypothesize that by systematically analyzing and integrating patterns found in multiple crises, future indicators projected from an ongoing crisis may be predicted at a precision correlated to the quality and quantity of comparable analysis. Predictions will be constrained to represent anticipated conformance to or deviation relative the lifespan of other compared crises.
+>__This project will explore the extent and effects of media coverage on a crisis__, distinguishing between traditional and social media providers and further, to the extent data is available, between stakeholders and non-stakeholders. For anyone interested in the effectiveness of humanitarian or disaster engagement / response, our visual products will facilitate user understanding of which events garner media attention; in turn, a user can use our product to identify strategies how to achieve better results. A crisis for our purposes is a destructive event in human history inspiring extraordinary social and/or media attention. We hypothesize that media coverage is correlated to successful crisis resolution such that intensive coverage results in and from more stakeholder energy being exerted to efficiently manage a crisis. Also, we hypothesize that there are detectable indicators throughout the lifespan of a crisis, from onset to resolution, and we further hypothesize that by systematically analyzing and integrating patterns found in multiple crises, future indicators projected from an ongoing crisis may be predicted at a precision correlated to the quality and quantity of comparable analysis. Predictions will be constrained to represent anticipated conformance to or deviation from the lifespan of other compared crises.
 
-We intentionally set broad outlines for the project until we really had a handle on what data would be reasonable. The ‘Questions’ section offers up what we think is more explorable and where we will attempt to scope our efforts. However, research into the more ponderous questions originally presented would be of benefit on subsequent projects.
+We intentionally set broad outlines for the project in our original [proposal](assets/proposal_dalal_hatfield_johns.pdf) until we really had a handle on what data would be reasonable. The ‘Questions’ section offers up what we think is more explorable and where we will attempt to scope our efforts. However, research into the more ponderous questions originally presented would be of benefit on subsequent projects.
 
 (visit our [website](http://www.crisiscoverage.info) to track our progress and see the final product on 01 MAY 2014.)
 
 ### Related Work: Anything that inspired you, such as a paper, a web site, visualizations we discussed in class, etc.  
+Here is some of pages that inspired our implementation.
+
+1. [Marcos-wescamp (News HeatMap)] (http://contrarian.ca/tag/marcos-wescamp/)  
+2. Overview: [Base globe](http://bl.ocks.org/mbostock/4183330), [Legend](https://github.com/jgoodall/d3-colorlegend), [Globe manipulation](http://rveciana.github.io/geoexamples/?page=d3js/d3js_svgcanvas/rotatingSVG.html)  
+3. [Tabs code](http://code-tricks.com/create-a-simple-html5-tabs-using-jquery/)  
+4. [Scrollpane](https://github.com/vitch/jScrollPane/blob/master/script/jquery.jscrollpane.min.js)
+5. [Sankey](http://bost.ocks.org/mike/sankey/)
+6. [CrossFilter](http://square.github.io/crossfilter/)  
+
+
+#### Milestone-1 Description Follows
 There are quite a few, here are some on the processing side of things.  
 1. [Pickanews: Media Search](http://www.pickanews.com)  
 2. [IndexDen]( https://addons.heroku.com/indexden)  
@@ -19,6 +30,7 @@ There are quite a few, here are some on the processing side of things.
 
 
 ### Questions: What questions are you trying to answer? How did these questions evolve over the course of the project? What new questions did you consider in the course of your analysis?  
+Here are our current questions (same as Milestone-1), please revisit our answer in Overview and Motivation Section for more of the history. 
 1. How much coverage is there of a crisis?  
 2. Where geographically is the coverage coming from?  
 3. What can be learned about coverage over time?  
@@ -27,7 +39,9 @@ There are quite a few, here are some on the processing side of things.
 6. What are the key story points that shape a crisis?  
 
 ### Data: Source, scraping method, cleanup, etc.  
+ For the latest writeup, please see [data-overview](productiondata/data-overview.md). Also, please review our production [data tables page](http://crisiscoverage.info/project-data) from our website.
 
+#### Milestone-1 Description Follows
 We have made quite a bit of progress since the project effort kicked off. First, we put together a robust [proposal](assets/proposal_dalal_hatfield_johns.pdf). The breadth of hypothesis and potential data sources was necessary until we really understood which few directions we could really pursue. The potentials have boiled down to the more concrete efforts discussed below.
 
 #### Data Ingestion Effort  
@@ -63,7 +77,7 @@ Summary metadata consists of the following subset of column fields (the first 7 
 `query_run_date, query_period, periods_back, days_back, result_count, date_query_start, date_query_end`  
 
 #### Sample Data  
-We have attached a compressed [sample](data/haiyan/haiyan-9-week-sample.7z) of our current starter queries to separate Google News from Google Blogs. The sample contains partial results of API queries, url crawling, text cleanup, and metadata extraction. The sample focuses on Typhoon Haiyan which struck the Philippines 13 NOV 2013. There are two collections in this sample held in the [google-news] and [google-blogs] folders. Each holds data from 9 weeks around the crisis. The [meta] folder within each provides aggregated metadata extraction with and with clean text as well as pure summary information. Additionally, the [clean] folder contains a stand-alone version of the cleanup results, ready for deeper indexing and analysis. There are other folders that are part of the processing pipeline but these folders are the output side of processing.
+We have attached a compressed [sample](assets/haiyan-9-week-sample.7z) of our current starter queries to separate Google News from Google Blogs. The sample contains partial results of API queries, url crawling, text cleanup, and metadata extraction. The sample focuses on Typhoon Haiyan which struck the Philippines 13 NOV 2013. There are two collections in this sample held in the [google-news] and [google-blogs] folders. Each holds data from 9 weeks around the crisis. The [meta] folder within each provides aggregated metadata extraction with and with clean text as well as pure summary information. Additionally, the [clean] folder contains a stand-alone version of the cleanup results, ready for deeper indexing and analysis. There are other folders that are part of the processing pipeline but these folders are the output side of processing.
 
 Below are the "starter" queries that drove this collection, prior to URL encoding -- we will most certainly be refining these queries now that we have demonstrated viability:  
 1. newsQueryVal = `q=typhoon haiyan news OR article OR coverage --blog --weather.com --wikipedia.org`  
@@ -98,6 +112,9 @@ We had a running catalog of visualizations from the course lectures and from d3 
 ### Design Evolution
 What are the different visualizations you considered? Justify the design decisions you made using the perceptual and design principles you learned in the course.
 
+[TBD]
+
+#### Milestone-1 Description Follows
 Initially we considered a worldmap that would show locations of Twitter data that related to a certain 'crisis.' When we realized Twitter data is unavailable past one week, we realized we would have to show less geographic data and more 2d chart data. A timeline was suggested to show crisis media according to its published date. The following is an image of our initial sketch.
 
 ![Initial Timeline Sketch](images/processbook/initialsketch.jpg "Initial Sketch")
@@ -119,6 +136,9 @@ This is not our primary visualization and may take on a new form as we refine ou
 ### Implementation  
 Describe the intent and functionality of the interactive visualizations you implemented. Provide clear and well-referenced images showing the key design and interaction elements.
 
+[TBD]
+
+#### Milestone-1 Description Follows
 ![Annotated Timeline](images/processbook/timeline-annotated.jpg "Annotated Timeline")
 
 The image above shows our current working state of the timeline visualization. This is visible on our [website](http://crisiscoverage.info 'CrisisCoverage.info'). You can see the crisis summary (a), the number of traditional or non-traditional query results (b), key story points (c), the data source picker (d), and the legend (e). 
@@ -133,8 +153,7 @@ The image above shows our current working state of the timeline visualization. T
 
 One word on the website layout itself: we were inspired by this d3 [example](http://remittances.herokuapp.com/?en "Worldwide remittance flows") and its horizontal navigation. This nav style has yet to be implemented on our site, but we do try to impress the equivalent nature of our three main views. 
 
-We also tried to structures a high-level overview, a mid-level timeline view, and a granular level data view. We hope
- these three views will give a wider audience something interesting to discover while taking maximum advantage of our data-gathering efforts by employing the results in a variety of forms.
+We also intend to structure a high-level overview, a mid-level timeline view, and a granular level data view. We hope these three views will give a wider audience something interesting to discover while taking maximum advantage of our data-gathering efforts by employing the results in a variety of forms.
 
 ### Evaluation: What did you learn about the data by using your visualizations? How did you answer your questions? How well does your visualization work, and how could you further improve it?  
 

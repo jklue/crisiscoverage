@@ -331,11 +331,12 @@
                       class: function(d){ return d.id + ' path'; }, // store name for reference to path
                       id: function(d){ return d.name; },
                       d: function(d){ return line(d.values); },
-                      transform: 'translate(0,' + typeDetail.y + ')',
+                      transform: 'translate(0,' + typeDetail.y + ')'
                    })
                    .style({
                     'stroke': function(e) { return color(e.name); },
-                    'fill': 'none',
+                    'stroke-width': '4px',
+                    'fill': 'none'
                    });
 
    /* add dots for each line */
@@ -451,7 +452,7 @@
     var tip = d3.tip()
             .html(function(d) { 
               // if 1 article, use singular 'article'
-                return d.count + " <span class='sourceName'>" + d.name + "</span> articles on during<br>the 30 days prior to " + parseDateTips(d.date); 
+                return numberWithCommas(d.count) + " <span class='sourceName'>" + d.name + "</span> articles on during<br>the 30 days prior to " + parseDateTips(d.date);
             })
             .direction('e')
             .attr('class','d3-tip e');
@@ -801,7 +802,7 @@
     var tip = d3.tip()
             .html(function(d) { 
               // if 1 article, use singular 'article'
-                return d.count + " articles on <span class='sourceName'>" + d.name + "</span> during<br>the 30 days prior to " + parseDateTips(d.date); 
+                return numberWithCommas(d.count) + " articles on <span class='sourceName'>" + d.name + "</span> during<br>the 30 days prior to " + parseDateTips(d.date);
             })
             .direction('e')
             .attr('class','d3-tip e');
