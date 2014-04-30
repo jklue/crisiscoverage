@@ -62,12 +62,12 @@ $(document).ready(function() {
     /* Append table selector to the crisis form */
     $('#crisis_form').append('<label for="data_select">Show Table: </label>\
         <select id="data_select">\
-            <option value="country_stats" >Country Stats</option>\
-                <option value="baseline_stats" >Baseline Coverage Stats</option>\
-                    <option value="crisis_stats" >Crisis Coverage Stats</option>\
-                        <option value="crisis_sample" >Crisis Sample Results</option>\
-                        </select>\
-                        <br>');
+          <option value="baseline_stats" >Baseline Coverage Stats</option>\
+          <option value="country_stats" >Country Stats</option>\
+          <option value="crisis_stats" >Crisis Coverage Stats</option>\
+          <option value="crisis_sample" >Crisis Sample Results</option>\
+        </select>\
+        <br>');
 
     if (!tableSelect) tableSelect = document.getElementById('data_select');
     d3.timer(

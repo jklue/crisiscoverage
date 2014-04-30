@@ -11,9 +11,12 @@
 			<div class="tutorial">
 				<h1>Project Data</h1>
 				<p><em>Offers the primary tables that drive this site, derived from using Google Custom Search API.</em></p>
-				<p><strong>Country Stats:</strong> Count of results from each country for a given crisis.</p>
+
 				<p><strong>Baseline Coverage Stats:</strong> Count of all results (not just crisis) available for each of our
-				specially	tracked sites + all Google.</p>
+        				specially	tracked sites + all Google.</p>
+
+				<p><strong>Country Stats:</strong> Count of results from each country for a given crisis.</p>
+
 				<p><strong>Crisis Coverage Stats:</strong> Count of crisis results from our specially tracked sites + all Google
 				.</p>
 				<p><strong>Crisis Sample Results:</strong> For each crisis, a sampling of results from each of our specially
