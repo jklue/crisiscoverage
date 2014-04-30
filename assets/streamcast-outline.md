@@ -1,9 +1,9 @@
 ## Streamcast Outline
 ### CONCEPT
 1. The orientation narration will generally follow the martini text flow as we discussed BUT the screencast will use the actual live pages not the martini pages (eventually clips from the screencast will become the actual martini backdrop gifs).  
-2. We are also supposed to transition to interesting findings and conclusions, which should given ample time as well and slipped into the overview. I recommend our two 'Crises Compared' tabs as the basis of our findings.  
+2. We are also supposed to transition to interesting findings and conclusions, which I have slipped into the overview, using our two `Crises Compared` tabs as the basis of our findings.  
 
-Given the importance of the screencast on both the need for impact and the grade implications under a 2 minute restriction, I recommend NOT doing this as a single recording but rather scripted (tighten existing) each section, doing some dry runs until the scene is solid, kind of like the movies. What follows is my input to a script starting point, though you guys will certainly want to embellish to meet recording needs.
+Given the importance of the screencast on both the need for impact and the grade implications under a 2 minute restriction, I recommend NOT doing this as a single recording but rather scripted from each section, doing some dry runs until the scene is solid, kind of like the movies. What follows is my input to a script starting point, though you guys will certainly want to embellish to meet recording needs.
 
 ## Intro (~:15)
 WHERE? [`Homepage` with globe spinning]  
@@ -18,7 +18,7 @@ NARRATION
 WHERE? [on `World` page]  
 NARRATION  
 >We begin our a brief overview of the site from the `World` page which gives several visualizations related to geographic crisis engagement. 
-* The `Compared Crises` Tab provides a sankey diagram of all countries that were found in top-ten results for each of the crises. `FINDING #1 -->` We found that consistently interested countries include the US, UK, India, and Canada. Single crisis countries include Philippines, Ukraine, Malaysia, South Africa, and Kenya. Prominent countries like Australia, France and Italy are consistently interested, even when outside the top-ten -- see other Tabs for full results.  
+* The `Compared Crises` Tab provides a sankey diagram of all countries that provided top-ten results for each of the crises assessed by amount of coverage emanating from a country. `FINDING #1 -->` We found that consistently interested countries include the US, UK, India, and Canada. Single crisis countries include Philippines, Ukraine, Malaysia, South Africa, and Kenya. Prominent countries like Australia, France and Italy are consistently interested, even when outside the top-ten -- see other Tabs for full results.  
 * The `Map` Tab presents results by country, colored on a choropleth map according to level of response. It is useful to gauge general responses to a single crisis at a glance.  
 * And, the `Bar Chart` Tab presents results by country provided as a horizontal bar chart according to level of response. It is useful to compare the level of response for a single crisis in absolute or numerical terms.  
 
