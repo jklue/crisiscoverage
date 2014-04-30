@@ -365,7 +365,7 @@ function renderBarChart() {
         .text(function (d) {
             var n = xScale(d.articles) - x_pad;
             if (n < 0) return "0";
-            else return d.articles;
+            else return numberWithCommas(d.articles);
         });
 
     reorder("result");
