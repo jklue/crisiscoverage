@@ -144,7 +144,8 @@ function clear_charts(){
 function build_initial_charts(){
 	//build out scales
 	xScale_l = d3.scale.ordinal().rangeRoundBands([0, width-250],.1);
-	yScale_l = d3.scale.linear().rangeRound([height, 0]);
+//	yScale_l = d3.scale.linear().rangeRound([height, 0]);//original
+    yScale_l = d3.scale.pow().exponent(0.5).rangeRound([height, 10]);
 
 	//setup svgs
 	svg = d3.select("#stacked").append("svg")
