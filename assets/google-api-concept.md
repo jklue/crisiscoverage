@@ -7,7 +7,7 @@ The API key is afforded 100 queries per day, with 10 results for each query in t
 
 As mentioned, the API key is used to call pre-existing Custom Search Engines. We have established 2 of importance to our efforts:
 1. [AllGoogle](https://www.google.com/cse/publicurl?cx=007061251080714295857:fevheb09whc) is what we had used to get through our initial prototyping and is used to search all of Google (i.e. useful for Country choropleth). ___Note: this is the only cx we are able to use in API calls due to Google restrictions.___
-2. [AllCrisisCoverage](https://www.google.com/cse/publicurl?cx=007061251080714295857:nhvoqbzpcim) which we set up to mimic our specially tracked [media sites](../productiondata/media-sites.tsv) with a nod to sources around the world (though english speaking heavy). ___Note: this cx is not used in API calls but is useful for embedding our custom search engine on our website.___
+2. [AllCrisisCoverage](https://www.google.com/cse/publicurl?cx=007061251080714295857:nhvoqbzpcim) which we set up to mimic our specially tracked [media sites](../productiondata/media-sites.tsv) with a nod to sources around the world (though english speaking heavy). ___Note: this cx is not used in API calls but might be useful if we choose to embed our custom search engine on our website.___
 
 Here is the code to embed the 'AllCrisisCoverage' search engine which includes our specially tracked sites:
 ```html
@@ -26,4 +26,4 @@ Here is the code to embed the 'AllCrisisCoverage' search engine which includes o
 <gcse:search></gcse:search>
 ```
 
-Once we really understand our strategy, then we can go after a paid set of searches to get 100,000 results for $50 down to a minimum of $10,000 for $5, this is a per day min and max as Google will let you spend as much as you want over time.
+Once we really understand our strategy, then we can go after a paid set of searches to get 100,000 results for $50 down to blocks of 10,000 for $5, this is a per day min and max as Google will let you spend as much as you want over time. Note: we ultimately spent $10 for data used in this project.
