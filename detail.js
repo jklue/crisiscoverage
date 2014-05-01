@@ -2,6 +2,7 @@
  * stacked bar chart inspired from http://bl.ocks.org/mbostock/3886208
  */
 //-----------Global Variables--------------------
+var sites =[];
 var stats_filter = {};
 var details_filter = {};
 var details;
@@ -294,13 +295,21 @@ function stack_chart(){
 
 //    data.sort(function(a, b) { return b.total - a.total; });
 
-	var selection = svg.selectAll(".series")
+    // Initialize tooltip
+    var tip = d3.tip()
+        .html(function(d) {
+            return  "<span class='sourceName'  style='color:" + color_l(d.name)  + ";'>" + d.name + ": </span>" + numberWithCommas(d.results) + " results<br><span class='tip'>Month: " + d.label + " (click for more)</span>";
+        })
+        .direction('e')
+        .attr('class','d3-tip e');
+
+	var series = svg.selectAll(".series")
 		.data(data)
 		.enter().append("g")
 			.attr("class", "series")
 			.attr("transform", function (d) {return "translate("+xScale_l(d.x)+",0)";});
 
-	selection.selectAll("rect")
+	series.selectAll("rect")
         .data(function (d) {return d.ySites;})
 		.enter().append("rect")
 		.attr("width", "70px")
@@ -310,8 +319,12 @@ function stack_chart(){
 		.on("click", function (d){
             console.log("--- d for month ---");
             console.log(d);
-			buildAndShowSubChartDialog(d.label);
-		});
+			buildAndShowSubChartDialog(d.label, d.name);
+		})
+        .on('mouseover', tip.show)
+        .on('mouseout', tip.hide);
+
+    series.call(tip);
 
   	//Add Legends
 	var legend = svg.selectAll(".legend")
@@ -377,12 +390,22 @@ function stack_chart(){
 /**
  * Entry-point method when a bar is clicked.
  * @param month
+ * @param siteName
  */
-function buildAndShowSubChartDialog(month){
+function buildAndShowSubChartDialog(month,siteName){
     var crisis = window.crisis_select.value;
 
+    $(function() {
+        $( "#deeper_dialog" ).dialog({
+            height: 500,
+            width: 1000,
+            modal: false
+        });
+    });
+    $('.ui-dialog').show();//use dialog parent container
+
     //update the data table
-    show_table(month);
+    show_table(month,siteName);
 
     //create new filter for data in month
     var crisis_filter = stats_filter[crisis];
@@ -395,27 +418,21 @@ function buildAndShowSubChartDialog(month){
     //TODO: FIGURE OUT THE BASELINE CHART
 //    trad_group(urows);
 
-    $(function() {
-        $( "#deeper_dialog" ).dialog({
-            height: 500,
-            width: 1000,
-            modal: false
-        });
-    });
-    $('.ui-dialog').show();//use dialog parent container
+
 }
 
 //-------Show Table -----------------------
 /**
  * Show Table
  * @param month
+ * @param siteName
  */
-function show_table(month){
+function show_table(month,siteName){
     var crisis = window.crisis_select.value;
 
 	$('#source').empty();
     $('#source').append(
-          "<table id='source_table' class='data-content'></table>");
+          "<table id='source_table' class='display'></table>");
 
 	//get data and create filter 
 	var crisis_filter = details_filter[crisis];
@@ -444,11 +461,25 @@ function show_table(month){
 //        "aoColumns": columns
 //    } );
 
-    $('#source_table').dataTable( {
+    var table = $('#source_table').dataTable( {
         "aaData": rows,
         "aoColumns": columns
     } );
 
+    if (siteName && siteName.length > 0 && sites[siteName]){
+        console.log("... searching table for sample results from site: "+ siteName);
+        var tableFilters = $('#source_table_filter').find('input');
+        if (tableFilters && tableFilters.length > 0){
+            var tableFilter = tableFilters[0];
+            tableFilter.value = sites[siteName]//'wordpress.com';
+            tableFilter.focus();
+
+            var e = $.Event('keyup');
+            e.keyCode= 13; // enter
+            $('input').trigger(e);
+        }
+
+    }
 }
 
 //------------Grouped bar graph code-----------------
@@ -814,6 +845,12 @@ function blog_group(data){
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // CRISIS SELECT
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function populateMediaSiteLookup(error, _sites){
+    _sites.forEach(function(d){
+        sites[d.site_name] = d.site_domain;
+    });
+}
+
 
 $('document').ready(function(){
     addClassNameListener("crisis_select", function(){
@@ -824,4 +861,8 @@ $('document').ready(function(){
             .defer(d3.csv, "/productiondata/"+crisis+"/summary.csv")//storypoints
             .await(useData);
     });
+
+    queue()
+        .defer(d3.tsv, "productiondata/media-sites.tsv")
+        .await(populateMediaSiteLookup);
 });
