@@ -43,6 +43,11 @@
           background-image:     -ms-linear-gradient(left, #ccc, #333, #ccc);
           background-image:      -o-linear-gradient(left, #ccc, #333, #ccc);
       }
+
+      .axis {
+      		fill: #CCC;
+      	}
+      }
       </style>
 
 	<div class="content">

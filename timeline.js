@@ -1003,7 +1003,6 @@ function loadedComparedTimelineCallback(error,data){
         .attr("transform", "translate(0," + ((detail.h)/2) + ")")
         .call(xAxis)
         .append("text")
-//            .attr("transform", "rotate(-90)")
             .attr("x",detail.w+2)
             .attr("y", -13)
             .attr("dy", ".71em")

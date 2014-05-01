@@ -11,8 +11,8 @@ var sm_width = 200 - sm_margin.left - sm_margin.right;
 var sm_height = 200 - sm_margin.top - sm_margin.bottom;
 
 //measurements for large charts
-var margin = {top:50,right:50,bottom:50,left:50};
-var width = 960 - margin.left - margin.right;
+var margin = {top:0,right:0,bottom:50,left:100};
+var width = 1060 - margin.left - margin.right;
 var height = 500 - margin.top - margin.bottom;
 
 //Dictionary of English names for crisis values
@@ -116,7 +116,7 @@ function useData(error, data,crisisSummary){
  * Clear stacks.
  */
 function clear_stacks(){
-//	d3.select("svg").remove();
+	d3.select("svg").remove();
     $('#stacked').empty();
 	$('#source').empty();
 }
@@ -125,10 +125,9 @@ function clear_stacks(){
  * Clear charts.
  */
 function clear_charts(){
-
-//	d3.select("#blog svg").remove();
-//	d3.select("#traditional svg").remove();
-//	d3.select("#independent svg").remove();
+	d3.select("#blog svg").remove();
+	d3.select("#traditional svg").remove();
+	d3.select("#independent svg").remove();
 
 	$('#traditional').empty();
 	$('#blog').empty();
@@ -149,10 +148,10 @@ function build_initial_charts(){
 
 	//setup svgs
 	svg = d3.select("#stacked").append("svg")
-			.attr("width",width)
-			.attr("height", height)
+			.attr("width",width + margin.left + margin.right)
+			.attr("height", height + margin.top + margin.bottom)
 			.append("g")
-			.attr("transform", "translate("+margin.left +","+margin.top+")");
+			    .attr("transform", "translate("+margin.left +","+margin.top+")");
 }
 
 //------------Build Stacked Chart -----------------
@@ -244,7 +243,7 @@ function stack_chart(){
 		.data(function (d) {return d.mappings;})
 		.enter().append("rect")
 		.attr("width", "70px")
-		.attr("y", function(d){return yScale_l(d.y1) - 65})
+		.attr("y", function(d){return yScale_l(d.y1)})
 		.attr("height", function(d){return yScale_l(d.y0) - yScale_l(d.y1);})
 		.style("fill", function(d){ return color_l(d.name);})
 		.on("click", function (d){
@@ -277,11 +276,11 @@ function stack_chart(){
 
   	//Add Legends
 	var legend = svg.selectAll(".legend")
-            .data(names.slice().reverse())
+            .data(names.slice().reverse())//TODO: WHAT IS THE RIGHT ORDERING?
           .enter().append("g")
             .attr("class", "legend")
-            .attr("transform", function (d, i) { 
-              return "translate(55," + i *15 + ")"; 
+            .attr("transform", function (d, i) {
+              return "translate("+(margin.right)+"," + i *15 + ")";
             });
 
         legend.append("rect")
@@ -296,7 +295,8 @@ function stack_chart(){
             .attr("y", 6)
             .attr("dy", ".35em")
             .style("text-anchor", "end")
-            .text(function (d) { return d; });	
+            .text(function (d) { return d; })
+            .attr("fill", function(d){ return color_l(d); });
 
     //Add Axes
     var xAxis = d3.svg.axis()
@@ -308,14 +308,12 @@ function stack_chart(){
     	.orient("left");
 
     svg.append("g")
-    .attr("class", "x axis")
-    .attr("transform", "translate(0," + (height - 70 )+ ")")
-    .attr("stroke-width", ".5")
+    .attr("class", "axis")//instead of x axis
+    .attr("transform", "translate(0," + height + ")")
     .call(xAxis);
 
 	svg.append("g")
-	    .attr("class", "y axis")
-	    .attr("stroke-width", "1")
+	    .attr("class", "axis")//instead of y axis
     	.call(yAxis)
 	  .append("text")
 	    .attr("transform", "rotate(-90)")
@@ -323,6 +321,13 @@ function stack_chart(){
 	    .attr("dy", ".71em")
 	    .style("text-anchor", "end")
 	    .text("Articles Published Related to Crisis");
+
+    svg.selectAll('.axis line, .axis path')
+        .style({'stroke': '#CCC', 'fill': '#CCC', 'stroke-width': '1px'});
+
+    svg.selectAll('.axis text')
+        .style({'fill': '#CCC'});
+
 	show_table(months[0], months);
 }
 
