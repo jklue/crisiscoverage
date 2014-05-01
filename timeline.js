@@ -204,8 +204,8 @@
           allDates.push(currentSource);
       });
       // define color
-      color = d3.scale.category20();
-
+//      color = d3.scale.category20();
+      color = d3.scale.ordinal().range(d3.scale.category20().range().concat(d3.scale.category20b().range().slice(0,3)));
   // get reported dates for indeces for aggregate chart
     // define var to hold dates
     var reportedDates = [];

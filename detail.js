@@ -24,8 +24,7 @@ var crisis_dict = {"turkish-revolt": "A Revolt in Turkey","pakistan-drought": "D
 //--------------Scales--------------------------
 //Stacked bar graph scales
 var xScale_l, yScale_l,
-    color_l = d3.scale.category20();
-
+color_l = d3.scale.ordinal().range(d3.scale.category20().range().concat(d3.scale.category20b().range().slice(0,3)));
 
 //grouped bar graph scales
 var xScale_s, yScale_s, yScale_s;
@@ -287,7 +286,8 @@ function stack_chart(){
     data.forEach(function(d) {
         var y0 = 0;
         d.ySites = color_l.domain().map(function(name) {
-            return {name: name, y0: y0, y1: y0 += +d.sources[name]};
+            var resultCount = +d.sources[name];
+            return {label: d.x, name: name, results: resultCount, y0: y0, y1: y0 += resultCount};
         });
         d.yMax = d.ySites[d.ySites.length - 1].y1;
     });
@@ -304,13 +304,12 @@ function stack_chart(){
         .data(function (d) {return d.ySites;})
 		.enter().append("rect")
 		.attr("width", "70px")
-        .attr("y", function(d) {
-            console.log(d);
-            return yScale_l(d.y1);
-        })//standard way.
+        .attr("y", function(d) { return yScale_l(d.y1);})
         .attr("height", function(d) { return yScale_l(d.y0) - yScale_l(d.y1); })
 		.style("fill", function(d){ return color_l(d.name);})
 		.on("click", function (d){
+            console.log("--- d for month ---");
+            console.log(d);
 			buildAndShowSubChartDialog(d.label);
 		});
 
@@ -440,10 +439,16 @@ function show_table(month){
             { "sTitle": "Query End Date" }
         ]
     //deploy table
+//    $('#source_table').dataTable( {
+//        "aaData": rows,
+//        "aoColumns": columns
+//    } );
+
     $('#source_table').dataTable( {
         "aaData": rows,
-        "aoColumns": columns 
-    } );   
+        "aoColumns": columns
+    } );
+
 }
 
 //------------Grouped bar graph code-----------------
