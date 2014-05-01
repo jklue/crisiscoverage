@@ -414,7 +414,9 @@ footer {
 /* Screencast */
 #screencast .embed {
   width: 500px;
-  margin: 0 auto 4em; }
+  height: 281px;
+  margin: 0 auto 4em;
+  border: 2px solid gray; }
 
 /* Data page */
 table.dataTable tr.odd, table.dataTable tr.odd td.sorting_1 {
@@ -578,7 +580,7 @@ nav.martini {
   /* Tooltips */
   /* Legend */ }
   #overview .water {
-    fill: rgba(66, 146, 198, 0.7); }
+    fill: #bdd7e7; }
   #overview #overviewVis {
     width: 940px;
     margin: 0 auto 7em;
