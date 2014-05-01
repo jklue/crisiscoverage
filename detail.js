@@ -11,7 +11,7 @@ var sm_width = 200 - sm_margin.left - sm_margin.right;
 var sm_height = 200 - sm_margin.top - sm_margin.bottom;
 
 //measurements for large charts
-var margin = {top:0,right:0,bottom:50,left:100};
+var margin = {top:0,right:250,bottom:50,left:100};
 var width = 1060 - margin.left - margin.right;
 var height = 500 - margin.top - margin.bottom;
 
@@ -27,6 +27,9 @@ var xScale_l, yScale_l,
 var xScale_s, yScale_s, yScale_s;
 var parse = d3.time.format("%Y-%m-%d").parse;
 var format = d3.time.format("%B");
+
+//TODO:NEED SOME MONTH ORDERING SMARTS
+
 
 //------------------End Global Variable declarations----------------------
 
@@ -125,27 +128,38 @@ function clear_stacks(){
  * Clear charts.
  */
 function clear_charts(){
-	d3.select("#blog svg").remove();
+
+    $('.ui-dialog').hide();//use dialog parent container
+
 	d3.select("#traditional svg").remove();
 	d3.select("#independent svg").remove();
+    d3.select("#blog svg").remove();
 
 	$('#traditional').empty();
-	$('#blog').empty();
-    $('#bndependant').empty();
+    $('#independent').empty();
+    $('#blog').empty();
 
     //$('#cloud').empty();
     //$('#cloud').append("traditional");
-}   
 
+//TODO: RE-ENABLE WHEN SUB-CHART IS IN USE AGAIN
+//    $('#traditional').append('<div class="overview_title">Traditional</div><br>');
+//    $('#independent').append('<div class="overview_title">Independent</div><br>');
+//    $('#blog').append('<div class="overview_title">Blog-Social</div><br>');
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// PRIMARY CHART (I.E. STACK CHART)
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //----------------------------------------------
 /**
  * Build initial charts.
  */
 function build_initial_charts(){
 	//build out scales
-	xScale_l = d3.scale.ordinal().rangeRoundBands([0, width-250],.1);
+	xScale_l = d3.scale.ordinal().rangeRoundBands([0, width],.1);//took out -250!
 //	yScale_l = d3.scale.linear().rangeRound([height, 0]);//original
-    yScale_l = d3.scale.pow().exponent(0.5).rangeRound([height, 10]);
+    yScale_l = d3.scale.pow().exponent(0.38).rangeRound([height, 10]);
 
 	//setup svgs
 	svg = d3.select("#stacked").append("svg")
@@ -231,8 +245,12 @@ function stack_chart(){
 		});
 	})
 	//------------------------------------------
-	xScale_l.domain(data.map(function (d) {return d.x}));
-	yScale_l.domain([0, d3.max(data, function(d){return d.total;})]);
+/* In order to get the months correct, need to reverse the value instead of pull it directly */
+    var xMap = data.map(function (d) {return d.x;});
+    var orderX = xMap.slice().reverse();
+	xScale_l.domain(orderX);
+
+	yScale_l.domain([0, d3.max(data, function(d){ return d.total;})]);
 
 	var selection = svg.selectAll(".series")
 		.data(data)
@@ -248,36 +266,12 @@ function stack_chart(){
 		.attr("height", function(d){return yScale_l(d.y0) - yScale_l(d.y1);})
 		.style("fill", function(d){ return color_l(d.name);})
 		.on("click", function (d){
-			//update the data table
-			show_table(d.label, crisis, months);
-
-			//create new filter for data in month 
-			var crisis_filter = stats_filter[crisis];
-			var dim = crisis_filter.dimension(function (d){return d.month});
-			var dim_filtered = dim.filter(d.label);
-		    var urows = dim_filtered.top(Infinity);
-			dim_filtered.filterAll();
-
-			clear_charts();
-			indi_group(urows);
-			blog_group(urows);
-			trad_group(urows);
-
-            //update all details charts
-            $(function() {
-                $( "#deeper_dialog" ).dialog({
-                    height: 500,
-                    width: 1000,
-                    modal: false
-                });
-            });
-            $('#deeper_dialog').show();
-
+			buildAndShowSubChartDialog(d.label);
 		});
 
   	//Add Legends
 	var legend = svg.selectAll(".legend")
-            .data(names.slice().reverse())//TODO: WHAT IS THE RIGHT ORDERING?
+          .data(names.slice())//removed .reverse()
           .enter().append("g")
             .attr("class", "legend")
             .attr("transform", function (d, i) {
@@ -302,7 +296,13 @@ function stack_chart(){
     //Add Axes
     var xAxis = d3.svg.axis()
     	.scale(xScale_l)
-    	.orient("bottom");
+    	.orient("bottom")
+//        .ticks(maxMonth)
+        .tickSize(6, 0, 0)
+        .tickFormat(function(d){
+          console.log(d);
+            return d;
+        });
 
 	var yAxis = d3.svg.axis()
     	.scale(yScale_l)
@@ -312,6 +312,13 @@ function stack_chart(){
     .attr("class", "axis")//instead of x axis
     .attr("transform", "translate(0," + height + ")")
     .call(xAxis);
+//    .append("text")
+//        .attr("x",700)//TODO: GET THIS RIGHT!
+//        .attr("y", 9)
+//        .attr("dy", ".71em")
+//        .style("text-anchor", "end")
+//        .style("font-size","11px")
+//        .text("Crisis Month");
 
 	svg.append("g")
 	    .attr("class", "axis")//instead of y axis
@@ -321,6 +328,7 @@ function stack_chart(){
 	    .attr("y", 6)
 	    .attr("dy", ".71em")
 	    .style("text-anchor", "end")
+        .style("font-size","11px")
 	    .text("Articles Published Related to Crisis");
 
     svg.selectAll('.axis line, .axis path')
@@ -328,23 +336,54 @@ function stack_chart(){
 
     svg.selectAll('.axis text')
         .style({'fill': '#CCC'});
+}
 
-	show_table(months[0], months);
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Sub-Chart & Table (DIALOG)
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/**
+ * Entry-point method when a bar is clicked.
+ * @param month
+ */
+function buildAndShowSubChartDialog(month){
+    var crisis = window.crisis_select.value;
+
+    //update the data table
+    show_table(month);
+
+    //create new filter for data in month
+    var crisis_filter = stats_filter[crisis];
+    var dim = crisis_filter.dimension(function (d){return d.month});
+    var dim_filtered = dim.filter(month);
+    var urows = dim_filtered.top(Infinity);
+    dim_filtered.filterAll();
+
+    //BUILD THE CHARTS IN SEQUENCE, LETTING EACH ONE CALL THE NEXT !!!
+    //TODO: FIGURE OUT THE BASELINE CHART
+//    trad_group(urows);
+
+    $(function() {
+        $( "#deeper_dialog" ).dialog({
+            height: 500,
+            width: 1000,
+            modal: false
+        });
+    });
+    $('.ui-dialog').show();//use dialog parent container
 }
 
 //-------Show Table -----------------------
 /**
  * Show Table
  * @param month
- * @param months
  */
-function show_table(month, months){
-
+function show_table(month){
     var crisis = window.crisis_select.value;
 
 	$('#source').empty();
     $('#source').append(
-        "<table id='table' class='display' cellpadding='0' cellspacing='0' border='0'></table>");
+          "<table id='source_table' class='data-content'></table>");
 
 	//get data and create filter 
 	var crisis_filter = details_filter[crisis];
@@ -356,21 +395,19 @@ function show_table(month, months){
 	//populate row
 	rows = [];
 		$(urows).each(function(i,k){
-		url = "<a href =" + k.url +"> article url</a>";
-	
-		rows.push([month, k.domain, k.date_start, k.date_end,k.title,url ])
+		var anchor = "<a href ='" + k.url +"' target='_blank'>"+ k.title+"</a>";
+        rows.push([k.domain,anchor,month,k.date_start, k.date_end]);
 	});
 
 	var columns = [
-            { "sTitle": "Month" },
             { "sTitle": "Domain" },
+            { "sTitle": "Anchor"},
+            { "sTitle": "Month" },
             { "sTitle": "Query Start Date" },
-            { "sTitle": "Query End Date" },
-            { "sTitle": "Title"},
-            { "sTitle": "Url"}
+            { "sTitle": "Query End Date" }
         ]
     //deploy table
-	$('#table').dataTable( {
+    $('#source_table').dataTable( {
         "aaData": rows,
         "aoColumns": columns 
     } );   
@@ -379,10 +416,12 @@ function show_table(month, months){
 //------------Grouped bar graph code-----------------
 
 /**
- * Independent Group
+ * SUB-CHART-2: Independent Group
  * @param data
  */
 function indi_group(data){
+    var crisis = window.crisis_select.value;
+
 	//-------Parse data----------------------------------
 	var type = 'Independent'
 	var final_data = [];
@@ -491,13 +530,21 @@ function indi_group(data){
       .attr("dy", ".35em")
       .style("text-anchor", "end")
       .text(function(d) { return d; });
+
+    /** CALL SUB-CHART */
+    blog_group(data);
 }
 
 /**
- * Traditional Group
+ * SUB-CHART-1: Traditional Group
  * @param data
  */
 function trad_group(data){
+    var crisis = window.crisis_select.value;
+
+    /** AS THIS IS THE FIRST IN THE SEQUENCE, CLEAR THE CHARTS. */
+    clear_charts();
+
 	//-------Parse data----------------------------------
 	var type = 'Traditional'
 	var final_data = [];
@@ -606,9 +653,18 @@ function trad_group(data){
       .style("text-anchor", "end")
       .text(function(d) { return d; });
       console.log(data);
+
+      /** CALL SUB-CHART */
+      indi_group(data);
 }
 
+/**
+ * SUB-CHART-3: Blog-Social Group
+ * @param data
+ */
 function blog_group(data){
+    var crisis = window.crisis_select.value;
+
 	//-------Parse data----------------------------------
 	var type = 'Blogs-Social'
 	var final_data = [];
@@ -723,9 +779,6 @@ function blog_group(data){
 
 $('document').ready(function(){
     addClassNameListener("crisis_select", function(){
-
-        $('#deeper_dialog').hide();
-
         var crisis = window.crisis_select.value;
         console.log("### QUEUE NEW CRISIS ("+crisis+") AFTER CLASS CHANGE ###");
         queue()
@@ -733,6 +786,4 @@ $('document').ready(function(){
             .defer(d3.csv, "/productiondata/"+crisis+"/summary.csv")//storypoints
             .await(useData);
     });
-
-    $('#deeper_dialog').hide();
 });

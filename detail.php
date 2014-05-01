@@ -28,7 +28,7 @@
         overflow-x:auto;
       }
 
-      #detail_header{
+      #detail_header {
         display: block;
         margin-top: 200px;
         margin-bottom: 10px;
@@ -48,6 +48,11 @@
       .axis {
       		fill: #CCC;
       	}
+
+      #sub_charts{
+          display: block;
+          margin-top: 10px;
+          margin-bottom: 10px;
       }
       </style>
 
@@ -55,26 +60,21 @@
 	      <header id="detail_header" class="tab_header">
 	        <hr class="style-one">
           <div class="overview_title">Crisis Coverage Detail</div>
-          <div class="tip">An in-depth exploration for crisis over months of coverage. Click on a bar for more.</div>
+          <div class="tip">An in-depth exploration for crisis over months of coverage. Click on a bar for sample
+          monthly results.</div>
         </header>
 
         <div id = "stacked" class = 'large'></div>
 
         <div id="deeper_dialog">
 
-          <div class="overview_title">Traditional</div><br>
-    		  <div id ="traditional" class="small"></div>
-
-    		  <div class="overview_title">Blogs-Social</div><br>
-    		  <div id ="blog" class="small"></div>
-
-    		  <div class="overview_title">Independent</div><br>
-    		  <div id ="independent" class="small"></div>
-
-    		  <div id ="source" class="large">
-              <table id="table" class="display" cellpadding="0" cellspacing="0" border="0"></table>
+          <div id="sub_charts">
+    		     <div id ="traditional" class="small"></div>
+    		     <div id ="blog" class="small"></div>
+    		     <div id ="independent" class="small"></div>
           </div>
 
+    		  <div id ="source" class="large"></div>
         </div>
 	</div>
 
@@ -83,10 +83,6 @@
 
 	<!-- Crossfilter Library -->
   <script src="libs/crossfilter.v1.min.js"></script>
-
-  <!--- Data tables -->
-  <script src="libs/jquery.dataTables.min.js"></script>
-   <link rel="stylesheet" href="css/jquery.dataTables.css">
 
   <!-- Modal Dialog for additional detail -->
   <title>jQuery UI Dialog - Basic modal</title>
@@ -100,6 +96,23 @@
   	<script src="libs/jquery-ui/jquery.ui.resizable.js"></script>
   	<script src="libs/jquery-ui/jquery.ui.button.js"></script>
   	<script src="libs/jquery-ui/jquery.ui.dialog.js"></script>
+
+  <!--- Data tables -->
+  <script src="libs/jquery.dataTables.min.js"></script>
+  <link rel="stylesheet" href="css/jquery.dataTables.css">
+
+    <!-- OVERRIDE ANCHOR CSS AFTER JQUERY.DATATABLES MUCKS -->
+    <style>
+        .dataTable a:hover{
+          color: #af6e76;
+        }
+
+        .dataTable a{
+          text-decoration: underline;
+          color: #636363;
+
+        }
+   </style>
 
   <!-- Details -->
   <script src = 'detail.js'> </script>

@@ -7,22 +7,6 @@ dir = 'productiondata/';
 
 crisis_folders = ['haiyan', 'pakistan-drought', 'turkish-revolt','ukraine-protest'];
 
-//Queue all data files and load in paralell 
-queue()
-        .defer(d3.csv, "productiondata/haiyan/google-media_results_subset.csv")
-        .defer(d3.csv, "productiondata/haiyan/google-media_stats.csv")
-        .defer(d3.csv, "productiondata/haiyan/google-media-baseline_stats.csv")
-        .defer(d3.csv, "productiondata/pakistan-drought/google-media_results_subset.csv")
-        .defer(d3.csv, "productiondata/pakistan-drought/google-media_stats.csv")
-        .defer(d3.csv, "productiondata/pakistan-drought/google-media-baseline_stats.csv")
-        .defer(d3.csv, "productiondata/turkish-revolt/google-media_results_subset.csv")
-        .defer(d3.csv, "productiondata/turkish-revolt/google-media_stats.csv")
-        .defer(d3.csv, "productiondata/turkish-revolt/google-media-baseline_stats.csv")
-        .defer(d3.csv, "productiondata/ukraine-protest/google-media_results_subset.csv")
-        .defer(d3.csv, "productiondata/ukraine-protest/google-media_stats.csv")
-        .defer(d3.csv, "productiondata/ukraine-protest/google-media-baseline_stats.csv")
-        .await(getData);
-
 //-------Save to File ------------------/
 
 var saveToFile = function(object, filename){
@@ -63,7 +47,6 @@ function getData(error,h_m,h_stats,h_base,p_m,p_stats,p_base,t_m, t_stats,t_base
        var final = [final_media, final_stats];
        //console.log(final);
         saveToFile(final,"con-data.json");
-
 } 
 
 
@@ -163,6 +146,27 @@ function con_media(results){
         return g_results;
 
 }
+
+/**
+ * DO AFTER DOCUMENT IS READY
+ */
+$('document').ready(function(){
+    //Queue all data files and load in paralell
+    queue()
+        .defer(d3.csv, "productiondata/haiyan/google-media_results_subset.csv")
+        .defer(d3.csv, "productiondata/haiyan/google-media_stats.csv")
+        .defer(d3.csv, "productiondata/haiyan/google-media-baseline_stats.csv")
+        .defer(d3.csv, "productiondata/pakistan-drought/google-media_results_subset.csv")
+        .defer(d3.csv, "productiondata/pakistan-drought/google-media_stats.csv")
+        .defer(d3.csv, "productiondata/pakistan-drought/google-media-baseline_stats.csv")
+        .defer(d3.csv, "productiondata/turkish-revolt/google-media_results_subset.csv")
+        .defer(d3.csv, "productiondata/turkish-revolt/google-media_stats.csv")
+        .defer(d3.csv, "productiondata/turkish-revolt/google-media-baseline_stats.csv")
+        .defer(d3.csv, "productiondata/ukraine-protest/google-media_results_subset.csv")
+        .defer(d3.csv, "productiondata/ukraine-protest/google-media_stats.csv")
+        .defer(d3.csv, "productiondata/ukraine-protest/google-media-baseline_stats.csv")
+        .await(getData);
+});
 
 
   
