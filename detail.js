@@ -1,3 +1,6 @@
+/*
+ * stacked bar chart inspired from http://bl.ocks.org/mbostock/3886208
+ */
 //-----------Global Variables--------------------
 var stats_filter = {};
 var details_filter = {};
@@ -23,13 +26,11 @@ var crisis_dict = {"turkish-revolt": "A Revolt in Turkey","pakistan-drought": "D
 var xScale_l, yScale_l,
     color_l = d3.scale.category20();
 
+
 //grouped bar graph scales
 var xScale_s, yScale_s, yScale_s;
 var parse = d3.time.format("%Y-%m-%d").parse;
 var format = d3.time.format("%B");
-
-//TODO:NEED SOME MONTH ORDERING SMARTS
-
 
 //------------------End Global Variable declarations----------------------
 
@@ -157,8 +158,7 @@ function clear_charts(){
  */
 function build_initial_charts(){
 	//build out scales
-	xScale_l = d3.scale.ordinal().rangeRoundBands([0, width],.1);//took out -250!
-//	yScale_l = d3.scale.linear().rangeRound([height, 0]);//original
+	xScale_l = d3.scale.ordinal().rangeRoundBands([0, width],.1);
     yScale_l = d3.scale.pow().exponent(0.38).rangeRound([height, 10]);
 
 	//setup svgs
@@ -175,7 +175,6 @@ function build_initial_charts(){
  * Stack Chart.
  */
 function stack_chart(){
-
 	var crisis = window.crisis_select.value;
 
 	//Create data set for selected crisis
@@ -190,10 +189,14 @@ function stack_chart(){
 		var source = obj.name;
 		var date = format(parse(obj.date_start));
 
-		if(jQuery.inArray(source, names) < 0)
-			names.push(source)
-		if(jQuery.inArray(date,months)<0)
-			months.push(date)
+		if(jQuery.inArray(source, names) < 0) {
+//            console.log("...pushing name: "+source);
+            names.push(source);
+        }
+		if(jQuery.inArray(date,months)<0) {
+//            console.log("...pushing month: "+date);
+            months.push(date)
+        }
 
 	});
 	//Remove Google as it skews everything
@@ -202,8 +205,12 @@ function stack_chart(){
     	names.splice(g_index, 1);
 	}
 
+    /* Set the color domain */
+    color_l.domain(names);
+
 	crisis_filter = stats_filter[crisis];
 	mfilters = {};
+
 	$(months).each(function (i,k){
 		var dim = crisis_filter.dimension(function (d){return d.month});
 		var dim_filtered = dim.filter(k);
@@ -250,7 +257,42 @@ function stack_chart(){
     var orderX = xMap.slice().reverse();
 	xScale_l.domain(orderX);
 
-	yScale_l.domain([0, d3.max(data, function(d){ return d.total;})]);
+    //yScale domain is correct.
+	yScale_l.domain([0, d3.max(data, function(d){return d.total;})]);
+
+    /* Since the data repeats so much, we need to figure out the max total per month and just use that. */
+    var tmpData = [];
+    months.forEach(function(month){
+//        console.log("--- Finding Max for Month '"+month+"' ---");
+        data.forEach(function(monthData){
+            if (monthData && monthData.x && monthData.x === month) {
+                if (!tmpData[month] || tmpData[month].total < monthData.total) {
+//                        console.log("... new top total: "+monthData.total);
+                        tmpData[month] = monthData;
+                }
+            }
+        });
+    });
+
+    /* NOTICE: RE-ASSIGNING 'data' OBJECT */
+    console.log("--- SHOW ME WHATCHA WORKIN WITH ---");
+    data = [];
+    months.forEach(function(month){
+        console.log(month);
+        data.push(tmpData[month]);
+    });
+    console.log(data);
+
+    /* APPEND SOME y0 and y1 Info */
+    data.forEach(function(d) {
+        var y0 = 0;
+        d.ySites = color_l.domain().map(function(name) {
+            return {name: name, y0: y0, y1: y0 += +d.sources[name]};
+        });
+        d.yMax = d.ySites[d.ySites.length - 1].y1;
+    });
+
+//    data.sort(function(a, b) { return b.total - a.total; });
 
 	var selection = svg.selectAll(".series")
 		.data(data)
@@ -259,11 +301,14 @@ function stack_chart(){
 			.attr("transform", function (d) {return "translate("+xScale_l(d.x)+",0)";});
 
 	selection.selectAll("rect")
-		.data(function (d) {return d.mappings;})
+        .data(function (d) {return d.ySites;})
 		.enter().append("rect")
 		.attr("width", "70px")
-		.attr("y", function(d){return yScale_l(d.y1)})
-		.attr("height", function(d){return yScale_l(d.y0) - yScale_l(d.y1);})
+        .attr("y", function(d) {
+            console.log(d);
+            return yScale_l(d.y1);
+        })//standard way.
+        .attr("height", function(d) { return yScale_l(d.y0) - yScale_l(d.y1); })
 		.style("fill", function(d){ return color_l(d.name);})
 		.on("click", function (d){
 			buildAndShowSubChartDialog(d.label);
@@ -297,12 +342,7 @@ function stack_chart(){
     var xAxis = d3.svg.axis()
     	.scale(xScale_l)
     	.orient("bottom")
-//        .ticks(maxMonth)
-        .tickSize(6, 0, 0)
-        .tickFormat(function(d){
-          console.log(d);
-            return d;
-        });
+        .tickSize(6, 0, 0);
 
 	var yAxis = d3.svg.axis()
     	.scale(yScale_l)
@@ -312,20 +352,13 @@ function stack_chart(){
     .attr("class", "axis")//instead of x axis
     .attr("transform", "translate(0," + height + ")")
     .call(xAxis);
-//    .append("text")
-//        .attr("x",700)//TODO: GET THIS RIGHT!
-//        .attr("y", 9)
-//        .attr("dy", ".71em")
-//        .style("text-anchor", "end")
-//        .style("font-size","11px")
-//        .text("Crisis Month");
 
 	svg.append("g")
 	    .attr("class", "axis")//instead of y axis
     	.call(yAxis)
 	  .append("text")
 	    .attr("transform", "rotate(-90)")
-	    .attr("y", 6)
+	    .attr("y", 3)
 	    .attr("dy", ".71em")
 	    .style("text-anchor", "end")
         .style("font-size","11px")

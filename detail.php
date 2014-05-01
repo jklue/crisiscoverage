@@ -60,7 +60,8 @@
 	      <header id="detail_header" class="tab_header">
 	        <hr class="style-one">
           <div class="overview_title">Crisis Coverage Detail</div>
-          <div class="tip">An in-depth exploration for crisis over months of coverage. Click on a bar for sample
+          <div class="tip">An in-depth exploration for crisis over months of coverage. Click on a bar
+          for sample
           monthly results.</div>
         </header>
 
