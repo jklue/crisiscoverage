@@ -4,7 +4,6 @@ var details_filter = {};
 var details;
 var stats;
 
-
 //SVG variables
 //Measurements for small charts
 var sm_margin = {top:5,right:10,bottom:10,left:10};
@@ -16,29 +15,13 @@ var margin = {top:50,right:50,bottom:50,left:50};
 var width = 960 - margin.left - margin.right;
 var height = 500 - margin.top - margin.bottom;
 
-
-//set crisis to current selected crisis
-var crisis = document.getElementById('crisis_select').value;
 //Dictionary of English names for crisis values
 var crisis_dict = {"turkish-revolt": "A Revolt in Turkey","pakistan-drought": "Drought in Pakistan", "ukraine-protest":"Protests in Ukraine", "haiyan":"Typhoon Haiyan"};
 
-//Add Event listner for Crisis Selector 
-$( "select" )
-  .change(function () {
-  	$( "select option:selected" ).each(function(d, k) {
-    	crisis = document.getElementById('crisis_select').value;
-    	clear_charts();
-    	clear_stacks();
-    	read_data();
-    	build_initial_charts();
-		stack_chart(crisis);
-    });
-  })
-  
-
 //--------------Scales--------------------------
 //Stacked bar graph scales
-var xScale_l, yScale_l, color_l;
+var xScale_l, yScale_l,
+    color_l = d3.scale.category20();
 
 //grouped bar graph scales
 var xScale_s, yScale_s, yScale_s;
@@ -47,18 +30,22 @@ var format = d3.time.format("%B");
 
 //------------------End Global Variable declarations----------------------
 
- read_data();
-//-----------Read in Data-----------------------
- function read_data(){
-    queue()
-       .defer(d3.json, "productiondata/con-data.json")
-       .await(useData)
-}
-
-
 //----------- Use Data -------------------------
+/**
+ * Use data.
+ * @param error
+ * @param data
+ * @param crisisSummary
+ */
+function useData(error, data,crisisSummary){
 
-function useData(error, data){
+    //SUMMARY BLOCK
+    /* Crisis summary */
+    // make summary global for use in tab changes
+    summary = crisisSummary;
+
+    // update crisis info section
+    resetSummary(summary);
 	
 	var keys = Object.keys(crisis_dict);
 	details = data[0];
@@ -123,9 +110,12 @@ function useData(error, data){
 	clear_charts();
 	clear_stacks();
 	build_initial_charts();
-	stack_chart(crisis);
+	stack_chart();
 }
 //------------end useData()------------------------
+/**
+ * Clear stacks.
+ */
 function clear_stacks(){
 	d3.select("svg").remove();
 
@@ -139,6 +129,9 @@ function clear_stacks(){
 
 }
 
+/**
+ * Clear charts.
+ */
 function clear_charts(){
 
 	d3.select("#Blog svg").remove();
@@ -160,25 +153,30 @@ function clear_charts(){
 }   
 
 //----------------------------------------------
+/**
+ * Build initial charts.
+ */
 function build_initial_charts(){
 	//build out scales
 	xScale_l = d3.scale.ordinal().rangeRoundBands([0, width-250],.1);
 	yScale_l = d3.scale.linear().rangeRound([height, 0]);
+
 	//setup svgs
 	svg = d3.select("#stacked").append("svg")
 			.attr("width",width)
 			.attr("height", height)
 			.append("g")
 			.attr("transform", "translate("+margin.left +","+margin.top+")");
-	
 }
-
-
 
 //------------Build Stacked Chart -----------------
 
-function stack_chart(crisis){
-	
+/**
+ * Stack Chart.
+ */
+function stack_chart(){
+	var crisis = window.crisis_select.value;
+
 	//Create data set for selected crisis
 	var dset = stats[crisis+"_stats"];
 	var data = [];
@@ -249,13 +247,6 @@ function stack_chart(crisis){
 	xScale_l.domain(data.map(function (d) {return d.x}));
 	yScale_l.domain([0, d3.max(data, function(d){return d.total;})]);
 
-	var colors = ["#003366", "#00FFFF", "#66FF99", "#CC6699", "#993366",
-				   "#00FF0", "#99FF66", "#FF9900", "#66FF66" ,"#CCCCFF","#993399",
-				   "#339966", "#1F5C3" ,"#7070B8" ,"#FFCC00", "#66990",
-				   "#BFC5B2", "#FFCC99", "#8CD18C", "#33CCFF", "#FF66FF", 
-				   "#CEB6FF", "#FFE6B2", "#99CC00","#B2E0F0"];
-	color_l = d3.scale.ordinal().range(colors);
-	
 	var selection = svg.selectAll(".series")
 		.data(data)
 		.enter().append("g")
@@ -268,7 +259,7 @@ function stack_chart(crisis){
 		.attr("width", "70px")
 		.attr("y", function(d){return yScale_l(d.y1) - 65})
 		.attr("height", function(d){return yScale_l(d.y0) - yScale_l(d.y1);})
-		.style("fill", function(d){return color_l(d.name);})
+		.style("fill", function(d){ return color_l(d.name);})
 		.on("click", function (d){
 			//update the data table
 			show_table(d.label, crisis, months);
@@ -285,11 +276,7 @@ function stack_chart(crisis){
 			indi_group(urows);
 			blog_group(urows);
 			trad_group(urows);
-
-
-		})
-		
-	
+		});
 
   	//Add Legends
 	var legend = svg.selectAll(".legend")
@@ -340,12 +327,18 @@ function stack_chart(crisis){
 	    .style("text-anchor", "end")
 	    .text("Articles Published Related to Crisis");
 	show_table(months[0], crisis, months);
-
 }
 
-
 //-------Show Table -----------------------
-function show_table(month, crisis, months){
+/**
+ * Show Table
+ * @param month
+ * @param months
+ */
+function show_table(month, months){
+
+    var crisis = window.crisis_select.value;
+
 	$('#source').empty();
     $('#source').append("<b><center>Articles by Month</b></center><table id='table'></table>");
 	//get data and create filter 
@@ -380,6 +373,10 @@ function show_table(month, crisis, months){
 
 //------------Grouped bar graph code-----------------
 
+/**
+ * Independent Group
+ * @param data
+ */
 function indi_group(data){
 	//-------Parse data----------------------------------
 	var type = 'Independent'
@@ -470,7 +467,7 @@ function indi_group(data){
       .style("fill", function(d) { return color(d.name); });
 
  
-
+ /* Legend */
   var legend = msvg.selectAll(".legend")
       .data(keys.slice().reverse())
     .enter().append("g")
@@ -489,9 +486,12 @@ function indi_group(data){
       .attr("dy", ".35em")
       .style("text-anchor", "end")
       .text(function(d) { return d; });
-
 }
 
+/**
+ * Traditional Group
+ * @param data
+ */
 function trad_group(data){
 	//-------Parse data----------------------------------
 	var type = 'Traditional'
@@ -580,9 +580,8 @@ function trad_group(data){
       .attr("y", function(d) { return y(d.value); })
       .attr("height", function(d) { return height - y(d.value); })
       .style("fill", function(d) { return color(d.name); });
-
  
-
+ /* Legend */
   var legend = msvg.selectAll(".legend")
       .data(keys.slice().reverse())
     .enter().append("g")
@@ -602,7 +601,6 @@ function trad_group(data){
       .style("text-anchor", "end")
       .text(function(d) { return d; });
       console.log(data);
-	
 }
 
 function blog_group(data){
@@ -622,8 +620,7 @@ function blog_group(data){
 						 "baseline" : baseline,
 						 "label" : label,
 						 "bars": bars	
-						})
-			
+						});
 		}
 	});
 
@@ -694,8 +691,7 @@ function blog_group(data){
       .attr("height", function(d) { return height - y(d.value); })
       .style("fill", function(d) { return color(d.name); });
 
- 
-
+  /* Legend */
   var legend = msvg.selectAll(".legend")
       .data(keys.slice().reverse())
     .enter().append("g")
@@ -714,6 +710,19 @@ function blog_group(data){
       .attr("dy", ".35em")
       .style("text-anchor", "end")
       .text(function(d) { return d; });
-	
 }
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// CRISIS SELECT
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+$('document').ready(function(){
+    addClassNameListener("crisis_select", function(){
+        var crisis = window.crisis_select.value;
+        console.log("### QUEUE NEW CRISIS ("+crisis+") AFTER CLASS CHANGE ###");
+        queue()
+            .defer(d3.json, "productiondata/con-data.json")//consolidated data
+            .defer(d3.csv, "/productiondata/"+crisis+"/summary.csv")//storypoints
+            .await(useData);
+    });
+});

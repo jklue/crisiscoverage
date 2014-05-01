@@ -85,14 +85,14 @@ function resetSummary(summary){
     /* Get content correct */
 
     // overview page
-    if ((document.getElementById("tab_1_compared").className === "content-tab active") && (document.getElementById("overview") != undefined)) {
+    if (document.getElementById("overview") != undefined && document.getElementById("tab_1_compared").className === "content-tab active") {
         d3.select("#crisisTitle").html('<h3>Country Interest In Crises</h3>');
         d3.select('#crisisStory').html("Countries providing top-ten results for each of the crises can be compared. Consistently interested countries include the US, UK, India, and Canada. Single crisis countries include Philippines, Ukraine, Malaysia, South Africa, and Kenya. Prominent countries like Australia, France and Italy are consistently interested, even when outside the top-ten.");
         // hide selector
         $('#crisis_selector').hide();
 
     // timeline page
-    } else if ((document.getElementById("tab_1_compared").className === "content-tab active") && (document.getElementById("timeline") != undefined)) {
+    } else if (document.getElementById("timeline") != undefined && document.getElementById("tab_1_compared").className === "content-tab active") {
         d3.select("#crisisTitle").html('<h3>Relative Interest In Crises</h3>');
         d3.select('#crisisStory').html('Percentage of change in crisis coverage can be compared from month to month to determine increased, same, or decreased media attention aggregated across all Google results.');
         // hide selector

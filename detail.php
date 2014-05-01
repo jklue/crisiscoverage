@@ -24,6 +24,10 @@
       </style>
 
 	<div class="content">
+	      <header class="tab_header">
+          <div class="overview_title">Crisis Details</div>
+          <div class="tip">In-depth exploration for crisis over months of coverage. Click on bar for more.</div>
+        </header>
     		<div id = "traditional" class = "small">traditional</div>
     		<div id = "Blog" class = "small">blog</div>
     		<div id = "Independant" class = "small">indi</div>
@@ -38,14 +42,14 @@
 	<?php include 'includes/footer.html'; ?>
 
 	<!-- Crossfilter Library -->
-  	<script src="libs/crossfilter.v1.min.js"></script>
+  <script src="libs/crossfilter.v1.min.js"></script>
 
   <!--- Data tables -->
-  	<script src="libs/jquery.dataTables.min.js"></script>
-      <link rel="stylesheet" href="css/jquery.dataTables.css">
+  <script src="libs/jquery.dataTables.min.js"></script>
+   <link rel="stylesheet" href="css/jquery.dataTables.css">
 
   <!-- Details -->
-  <script src = 'details.js'> </script>
+  <script src = 'detail.js'> </script>
 
 </body>
 </html>
