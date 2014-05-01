@@ -536,10 +536,10 @@ $(document).ready(function() {
         }
     });
 
-    addClassNameListener("tab_3_map", function () {
-        var className = document.getElementById("tab_3_map").className;
+    addClassNameListener("tab_2_map", function () {
+        var className = document.getElementById("tab_2_map").className;
         if (className === "content-tab active") {
-            console.log("... tab change to tab_3_map.");
+            console.log("... tab change to tab_2_map.");
 
             //Populate legend
             $('#legend_map').empty();
@@ -550,10 +550,10 @@ $(document).ready(function() {
         }
     });
 
-    addClassNameListener("tab_4_bar", function () {
-        var className = document.getElementById("tab_4_bar").className;
+    addClassNameListener("tab_3_bar", function () {
+        var className = document.getElementById("tab_3_bar").className;
         if (className === "content-tab active") {
-            console.log("... tab change to tab_4_bar.");
+            console.log("... tab change to tab_3_bar.");
 
             // change summary data
             resetSummary(summary); 

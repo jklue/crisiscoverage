@@ -36,9 +36,8 @@
   <div id="overview_content" class="cf">
   	<div class="tabs cf">
   	    <a data-toggle="tab_1_compared">Crises Compared</a>
-       <!-- <a data-toggle="tab_2_globe">Globe</a>-->
-        <a data-toggle="tab_3_map">Map</a>
-        <a data-toggle="tab_4_bar">Bar Chart</a>
+        <a data-toggle="tab_2_map">Map</a>
+        <a data-toggle="tab_3_bar">Bar Chart</a>
     </div>
 
     <div class="tabContent">
@@ -52,20 +51,7 @@
                 <figure id="countrySankeyVis"></figure>
             	</section>
             </div>
-<!--
-NOTE: COMMENTING OUT GLOBE AS IT DOESN'T REALLY ADD TO THE VIS
-        <div id="tab_2_globe" class="content-tab">
-          <section id="section_country_globe">
-            <header class="tab_header">
-               <div class="overview_title">Results by Country</div>
-               <div class="tip">click to manually rotate,double-click auto-rotate.</div>
-             </header>
-            <figure id="overviewGlobe"></figure>
-            <figure id="legend_globe" class="legend"></figure>
-        	</section>
-        </div>
--->
-         <div id="tab_3_map" class="content-tab">
+         <div id="tab_2_map" class="content-tab">
                   <section id="section_country_map">
                     <header class="tab_header">
                        <div class="overview_title">Results by Country</div>
@@ -76,7 +62,7 @@ NOTE: COMMENTING OUT GLOBE AS IT DOESN'T REALLY ADD TO THE VIS
                 	</section>
          </div>
 
-        <div id="tab_4_bar" class="content-tab">
+        <div id="tab_3_bar" class="content-tab">
           <section id="section_country_bar_chart">
              <header class="tab_header">
                <div class="overview_title">Results by Country</div>

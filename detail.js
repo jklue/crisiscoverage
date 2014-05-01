@@ -39,7 +39,6 @@ var format = d3.time.format("%B");
  */
 function useData(error, data,crisisSummary){
 
-    //SUMMARY BLOCK
     /* Crisis summary */
     // make summary global for use in tab changes
     summary = crisisSummary;
@@ -117,16 +116,9 @@ function useData(error, data,crisisSummary){
  * Clear stacks.
  */
 function clear_stacks(){
-	d3.select("svg").remove();
-
+//	d3.select("svg").remove();
     $('#stacked').empty();
-    $('#stacked').append("<b><center>News Coverage Breakdown</center></b>");
-
-
 	$('#source').empty();
-    $('#source').append("<b><center>Articles by Month</b></center><table id='table'></table>");
-
-
 }
 
 /**
@@ -134,22 +126,16 @@ function clear_stacks(){
  */
 function clear_charts(){
 
-	d3.select("#Blog svg").remove();
-	d3.select("#traditional svg").remove();
-	d3.select("#Independant svg").remove();
+//	d3.select("#blog svg").remove();
+//	d3.select("#traditional svg").remove();
+//	d3.select("#independent svg").remove();
 
 	$('#traditional').empty();
-    $('#traditional').append("<b><center>Traditional Media</center></b>");
-
-	$('#Blog').empty();
-    $('#Blog').append("<b><center>Blogs-Social Media</center></b>");
-
-    $('#Independant').empty();
-    $('#Independant').append("<b><center>Independant Media</center></b>");
+	$('#blog').empty();
+    $('#bndependant').empty();
 
     //$('#cloud').empty();
     //$('#cloud').append("traditional");
-
 }   
 
 //----------------------------------------------
@@ -175,6 +161,7 @@ function build_initial_charts(){
  * Stack Chart.
  */
 function stack_chart(){
+
 	var crisis = window.crisis_select.value;
 
 	//Create data set for selected crisis
@@ -271,11 +258,21 @@ function stack_chart(){
 		    var urows = dim_filtered.top(Infinity);
 			dim_filtered.filterAll();
 
-			//update all details charts
 			clear_charts();
 			indi_group(urows);
 			blog_group(urows);
 			trad_group(urows);
+
+            //update all details charts
+            $(function() {
+                $( "#deeper_dialog" ).dialog({
+                    height: 500,
+                    width: 1000,
+                    modal: false
+                });
+            });
+            $('#deeper_dialog').show();
+
 		});
 
   	//Add Legends
@@ -326,7 +323,7 @@ function stack_chart(){
 	    .attr("dy", ".71em")
 	    .style("text-anchor", "end")
 	    .text("Articles Published Related to Crisis");
-	show_table(months[0], crisis, months);
+	show_table(months[0], months);
 }
 
 //-------Show Table -----------------------
@@ -340,7 +337,9 @@ function show_table(month, months){
     var crisis = window.crisis_select.value;
 
 	$('#source').empty();
-    $('#source').append("<b><center>Articles by Month</b></center><table id='table'></table>");
+    $('#source').append(
+        "<table id='table' class='display' cellpadding='0' cellspacing='0' border='0'></table>");
+
 	//get data and create filter 
 	var crisis_filter = details_filter[crisis];
 	var dim = crisis_filter.dimension(function (d){return d.month});
@@ -425,7 +424,7 @@ function indi_group(data){
 	    .orient("left")
 	    .tickFormat(d3.format(".2s"));
 
-	var msvg = d3.select("#Independant").append("svg")
+	var msvg = d3.select("#independent").append("svg")
   		  .attr("width", w + m.left + m.right)
     	  .attr("height", h + m.top + m.bottom)
   		  .append("g")
@@ -650,7 +649,7 @@ function blog_group(data){
 	    .orient("left")
 	    .tickFormat(d3.format(".2s"));
 
-	var msvg = d3.select("#Blog").append("svg")
+	var msvg = d3.select("#blog").append("svg")
   		  .attr("width", w + m.left + m.right)
     	  .attr("height", h + m.top + m.bottom)
   		  .append("g")
@@ -718,6 +717,9 @@ function blog_group(data){
 
 $('document').ready(function(){
     addClassNameListener("crisis_select", function(){
+
+        $('#deeper_dialog').hide();
+
         var crisis = window.crisis_select.value;
         console.log("### QUEUE NEW CRISIS ("+crisis+") AFTER CLASS CHANGE ###");
         queue()
@@ -725,4 +727,6 @@ $('document').ready(function(){
             .defer(d3.csv, "/productiondata/"+crisis+"/summary.csv")//storypoints
             .await(useData);
     });
+
+    $('#deeper_dialog').hide();
 });
