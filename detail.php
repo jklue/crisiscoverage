@@ -28,13 +28,14 @@
         overflow-x:auto;
       }
 
-      #detail_header {
-        padding-top: 10px;
+      #detail_header{
+        display: block;
+        margin-top: 200px;
+        margin-bottom: 10px;
       }
 
       /* Gradient color1 - color2 - color1 */
       hr.style-one {
-          margin-top: 10px;
           border: 0;
           height: 1px;
           background: #333;
