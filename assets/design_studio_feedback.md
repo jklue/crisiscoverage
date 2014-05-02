@@ -1,19 +1,20 @@
-#Milestone Design Studio Feedback
-###Feedback received from: 
+# Milestone Design Studio Feedback
+### Feedback received from: 
 * Carolina Nobre
-* Rachel Boyce
-###Overall quality of the feedback: 
-	They both provided useful feedback. They highlighted several challenges we already aware due to limitations of the Google API, and raised a couple of of points we found very useful when it came to clarifying our narrative. Both Rachel and Carolina were enthusiastic and provided solid feedback. 
+* Rachel Boyce 
 
-##Feedback
+### Overall quality of the feedback: 
+They both provided useful feedback. They highlighted several challenges we already aware due to limitations of the Google API, and raised a couple of of points we found very useful when it came to clarifying our narrative. Both Rachel and Carolina were enthusiastic and provided solid feedback. 
 
-###General / Audience 
+## Feedback
+
+### General / Audience 
 The feedback we got was overall positive. Rachel and Carolina did raise an interesting point:
 >The perceived audience based off the visualization seems to primarily be journalists and news publications that might interested in SEO. This is based on the heavy focus on media coverage and the deep analysis of new providers. 
 
 Our target audience is still in general people interested having a better understanding a given crisis, the content of media coverage, and the saturation of messages within analyzed coverage. The takeaway we got from the feedback is that we can perhaps better annotate our visualization so that the narrative we wish to convey is more evident. To achieve this, we will focus both fleshing out the visualizations at the detail level (described below) and providing a bit more contextual text to tell a story. 
 
-###Visualization 
+### Visualization 
 
 Rachel and Carolina raised the following points:
 
@@ -25,7 +26,7 @@ As we better develop our visualization the story points will be more clear. We w
 
 We had a good discussion about the purpose of the world map. Michael based on his research of the Google API came up with an interesting use of the world map. The Google Search API gives us the country for each search result. One way we can tell our narrative better could be show the distribution of coverage of a crisis by country. 
 
-###Data
+### Data
 
 Finally, Rachel and Carolina raised the following points about the data: 
 
