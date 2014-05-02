@@ -22,7 +22,7 @@
 		</div>
 
 		<!-- GIF Tutorial -->
-		<div id="timelineVisGIF" class="tut-gif"></div>
+		<div id="detailVisGIF" class="tut-gif"></div>
 
 	</div>
 
