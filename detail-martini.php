@@ -10,7 +10,7 @@
 		<div class="tutorial-wrapper cf">
 			<div class="tutorial">
 			<h1>Details</h1>
-				<p>The 'Details' Page gives a more in depth comparison of results from each site by crisis. The primary visualization is a stacked bar chart providing results from each of our tracked sites over the course of the crisis lifespan. On hover, aa tooltip is presented with the total crisis coverage article results as well as the baseline coverage given by that site for any news and then the relative percentage.</p>
+				<p>The goal of this section was to show more details about the data we gathered. For this this page, we created a custom json that aggregated the 8 different source files produced by the crawler and indexed by month, type, and media source. Using the crossfilter.js, we were able to perform fast searches on the page as well for both displaying the stacked bar chart as well as retrieving the pertinent articles in the article explorer.</p>
 				<p>Clicking on the bars reveals a secondary interactive table that shows sample article results for the crisis within the month selected. This gives a taste of the articles our custom query returned, and is limited to 10 articles.</p>
 				<nav class="martini">
 					<ul>
