@@ -32,7 +32,7 @@
 		</div>
 
 		<!-- GIF Tutorial -->
-		<div id="timelineVisGIF" class="tut-gif"></div>
+		<div id="dataVisGIF" class="tut-gif"></div>
 
 	</div>
 
