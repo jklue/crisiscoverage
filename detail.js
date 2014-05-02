@@ -230,6 +230,7 @@ function stack_chart(){
 		
 		$(set).each(function(i,k){
 			if(k.domain != 'Google'){
+
 				var y0 = 0;
 				var articles = parseInt(k.c_articles);
 				//check for nan
@@ -237,12 +238,14 @@ function stack_chart(){
 					articles = 0;
 				source_counts[k.domain] = articles;
 				total += articles;
-				mappings.push({
+//				mappings.push({
+                mappings[label] = {
 					"label" : label,
 					"name"  : k.domain,
+                    "baseline" : k.baseline,
 					"y0"    : y0,
 					"y1"    : articles
-				});
+				};
 				data.push({
 					"sources":source_counts, 
 					"mappings":mappings, 
@@ -288,7 +291,7 @@ function stack_chart(){
         var y0 = 0;
         d.ySites = color_l.domain().map(function(name) {
             var resultCount = +d.sources[name];
-            return {label: d.x, name: name, results: resultCount, y0: y0, y1: y0 += resultCount};
+            return {label: d.x, name: name, baseline: +d.mappings[d.x].baseline, results: resultCount, y0: y0, y1: y0 += resultCount};
         });
         d.yMax = d.ySites[d.ySites.length - 1].y1;
     });
@@ -298,7 +301,10 @@ function stack_chart(){
     // Initialize tooltip
     var tip = d3.tip()
         .html(function(d) {
-            return  "<span class='sourceName'  style='color:" + color_l(d.name)  + ";'>" + d.name + ": </span>" + numberWithCommas(d.results) + " results<br><span class='tip'>Month: " + d.label + " (click for more)</span>";
+            var p = ""+(d.results/ d.baseline)*100;
+            var percentVal = p.slice(0,p.indexOf("."));
+            if (percentVal === "0") percentVal = "<1";
+            return  "<span class='sourceName'  style='color:" + color_l(d.name)  + ";'>" + d.name + ": </span>" + numberWithCommas(d.results) + " results for "+ d.label+"<br><span class='tip'>Baseline: " + numberWithCommas(d.baseline) + " -  " + percentVal   + "% of coverage (click for more)</span>";
         })
         .direction('e')
         .attr('class','d3-tip e');
@@ -454,12 +460,7 @@ function show_table(month,siteName){
             { "sTitle": "Month" },
             { "sTitle": "Query Start Date" },
             { "sTitle": "Query End Date" }
-        ]
-    //deploy table
-//    $('#source_table').dataTable( {
-//        "aaData": rows,
-//        "aoColumns": columns
-//    } );
+        ];
 
     var table = $('#source_table').dataTable( {
         "aaData": rows,
@@ -471,14 +472,13 @@ function show_table(month,siteName){
         var tableFilters = $('#source_table_filter').find('input');
         if (tableFilters && tableFilters.length > 0){
             var tableFilter = tableFilters[0];
-            tableFilter.value = sites[siteName]//'wordpress.com';
+            tableFilter.value = sites[siteName];
             tableFilter.focus();
 
             var e = $.Event('keyup');
             e.keyCode= 13; // enter
             $('input').trigger(e);
         }
-
     }
 }
 
